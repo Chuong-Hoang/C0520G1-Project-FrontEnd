@@ -1,5 +1,9 @@
 b1_chuong branch tạo file này
 b1_chuong branch cập nhật nội dung mới này..........
+
+branch: chuong cập nhật nội dung này --> sau chót.
+
 master cập nhật nội dung này--> lần cuối.
+
 
 
