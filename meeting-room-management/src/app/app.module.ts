@@ -10,7 +10,9 @@ import {MeetingRoomModule} from './meeting-room/meeting-room.module';
 import {OfficeAssetModule} from './office-asset/office-asset.module';
 import {OfficeCommonModule} from './office-common/office-common.module';
 import {UserModule} from './user/user.module';
-import { MeetingRoomAppRoutingModule } from './meeting-room/meeting-room-app-routing.module';
+import {StatisticRoomModule} from './statistic-room/statistic-room.module';
+import {HttpClientModule} from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -18,14 +20,17 @@ import { MeetingRoomAppRoutingModule } from './meeting-room/meeting-room-app-rou
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    MaterialModule,
+    NgxPaginationModule,
     BookedRoomModule,
     CommentModule,
     MeetingRoomModule,
     OfficeAssetModule,
     OfficeCommonModule,
     UserModule,
-    MeetingRoomAppRoutingModule
+    StatisticRoomModule,
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
