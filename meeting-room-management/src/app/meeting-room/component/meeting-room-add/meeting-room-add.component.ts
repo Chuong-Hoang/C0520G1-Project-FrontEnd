@@ -1,8 +1,12 @@
+// @ts-ignore
 import { Component, OnInit } from '@angular/core';
 import { MeetingRoomService} from '../../service/meeting-room.service';
+// @ts-ignore
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+// @ts-ignore
 import { Router} from '@angular/router';
 
+// @ts-ignore
 @Component({
   selector: 'app-meeting-room-add',
   templateUrl: './meeting-room-add.component.html',
