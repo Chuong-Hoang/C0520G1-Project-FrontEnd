@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
-import {APP_BASE_HREF, CommonModule} from '@angular/common';
-import {HttpClientModule} from '@angular/common/http';
-import {RouterModule} from '@angular/router';
-import {BrowserModule} from '@angular/platform-browser';
-
+import { CommonModule } from '@angular/common';
+import { HttpClientModule} from '@angular/common/http';
+import { MeetingRoomAddComponent } from './component/meeting-room-add/meeting-room-add.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import { MeetingRoomEditComponent } from './component/meeting-room-edit/meeting-room-edit.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [MeetingRoomAddComponent, MeetingRoomEditComponent],
+  exports: [
+    MeetingRoomAddComponent,
+    MeetingRoomEditComponent
+  ],
   imports: [
-    BrowserModule,
     CommonModule,
     HttpClientModule,
-    RouterModule,
-  ],
-  providers: [{provide: APP_BASE_HREF, useValue: '/'}],
+    ReactiveFormsModule
+  ]
 })
 export class MeetingRoomModule { }
