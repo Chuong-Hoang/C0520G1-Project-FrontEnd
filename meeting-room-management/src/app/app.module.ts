@@ -17,13 +17,13 @@ import {UserModule} from './user/user.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BookedRoomModule,
     CommentModule,
     MeetingRoomModule,
     OfficeAssetModule,
     OfficeCommonModule,
-    UserModule
+    UserModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
