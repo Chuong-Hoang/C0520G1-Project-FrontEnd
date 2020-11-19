@@ -1,0 +1,106 @@
+<div class="container d-flex justify-content-center">
+  <div class="w-75">
+    <h3 class="d-flex justify-content-center bg-light p-3 my-3">Đăng ký phòng</h3>
+    <form>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Tên phòng</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control-plaintext" value="6.5.A">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Loại cuộc họp</label>
+        <div class="col-sm-9">
+          <select class="form-control form-control-sm">
+            <option>--Chọn--</option>
+            <option>1 lần</option>
+            <option>Hàng tháng</option>
+            <option>Hàng tuần</option>
+            <option>Hàng ngày</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row" style="display: none">
+        <label class="col-sm-3 col-form-label">Ngày họp</label>
+        <div class="col-sm-9">
+          <!--<input class="form-control form-control-sm" type="date">-->
+          <mat-form-field class="w-100">
+            <input matInput [matDatepicker]="myDatepicker1">
+            <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker1 startView="month"></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Ngày bắt đầu</label>
+        <div class="col-sm-9">
+          <!--<input class="form-control form-control-sm" type="date">-->
+          <mat-form-field class="w-100">
+            <input matInput [matDatepicker]="myDatepicker2">
+            <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker2 startView="month"></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Ngày kết thúc</label>
+        <div class="col-sm-9">
+          <!--<input class="form-control form-control-sm" type="date">-->
+          <mat-form-field class="w-100">
+            <input matInput [matDatepicker]="myDatepicker3">
+            <mat-datepicker-toggle matSuffix [for]="myDatepicker3"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker3 startView="month"></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Thời gian bắt đầu</label>
+        <div class="col-sm-9">
+          <!--<input class="form-control form-control-sm" type="time" min="08:00" max="18:00" required>-->
+          <select class="form-control form-control-sm">
+            <option>--Chọn--</option>
+            <option>7:00</option>
+            <option>7:30</option>
+            <option>8:00</option>
+            <option>8:30</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Thời gian kết thúc</label>
+        <div class="col-sm-9">
+          <!--<input class="form-control form-control-sm" type="time" min="08:00" max="18:00" required>-->
+          <select class="form-control form-control-sm">
+            <option>--Chọn--</option>
+            <option>7:00</option>
+            <option>7:30</option>
+            <option>8:00</option>
+            <option>8:30</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Nội dung cuộc họp</label>
+        <div class="col-sm-9">
+          <textarea class="form-control" rows="2" placeholder="nội dung" class="w-100" style="resize: none" required></textarea>
+        </div>
+      </div>
+
+
+      <div class="row d-flex justify-content-center">
+        <button type="button" class="btn btn-sm btn-secondary mr-3">Hủy bỏ</button>
+        <button type="submit" class="btn btn-sm btn-success">Đăng ký</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
