@@ -6,6 +6,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {statisticRoomRoutes} from './statistic-room.routers';
 import { StatisticalResultsByRoomComponent } from './statistical-results-by-room/statistical-results-by-room.component';
 import { StatisticalResultsByTimeComponent } from './statistical-results-by-time/statistical-results-by-time.component';
+import {MaterialModule} from "../material.module";
+
 
 
 
@@ -15,7 +17,8 @@ import { StatisticalResultsByTimeComponent } from './statistical-results-by-time
     CommonModule,
     RouterModule.forChild(statisticRoomRoutes),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MaterialModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
