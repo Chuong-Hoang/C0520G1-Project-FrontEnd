@@ -4,6 +4,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { MeetingRoomAddComponent } from './component/meeting-room-add/meeting-room-add.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { MeetingRoomEditComponent } from './component/meeting-room-edit/meeting-room-edit.component';
+import {MeetingRoomAppRoutingModule} from './meeting-room-app-routing.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MeetingRoomEditComponent } from './component/meeting-room-edit/meeting-
   imports: [
     CommonModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MeetingRoomAppRoutingModule
   ]
 })
 export class MeetingRoomModule { }
