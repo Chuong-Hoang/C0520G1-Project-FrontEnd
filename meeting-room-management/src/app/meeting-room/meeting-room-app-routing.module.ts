@@ -5,11 +5,13 @@ import {MeetingRoomDetailComponent} from './component/meeting-room-detail/meetin
 import {MeetingRoomDeleteComponent} from './component/meeting-room-delete/meeting-room-delete.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import {MeetingRoomAddComponent} from './component/meeting-room-add/meeting-room-add.component';
 
 const routesConfig: Routes = [
   {path: 'meeting-room', component: MeetingRoomListComponent},
-  {path: 'meeting-room/:id', component: MeetingRoomDetailComponent}
+  {path: 'meeting-room/:id', component: MeetingRoomDetailComponent},
+  {path: 'meeting-room-add', component: MeetingRoomAddComponent},
+  {path: 'meeting-room-edit/:id', component: MeetingRoomAddComponent}
 ];
 
 @NgModule({
@@ -20,5 +22,6 @@ const routesConfig: Routes = [
     MatDialogModule
   ]
 })
+
 export class MeetingRoomAppRoutingModule {
 }

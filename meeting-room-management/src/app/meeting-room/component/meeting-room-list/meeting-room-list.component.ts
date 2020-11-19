@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
-import {MeetingRoomService} from '../../meeting-room.service';
+
 import {MeetingRoomDeleteComponent} from '../meeting-room-delete/meeting-room-delete.component';
+import {MeetingRoomService} from '../../service/meeting-room.service';
 
 @Component({
   selector: 'app-meeting-room-list',
@@ -20,7 +21,7 @@ export class MeetingRoomListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.meetingRoomService.getAll().subscribe(data => {
+    this.meetingRoomService.getAllMeetingRoom().subscribe(data => {
       this.meetingRoomList = data;
     });
   }
