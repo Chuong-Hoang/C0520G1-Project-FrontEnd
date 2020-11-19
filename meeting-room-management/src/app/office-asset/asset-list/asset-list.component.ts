@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 
 import {AssetDeleteComponent} from '../asset-delete/asset-delete.component';
@@ -14,10 +14,12 @@ export class AssetListComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
+
   openDialogCreate(): void {
     const dialogRef = this.dialog.open(AssetCreateQuantityComponent, {
       width: '500px',
@@ -30,8 +32,7 @@ export class AssetListComponent implements OnInit {
     });
   }
 
-  // tslint:disable-next-line:typedef
-  openDialogDelete() {
+  openDialogDelete(): void {
     const dialogRef = this.dialog.open(AssetDeleteComponent, {
       width: '500px',
       // data: {name: this.name, animal: this.animal}

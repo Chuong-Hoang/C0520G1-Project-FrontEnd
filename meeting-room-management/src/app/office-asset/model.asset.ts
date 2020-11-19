@@ -1,24 +1,25 @@
 export class Asset {
+
   // tslint:disable-next-line:variable-name
   private _id: number;
-// tslint:disable-next-line:ban-types variable-name
-  private _assetName: String;
-  // tslint:disable-next-line:ban-types variable-name
-  private _usingQuantity: String;
-  // tslint:disable-next-line:ban-types variable-name
-  private _fixingQuantity: String;
-  // tslint:disable-next-line:ban-types variable-name
-  private _image: String;
-  // tslint:disable-next-line:ban-types variable-name
-  private _total: String;
-  // tslint:disable-next-line:ban-types variable-name
-  private _description: String;
-  // tslint:disable-next-line:ban-types variable-name
-  private _price: String;
+  // tslint:disable-next-line:variable-name
+  private _assetName: string;
+  // tslint:disable-next-line:variable-name
+  private _usingQuantity: string;
+  // tslint:disable-next-line:variable-name
+  private _fixingQuantity: string;
+  // tslint:disable-next-line:variable-name
+  private _image: string;
+  // tslint:disable-next-line:variable-name
+  private _total: string;
+  // tslint:disable-next-line:variable-name
+  private _description: string;
+  // tslint:disable-next-line:variable-name
+  private _price: string;
 
 
-  // tslint:disable-next-line:ban-types max-line-length
-  constructor(id: number, assetName: String, usingQuantity: String, fixingQuantity: String, image: String, total: String, description: String, price: String) {
+  // tslint:disable-next-line:max-line-length
+  constructor(id: number, assetName: string, usingQuantity: string, fixingQuantity: string, image: string, total: string, description: string, price: string) {
     this._id = id;
     this._assetName = assetName;
     this._usingQuantity = usingQuantity;
@@ -30,80 +31,66 @@ export class Asset {
   }
 
   get id(): number {
-    return this._id;
+    return this.id;
   }
 
   set id(value: number) {
     this._id = value;
   }
 
-  // tslint:disable-next-line:ban-types
-  get assetName(): String {
+  get assetName(): string {
     return this._assetName;
   }
 
-  // tslint:disable-next-line:ban-types
-  set assetName(value: String) {
+  set assetName(value: string) {
     this._assetName = value;
   }
 
-  // tslint:disable-next-line:ban-types
-  get usingQuantity(): String {
+  get usingQuantity(): string {
     return this._usingQuantity;
   }
 
-  // tslint:disable-next-line:ban-types
-  set usingQuantity(value: String) {
+  set usingQuantity(value: string) {
     this._usingQuantity = value;
   }
 
-  // tslint:disable-next-line:ban-types
-  get fixingQuantity(): String {
+  get fixingQuantity(): string {
     return this._fixingQuantity;
   }
 
-  // tslint:disable-next-line:ban-types
-  set fixingQuantity(value: String) {
+  set fixingQuantity(value: string) {
     this._fixingQuantity = value;
   }
 
-  // tslint:disable-next-line:ban-types
-  get image(): String {
+  get image(): string {
     return this._image;
   }
 
-  // tslint:disable-next-line:ban-types
-  set image(value: String) {
+  set image(value: string) {
     this._image = value;
   }
 
-  // tslint:disable-next-line:ban-types
-  get total(): String {
+  get total(): string {
     return this._total;
   }
 
-  // tslint:disable-next-line:ban-types
-  set total(value: String) {
+  set total(value: string) {
     this._total = value;
   }
 
-  // tslint:disable-next-line:ban-types
-  get description(): String {
+  get description(): string {
     return this._description;
   }
 
-  // tslint:disable-next-line:ban-types
-  set description(value: String) {
+  set description(value: string) {
     this._description = value;
   }
 
-  // tslint:disable-next-line:ban-types
-  get price(): String {
+  get price(): string {
     return this._price;
   }
 
-  // tslint:disable-next-line:ban-types
-  set price(value: String) {
+  set price(value: string) {
     this._price = value;
   }
 }
