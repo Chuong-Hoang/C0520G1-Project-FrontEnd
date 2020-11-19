@@ -20,7 +20,6 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    MaterialModule,
     NgxPaginationModule,
     BookedRoomModule,
     CommentModule,
@@ -29,6 +28,7 @@ import {HttpClientModule} from '@angular/common/http';
     OfficeCommonModule,
     UserModule,
     StatisticRoomModule,
+    MaterialModule,
     AppRoutingModule,
     HttpClientModule
   ],
