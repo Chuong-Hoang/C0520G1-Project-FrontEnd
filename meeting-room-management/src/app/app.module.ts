@@ -10,6 +10,9 @@ import {MeetingRoomModule} from './meeting-room/meeting-room.module';
 import {OfficeAssetModule} from './office-asset/office-asset.module';
 import {OfficeCommonModule} from './office-common/office-common.module';
 import {UserModule} from './user/user.module';
+import {StatisticRoomModule} from './statistic-room/statistic-room.module';
+import {HttpClientModule} from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -17,13 +20,17 @@ import {UserModule} from './user/user.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    NgxPaginationModule,
     BookedRoomModule,
     CommentModule,
     MeetingRoomModule,
     OfficeAssetModule,
     OfficeCommonModule,
-    UserModule
+    UserModule,
+    StatisticRoomModule,
+    MaterialModule,
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

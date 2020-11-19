@@ -1,12 +1,25 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { CommentListComponent } from './component/comment-list/comment-list.component';
+import {CommentRoutes} from './comment-routing.module';
+import {RouterModule} from '@angular/router';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CommentHandleComponent } from './component/comment-handle/comment-handle.component';
+import { CommentCreateComponent } from './component/comment-create/comment-create.component';
+import { NotificationComponent } from './component/notification/notification.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [CommentListComponent, CommentHandleComponent, CommentCreateComponent, NotificationComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(CommentRoutes),
+    ReactiveFormsModule,
+    FormsModule
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA
   ]
 })
 export class CommentModule { }
