@@ -10,6 +10,7 @@ import {MeetingRoomModule} from './meeting-room/meeting-room.module';
 import {OfficeAssetModule} from './office-asset/office-asset.module';
 import {OfficeCommonModule} from './office-common/office-common.module';
 import {UserModule} from './user/user.module';
+import { MeetingRoomAppRoutingModule } from './meeting-room/meeting-room-app-routing.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {UserModule} from './user/user.module';
     MeetingRoomModule,
     OfficeAssetModule,
     OfficeCommonModule,
-    UserModule
+    UserModule,
+    MeetingRoomAppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
