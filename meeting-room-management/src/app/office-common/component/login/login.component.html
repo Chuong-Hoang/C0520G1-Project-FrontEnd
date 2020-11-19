@@ -1,0 +1,33 @@
+<div class="wrapper m-auto col-4" style="top: 150px">
+  <form class="form-signIn" *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
+        novalidate>
+    <h2 class="form-signIn-heading text-center">Đăng Nhập</h2>
+    <input type="text" class="form-control" name="username" placeholder="Tên Đăng Nhập" autofocus=""
+           autocomplete="off" [(ngModel)]="form.username" required #username="ngModel"/>
+    <div class="alert-danger" *ngIf="f.submitted && username.invalid">
+      <div *ngIf="username.errors.required">
+        Tên Đăng Nhập là bắt buộc.
+      </div>
+    </div>
+    <input type="password" class="form-control mt-3" name="password" placeholder="Mật Khẩu"
+           autocomplete="off" [(ngModel)]="form.password" required #password="ngModel"/>
+    <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+      <div *ngIf="password.errors.required">
+        Mật Khẩu là bắt buộc.
+      </div>
+    </div>
+    <button class="btn btn-lg btn-dark btn-block mt-3" type="submit">Đăng Nhập</button>
+    <div class="text-center mt-3">
+      <span>Chưa có tài khoản ?</span>
+      <a href="#"> Tạo tài khoản</a>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="f.submitted && isLoginFailed">
+      Tên Đăng Nhập hoặc Mật Khẩu không đúng.
+    </div>
+  </form>
+
+  <!--  <div class="alert alert-success" *ngIf="isLoggedIn">-->
+  <!--    Logged in as {{ role }}.-->
+  <!--  </div>-->
+</div>
