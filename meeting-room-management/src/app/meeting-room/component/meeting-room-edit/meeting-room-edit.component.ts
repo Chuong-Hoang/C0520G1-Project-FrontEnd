@@ -10,6 +10,7 @@ import { Router} from '@angular/router';
   styleUrls: ['./meeting-room-edit.component.css']
 })
 export class MeetingRoomEditComponent implements OnInit {
+  formEditRoom: FormGroup;
 
   constructor() { }
 
