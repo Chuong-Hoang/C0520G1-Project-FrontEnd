@@ -8,9 +8,9 @@
       </div>
     </div>
     <div class="row mt-3">
-      <a href="">
-        <button class="btn btn-success">Thêm Tài Sản</button>
-      </a>
+
+        <button class="btn btn-success" routerLink="/asset-create">Thêm Tài Sản</button>
+
       <table class="table table-hover table-striped mt-3">
         <thead>
         <tr>
@@ -24,53 +24,26 @@
           <th style="text-align: center">Tác vụ</th>
         </tr>
         </thead>
+
         <tbody>
-        <tr>
-          <td>1</td>
-          <td>Máy chiếu</td>
-          <td>Cái</td>
-          <td>100</td>
-          <td>50</td>
-          <td>5</td>
-          <td>45</td>
+        <tr *ngFor="let asset of assetList">
+          <td>{{asset.idAsset}}</td>
+          <td>{{asset.assetName}}</td>
+          <td>cai</td>
+          <td>{{asset.total}}</td>
+          <td>{{asset.usingQuantity}}</td>
+          <td>{{asset.fixingQuantity}}</td>
+          <td>{{asset.total - asset.usingQuantity - asset.fixingQuantity }}</td>
+
           <td style="text-align: center">
-            <button class="btn btn-sm btn-info mr-3">Chi tiết</button>
+            <button class="btn btn-sm btn-info mr-3" [routerLink]="['/asset-detail/'+ asset.idAsset]">Chi tiết</button>
 
             <button class="btn btn-sm btn-success mr-3" (click)="openDialogCreate()">Cập nhật số lượng</button>
 
             <button class="btn btn-sm btn-danger mr-3" (click)="openDialogDelete()">Xóa</button>
           </td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>Máy in</td>
-          <td>Cái</td>
-          <td>100</td>
-          <td>50</td>
-          <td>5</td>
-          <td>45</td>
-          <td style="text-align: center">
-            <button class="btn btn-sm btn-info mr-3">Chi tiết</button>
-            <button class="btn btn-sm btn-success mr-3" (click)="openDialogCreate()">Cập nhật số lượng</button>
 
-            <button class="btn btn-sm btn-danger mr-3" (click)="openDialogDelete()">Xóa</button>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Laptop</td>
-          <td>Cái</td>
-          <td>100</td>
-          <td>50</td>
-          <td>5</td>
-          <td>45</td>
-          <td style="text-align: center">
-            <button class="btn btn-sm btn-info mr-3">Chi tiết</button>
-            <button class="btn btn-sm btn-success mr-3" (click)="openDialogCreate()">Cập nhật số lượng</button>
-
-            <button class="btn btn-sm btn-danger mr-3" (click)="openDialogDelete()">Xóa</button>
-          </td>
-        </tr>
         </tbody>
       </table>
     </div>
