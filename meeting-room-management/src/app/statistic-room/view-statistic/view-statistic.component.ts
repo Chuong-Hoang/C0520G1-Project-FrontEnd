@@ -8,8 +8,9 @@ import {MatDialog} from '@angular/material/dialog';
   templateUrl: './view-statistic.component.html',
   styleUrls: ['./view-statistic.component.css']
 })
-export class ViewStatisticComponent implements OnInit {
 
+export class ViewStatisticComponent implements OnInit {
+  public cssClass: string = 'e-custom-style';
   public statisticByTime: FormGroup;
   public statisticByRoom: FormGroup;
 
@@ -18,6 +19,8 @@ export class ViewStatisticComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private dialog: MatDialog) {
   }
+
+
 
   ngOnInit(): void {
     this.statisticByTime = this.fb.group({

@@ -3,6 +3,6 @@ import {ViewStatisticComponent} from './view-statistic/view-statistic.component'
 import {StatisticalResultsByRoomComponent} from './statistical-results-by-room/statistical-results-by-room.component';
 
 export const statisticRoomRoutes: Routes = [
-  { path: '',
+  { path: 'statistic',
     component: ViewStatisticComponent}
 ];
