@@ -1,0 +1,171 @@
+<div class="container d-flex justify-content-center">
+  <div class="w-75">
+    <h3 class="d-flex justify-content-center bg-light p-3 my-3">Lịch sử đăng ký</h3>
+    <form>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Tên phòng họp</label>
+        <div class="col-sm-9">
+          <!--<input type="text" class="form-control form-control-sm" value="tên phòng">-->
+          <select class="form-control form-control-sm">
+            <option>--Chọn--</option>
+            <option>Red</option>
+            <option>Green</option>
+            <option>Blue</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Trạng thái phòng</label>
+        <div class="col-sm-9">
+          <select class="form-control form-control-sm">
+            <option>Đang sử dụng</option>
+            <option>Đã kết thúc</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Loại phòng họp</label>
+        <div class="col-sm-9">
+          <select class="form-control form-control-sm">
+            <option>--Chọn--</option>
+            <option>1 lần</option>
+            <option>Hàng tháng</option>
+            <option>Hàng tuần</option>
+            <option>Hàng ngày</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row" style="display: none">
+        <label class="col-sm-3 col-form-label">Ngày họp</label>
+        <div class="col-sm-9">
+          <!--<input class="form-control form-control-sm" type="date">-->
+          <mat-form-field class="w-100">
+            <input matInput [matDatepicker]="myDatepicker1">
+            <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker1 startView="month"></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Ngày bắt đầu</label>
+        <div class="col-sm-9">
+          <!--<input class="form-control form-control-sm" type="date">-->
+          <mat-form-field class="w-100">
+            <input matInput [matDatepicker]="myDatepicker2">
+            <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker2 startView="month"></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Ngày kết thúc</label>
+        <div class="col-sm-9">
+          <!--<input class="form-control form-control-sm" type="date">-->
+          <mat-form-field class="w-100">
+            <input matInput [matDatepicker]="myDatepicker3">
+            <mat-datepicker-toggle matSuffix [for]="myDatepicker3"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker3 startView="month"></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Ngày đăng ký</label>
+        <div class="col-sm-9">
+          <!--<input class="form-control form-control-sm" type="date">-->
+          <mat-form-field class="w-100">
+            <input matInput [matDatepicker]="myDatepicker4">
+            <mat-datepicker-toggle matSuffix [for]="myDatepicker4"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker4 startView="month"></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row d-flex justify-content-center mb-5">
+        <button type="submit" class="btn btn-sm btn-primary">Tìm kiếm</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!--  Show list of booked rooms-->
+<div class="container-fluid">
+  <table class="table table-hover table-responsive">
+    <thead class="thead-light">
+    <tr>
+      <th>STT</th>
+      <th>Tên phòng</th>
+      <th>Nội dung</th>
+      <th>Thời gian bắt đầu</th>
+      <th>Thời gian kết thúc</th>
+      <th>Ngày bắt đầu</th>
+      <th>Ngày kết thúc</th>
+      <th>Loại phòng họp</th>
+      <th>Ngày đăng ký</th>
+      <th>Trạng thái</th>
+      <th>Hủy</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>1</td>
+      <td>6.5.A</td>
+      <td>Họp tổng kết</td>
+      <td>7:00</td>
+      <td>9:00</td>
+      <td>20-11-2020</td>
+      <td>20-11-2020</td>
+      <td>1 lần</td>
+      <td>10-11-2020</td>
+      <td>Khả dụng</td>
+      <td>
+        <button class="btn btn-sm btn-danger">Hủy</button>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <nav  aria-label="Page navigation example" class="d-flex justify-content-end">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+  </nav>
+</div>
+
+
