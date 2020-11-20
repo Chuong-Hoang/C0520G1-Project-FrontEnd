@@ -31,12 +31,12 @@ export class BookedRoomService {
   }
 
   // get TimeFrame List
-  getAllTimeFrame(): Observable<any>{
-    return this.http.get(this.API_TimeFrame);
+  getAllTimeFrames(): Observable<any>{
+    return this.http.get(this.API_TimeFrame, {responseType: 'text'});
   }
 
   // get MeetingRoom List
-  getMeetingRoomList(): Observable<any>{
-    return this.http.get(this.API_MeetingRoom);
+  getAllMeetingRooms(): Observable<any>{
+    return this.http.get(this.API_MeetingRoom, {responseType: 'text'});
   }
 }

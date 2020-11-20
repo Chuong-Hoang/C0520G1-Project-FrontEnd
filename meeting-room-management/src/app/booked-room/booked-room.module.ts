@@ -8,7 +8,7 @@ import {BookedRoomListComponent} from './component/booked-room-list/booked-room-
 import {BookedRoomCreateComponent} from './component/booked-room-create/booked-room-create.component';
 import {BookedRoomSearchComponent} from './component/booked-room-search/booked-room-search.component';
 import {MaterialModule} from './material.module';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -25,7 +25,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     CommonModule,
     RouterModule.forChild(bookingRoomRoute),
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
