@@ -13,9 +13,10 @@
               <p>Đang sửa:</p>
             </div>
             <div class="col-8 px-0">
-              <p>Máy chiếu</p>
-              <p>100 cái</p>
-              <p>5 cái</p>
+              <span></span>
+              <span>{{asset.image}}</span>
+              <span>{{asset.price}}</span>
+
             </div>
           </div>
         </div>
@@ -27,8 +28,8 @@
               <p>Giá:</p>
             </div>
             <div class="col-9 px-0">
-              <p>Máy chiếu thế hệ mới</p>
-              <p>5.000.000 vnd</p>
+              <span>{{asset.price}}</span>
+              <span>{{asset.usingQuantity}}</span>
             </div>
           </div>
         </div>
@@ -43,7 +44,7 @@
         <tr>
           <th>Stt</th>
           <th>Tên phòng</th>
-          <th>Số lượng đang sử dụng</th>
+          <th>Đang sử dụng</th>
           <th>Đơn vị</th>
         </tr>
         </thead>
@@ -84,8 +85,7 @@
 
   </div>
   <div class="row d-flex justify-content-center">
-    <button type="button" class="btn btn-secondary " data-dismiss="modal">Back</button>
+    <button type="button" class="btn btn-secondary " routerLink="/asset">Back</button>
   </div>
-
 </div>
 
