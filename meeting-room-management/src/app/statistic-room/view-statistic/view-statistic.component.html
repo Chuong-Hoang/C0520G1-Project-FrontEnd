@@ -121,8 +121,7 @@
 
   <app-charts-statistic></app-charts-statistic>
 
-
-  <div class="container">
+  <div class="container" *ngIf="bookedRoom.length > 0 ; else blockByTime">
     <div class="row">
       <div class="col-md-12 border border-success mt-4 ">
         <h5 class="font-weight-bold mt-2">Kết quả</h5>
@@ -183,6 +182,10 @@
       </div>
     </div>
   </div>
+
+  <ng-template #blockByTime>
+    <h1 style="color: chartreuse" class="d-flex justify-content-center">Hãy thống kê theo cách của bạn</h1>
+  </ng-template>
   <br>
   <div class="container">
     <div class="row mt-2">

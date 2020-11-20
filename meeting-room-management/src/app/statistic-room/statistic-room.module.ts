@@ -9,7 +9,6 @@ import { ChartsStatisticComponent } from './charts-statistic/charts-statistic.co
 import { ChartsModule } from 'ng2-charts';
 
 
-
 @NgModule({
   declarations: [ViewStatisticComponent, ViewStatisticComponent, ChartsStatisticComponent],
   imports: [
