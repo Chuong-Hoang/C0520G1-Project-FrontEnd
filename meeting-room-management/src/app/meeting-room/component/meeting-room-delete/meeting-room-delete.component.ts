@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {MeetingRoomService} from '../../meeting-room.service';
+import {MeetingRoomService} from '../../service/meeting-room.service';
 
 @Component({
   selector: 'app-meeting-room-delete',
