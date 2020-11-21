@@ -28,11 +28,11 @@ export class AssetServerService {
     return this.http.get<Asset>(this.Api + '/detail/' + idAsset);
   }
 
-  // // tslint:disable-next-line:typedef
-  // create(asset) {
-  //   return this.http.post(this.Api, asset);
-  // }
-  //
+  // tslint:disable-next-line:typedef
+  create(asset) {
+    return this.http.post(this.Api + '/create', asset);
+  }
+
 
   //
   // edit(asset, assetId): Observable<Asset> {
