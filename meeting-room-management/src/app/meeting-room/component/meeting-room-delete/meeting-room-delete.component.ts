@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {MeetingRoomService} from '../../service/meeting-room.service';
+import {MeetingRoomService} from '../../meeting-room.service';
 
 @Component({
   selector: 'app-meeting-room-delete',
@@ -22,6 +22,7 @@ export class MeetingRoomDeleteComponent implements OnInit {
     this.meetingRoomTemp = this.data.dataEl;
     this.idMeetingRoomTemp = this.data.dataEl.id;
   }
+
 
   delete(): void {
     this.meetingRoomService.deleteMeetingRoomById(this.idMeetingRoomTemp).subscribe(data => {

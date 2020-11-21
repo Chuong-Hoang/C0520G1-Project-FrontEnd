@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import { MatFormFieldModule} from '@angular/material/form-field';
@@ -24,7 +23,8 @@ import {MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter'
   MatDialogModule,
   BrowserAnimationsModule
 ],
-  providers: [MatDatepickerModule,
+  providers: [
+    MatDatepickerModule,
     {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
     {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true }}
     ],
