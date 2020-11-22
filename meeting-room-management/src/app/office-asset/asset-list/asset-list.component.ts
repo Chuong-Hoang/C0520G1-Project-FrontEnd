@@ -1,8 +1,11 @@
+// @ts-ignore
 import {Component, OnInit} from '@angular/core';
+// @ts-ignore
 import {MatDialog} from '@angular/material/dialog';
 
 import {AssetDeleteComponent} from '../asset-delete/asset-delete.component';
 import {AssetCreateQuantityComponent} from '../asset-create-quantity/asset-create-quantity.component';
+import {AssetServerService} from '../service/asset-server.service';
 
 
 @Component({
@@ -12,12 +15,19 @@ import {AssetCreateQuantityComponent} from '../asset-create-quantity/asset-creat
 })
 export class AssetListComponent implements OnInit {
 
+  public assetList;
+
   constructor(
-    public dialog: MatDialog
+    private dialog: MatDialog,  private assetService: AssetServerService
   ) {
   }
 
   ngOnInit(): void {
+    this.assetService.getAll().subscribe(data => {
+      this.assetList = data;
+      console.log(this.assetList);
+      // this.sendMessage();
+    });
   }
 
   openDialogCreate(): void {

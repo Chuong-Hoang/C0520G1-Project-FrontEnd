@@ -4,18 +4,20 @@ import { ViewStatisticComponent } from './view-statistic/view-statistic.componen
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {statisticRoomRoutes} from './statistic-room.routers';
-import { StatisticalResultsByRoomComponent } from './statistical-results-by-room/statistical-results-by-room.component';
-import { StatisticalResultsByTimeComponent } from './statistical-results-by-time/statistical-results-by-time.component';
-
+import {MaterialModule} from './material.module';
+import { ChartsStatisticComponent } from './charts-statistic/charts-statistic.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
-  declarations: [ViewStatisticComponent, ViewStatisticComponent, StatisticalResultsByRoomComponent, StatisticalResultsByTimeComponent],
+  declarations: [ViewStatisticComponent, ViewStatisticComponent, ChartsStatisticComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(statisticRoomRoutes),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MaterialModule,
+    ChartsModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

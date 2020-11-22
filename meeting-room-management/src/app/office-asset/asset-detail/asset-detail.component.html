@@ -13,9 +13,7 @@
               <p>Đang sửa:</p>
             </div>
             <div class="col-8 px-0">
-              <p>Máy chiếu</p>
-              <p>100 cái</p>
-              <p>5 cái</p>
+              <span>{{asset.assetName}}</span>
             </div>
           </div>
         </div>
@@ -27,8 +25,8 @@
               <p>Giá:</p>
             </div>
             <div class="col-9 px-0">
-              <p>Máy chiếu thế hệ mới</p>
-              <p>5.000.000 vnd</p>
+              <span>{{asset.price}}</span>
+              <span>{{asset.usingQuantity}}</span>
             </div>
           </div>
         </div>
@@ -42,35 +40,17 @@
         <thead>
         <tr>
           <th>Stt</th>
-          <th>Tên phòng</th>
-          <th>Số lượng đang sử dụng</th>
+          <th>{{roomName}}</th>
+          <th>Đang sử dụng</th>
           <th>Đơn vị</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>1</td>
-          <td>53.B</td>
-          <td>2</td>
-          <td>Cái</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>53.C</td>
-          <td>2</td>
-          <td>Cái</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>44.A</td>
-          <td>2</td>
-          <td>Cái</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>23.B</td>
-          <td>2</td>
-          <td>Cái</td>
+        <tr *ngFor="let element of asset.assetDetailCollection; let i = index">
+          <td>{{i+1}}</td>
+          <td>Ten Phong</td>
+          <td>{{element.assetQuantity}}</td>
+          <td>Cais</td>
         </tr>
         </tbody>
       </table>
@@ -84,8 +64,7 @@
 
   </div>
   <div class="row d-flex justify-content-center">
-    <button type="button" class="btn btn-secondary " data-dismiss="modal">Back</button>
+    <button type="button" class="btn btn-secondary " routerLink="/asset">Back</button>
   </div>
-
 </div>
 
