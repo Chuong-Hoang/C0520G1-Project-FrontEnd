@@ -26,7 +26,6 @@ export class AssetServerService {
   }
 
   create(asset): Observable<any> {
-    console.log('service' + asset);
     return this.http.post(this.Api + '/create', asset);
   }
 
