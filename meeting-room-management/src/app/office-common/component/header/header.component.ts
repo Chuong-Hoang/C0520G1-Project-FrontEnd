@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from '../../service/token-storage/token-storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {UserChangePasswordComponent} from '../../../user/component/user-change-password/user-change-password.component';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +17,7 @@ export class HeaderComponent implements OnInit {
   showUserBoard = true;
   username: string;
 
-  constructor(private tokenStorageService: TokenStorageService, private router: Router) {
+  constructor(private tokenStorageService: TokenStorageService, private router: Router, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -36,5 +38,19 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     this.tokenStorageService.signOut();
     window.location.reload();
+  }
+
+  // tslint:disable-next-line:typedef
+  openDialogChangePassword() {
+    const dialogRef = this.dialog.open(UserChangePasswordComponent, {
+      width: '740px',
+      height: '380px',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.ngOnInit();
+    });
   }
 }
