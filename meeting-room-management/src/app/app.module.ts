@@ -11,7 +11,7 @@ import {OfficeCommonModule} from './office-common/office-common.module';
 import {UserModule} from './user/user.module';
 import {StatisticRoomModule} from './statistic-room/statistic-room.module';
 import {HttpClientModule} from '@angular/common/http';
-
+import {authInterceptorProviders} from './office-common/helper/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [authInterceptorProviders],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

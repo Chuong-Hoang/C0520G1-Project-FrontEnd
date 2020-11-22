@@ -8,11 +8,6 @@
 </head>
 <body>
 <div class="container-fluid 100vh">
-  <div class="">
-    <h1 class="d-flex justify-content-center">Header</h1>
-  </div>
-  <hr>
-
   <from>
     <div class="col-lg-12  px-0"><!--Thanh Tiêu Đề Thông Báo-->
       <div class="col-lg-12 px-0">
@@ -28,8 +23,6 @@
             <input class="col-8 form-control form-control-sm rounded" required=""
                    placeholder="Nhập tên người dùng">
           </div>
-
-
           <div class="form-group row col-12 col-md-12 col-lg-4 my-2">
             <span class="col-4 col-md-4 col-lg-4 justify-content-start">Tên phòng</span>
             <input class="col-8 col-md-8 col-lg-8 form-control form-control-sm"
@@ -65,6 +58,17 @@
           </tr>
           </thead>
           <tbody>
+          <tr *ngFor="let comment of comments">
+            <td>{{comment.idComment}}</td>
+            <td>{{comment.sender}}</td>
+            <td>{{comment.meetingRoom}}</td>
+            <td>{{comment.commentTime}}</td>
+            <td>{{comment.contentComment}}</td>
+            <td>{{comment.status}}</td>
+<!--            <td *ngIf="comment.status == true"></td>-->
+            <td><button  class="btn-sm btn-success" style="width: 80px" [disabled]="true" >Đã xử lý</button></td>
+
+          </tr>
           <tr>
             <td scope="row">1</td>
             <td>Lê toàn</td>

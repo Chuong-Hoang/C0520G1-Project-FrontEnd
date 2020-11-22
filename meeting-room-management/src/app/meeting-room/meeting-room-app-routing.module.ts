@@ -9,9 +9,10 @@ import {MeetingRoomEditComponent} from './component/meeting-room-edit/meeting-ro
 import {MeetingRoomAddComponent} from './component/meeting-room-add/meeting-room-add.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {AuthGuard} from '../office-common/helper/auth.guard';
 
 const routesConfig: Routes = [
-  {path: 'meeting-room', component: MeetingRoomListComponent},
+  {path: 'meeting-room', component: MeetingRoomListComponent, canActivate: [AuthGuard], data: {roles: 'ROLE_ADMIN'}},
   {path: 'meeting-room/:id', component: MeetingRoomDetailComponent},
   {path: 'meeting-room-add', component: MeetingRoomAddComponent},
   {path: 'meeting-room-edit/:id', component: MeetingRoomEditComponent}

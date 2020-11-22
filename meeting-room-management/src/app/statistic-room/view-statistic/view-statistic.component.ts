@@ -2,22 +2,29 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
+import {StatisticRoomService} from '../service/statistic-room.service';
+import {BookedRoom} from '../model/BookedRoom.class';
 
 @Component({
   selector: 'app-view-statistic',
   templateUrl: './view-statistic.component.html',
   styleUrls: ['./view-statistic.component.css']
 })
-export class ViewStatisticComponent implements OnInit {
 
+export class ViewStatisticComponent implements OnInit {
   public statisticByTime: FormGroup;
   public statisticByRoom: FormGroup;
-
+  public startDate: string;
+  public endDate: string;
+  public bookedRoom: BookedRoom[] = [];
   constructor(private fb: FormBuilder,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private statisticRoom: StatisticRoomService) {
   }
+
+
 
   ngOnInit(): void {
     this.statisticByTime = this.fb.group({
@@ -32,8 +39,13 @@ export class ViewStatisticComponent implements OnInit {
       month: ['', [Validators.required]]
     });
   }
-  onSubmit(): void {
+  onSubmitByTime(): void {
     console.log(this.statisticByTime.value);
+    if (this.statisticByTime.valid) {
+      this.statisticRoom.findSearchByTime(this.startDate, this.endDate).subscribe(data => {
+        this.bookedRoom = data;
+      });
+    }
   }
 
   onSubmitByRoom(): void {
