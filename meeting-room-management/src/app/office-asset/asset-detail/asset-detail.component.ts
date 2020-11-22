@@ -9,7 +9,8 @@ import {Asset} from '../model.asset';
   styleUrls: ['./asset-detail.component.css']
 })
 export class AssetDetailComponent implements OnInit {
-  public asset: Asset;
+  public asset = new Asset();
+  roomName: string;
 
   constructor(
     private assetService: AssetServerService,

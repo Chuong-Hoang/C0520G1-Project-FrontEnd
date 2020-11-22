@@ -1,21 +1,18 @@
-// @ts-ignore
-import { Injectable } from '@angular/core';
-// @ts-ignore
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-// @ts-ignore
 import {Observable} from 'rxjs';
 import {Asset} from '../model.asset';
 
-// @ts-ignore
 @Injectable({
   providedIn: 'root'
 })
 export class AssetServerService {
   public Api = 'http://localhost:8080/assets';
-  // public ApiDetail = 'http://localhost:8080/assets/detail/{id}';
+
   constructor(
     public http: HttpClient
-  ) { }
+  ) {
+  }
 
 
   getAll(): Observable<Asset> {
@@ -28,11 +25,10 @@ export class AssetServerService {
     return this.http.get<Asset>(this.Api + '/detail/' + idAsset);
   }
 
-  // // tslint:disable-next-line:typedef
-  // create(asset) {
-  //   return this.http.post(this.Api, asset);
-  // }
-  //
+  create(asset): Observable<any> {
+    return this.http.post(this.Api + '/create', asset);
+  }
+
 
   //
   // edit(asset, assetId): Observable<Asset> {
