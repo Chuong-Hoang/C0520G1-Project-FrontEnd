@@ -23,8 +23,8 @@ export class MeetingRoomDeleteComponent implements OnInit {
     this.idMeetingRoomTemp = this.data.dataEl.id;
   }
 
-  // tslint:disable-next-line:typedef
-  delete() {
+
+  delete(): void {
     this.meetingRoomService.deleteMeetingRoomById(this.idMeetingRoomTemp).subscribe(data => {
       this.dialogRef.close();
     });

@@ -1,7 +1,6 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-1 col-md-1 col-sm-1"></div>
-
     <div class="col-8 col-sm-8">
       <div class="row">
         <div class="col-12 col-sm-12">
@@ -13,12 +12,11 @@
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img src="https://phonghoinghi.com/wp-content/uploads/2019/04/lua-chon-noi-that-phong-hop-toi-uu.jpg"
-                   class="d-block w-100" alt="..."
-              >
+                   class="d-block w-100" alt="..." >
             </div>
             <div class="carousel-item">
               <img src="https://blog.rever.vn/hubfs/nhu-cau-van-phong-cho-thue-officetel-min.jpg"
-                   class="d-block w-100" alt="...">
+                   class="d-block w-100" alt="..." >
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -43,11 +41,11 @@
             <table class="table">
               <tr>
                 <td>Stt :</td>
-                <td></td>
+                <td>{{meetingRoom.idRoom}}</td>
               </tr>
               <tr>
                 <td>Tên phòng :</td>
-                <td>{{meetingRoom}}</td>
+                <td>{{meetingRoom.roomName}}</td>
               </tr>
               <tr>
                 <td>Tầng :</td>
@@ -59,12 +57,12 @@
               </tr>
               <tr>
                 <td>Trạng thái :</td>
-                <td>{{meetingRoom}}</td>
+                <td>{{meetingRoom.roomStatusName}}</td>
               </tr>
 
               <tr>
                 <td>Loại phòng :</td>
-                <td>{{meetingRoom}}</td>
+                <td>{{meetingRoom.roomTypeName}}</td>
               </tr>
 
               <tr>
@@ -74,7 +72,13 @@
 
               <tr>
                 <td>Tài sản :</td>
-                <td>{{meetingRoom}}</td>
+                <td>
+                  <ul style="list-style-type: none; padding: 0">
+                    <li *ngFor="let asset of meetingRoom.asset">
+                      {{asset.nameAssetDetail}}: {{asset.quantity}}
+                    </li>
+                    </ul>
+                </td>
               </tr>
               <tr>
                 <td colspan="2">

@@ -9,30 +9,31 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class MeetingRoomDetailComponent implements OnInit {
 
-  // tslint:disable-next-line:variable-name
-  private _meetRoomService: MeetingRoomService;
-  // tslint:disable-next-line:variable-name
-  private _router: Router;
-  // tslint:disable-next-line:variable-name
 
-  // tslint:disable-next-line:variable-name
-  private _idMeetingRoom: number;
-  // tslint:disable-next-line:variable-name
+  private router: Router;
+
+  private idMeetingRoom: number;
   public meetingRoom;
 
-  constructor(public activeRouter: ActivatedRoute) {
+  constructor(public activeRouter: ActivatedRoute, private meetRoomService: MeetingRoomService) {
   }
 
   ngOnInit(): void {
     this.activeRouter.params.subscribe(data => {
-        console.log(data);
-        this._idMeetingRoom = data.idRoom;
-        // tslint:disable-next-line:no-shadowed-variable
-        this._meetRoomService.getMeetingRoomById(this._idMeetingRoom).subscribe(data => {
-          console.log(data);
-          this.meetingRoom = data;
-        });
+        console.log(data.id);
+        this.idMeetingRoom = data.id;
+        this.meetRoomService.getMeetingRoomById(this.idMeetingRoom).subscribe(next => {
+          console.log(next);
+          this.meetingRoom = next;
+        }, error => console.log('error'));
       }
     );
+  //   const id = this.activeRouter.snapshot.paramMap.get('id');
+  //   console.log(id);
+  //   this._meetRoomService.getMeetingRoomById(id).subscribe( data => {
+  //     console.log(data);
+  //     this.meetingRoom = data;
+  //   },
+  //     error => console.log('error'));
   }
 }

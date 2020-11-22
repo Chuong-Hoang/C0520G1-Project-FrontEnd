@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto topnav" routerLinkActive="active" *ngIf="showAdminBoard">
         <li class="nav-item">
-          <a class="nav-link" href="#">Quản lí phòng họp</a>
+          <a class="nav-link" >Quản lí phòng họp</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Quản lí tài sản</a>
@@ -26,7 +26,7 @@
 
       <ul class="navbar-nav mr-auto topnav" routerLinkActive="active" *ngIf="showUserBoard">
         <li class="nav-item">
-          <a class="nav-link" href="#">Danh sách phòng họp</a>
+          <a class="nav-link" [routerLink]="['/meeting-room']">Danh sách phòng họp</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOffice" role="button"

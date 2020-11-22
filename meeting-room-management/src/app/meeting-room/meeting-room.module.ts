@@ -1,18 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule} from '@angular/common/http';
-import { MeetingRoomAddComponent } from './component/meeting-room-add/meeting-room-add.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
-import { MeetingRoomEditComponent } from './component/meeting-room-edit/meeting-room-edit.component';
 import {MeetingRoomAppRoutingModule} from './meeting-room-app-routing.module';
+import {MeetingRoomAddComponent} from './component/meeting-room-add/meeting-room-add.component';
+import {MeetingRoomEditComponent} from './component/meeting-room-edit/meeting-room-edit.component';
 
 
 @NgModule({
-  declarations: [MeetingRoomAddComponent, MeetingRoomEditComponent],
-  exports: [
-    MeetingRoomAddComponent,
-    MeetingRoomEditComponent
-  ],
+  declarations: [MeetingRoomAddComponent,
+    MeetingRoomEditComponent],
+  exports: [MeetingRoomAddComponent,
+    MeetingRoomEditComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -20,4 +19,5 @@ import {MeetingRoomAppRoutingModule} from './meeting-room-app-routing.module';
     MeetingRoomAppRoutingModule
   ]
 })
-export class MeetingRoomModule { }
+export class MeetingRoomModule {
+}

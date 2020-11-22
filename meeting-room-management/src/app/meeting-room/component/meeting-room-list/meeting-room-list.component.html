@@ -5,10 +5,11 @@
 
   </div>
   <div class="row mt-3">
-    <div class="col-1 col-sm-1 p-0"><a name="" id="" class="btn btn-success btn-sm" href="#" role="button">Thêm</a>
+    <div class="col-1 col-sm-1 p-0"><a [routerLink]="['/meeting-room-add']" class="btn btn-success btn-sm" href="#"
+                                       role="button">Thêm</a>
     </div>
   </div>
-  <form>
+  <form [formGroup]="formSearch" (ngSubmit)="search()">
     <div class="row mt-2" style="background: #cdccd4">
 
       <div class="col-1"></div>
@@ -17,41 +18,38 @@
         <div class="row form-group">
           <label class="col-5 col-sm-5 col-form-label" for="tenPhong">Tên phòng<sup
             class="text-danger">*</sup></label>
-          <div class="col-7 col-sm-7"><input type="text" id="tenPhong" class="form-control form-control-sm">
+          <div class="col-7 col-sm-7"><input type="text" id="tenPhong" formControlName="roomName" class="form-control form-control-sm">
           </div>
         </div>
         <div class="row mt-1 form-group">
           <label class="col-5 col-sm-5 col-form-label" for="trangThai">Trạng thái<sup
             class="text-danger">*</sup></label>
           <div class="col-7 col-sm-7 input-group input-group-sm">
-            <select class="custom-select" aria-label="Example select with button addon" id="trangThai">
-              <option selected>--Chọn--</option>
-              <option>Tất cả</option>
-              <option value="1">Đang sử dụng</option>
-              <option value="2">Trống</option>
-              <option value="3">Sửa</option>
-              <option value="4">Hỏng</option>
-            </select></div>
+<!--            <select class="form-control" id="trangThai" formControlName="roomStatus">-->
+            <select class="form-control" id="trangThai">
+              <option value="">--Chọn--</option>
+              <option *ngFor="let roomStatus of roomStatusList" [ngValue]="roomStatus">
+                {{roomStatus.roomStatusName}}</option>
+            </select>
+          </div>
         </div>
       </div>
 
       <div class="col-3 col-sm-3 mt-3">
         <div class="row form-group">
           <label class="col-5 col-form-label col-sm-5" for="tang">Tầng<sup class="text-danger">*</sup></label>
-          <div class="col-7 col-sm-7"><input id="tang" type="text"
-                                             class="form-control form-control-sm"></div>
+<!--          <div class="col-7 col-sm-7"><input id="tang" type="text"  class="form-control form-control-sm"></div>-->
+          <div class="col-7 col-sm-7"><input id="tang" type="text" formControlName="floor" class="form-control form-control-sm"></div>
         </div>
         <div class="row mt-1 form-group">
           <label class="col-5 col-sm-5 col-form-label pr-0" for="loaiPhong">Loại phòng<sup
             class="text-danger">*</sup></label>
           <div class="col-7 col-sm-7 input-group input-group-sm">
-            <select class="custom-select" aria-label="Example select with button addon" id="loaiPhong">
-              <option selected>--Chọn--</option>
-              <option>Tất cả</option>
-              <option value="0">Một lấn</option>
-              <option value="1">Hàng ngày</option>
-              <option value="2">Hàng tuần</option>
-              <option value="3">Hàng tháng</option>
+<!--            <select class="form-control" id="loaiPhong" formControlName="roomType">-->
+            <select class="form-control" id="loaiPhong" >
+              <option value="">--Chọn--</option>
+              <option *ngFor="let roomType of roomTypeList" [ngValue]="roomType">
+                {{roomType.roomTypeName}}</option>
             </select>
           </div>
         </div>
@@ -60,11 +58,13 @@
       <div class="col-3 col-sm-3 mt-3">
         <div class="row form-group">
           <label class="col-5 col-form-label" for="khuVuc">Khu vực<sup class="text-danger">*</sup></label>
-          <div class="col-7"><input id="khuVuc" type="text" class="form-control form-control-sm"></div>
+          <div class="col-7"><input id="khuVuc" type="text" class="form-control form-control-sm" formControlName="zone"></div>
+<!--          <div class="col-7"><input id="khuVuc" type="text" class="form-control form-control-sm" ></div>-->
         </div>
         <div class="row mt-1 form-group">
           <label class="col-5 col-form-label" for="sucChua">Sức chứa<sup class="text-danger">*</sup></label>
-          <div class="col-7"><input type="text" class="form-control form-control-sm" id="sucChua"></div>
+<!--          <div class="col-7"><input type="text" class="form-control form-control-sm" id="sucChua" ></div>-->
+          <div class="col-7"><input type="text" class="form-control form-control-sm" id="sucChua" formControlName="capacity"></div>
         </div>
       </div>
 
@@ -76,10 +76,8 @@
           <button type="submit" class="btn btn-primary btn-sm">Tìm kiếm</button>
         </div>
       </div>
-
     </div>
   </form>
-
 </div>
 
 <div class="container">
@@ -99,20 +97,25 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let meetingRoom of meetingRoomList, let i = index">
-        <td>{{i+1}}</td>
+      <tr *ngFor="let meetingRoom of meetingRoomList | paginate : { itemsPerPage: 5, currentPage: p }, let i = index">
+        <td>{{i + 1}}</td>
         <td>{{meetingRoom.roomName}}</td>
         <td>{{meetingRoom.floor}}</td>
         <td>{{meetingRoom.zone}}</td>
-        <td>{{meetingRoom.roomStatus}}</td>
-        <td>{{meetingRoom.roomType}}</td>
+        <td>{{meetingRoom.roomStatusName}}</td>
+        <td>{{meetingRoom.roomTypeName}}</td>
         <td>{{meetingRoom.capacity}}</td>
         <td class="text-center">
-          <button type="button" class="btn btn-info btn-sm mt-1" [routerLink]="['/meeting-room/' + meetingRoom.idRoom]">Chi tiết</button>
+          <button type="button" class="btn btn-info btn-sm mt-1"
+                  [routerLink]="['/meeting-room/' + meetingRoom.idRoom]">
+            Chi tiết
+          </button>
 
-          <button type="button" class="btn btn-warning btn-sm mt-1 ml-1">Sửa</button>
+          <button type="button" class="btn btn-warning btn-sm mt-1 ml-1"
+                  [routerLink]="['/meeting-room-edit/' + meetingRoom.idRoom]">Sửa
+          </button>
 
-          <button type="button" class="btn btn-danger btn-sm mt-1 ml-" (click)="delete()">
+          <button type="button" class="btn btn-danger btn-sm mt-1 ml-1" (click)="delete()">
             Xóa
           </button>
         </td>
@@ -120,24 +123,10 @@
       </tr>
       </tbody>
     </table>
-
-
   </div>
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-end">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center"></div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 </div>
+
