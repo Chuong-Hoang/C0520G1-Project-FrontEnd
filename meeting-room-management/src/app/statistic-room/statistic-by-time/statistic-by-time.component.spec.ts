@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChartsStatisticComponent } from './charts-statistic.component';
+import { StatisticByTimeComponent } from './statistic-by-time.component';
 
-describe('ChartsStatisticComponent', () => {
-  let component: ChartsStatisticComponent;
-  let fixture: ComponentFixture<ChartsStatisticComponent>;
+describe('StatisticByTimeComponent', () => {
+  let component: StatisticByTimeComponent;
+  let fixture: ComponentFixture<StatisticByTimeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChartsStatisticComponent ]
+      declarations: [ StatisticByTimeComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChartsStatisticComponent);
+    fixture = TestBed.createComponent(StatisticByTimeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
