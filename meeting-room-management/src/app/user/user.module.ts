@@ -8,7 +8,7 @@ import {UserChangePasswordComponent} from './component/user-change-password/user
 import {UserAppRoutingModule} from './user-app-routing.module';
 import {MatDialogModule} from '@angular/material/dialog';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -25,6 +25,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatDialogModule,
     NgxPaginationModule,
     ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class UserModule {
