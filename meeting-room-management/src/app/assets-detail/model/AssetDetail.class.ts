@@ -1,4 +1,4 @@
-import {Asset} from '../../office-asset/model.asset';
+import {Asset} from '../../office-asset/model/model.asset';
 import {MeetingRoom} from '../../meeting-room/model/MeetingRoom';
 // import {MeetingRoom} from '../../meeting-room/model/MeetingRoom.class';
 

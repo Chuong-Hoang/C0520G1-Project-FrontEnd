@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AssetServerService} from '../service/asset-server.service';
 import {ActivatedRoute} from '@angular/router';
-import {Asset} from '../model.asset';
+import {Asset} from '../model/model.asset';
 
 @Component({
   selector: 'app-asset-detail',
