@@ -12,7 +12,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {AuthGuard} from '../office-common/helper/auth.guard';
 
 const routesConfig: Routes = [
-  {path: 'meeting-room', component: MeetingRoomListComponent, canActivate: [AuthGuard], data: {roles: 'ROLE_ADMIN'}},
+  {path: 'meeting-room', component: MeetingRoomListComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ADMIN','ROLE_USER']}},
+  // {path: 'meeting-room', component: MeetingRoomListComponent, canActivate: [AuthGuard], data: {roles: 'ROLE_USER'}},
   {path: 'meeting-room/:id', component: MeetingRoomDetailComponent},
   {path: 'meeting-room-add', component: MeetingRoomAddComponent},
   {path: 'meeting-room-edit/:id', component: MeetingRoomEditComponent}
