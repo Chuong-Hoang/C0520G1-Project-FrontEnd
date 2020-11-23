@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AssetServerService} from '../service/asset-server.service';
 import {ActivatedRoute} from '@angular/router';
-import {Asset} from '../model/model.asset';
+import {AssetServerService} from '../../service/asset-server.service';
+import {Asset} from '../../model/model.asset';
 
 @Component({
   selector: 'app-asset-detail',
@@ -13,7 +13,7 @@ export class AssetDetailComponent implements OnInit {
 
   constructor(
     private assetService: AssetServerService,
-    public activatedRouter: ActivatedRoute,
+    private activatedRouter: ActivatedRoute,
     private route: ActivatedRoute
   ) {
   }
