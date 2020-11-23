@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AssetServerService} from '../service/asset-server.service';
 import {ActivatedRoute} from '@angular/router';
-import {Asset} from '../model.asset';
+import {AssetServerService} from '../../service/asset-server.service';
+import {Asset} from '../../model/model.asset';
 
 @Component({
   selector: 'app-asset-detail',
@@ -9,11 +9,11 @@ import {Asset} from '../model.asset';
   styleUrls: ['./asset-detail.component.css']
 })
 export class AssetDetailComponent implements OnInit {
-  public asset: Asset;
+  public asset = new Asset();
 
   constructor(
     private assetService: AssetServerService,
-    public activatedRouter: ActivatedRoute,
+    private activatedRouter: ActivatedRoute,
     private route: ActivatedRoute
   ) {
   }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {AssetServerService} from '../service/asset-server.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {AssetServerService} from '../../service/asset-server.service';
+
 @Component({
   selector: 'app-asset-create',
   templateUrl: './asset-create.component.html',
@@ -9,18 +10,23 @@ import {Router} from '@angular/router';
 })
 export class AssetCreateComponent implements OnInit {
   public formCreate: FormGroup;
-  constructor(public formBuilder: FormBuilder,
-              public assetServer: AssetServerService,
-              public router: Router) { }
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private assetServer: AssetServerService,
+    private router: Router
+  ) {
+  }
+
   ngOnInit(): void {
     this.formCreate = this.formBuilder.group({
-      assetName: [''],
+      assetName: ['', [Validators.required]],
       usingQuantity: ['0'],
       fixingQuantity: ['0'],
-      image: [''],
-      total: [''],
-      description: [''],
-      price: ['']
+      image: ['', [Validators.required]],
+      total: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      price: ['', [Validators.required]]
     });
   }
 
