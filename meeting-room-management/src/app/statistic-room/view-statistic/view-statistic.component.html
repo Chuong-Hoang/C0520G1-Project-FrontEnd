@@ -8,26 +8,32 @@
 </div>
 <div class="container-fluid justify-content-center">
   <div class="row">
-    <div class="col-md-2 mt-5 ml-3"><h4 style="color: #7b7b7b">I. Biểu đồ thống kê</h4>
-      <select [(ngModel)]="start" class="form-control">
-        <option  value="2014"> 2014 </option>
-        <option  value="2015"> 2015 </option>
-        <option  value="2016"> 2016 </option>
-        <option  value="2017"> 2017 </option>
-        <option  value="2018"> 2018 </option>
-        <option  value="2019"> 2019 </option>
-        <option  value="2020"> 2020 </option>
-      </select>
-      <select [(ngModel)]="end" class="form-control">
-        <option  value="2014"> 2014 </option>
-        <option  value="2015"> 2015 </option>
-        <option  value="2016"> 2016 </option>
-        <option  value="2017"> 2017 </option>
-        <option  value="2018"> 2018 </option>
-        <option  value="2019"> 2019 </option>
-        <option  value="2020"> 2020 </option>
-      </select>
-      <button (click)="chartYear()" class="btn btn-success">xem</button>
+    <div class="col-md-2 mt-5 ml-2"><h4 class="font-weight-bold">I. Biểu đồ thống kê</h4>
+      <div class="row ml-3">
+        <label class="mt-1 font-weight-bold">Từ năm &nbsp;</label>
+        <select [(ngModel)]="start" class="form-control col-md-6 ml-4 pl-4">
+          <option value="2014"> 2014</option>
+          <option value="2015"> 2015</option>
+          <option value="2016"> 2016</option>
+          <option value="2017"> 2017</option>
+          <option value="2018"> 2018</option>
+          <option value="2019"> 2019</option>
+          <option value="2020"> 2020</option>
+        </select>
+      </div>
+      <div class="row mt-2 ml-3">
+        <label class="mt-1 font-weight-bold">Đến năm &nbsp;&nbsp;&nbsp;</label>
+        <select [(ngModel)]="end" class="form-control col-md-6 pl-4">
+          <option value="2014"> 2014</option>
+          <option value="2015"> 2015</option>
+          <option value="2016"> 2016</option>
+          <option value="2017"> 2017</option>
+          <option value="2018"> 2018</option>
+          <option value="2019"> 2019</option>
+          <option value="2020"> 2020</option>
+        </select>
+      </div>
+      <button (click)="chartYear()" class="btn btn-success mt-1 offset-md-8">xem</button>
     </div>
     <div class="col-md-9">
       <br>
@@ -48,123 +54,135 @@
   </div>
   <br>
   <div class="row">
-    <div class="col-md-2 mt-5 ml-3"><h4 style="color: #7b7b7b">II. Thống kê theo số liệu</h4></div>
+    <div class="col-md-2 mt-5 ml-2"><h4 class="font-weight-bold">II. Thống kê theo số liệu</h4></div>
     <div class="col-md-9">
       <div class="container-fluid ">
         <div class="row mt-5">
           <div class="col-md-5 border border border-dark">
             <form [formGroup]="statisticByTime" (ngSubmit)="onSubmitByTime()">
-              <h5 class="font-weight-bold mt-3">Theo thời gian</h5>
+              <h5 class="font-weight-bold mt-1">Theo thời gian</h5>
+              <div formGroupName="dateGroup">
+                <div class="row">
+                  <label class="font-weight-bold offset-md-2 mt-3">Từ ngày:</label>
+                  <!--            <input class="form-control col-md-7 ml-3" type="date" formControlName="startDate" >-->
+                  <mat-form-field class="ml-3">
+                    <input matInput [matDatepicker]="picker" [max]="maxDate" [min]="minDate" placeholder="Choose a date"
+                           formControlName="startIn"
+                           id="startIn">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
 
-              <div class="row mt-3">
-                <label class="font-weight-bold offset-md-2 mt-3">Từ ngày:</label>
-                <!--            <input class="form-control col-md-7 ml-3" type="date" formControlName="startDate" >-->
-                <mat-form-field class="ml-3">
-                  <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="startDate">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
+                <div class="row mt-3">
+                  <label class="font-weight-bold offset-md-2 mt-3">Đến ngày: </label>
+                  <!--            <input class="form-control col-md-7 ml-1" type="date" formControlName="endDate">-->
+                  <mat-form-field class="ml-2">
+                    <input matInput [matDatepicker]="picker1" [max]="maxDate" [min]="minDate"
+                           placeholder="Choose a date" formControlName="startOut"
+                           id="startOut">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
               </div>
-
-              <div class="row">
-                <label class="font-weight-bold offset-md-2 mt-3">Đến ngày: </label>
-                <!--            <input class="form-control col-md-7 ml-1" type="date" formControlName="endDate">-->
-                <mat-form-field class="ml-2">
-                  <input matInput [matDatepicker]="picker1" placeholder="Choose a date" formControlName="endDate">
-                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                  <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
-              </div>
-
-
-              <div class="d-flex justify-content-end mb-2">
-                <button class="btn btn-success" type="submit" [disabled]="statisticByTime.invalid"
-                        [ngClass]="{'btn-primary':statisticByTime.valid, 'btn-outline-primary':statisticByTime.invalid}">
+              <div class="d-flex justify-content-end mt-3 mb-2">
+                <span class="text-danger mr-5 font-weight-bold"
+                      *ngIf="statisticByTime.get('dateGroup').hasError('invalidDateNotMatch') && statisticByTime.get('dateGroup').touched">Dữ liệu không đúng định dang!!</span>
+                <button class="btn btn-success" type="submit" [disabled]="statisticByTime.invalid">
                   Thống kê
                 </button>
               </div>
-            </form>
-          </div>
+          </form>
+        </div>
 
-          <div class="col-md-1"></div>
-          <div class="col-md-6 border border border-dark ">
-            <form [formGroup]="statisticByRoom" (ngSubmit)="onSubmitByRoom()">
-              <h5 class="font-weight-bold mt-3">Theo phòng</h5>
-              <div class="row mt-4">
-                <div class="form-group col-md-6">
-                  <div class="row">
-                    <label class="font-weight-bold offset-md-1">Loại phòng:</label>
-                    <select class="form-control col-md-6 ml-2 input-group-text" formControlName="roomType">
-                      <option value="">--Chọn--</option>
-                      <option *ngFor="let element of roomType">{{element.roomTypeName}}</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group col-md-6">
-                  <div class="row">
-                    <label class="font-weight-bold offset-md-1">Tên phòng:</label>
-                    <select class="form-control col-md-6 ml-1 input-group-text" formControlName="roomName">
-                      <option value="">--Chọn--</option>
-                      <option *ngFor="let element1 of roomNames">{{element1}}</option>
-                    </select>
-                  </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-6 border border border-dark ">
+          <form [formGroup]="statisticByRoom" (ngSubmit)="onSubmitByRoom()">
+            <h5 class="font-weight-bold mt-1">Theo phòng </h5>
+            <div class="row mt-4">
+              <div class="form-group col-md-6">
+                <div class="row">
+                  <label class="font-weight-bold offset-md-1">Loại phòng:</label>
+                  <select class="form-control col-md-6 ml-2 input-group-text" formControlName="roomType">
+                    <option value="">--Chọn--</option>
+                    <option *ngFor="let element of roomType">{{element.roomTypeName}}</option>
+                  </select>
                 </div>
               </div>
-              <div class="row mt-3">
-                <div class="col-md-11 offset-md-1">
-                  <div class="row">
-                    <div class="mt-3"><label class="font-weight-bold d-flex">Thống kê theo:</label></div>
-                    <div class="col-md-5">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="username-addon">Tháng</span>
-                        </div>
-                        <select class="form-control" aria-label="username" aria-describedby="username-addon" id="username"
-                                name="username" formControlName="month">
-                          <option value="01">01</option>
-                          <option value="02">02</option>
-                          <option value="03">03</option>
-                          <option value="04">04</option>
-                          <option value="05">05</option>
-                          <option value="06">06</option>
-                          <option value="07">07</option>
-                          <option value="08">08</option>
-                          <option value="09">09</option>
-                          <option value="10">10</option>
-                          <option value="11">11</option>
-                          <option value="12">12</option>
-                        </select>
+              <div class="form-group col-md-6">
+                <div class="row">
+                  <label class="font-weight-bold offset-md-1">Tên phòng:</label>
+                  <select class="form-control col-md-6 ml-1 input-group-text" formControlName="roomName">
+                    <option value="">--Chọn--</option>
+                    <option *ngFor="let element1 of roomNames">{{element1}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-11 offset-md-1">
+                <div class="row">
+                  <div class="mt-3"><label class="font-weight-bold d-flex">Thống kê theo:</label></div>
+                  <div class="col-md-5">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="username-addon">Tháng</span>
                       </div>
-                      <div class="input-group mt-2">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Năm &nbsp;</span>
-                        </div>
-                        <select class="form-control mdb-select md-form" aria-label="username"
-                                aria-describedby="username-addon" name="username" formControlName="year">
-                          <option>2014</option>
-                          <option>2015</option>
-                          <option>2016</option>
-                          <option>2017</option>
-                          <option>2018</option>
-                          <option>2019</option>
-                          <option>2020</option>
-                        </select>
-                      </div>
+                      <select class="form-control" aria-label="username" aria-describedby="username-addon"
+                              id="username"
+                              name="username" formControlName="month">
+                        <option value="">--Chọn--</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                      </select>
                     </div>
-                    <div class="col-md-3 offset-md-1 mt-5 mb-1">
-                      <button class="btn btn-success" type="submit" >Thống kê</button>
+                    <div class="input-group mt-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Năm &nbsp;</span>
+                      </div>
+                      <select class="form-control mdb-select md-form" aria-label="username"
+                              aria-describedby="username-addon" name="username" formControlName="year">
+                        <option value="">--Chọn--</option>
+                        <option>2014</option>
+                        <option>2015</option>
+                        <option>2016</option>
+                        <option>2017</option>
+                        <option>2018</option>
+                        <option>2019</option>
+                        <option>2020</option>
+                      </select>
                     </div>
                   </div>
                 </div>
+
+                <div class="row">
+                  <div class="col-md-9 font-weight-bold"><p class="text-danger ml-3">{{messageError}}</p></div>
+                <div class="col-md-3 mb-1">
+                  <button class="btn  btn-success" type="submit">Thống kê</button>
+                </div>
+                </div>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
-  <br>
-  <br>
-  <br>
-  <br>
+</div>
+<br>
+<br>
+<br>
+<br>
 </div>
