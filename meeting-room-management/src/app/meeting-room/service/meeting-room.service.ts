@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Observable} from 'rxjs';
+import {MeetingRoom} from '../model/MeetingRoom';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +10,18 @@ export class MeetingRoomService {
   public API_MEETING_ROOM = 'http://localhost:8080/meeting-room';
   public API_ROOM_TYPE = 'http://localhost:8080/room-type';
   public API_ROOM_STATUS = 'http://localhost:8080/room-status';
+  public API_SEARCH_ROOM = 'http://localhost:8080/meeting-room/search';
 
   constructor(
     public http: HttpClient
-  ) { }
+  ) {}
 
   addNewMeetingRoom(meetingRoom): Observable<any> {
     return this.http.post(this.API_MEETING_ROOM, meetingRoom);
   }
 
-  getMeetingRoomById(meetingRoomId): Observable<any> {
-    return this.http.get(this.API_MEETING_ROOM + '/' + meetingRoomId);
+  getMeetingRoomById(meetingRoomId): Observable<MeetingRoom> {
+    return this.http.get<MeetingRoom>(this.API_MEETING_ROOM + '/' + meetingRoomId);
   }
 
   editMeetingRoom(meetingRoom, meetingRoomId): Observable<any> {
@@ -42,5 +44,7 @@ export class MeetingRoomService {
   getAllRoomStatus(): Observable<any> {
       return this.http.get(this.API_ROOM_STATUS);
   }
-
+  search(meetingRoomSearch): Observable<any>{
+    return this.http.post(this.API_SEARCH_ROOM, meetingRoomSearch);
+  }
 }

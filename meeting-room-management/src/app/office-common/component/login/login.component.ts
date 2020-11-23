@@ -30,13 +30,12 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.authenticationService.login(this.form).subscribe(
       data => {
-        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveToken(data.token);
         this.tokenStorage.saveUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.reloadPage();
-        // this.router.navigate(['/']);
+        this.router.navigate(['/']).then(() => this.reloadPage());
       },
       err => {
         this.errorMessage = err.error.message;
