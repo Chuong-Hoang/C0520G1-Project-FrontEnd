@@ -32,7 +32,7 @@ export class AssetListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.p = 0;
+    // this.p = 0;
     this.assetService.getAll().subscribe(data => {
       this.assetList = data;
       console.log(this.assetList);
@@ -43,8 +43,8 @@ export class AssetListComponent implements OnInit {
   openDialogCreate(id): void {
     this.assetService.getByID(id).subscribe(dataAsset => {
       const dialogRef = this.dialog.open(AssetCreateQuantityComponent, {
-        width: '400px',
-        height: '400px',
+        width: '500px',
+        height: '500px',
         data: {dataC: dataAsset.idAsset},
         disableClose: true
       });
