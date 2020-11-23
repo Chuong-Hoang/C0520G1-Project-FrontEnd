@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class UserService {
   public API_USER = 'http://localhost:8080/user';
-  public API_ROLE = 'http://localhost:8080/user/role-List';
+  public API_ROLE = 'http://localhost:8080/role-List';
 
   constructor(public http: HttpClient) {
   }
