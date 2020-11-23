@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient , HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Asset} from '../model.asset';
+import {Asset} from '../model/model.asset';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,7 @@ export class AssetServerService {
 
 
   getAll(): Observable<Asset> {
-    // @ts-ignore
-    return this.http.get(this.Api);
+    return this.http.get<Asset>(this.Api);
   }
 
   getByID(idAsset): Observable<Asset> {
@@ -26,15 +25,25 @@ export class AssetServerService {
   }
 
   create(asset): Observable<any> {
+    console.log('service' + asset);
     return this.http.post(this.Api + '/create', asset);
   }
 
+  edit(asset, assetId): Observable<Asset> {
+    return this.http.patch<Asset>(this.Api + '/edit/' + assetId, asset);
+  }
 
-  //
-  // edit(asset, assetId): Observable<Asset> {
-  //   // @ts-ignore
-  //   return this.http.put(this.Api + '/' + assetId, asset);
-  // }
+  delete(assetId): Observable<Asset> {
+    return this.http.delete<Asset>(this.Api + '/delete/' + assetId);
+  }
 
+
+  searchByNameAsset(inputSearch: string): Observable<Asset> {
+
+    let params = new HttpParams();
+    params = params.append('valueSearch', inputSearch);
+
+    return this.http.get<Asset>(this.Api + '/inputSearch' , {params});
+  }
 
 }

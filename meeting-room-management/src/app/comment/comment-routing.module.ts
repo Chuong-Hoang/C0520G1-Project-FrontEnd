@@ -14,7 +14,7 @@ export const CommentRoutes: Routes = [
     component: CommentCreateComponent,
   },
   {
-    path: 'comment-handle',
+    path: 'comment/:idComment',
     component: CommentHandleComponent,
   },
   {

@@ -1,11 +1,17 @@
+import {BookedUser} from './BookedUser.class';
+
 export class BookedRoom {
-  private idBookedRoom: number;
-  private startDate: string;
-  private endDate: string;
-  private content: string;
-  private bookedStatus: string;
-  private startTime: string;
-  private endTime: string;
-  private bookedUser: string;
-  private meetingRoom: string;
+  public idBookedRoom: number;
+  public startDate: string;
+  public endDate: string;
+  public content: string;
+  public bookedDate: string;
+  public bookedStatus: string;
+  public effective: number;
+  public totalUse: number;
+  public startTime: string;
+  public endTime: string;
+  public userName: string;
+  public roomName: string;
+  public roomType: string;
 }

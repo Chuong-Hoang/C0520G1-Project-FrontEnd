@@ -9,6 +9,7 @@ import {BookedRoomCreateComponent} from './component/booked-room-create/booked-r
 import {BookedRoomSearchComponent} from './component/booked-room-search/booked-room-search.component';
 import {MaterialModule} from './material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
     declarations: [
@@ -21,13 +22,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     exports: [
         BookedRoomCancelComponent
     ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(bookingRoomRoute),
-    MaterialModule,
-    ReactiveFormsModule,
-    FormsModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(bookingRoomRoute),
+        MaterialModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NgxPaginationModule
+    ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
