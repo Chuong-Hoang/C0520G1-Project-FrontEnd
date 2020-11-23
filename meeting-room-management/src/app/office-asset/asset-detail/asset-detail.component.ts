@@ -10,7 +10,6 @@ import {Asset} from '../model/model.asset';
 })
 export class AssetDetailComponent implements OnInit {
   public asset = new Asset();
-  roomName: string;
 
   constructor(
     private assetService: AssetServerService,
