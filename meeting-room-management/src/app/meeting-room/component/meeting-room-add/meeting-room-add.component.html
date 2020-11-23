@@ -6,42 +6,58 @@
   <div class="w-75">
     <form [formGroup]="formAddRoom">
       <div class="form-group row">
-        <label for="roomName" class="col-sm-2 col-form-label">Tên phòng(*)</label>
+        <label for="roomName" class="col-sm-2 col-form-label">Tên phòng<span class="text-danger">(*)</span></label>
         <div class="col-sm-10">
           <input type="text" class="form-control form-control-sm" id="roomName" formControlName="roomName">
+          <p *ngIf="formAddRoom.controls.roomName.errors?.required && formAddRoom.controls.roomName.touched"
+             class="text-danger">Vui lòng nhập tên phòng</p>
+          <p *ngIf="formAddRoom.controls.roomName.errors?.pattern && formAddRoom.controls.roomName.touched"
+             class="text-danger">Tên phòng phải nhỏ hơn 30 ký tự</p>
         </div>
       </div>
       <div class="form-group row">
-        <label for="floor" class="col-sm-2 col-form-label">Tầng</label>
+        <label for="floor" class="col-sm-2 col-form-label">Tầng<span class="text-danger">(*)</span></label>
         <div class="col-10">
           <input type="text" class="form-control form-control-sm" formControlName="floor" id="floor">
+          <p *ngIf="formAddRoom.controls.floor.errors?.required && formAddRoom.controls.floor.touched"
+             class="text-danger">Vui lòng chọn tầng</p>
+          <p *ngIf="formAddRoom.controls.floor.errors?.pattern && formAddRoom.controls.floor.touched"
+             class="text-danger">Tầng phải là số nguyên</p>
         </div>
       </div>
       <div class="form-group row">
-        <label for="zone" class="col-sm-2 col-form-label">Khu vực(*)</label>
+        <label for="zone" class="col-sm-2 col-form-label">Khu vực<span class="text-danger">(*)</span></label>
         <div class="col-10">
           <select id="zone" class="form-control form-control-sm" formControlName="zone">
+            <option>Đà nẵng</option>
+            <option>Hội an</option>
+            <option>Hà nội</option>
             <option>A</option>
             <option>B</option>
             <option>C</option>
           </select>
+          <p *ngIf="formAddRoom.controls.zone.errors?.required && formAddRoom.controls.zone.touched"
+             class="text-danger">Vui lòng chọn khu vực</p>
         </div>
       </div>
       <div class="form-group row">
-        <label for="capacity" class="col-sm-2 col-form-label">Sức chứa(*)</label>
+        <label for="capacity" class="col-sm-2 col-form-label">Sức chứa<span class="text-danger">(*)</span></label>
         <div class="col-10">
           <input type="text" class="form-control form-control-sm" id="capacity" formControlName="capacity">
+          <p *ngIf="formAddRoom.controls.capacity.errors?.required && formAddRoom.controls.capacity.touched"
+             class="text-danger">Vui lòng nhập sức chứa</p>
+          <p *ngIf="formAddRoom.controls.capacity.errors?.pattern && formAddRoom.controls.capacity.touched"
+             class="text-danger">Sức chứa phải là số nguyên</p>
         </div>
       </div>
       <div class="form-group row">
-        <label for="roomType" class="col-sm-2 col-form-label">Loại phòng(*)</label>
+        <label for="roomType" class="col-sm-2 col-form-label">Loại phòng<span class="text-danger">(*)</span></label>
         <div class="col-10">
-          <select id="roomType" class="form-control form-control-sm">
-            <option>1 lần</option>
-            <option>Hàng ngày</option>
-            <option>Hàng tuần</option>
-            <option>Hàng tháng</option>
-          </select>
+            <select type="text" id="roomType" class="form-control form-control-sm" formControlName="roomTypeName">
+                <option *ngFor="let item of roomTypeList" [ngValue]="item">{{item}}</option>
+            </select>
+          <p *ngIf="formAddRoom.controls.roomTypeName.errors?.required && formAddRoom.controls.roomTypeName.touched"
+             class="text-danger">Vui lòng chọn kiểu phòng</p>
         </div>
       </div>
       <!--custom-file in div class-->
@@ -52,9 +68,9 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Tài sản(*)</label>
+        <label class="col-sm-2 col-form-label">Tài sản</label>
         <div class="col-10">
-          <a href="#" role="button" class="btn btn-sm btn-success" style="width: 80px">Chọn</a>
+          <a role="button" class="btn btn-sm btn-success" style="width: 80px" (click) = openDialog()>Chọn</a>
         </div>
       </div>
       <div>
@@ -62,7 +78,7 @@
       </div>
       <div class="form-group row d-flex justify-content-center">
         <button class="btn btn-secondary btn-sm ml-3 mr-3" type="reset" style="width: 80px">Hủy</button>
-        <button class="btn btn-success btn-sm ml-3" type="submit" style="width: 80px">Thêm</button>
+        <button [disabled]="formAddRoom.invalid" class="btn btn-success btn-sm ml-3" type="submit" style="width: 80px" (click)="addNewMeetingRoom()">Thêm</button>
       </div>
     </form>
   </div>

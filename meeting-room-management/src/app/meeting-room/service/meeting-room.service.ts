@@ -9,21 +9,24 @@ export class MeetingRoomService {
   public API_MEETING_ROOM = 'http://localhost:8080/meeting-room';
   public API_ROOM_TYPE = 'http://localhost:8080/room-type';
   public API_ROOM_STATUS = 'http://localhost:8080/room-status';
-
+  public API_ADD_MEETING_ROOM = 'http://localhost:8080/meeting-room/createMeetingRoom';
+  public API_EDIT_MEETING_ROOM = 'http://localhost:8080/meeting-room/find';
+  public API_SEARCH_ROOM = 'http://localhost:8080/meeting-room/search';
+  public API_EDIT_ROOM = 'http://localhost:8080/meeting-room/edit';
   constructor(
     public http: HttpClient
-  ) { }
+  ) {}
 
   addNewMeetingRoom(meetingRoom): Observable<any> {
-    return this.http.post(this.API_MEETING_ROOM, meetingRoom);
+    return this.http.post(this.API_ADD_MEETING_ROOM, meetingRoom);
   }
 
   getMeetingRoomById(meetingRoomId): Observable<any> {
-    return this.http.get(this.API_MEETING_ROOM + '/' + meetingRoomId);
+    return this.http.get(this.API_EDIT_MEETING_ROOM + '/' + meetingRoomId);
   }
 
   editMeetingRoom(meetingRoom, meetingRoomId): Observable<any> {
-    return this.http.put(this.API_MEETING_ROOM + '/' + meetingRoomId, meetingRoom);
+    return this.http.put(this.API_EDIT_ROOM + '/' + meetingRoomId, meetingRoom);
   }
 
   getAllMeetingRoom(): Observable<any> {
@@ -41,6 +44,10 @@ export class MeetingRoomService {
 
   getAllRoomStatus(): Observable<any> {
       return this.http.get(this.API_ROOM_STATUS);
+  }
+
+  search(meetingRoomSearch): Observable<any> {
+    return this.http.post(this.API_SEARCH_ROOM, meetingRoomSearch);
   }
 
 }
