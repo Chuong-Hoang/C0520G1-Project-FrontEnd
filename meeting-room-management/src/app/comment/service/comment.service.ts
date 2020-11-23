@@ -27,6 +27,9 @@ export class CommentService {
     console.log(comment);
     return this.http.put(this.API + '/' + idComment, comment);
   }
+  detailComment(idComment, comment): Observable<any> {
+    return this.http.put(this.API + '/detail/' + idComment, comment);
+  }
   search(a: string, b: string, c: string): Observable<any> {
     let params = new HttpParams();
     params = params.append('value1', a);
