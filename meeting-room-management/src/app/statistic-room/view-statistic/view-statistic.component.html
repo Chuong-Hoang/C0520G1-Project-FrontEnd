@@ -1,255 +1,188 @@
 <br>
 <br>
 <br>
-<div class="container justify-content-center">
-  <hr>
-  <div class="row d-flex justify-content-center mr-5"><h3>Báo cáo thống kê </h3></div>
-  <div class="container-fluid ">
-    <div class="row mt-5">
-      <div class="col-md-5 border border-success">
-        <form [formGroup]="statisticByTime" (ngSubmit)="onSubmitByTime()">
-          <h5 class="font-weight-bold mt-3">Theo thời gian</h5>
-
-          <div class="row mt-3">
-            <label class="font-weight-bold offset-md-2 mt-3">Từ ngày:</label>
-<!--            <input class="form-control col-md-7 ml-3" type="date" formControlName="startDate" >-->
-            <mat-form-field class="ml-3">
-              <input  matInput [matDatepicker]="picker"  [ngModel]="startDate" placeholder="Choose a date" formControlName="startDate">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </div>
-
-          <div class="row">
-            <label class="font-weight-bold offset-md-2 mt-3">Đến ngày: </label>
-<!--            <input class="form-control col-md-7 ml-1" type="date" formControlName="endDate">-->
-            <mat-form-field class="ml-2">
-              <input  matInput [matDatepicker]="picker1" [ngModel]="endDate"  placeholder="Choose a date" formControlName="endDate">
-              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-              <mat-datepicker #picker1></mat-datepicker>
-            </mat-form-field>
-          </div>
-
-
-          <div class="d-flex justify-content-end mb-2">
-            <button class="btn btn-success" type="submit" [disabled]="statisticByTime.invalid" [ngClass]="{'btn-primary':statisticByTime.valid, 'btn-outline-primary':statisticByTime.invalid}">Thống kê</button>
-          </div>
-        </form>
-      </div>
-
-      <div class="col-md-1"></div>
-      <div class="col-md-6 border border-success ">
-        <form [formGroup]="statisticByRoom" (ngSubmit)="onSubmitByRoom()">
-        <h5 class="font-weight-bold mt-3">Theo phòng</h5>
-        <div class="row mt-4">
-          <div class="form-group col-md-6">
-            <div class="row">
-              <label class="font-weight-bold offset-md-1">Loại phòng:</label>
-              <select class="form-control col-md-6 ml-2 input-group-text" >
-                <option disabled selected>--Chọn--</option>
-                <option>1 lần</option>
-                <option>Hàng tuần</option>
-                <option>Hàng tháng</option>
-                <option>Hàng ngày</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group col-md-6">
-            <div class="row">
-              <label class="font-weight-bold offset-md-1">Tên phòng:</label>
-              <select class="form-control col-md-6 ml-1 input-group-text" >
-                <option disabled selected>--Chọn--</option>
-                <option>A2</option>
-                <option>B2</option>
-                <option>C3</option>
-                <option>A4</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-md-11 offset-md-1">
-            <div class="row">
-              <div class="mt-3"><label class="font-weight-bold d-flex">Thống kê theo:</label></div>
-              <div class="col-md-5">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="username-addon">Tháng</span>
-                  </div>
-                  <select class="form-control" aria-label="username" aria-describedby="username-addon" id="username"
-                          name="username">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
-                  </select>
-                </div>
-                <div class="input-group mt-2">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Năm &nbsp;</span>
-                  </div>
-                  <select class="form-control mdb-select md-form" aria-label="username" aria-describedby="username-addon" name="username">
-                    <option>2014</option>
-                    <option>2015</option>
-                    <option>2016</option>
-                    <option>2017</option>
-                    <option>2018</option>
-                    <option>2019</option>
-                    <option>2020</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-3 offset-md-1 mt-5 mb-1">
-                <button class="btn btn-success">Thống kê</button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        </form>
-      </div>
-    </div>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center ">
+    <h1 class="font-weight-bold" style="color: #3c3c3c">Báo cáo thống kê </h1>
   </div>
-
-  <app-charts-statistic></app-charts-statistic>
-
-  <div class="container" *ngIf="bookedRoom.length > 0 ; else blockByTime">
-    <div class="row">
-      <div class="col-md-12 border border-success mt-4 ">
-        <h5 class="font-weight-bold mt-2">Kết quả</h5>
-        <div class="col-md-11 offset-md-1">
-          <div class="row">
-            <div class="col-md-3 font-weight-bold">Tên phòng:A2</div>
-            <div class="col-md-3 font-weight-bold">Tổng số lần sử dụng:3</div>
-            <div class="col-md-3 font-weight-bold">Hiệu suất:60%</div>
-          </div>
-        </div>
-        <div style="overflow-x:auto;" class="mt-2">
-          <table class="table table-striped table-hover mt-2">
-            <thead style="background: #96a2af">
-            <tr>
-              <th class="small font-weight-bold">STT</th>
-              <th class="small font-weight-bold">Tên người đăng ký</th>
-              <th class="small font-weight-bold">Thời gian bắt đầu</th>
-              <th class="small font-weight-bold">Thời gian kết thúc</th>
-              <th class="small font-weight-bold">Ngày bắt đầu</th>
-              <th class="small font-weight-bold">Ngày kết thúc</th>
-              <th class="small font-weight-bold">Trạng thái</th>
-              <th class="small font-weight-bold">Ngày đăng ký</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <td>1</td>
-              <td>Nguyễn Tiến Hải</td>
-              <td>8h 00p</td>
-              <td>10h 30p</td>
-              <td>11/10/2014</td>
-              <td>11/11/2014</td>
-              <td>Đang sử dụng</td>
-              <td>11/09/2014</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Nguyễn Tiến Hải 2</td>
-              <td>8h 00p</td>
-              <td>10h 30p</td>
-              <td>09/10/2014</td>
-              <td>18/11/2014</td>
-              <td>Đang sử dụng</td>
-              <td>11/09/2014</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-          <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Trước</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Sau</a></li>
-          </ul>
-        </nav>
+</div>
+<div class="container-fluid justify-content-center">
+  <div class="row">
+    <div class="col-md-2 mt-5 ml-2"><h4 class="font-weight-bold">I. Biểu đồ thống kê</h4>
+      <div class="row ml-3">
+        <label class="mt-1 font-weight-bold">Từ năm &nbsp;</label>
+        <select [(ngModel)]="start" class="form-control col-md-6 ml-4 pl-4">
+          <option value="2014"> 2014</option>
+          <option value="2015"> 2015</option>
+          <option value="2016"> 2016</option>
+          <option value="2017"> 2017</option>
+          <option value="2018"> 2018</option>
+          <option value="2019"> 2019</option>
+          <option value="2020"> 2020</option>
+        </select>
       </div>
+      <div class="row mt-2 ml-3">
+        <label class="mt-1 font-weight-bold">Đến năm &nbsp;&nbsp;&nbsp;</label>
+        <select [(ngModel)]="end" class="form-control col-md-6 pl-4">
+          <option value="2014"> 2014</option>
+          <option value="2015"> 2015</option>
+          <option value="2016"> 2016</option>
+          <option value="2017"> 2017</option>
+          <option value="2018"> 2018</option>
+          <option value="2019"> 2019</option>
+          <option value="2020"> 2020</option>
+        </select>
+      </div>
+      <button (click)="chartYear()" class="btn btn-success mt-1 offset-md-8">xem</button>
     </div>
-  </div>
-
-  <ng-template #blockByTime>
-    <h1 style="color: chartreuse" class="d-flex justify-content-center">Hãy thống kê theo cách của bạn</h1>
-  </ng-template>
-  <br>
-  <div class="container">
-    <div class="row mt-2">
-      <div class="col-md-12 border border-success mt-4 ">
-        <h5 class="font-weight-bold mt-2">Kết quả:</h5>
-        <div class="col-md-11 offset-md-1">
-          <div class="row">
-            <div class="col-md-3 font-weight-bold">Từ ngày: 10/09/2020</div>
-            <div class="col-md-3 font-weight-bold">Đến ngày: 16/11/2020</div>
-            <div class="col-md-3 font-weight-bold">Tổng số lần sử dụng: 10</div>
-          </div>
-        </div>
-        <div style="overflow-x:auto;" class="mt-2">
-          <table class="table table-striped table-hover mt-2">
-            <thead style="background: #96a2af">
-            <tr>
-              <th class="small font-weight-bold">STT</th>
-              <th class="small font-weight-bold">Tên người đăng ký</th>
-              <th class="small font-weight-bold">Tên phòng</th>
-              <th class="small font-weight-bold">Loại phòng</th>
-              <th class="small font-weight-bold">Thời gian bắt đầu</th>
-              <th class="small font-weight-bold">Thời gian kết thúc</th>
-              <th class="small font-weight-bold">Ngày bắt đầu</th>
-              <th class="small font-weight-bold">Ngày kết thúc</th>
-              <th class="small font-weight-bold">Trạng thái</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <td>1</td>
-              <td>Nguyễn Tiến Hải</td>
-              <td>B1</td>
-              <td>1 lần</td>
-              <td>8h 00p</td>
-              <td>10h 30p</td>
-              <td>11/10/2020</td>
-              <td>11/11/2020</td>
-              <td>Đang sử dụng</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Lê Nhật</td>
-              <td>B2</td>
-              <td>1 lần</td>
-              <td>8h 00p</td>
-              <td>10h 30p</td>
-              <td>9/10/2020</td>
-              <td>4/11/2020</td>
-              <td>Đã kết thúc</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-          <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Trước</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Sau</a></li>
-          </ul>
-        </nav>
+    <div class="col-md-9">
+      <br>
+      <div style="width: 100%;">
+        <canvas
+          baseChart
+          height="100vh"
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"
+          [colors]="chartColors"
+          (chartClick)="onChartClick($event)">
+        </canvas>
       </div>
     </div>
   </div>
   <br>
+  <div class="row">
+    <div class="col-md-2 mt-5 ml-2"><h4 class="font-weight-bold">II. Thống kê theo số liệu</h4></div>
+    <div class="col-md-9">
+      <div class="container-fluid ">
+        <div class="row mt-5">
+          <div class="col-md-5 border border border-dark">
+            <form [formGroup]="statisticByTime" (ngSubmit)="onSubmitByTime()">
+              <h5 class="font-weight-bold mt-1">Theo thời gian</h5>
+              <div formGroupName="dateGroup">
+                <div class="row">
+                  <label class="font-weight-bold offset-md-2 mt-3">Từ ngày:</label>
+                  <!--            <input class="form-control col-md-7 ml-3" type="date" formControlName="startDate" >-->
+                  <mat-form-field class="ml-3">
+                    <input matInput [matDatepicker]="picker" [max]="maxDate" [min]="minDate" placeholder="Choose a date"
+                           formControlName="startIn"
+                           id="startIn">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="row mt-3">
+                  <label class="font-weight-bold offset-md-2 mt-3">Đến ngày: </label>
+                  <!--            <input class="form-control col-md-7 ml-1" type="date" formControlName="endDate">-->
+                  <mat-form-field class="ml-2">
+                    <input matInput [matDatepicker]="picker1" [max]="maxDate" [min]="minDate"
+                           placeholder="Choose a date" formControlName="startOut"
+                           id="startOut">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+              </div>
+              <div class="d-flex justify-content-end mt-3 mb-2">
+                <span class="text-danger mr-5 font-weight-bold"
+                      *ngIf="statisticByTime.get('dateGroup').hasError('invalidDateNotMatch') && statisticByTime.get('dateGroup').touched">Dữ liệu không đúng định dang!!</span>
+                <button class="btn btn-success" type="submit" [disabled]="statisticByTime.invalid">
+                  Thống kê
+                </button>
+              </div>
+          </form>
+        </div>
+
+        <div class="col-md-1"></div>
+        <div class="col-md-6 border border border-dark ">
+          <form [formGroup]="statisticByRoom" (ngSubmit)="onSubmitByRoom()">
+            <h5 class="font-weight-bold mt-1">Theo phòng </h5>
+            <div class="row mt-4">
+              <div class="form-group col-md-6">
+                <div class="row">
+                  <label class="font-weight-bold offset-md-1">Loại phòng:</label>
+                  <select class="form-control col-md-6 ml-2 input-group-text" formControlName="roomType">
+                    <option value="">--Chọn--</option>
+                    <option *ngFor="let element of roomType">{{element.roomTypeName}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <div class="row">
+                  <label class="font-weight-bold offset-md-1">Tên phòng:</label>
+                  <select class="form-control col-md-6 ml-1 input-group-text" formControlName="roomName">
+                    <option value="">--Chọn--</option>
+                    <option *ngFor="let element1 of roomNames">{{element1}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-11 offset-md-1">
+                <div class="row">
+                  <div class="mt-3"><label class="font-weight-bold d-flex">Thống kê theo:</label></div>
+                  <div class="col-md-5">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="username-addon">Tháng</span>
+                      </div>
+                      <select class="form-control" aria-label="username" aria-describedby="username-addon"
+                              id="username"
+                              name="username" formControlName="month">
+                        <option value="">--Chọn--</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                      </select>
+                    </div>
+                    <div class="input-group mt-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Năm &nbsp;</span>
+                      </div>
+                      <select class="form-control mdb-select md-form" aria-label="username"
+                              aria-describedby="username-addon" name="username" formControlName="year">
+                        <option value="">--Chọn--</option>
+                        <option>2014</option>
+                        <option>2015</option>
+                        <option>2016</option>
+                        <option>2017</option>
+                        <option>2018</option>
+                        <option>2019</option>
+                        <option>2020</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-9 font-weight-bold"><p class="text-danger ml-3">{{messageError}}</p></div>
+                <div class="col-md-3 mb-1">
+                  <button class="btn  btn-success" type="submit">Thống kê</button>
+                </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
 </div>

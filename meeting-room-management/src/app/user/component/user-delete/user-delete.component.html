@@ -1,0 +1,15 @@
+<h4 class="font-weight-bold font-italic form-text m-0 p-0 text-primary ">Xác nhận</h4>
+<hr class=" border">
+<div>
+  <p class="mb-0 font-weight-bolder">Bạn có chắc chắn muốn xóa tài khoản
+    <span class="font-weight-bold font-italic " style="color: #ff1904;font-size: 20px">{{userName}}</span> ?</p>
+</div>
+<hr class="border">
+<div class="row d-flex">
+  <p class="row d-flex mr-3 font-italic" style="color:red;margin-left: 10px ;font-size: 12px">(*) Lưu ý thao tác không thể hoàn lại</p>
+  <button mat-dialog-close class="btn btn-secondary mr-4 btn-sm" style="width: 80px;margin-left: 90px">Không</button>
+  <button   class="btn btn-danger btn-sm " style="width: 80px" (click)="deleteUser()">Có</button>
+</div>
+
+
+

@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"-->
-<!--        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
-</head>
-<body>
-<div class="container-fluid 100vh">
-  <from>
+<div class="container-fluid 100vh mt-5">
+  <br>
+  <from >
     <div class="col-lg-12  px-0"><!--Thanh Tiêu Đề Thông Báo-->
       <div class="col-lg-12 px-0">
         <h3 class="d-flex justify-content-center">Danh sách phản
@@ -16,106 +8,67 @@
       </div>
       <!--Phần Thân Nội Dung thông Báo-->
       <div class="container-fluid col-12 col-md-12 mt-5 col-lg-12 ">
-        <form class="form-inline">
+        <form class="form-inline" [formGroup]="formSearch" (ngSubmit)="onSearch()">
 
           <div class="form-group row col-md-12 col-12 col-lg-4 my-2">
             <label class="col-4 justify-content-start">Tên người dùng<span style="color: red">(*)</span></label>
-            <input class="col-8 form-control form-control-sm rounded" required=""
+            <input class="col-8 form-control form-control-sm rounded" required="" formControlName="a"
                    placeholder="Nhập tên người dùng">
           </div>
           <div class="form-group row col-12 col-md-12 col-lg-4 my-2">
             <span class="col-4 col-md-4 col-lg-4 justify-content-start">Tên phòng</span>
-            <input class="col-8 col-md-8 col-lg-8 form-control form-control-sm"
+            <input class="col-8 col-md-8 col-lg-8 form-control form-control-sm" formControlName="b"
                    placeholder="Nhập tên phòng">
           </div>
 
           <div class="form-group row col-12 col-md-12 col-lg-3 my-2">
             <label class="col-4 justify-content-start">Trạng thái</label>
-            <select class="col-8 form-control form-control-sm">
-              <option>Đã xử lý</option>
-              <option>Chưa xử lý</option>
+            <select class="col-8 form-control form-control-sm" formControlName="c" [(ngModel)]="status">
+              <option [value]="false" >Đã xử lý</option>
+              <option [value]="true">Chưa xử lý</option>
             </select>
           </div>
           <div class="row col-12 col-md-12 col-lg-1 my-2 mx-2 d-fex justify-content-end">
-            <button class="btn-sm btn-primary" type="submit">Tìm kiếm</button>
+            <button class="btn-sm btn-primary"  type="submit">Tìm kiếm</button>
           </div>
         </form>
       </div>
 
 
       <div class=" row mt-4">
-        <table class="table table-hover">
+        <table class="table table-hover" style="overflow-y:scroll">
           <thead class="btn-light">
           <tr>
-            <th>Stt</th>
+            <th>STT</th>
 
             <th>Tên người dùng</th>
             <th>Tên phòng</th>
             <th>Thời gian phản hồi</th>
+            <th>Lỗi Phòng</th>
             <th>Nội dung</th>
             <th>Trạng Thái</th>
             <th>Tác vụ</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let comment of comments">
-            <td>{{comment.idComment}}</td>
-            <td>{{comment.sender}}</td>
-            <td>{{comment.meetingRoom}}</td>
+          <tr *ngFor="let comment of comments| paginate: { itemsPerPage: 6, currentPage: p}; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{comment.senderName}}</td>
+            <td>{{comment.roomName}}</td>
+            <td>{{comment.errorTypeName}}</td>
             <td>{{comment.commentTime}}</td>
             <td>{{comment.contentComment}}</td>
-            <td>{{comment.status}}</td>
-<!--            <td *ngIf="comment.status == true"></td>-->
-            <td><button  class="btn-sm btn-success" style="width: 80px" [disabled]="true" >Đã xử lý</button></td>
-
-          </tr>
-          <tr>
-            <td scope="row">1</td>
-            <td>Lê toàn</td>
-            <td>Phòng 203</td>
-            <td>23/20/2019</td>
-            <td>Phòng Lỗi máy chiếu</td>
-            <td>Đã xử lý</td>
-            <td>
-              <button class="btn-sm btn-success" style="width: 80px">Xử lý</button>
-            </td>
-          </tr>
-          <tr>
-            <td scope="row">2</td>
-            <td>Hoàng Văn Kim Chương</td>
-            <td>Phòng 204</td>
-            <td>11/11/2020</td>
-            <td>Phòng ẩm móc</td>
-            <td>Chưa xử lý</td>
-            <td>
-              <button  class="btn-sm btn-success"style="width: 80px" [disabled]="true" >Đã xử lý</button>
-            </td>
+            <td *ngIf="!comment.status==true; else abc" >Đã xử lý</td>
+            <ng-template #abc><td>Chưa xử lý</td></ng-template>
+            <td><button  style="width: 80px" [disabled]="!comment.status" [ngClass]="{'btn-sm btn-secondary':!comment.status, 'btn-sm btn-success':comment.status}" [routerLink]="['/comment/'+comment.idComment]">Xử Lý</button></td>
           </tr>
           </tbody>
         </table>
       </div>
-      <nav aria-label="Page navigation example" >
-        <ul class="pagination d-flex justify-content-center">
-          <li class="page-item"><a class="page-link" href="#">Trước</a></li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">Sau</a></li>
-        </ul>
-      </nav>
+      <div class="d-flex justify-content-center">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
     </div>
   </from>
 </div>
-
-</body>
-<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"-->
-<!--        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"-->
-<!--        crossorigin="anonymous"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"-->
-<!--        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"-->
-<!--        crossorigin="anonymous"></script>-->
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"-->
-<!--        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"-->
-<!--        crossorigin="anonymous"></script>-->
-</html>
 

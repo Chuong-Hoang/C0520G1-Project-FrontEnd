@@ -1,0 +1,72 @@
+<div class="container-fluid px-0 w-75 mt-3 ">
+  <h3 class="row d-flex justify-content-center">Chi tiết tài sản</h3>
+
+  <div class="row px-0 mx-0 mt-5" style="height: 90%">
+    <div class="col-8 px-0 ">
+
+      <div class="row d-flex justify-content-center ml-1">
+        <div class="col-6">
+          <div class="row d-flex justify-content-center">
+            <div class="col-4 px-0">
+              <p>Tên tài sản:</p>
+              <p>Số lượng:</p>
+              <p>Đang sửa:</p>
+            </div>
+            <div class="col-8 px-0">
+              <p>{{asset.assetName}}</p>
+              <p>{{asset.total}} cái</p>
+              <p>{{asset.fixingQuantity}} cái</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="row d-flex justify-content-center">
+            <div class="col-3 px-0">
+              <p>Mô tả:</p>
+              <p>Giá:</p>
+            </div>
+            <div class="col-9 px-0">
+              <p>{{asset.description}}</p>
+              <p>{{asset.price}} vnđ</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <p>Danh sách phòng đang sử dụng tài sản</p>
+
+      <table class="table table-hover mt-5">
+        <thead class="thead-light">
+        <tr>
+          <th>Stt</th>
+          <th>Tên phòng</th>
+          <th>Đang sử dụng</th>
+          <th>Đơn vị</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let element of asset.assetDetailDTOList; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{element.nameMeetingRoom}}</td>
+          <td>{{element.quantity}}</td>
+          <td>Cái</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="col-4 px-5 mt-5">
+<!--      <img src="https://www.sieuthivienthong.com/imgs/art/p_30150_OPTOMA-SA500.jpg "-->
+<!--           class="w-100">-->
+    </div>
+
+  </div>
+  <div class="row d-flex justify-content-center mt-3">
+    <button type="button" class="btn btn-secondary " routerLink="/asset">Back</button>
+  </div>
+</div>
+
