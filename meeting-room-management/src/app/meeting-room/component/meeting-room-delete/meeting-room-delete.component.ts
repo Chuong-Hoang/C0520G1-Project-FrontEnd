@@ -9,8 +9,8 @@ import {MeetingRoomService} from '../../service/meeting-room.service';
 })
 export class MeetingRoomDeleteComponent implements OnInit {
 
-  public meetingRoomTemp;
-  public idMeetingRoomTemp;
+  public roomName: string;
+  public idMeetingRoom: number;
 
   constructor(
     public dialogRef: MatDialogRef<MeetingRoomDeleteComponent>,
@@ -19,13 +19,15 @@ export class MeetingRoomDeleteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.meetingRoomTemp = this.data.dataEl;
-    this.idMeetingRoomTemp = this.data.dataEl.id;
+    this.roomName = this.data.dataEl.roomName;
+    this.idMeetingRoom = this.data.dataEl.idRoom;
+    console.log(this.idMeetingRoom);
   }
 
 
   delete(): void {
-    this.meetingRoomService.deleteMeetingRoomById(this.idMeetingRoomTemp).subscribe(data => {
+    console.log('abc');
+    this.meetingRoomService.deleteMeetingRoomById(this.idMeetingRoom).subscribe(data => {
       this.dialogRef.close();
     });
   }
