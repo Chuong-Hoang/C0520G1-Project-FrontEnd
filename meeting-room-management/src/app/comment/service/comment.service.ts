@@ -27,6 +27,9 @@ export class CommentService {
     console.log(comment);
     return this.http.put(this.API + '/' + idComment, comment);
   }
+  detailComment(idComment, comment): Observable<any> {
+    return this.http.put(this.API + '/detail/' + idComment, comment);
+  }
   search(a: string, b: string, c: string): Observable<any> {
     let params = new HttpParams();
     params = params.append('value1', a);
@@ -37,8 +40,8 @@ export class CommentService {
   // getCustomerByID(customerId): Observable<any> {
   //   return this.http.get(this.API + '/' +customerId)
   // }
-  deleteCommentByID(customerId): Observable<any> {
-    return this.http.delete(this.API + '/' +customerId)
+  deleteCommentByID(idComment): Observable<any> {
+    return this.http.delete(this.API + '/' + idComment);
   }
   // editCustomer(customer,customerId): Observable<any> {
   //   return this.http.put(this.API + '/' +customerId,customer)

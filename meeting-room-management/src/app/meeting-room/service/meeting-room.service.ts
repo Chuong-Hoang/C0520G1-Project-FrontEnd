@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
-import { Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {MeetingRoom} from '../model/MeetingRoom';
 
 @Injectable({
@@ -14,7 +14,8 @@ export class MeetingRoomService {
 
   constructor(
     public http: HttpClient
-  ) {}
+  ) {
+  }
 
   addNewMeetingRoom(meetingRoom): Observable<any> {
     return this.http.post(this.API_MEETING_ROOM, meetingRoom);
@@ -34,7 +35,7 @@ export class MeetingRoomService {
 
   // tslint:disable-next-line:typedef
   deleteMeetingRoomById(meetingRoomId) {
-    return this.http.delete(this.API_MEETING_ROOM + '/' + meetingRoomId);
+    return this.http.put(this.API_MEETING_ROOM + '/delete/' + meetingRoomId, null);
   }
 
   getAllRoomType(): Observable<any> {
@@ -42,9 +43,10 @@ export class MeetingRoomService {
   }
 
   getAllRoomStatus(): Observable<any> {
-      return this.http.get(this.API_ROOM_STATUS);
+    return this.http.get(this.API_ROOM_STATUS);
   }
-  search(meetingRoomSearch): Observable<any>{
+
+  search(meetingRoomSearch): Observable<any> {
     return this.http.post(this.API_SEARCH_ROOM, meetingRoomSearch);
   }
 }

@@ -2,7 +2,19 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {UserService} from '../../service/user.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+
+// tslint:disable-next-line:typedef
+function comparePassword(c: AbstractControl) {
+  const v = c.value;
+  const isNotEmpty = v.confirmPassword !== '';
+  if (isNotEmpty) {
+    return (v.password === v.confirmPassword) ? null : {
+      passwordNotMatch: true
+    };
+  }
+
+}
 
 @Component({
   selector: 'app-user-create',
@@ -24,11 +36,14 @@ export class UserCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.formCreat = this.formBuilder.group({
-      userName: [''],
-      password: [''],
-      fullName: [''],
-      department: [''],
-      roleName: ['']
+      userName: ['', [Validators.required, Validators.pattern('^[a-z0-9]{3,30}$')]],
+      pwGroup: this.formBuilder.group({
+        password: ['', [Validators.required, Validators.pattern('^[a-z0-9]{6,30}$')]],
+        confirmPassword: ['', [Validators.required]]
+      }, {validator: comparePassword}),
+      fullName: ['', [Validators.required, Validators.maxLength(30)]],
+      department: ['', [Validators.required, Validators.maxLength(30)]],
+      roleName: ['', Validators.required]
     });
     this.userService.getAllRole().subscribe(data => {
       this.roleList = data;
@@ -37,10 +52,13 @@ export class UserCreateComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   addNewUser() {
-    console.log(this.formCreat.value);
-    this.userService.addNewUser(this.formCreat.value).subscribe(data => {
-      this.dialogRef.close();
-    }, error => console.log(error.message));
-  }
+    if (this.formCreat.valid) {
+      console.log(this.formCreat.value);
+      console.log(this.formCreat.value.message);
+      this.userService.addNewUser(this.formCreat.value).subscribe(data => {
+        this.dialogRef.close();
+      }, error => console.log(error.message));
+    }
 
+  }
 }
