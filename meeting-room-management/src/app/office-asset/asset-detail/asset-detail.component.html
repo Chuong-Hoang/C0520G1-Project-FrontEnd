@@ -40,16 +40,16 @@
         <thead>
         <tr>
           <th>Stt</th>
-          <th>{{roomName}}</th>
+          <th>Ten Phong</th>
           <th>Đang sử dụng</th>
           <th>Đơn vị</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let element of asset.assetDetailCollection; let i = index">
+        <tr *ngFor="let element of asset.assetDetailDTOList; let i = index">
           <td>{{i+1}}</td>
-          <td>Ten Phong</td>
-          <td>{{element.assetQuantity}}</td>
+          <td>{{element.nameMeetingRoom}}</td>
+          <td>{{element.quantity}}</td>
           <td>Cais</td>
         </tr>
         </tbody>
