@@ -48,10 +48,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let element of asset.assetDetailCollection; let i = index">
+        <tr *ngFor="let element of asset.assetDetailDTOList; let i = index">
           <td>{{i+1}}</td>
-          <td>Ten Phong</td>
-          <td>{{element.assetQuantity}}</td>
+          <td>{{element.nameMeetingRoom}}</td>
+          <td>{{element.quantity}}</td>
           <td>Cái</td>
         </tr>
         </tbody>

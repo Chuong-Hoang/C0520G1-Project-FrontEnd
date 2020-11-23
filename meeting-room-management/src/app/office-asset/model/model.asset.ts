@@ -16,7 +16,7 @@ export class Asset {
 
   price: string;
 
-  assetDetailCollection: any[];
+  assetDetailDTOList: any[];
 }
 
 
