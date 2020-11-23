@@ -4,6 +4,7 @@
 </div>
 <h3 class="text-center text-primary">Sửa người dùng</h3>
 <hr class="border">
+<!--<form class=" p-1 m-0 form-inline " style="width: 95%" >-->
 <form class=" p-1 m-0 form-inline " style="width: 95%" [formGroup]="formEdit">
   <div class="container-fluid col-lg-12 col-md-12 p-1 m-1 ">
     <div class=" form-group mt-4">
@@ -23,6 +24,7 @@
       <label class="col-lg-3 col-md-3 d-flex justify-content-start">Quyền</label>
       <select class="col-lg-9 col-md-9 form-control form-control-sm " formControlName="roleName">
         <!--        <option [ngValue]="formEdit.value.role">{{formEdit.value.role.roleName}}</option>-->
+<!--        <option *ngFor="let role of roleList">-->
         <option *ngFor="let role of roleList" [ngValue]="role.roleName">
           <span *ngIf="role.roleName=='ROLE_ADMIN'">Quản trị viên</span>
           <span *ngIf="role.roleName=='ROLE_USER'">Người dùng</span>
