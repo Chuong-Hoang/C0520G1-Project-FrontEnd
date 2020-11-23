@@ -37,8 +37,8 @@ export class CommentService {
   // getCustomerByID(customerId): Observable<any> {
   //   return this.http.get(this.API + '/' +customerId)
   // }
-  deleteCommentByID(customerId): Observable<any> {
-    return this.http.delete(this.API + '/' +customerId)
+  deleteCommentByID(idComment): Observable<any> {
+    return this.http.delete(this.API + '/' + idComment);
   }
   // editCustomer(customer,customerId): Observable<any> {
   //   return this.http.put(this.API + '/' +customerId,customer)
