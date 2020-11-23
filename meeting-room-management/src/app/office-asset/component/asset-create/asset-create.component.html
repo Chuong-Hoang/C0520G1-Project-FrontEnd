@@ -13,7 +13,7 @@
         class="text-danger" style="margin-left:150px">Trường này bắt buộc nhập</p>
 
       <p *ngIf="formCreate.controls.assetName.errors?.pattern && formCreate.controls.assetName.touched"
-         class="text-danger">Vui lòng nhập đúng định dạng CMND</p>
+         class="text-danger">Vui lòng nhập đúng định dạng</p>
 
     </div>
 
@@ -61,7 +61,7 @@
     <div class="row d-flex justify-content-center ml-4">
       <div>
         <button class="btn btn-secondary" routerLink="/asset">Hủy</button>
-        <button type="submit" class="btn btn-success mx-4" (click)="create()">Thêm mới</button>
+        <button type="submit" class="btn btn-success mx-4" (click)="onSubmit()">Thêm mới</button>
       </div>
     </div>
   </form>

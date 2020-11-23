@@ -5,19 +5,15 @@ import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {statisticRoomRoutes} from './statistic-room.routers';
 import {MaterialModule} from './material.module';
-import { ChartsStatisticComponent } from './charts-statistic/charts-statistic.component';
-import { ChartsModule } from 'ng2-charts';
-
 
 @NgModule({
-  declarations: [ViewStatisticComponent, ViewStatisticComponent, ChartsStatisticComponent],
+  declarations: [ViewStatisticComponent, ViewStatisticComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(statisticRoomRoutes),
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
-    ChartsModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
