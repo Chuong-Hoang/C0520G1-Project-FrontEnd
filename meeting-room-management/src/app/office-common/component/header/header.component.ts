@@ -17,7 +17,8 @@ export class HeaderComponent implements OnInit {
   showUserBoard = true;
   username: string;
 
-  constructor(private tokenStorageService: TokenStorageService, private router: Router, public dialog: MatDialog) {
+  constructor(private tokenStorageService: TokenStorageService, private router: Router,
+              public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -30,7 +31,6 @@ export class HeaderComponent implements OnInit {
 
       this.showAdminBoard = this.role.includes('ROLE_ADMIN');
       this.showUserBoard = this.role.includes('ROLE_USER');
-
       this.username = user.userName;
     }
   }
