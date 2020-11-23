@@ -11,7 +11,7 @@ import {RoomType} from '../model/RoomType.class';
 })
 
 export class StatisticRoomService {
-  public API = 'http://localhost:2001/statistic';
+  public API = 'http://localhost:8080/statistic';
   // để đưa dữ qua các component
   public bookedRoomByTime: BookedRoom[] = [];
   public bookedRoomByRoom: BookedRoom[] = [];
