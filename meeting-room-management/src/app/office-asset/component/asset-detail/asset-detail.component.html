@@ -1,7 +1,7 @@
-<div class="container-fluid px-0 w-75 ">
+<div class="container-fluid px-0 w-75 mt-3 ">
   <h3 class="row d-flex justify-content-center">Chi tiết tài sản</h3>
 
-  <div class="row px-0 mx-0" style="height: 90%">
+  <div class="row px-0 mx-0 mt-5" style="height: 90%">
     <div class="col-8 px-0 ">
 
       <div class="row d-flex justify-content-center ml-1">
@@ -13,7 +13,9 @@
               <p>Đang sửa:</p>
             </div>
             <div class="col-8 px-0">
-              <span>{{asset.assetName}}</span>
+              <p>{{asset.assetName}}</p>
+              <p>{{asset.total}} cái</p>
+              <p>{{asset.fixingQuantity}} cái</p>
             </div>
           </div>
         </div>
@@ -25,8 +27,8 @@
               <p>Giá:</p>
             </div>
             <div class="col-9 px-0">
-              <span>{{asset.price}}</span>
-              <span>{{asset.usingQuantity}}</span>
+              <p>{{asset.description}}</p>
+              <p>{{asset.price}} vnđ</p>
             </div>
           </div>
         </div>
@@ -36,11 +38,11 @@
 
       <p>Danh sách phòng đang sử dụng tài sản</p>
 
-      <table class="table table-hover table-striped mt-3">
+      <table class="table table-hover table-striped mt-5">
         <thead>
         <tr>
           <th>Stt</th>
-          <th>Ten Phong</th>
+          <th>Tên phòng</th>
           <th>Đang sử dụng</th>
           <th>Đơn vị</th>
         </tr>
@@ -50,7 +52,7 @@
           <td>{{i+1}}</td>
           <td>{{element.nameMeetingRoom}}</td>
           <td>{{element.quantity}}</td>
-          <td>Cais</td>
+          <td>Cái</td>
         </tr>
         </tbody>
       </table>
@@ -63,7 +65,7 @@
     </div>
 
   </div>
-  <div class="row d-flex justify-content-center">
+  <div class="row d-flex justify-content-center mt-3">
     <button type="button" class="btn btn-secondary " routerLink="/asset">Back</button>
   </div>
 </div>
