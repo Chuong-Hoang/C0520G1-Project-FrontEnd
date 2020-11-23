@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {AssetCreateQuantityComponent} from '../asset-create-quantity/asset-create-quantity.component';
 import {AssetServerService} from '../../service/asset-server.service';
 import { ActivatedRoute } from '@angular/router';
-import {AssetDeleteComponent} from "../asset-delete/asset-delete.component";
+import {AssetDeleteComponent} from '../asset-delete/asset-delete.component';
 
 
 @Component({

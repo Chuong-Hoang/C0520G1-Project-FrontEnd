@@ -10,7 +10,7 @@ import {AssetListComponent} from './component/asset-list/asset-list.component';
 import {AssetCreateComponent} from './component/asset-create/asset-create.component';
 import {AssetCreateQuantityComponent} from './component/asset-create-quantity/asset-create-quantity.component';
 import {AssetDetailComponent} from './component/asset-detail/asset-detail.component';
-import {NgxPaginationModule} from "ngx-pagination";
+import {NgxPaginationModule} from 'ngx-pagination';
 import { AssetDeleteComponent } from './component/asset-delete/asset-delete.component';
 
 @NgModule({
