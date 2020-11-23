@@ -1,26 +1,24 @@
 <div class="container d-flex justify-content-center">
-  <div class="w-75">
-    <h3 class="d-flex justify-content-center bg-light p-3 my-3">Lịch sử đăng ký</h3>
-    <form>
+  <div class="w-50 border rounded-lg p-3 my-5">
+    <h3 class="d-flex justify-content-center bg-light p-3 mb-3">Lịch sử đăng ký</h3>
+    <form (ngSubmit)="findBookedRooms();" [formGroup]="formBookedRoomSearched">
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Tên phòng họp</label>
         <div class="col-sm-9">
-          <!--<input type="text" class="form-control form-control-sm" value="tên phòng">-->
-          <select class="form-control form-control-sm">
-            <option>--Chọn--</option>
-            <option>Red</option>
-            <option>Green</option>
-            <option>Blue</option>
+          <select class="form-control form-control-sm" formControlName="roomName">
+            <option [selected]="true" value="">--Chọn--</option>
+            <option *ngFor="let item of meetingRoomList" [value]="item.roomName">{{item.roomName}}</option>
           </select>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Trạng thái phòng</label>
+        <label class="col-sm-3 col-form-label">Trạng thái</label>
         <div class="col-sm-9">
-          <select class="form-control form-control-sm">
-            <option>Đang sử dụng</option>
-            <option>Đã kết thúc</option>
+          <select class="form-control form-control-sm" formControlName="bookedStatus">
+            <option [selected]="true" value="">--Chọn--</option>
+            <option value="Đang sử dụng">Đang sử dụng</option>
+            <option value="Đã kết thúc">Đã kết thúc</option>
           </select>
         </div>
       </div>
@@ -28,34 +26,29 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Loại phòng họp</label>
         <div class="col-sm-9">
-          <select class="form-control form-control-sm">
-            <option>--Chọn--</option>
-            <option>1 lần</option>
-            <option>Hàng tháng</option>
-            <option>Hàng tuần</option>
-            <option>Hàng ngày</option>
+          <select class="form-control form-control-sm" formControlName="roomType">
+            <option [selected]="true" value="">--Chọn--</option>
+            <option *ngFor="let item of roomTypeList" [value]="item.roomTypeName">{{item.roomTypeName}}</option>
           </select>
         </div>
       </div>
 
-      <div class="form-group row" style="display: none">
-        <label class="col-sm-3 col-form-label">Ngày họp</label>
-        <div class="col-sm-9">
-          <!--<input class="form-control form-control-sm" type="date">-->
-          <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="myDatepicker1">
-            <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>
-            <mat-datepicker #myDatepicker1 startView="month"></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </div>
+      <!--<div class="form-group row" style="display: none">-->
+      <!--  <label class="col-sm-3 col-form-label">Ngày họp</label>-->
+      <!--  <div class="col-sm-9">          -->
+      <!--    <mat-form-field class="w-100">-->
+      <!--      <input matInput [matDatepicker]="myDatepicker1" formControlName="meetingDate">-->
+      <!--      <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>-->
+      <!--      <mat-datepicker #myDatepicker1 startView="month"></mat-datepicker>-->
+      <!--    </mat-form-field>-->
+      <!--  </div>-->
+      <!--</div>-->
 
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Ngày bắt đầu</label>
         <div class="col-sm-9">
-          <!--<input class="form-control form-control-sm" type="date">-->
           <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="myDatepicker2">
+            <input matInput [matDatepicker]="myDatepicker2" formControlName="startDate">
             <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
             <mat-datepicker #myDatepicker2 startView="month"></mat-datepicker>
           </mat-form-field>
@@ -65,9 +58,8 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Ngày kết thúc</label>
         <div class="col-sm-9">
-          <!--<input class="form-control form-control-sm" type="date">-->
           <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="myDatepicker3">
+            <input matInput [matDatepicker]="myDatepicker3" formControlName="endDate">
             <mat-datepicker-toggle matSuffix [for]="myDatepicker3"></mat-datepicker-toggle>
             <mat-datepicker #myDatepicker3 startView="month"></mat-datepicker>
           </mat-form-field>
@@ -79,93 +71,76 @@
         <div class="col-sm-9">
           <!--<input class="form-control form-control-sm" type="date">-->
           <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="myDatepicker4">
+            <input matInput [matDatepicker]="myDatepicker4" formControlName="bookedDate">
             <mat-datepicker-toggle matSuffix [for]="myDatepicker4"></mat-datepicker-toggle>
             <mat-datepicker #myDatepicker4 startView="month"></mat-datepicker>
           </mat-form-field>
         </div>
       </div>
 
-      <div class="row d-flex justify-content-center mb-5">
+      <div class="row d-flex justify-content-center">
         <button type="submit" class="btn btn-sm btn-primary">Tìm kiếm</button>
       </div>
-
     </form>
   </div>
 </div>
 
 <!--  Show list of booked rooms-->
 <div class="container-fluid">
+  <div class="d-flex justify-content-between">
+    <div class="col-sm-6">
+      <p><b>Kết quả: </b><span class="text-danger font-weight-bolder">{{size_msg}}</span></p>
+    </div>
+    <div class="col-sm-6 float-right">
+      <p class="text-success font-weight-bolder" [hidden]="isHidden">{{booking_message}}
+        <span class="badge badge-pill badge-secondary" style="cursor: pointer" (click)="hideMsg();" [hidden]="btnHidden">ẩn tin nhắn</span>
+      </p>
+    </div>
+  </div>
   <table class="table table-hover table-responsive">
     <thead class="thead-light">
     <tr>
       <th>STT</th>
-      <th>Tên phòng</th>
-      <th>Nội dung</th>
-      <th>Thời gian bắt đầu</th>
-      <th>Thời gian kết thúc</th>
+      <th>Tên phòng họp</th>
+      <th>Nội dung họp</th>
+      <th>Giờ bắt đầu</th>
+      <th>Giờ kết thúc</th>
       <th>Ngày bắt đầu</th>
       <th>Ngày kết thúc</th>
       <th>Loại phòng họp</th>
       <th>Ngày đăng ký</th>
-      <th>Trạng thái</th>
+      <th>Trạng thái phòng</th>
       <th>Hủy</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>1</td>
-      <td>6.5.A</td>
-      <td>Họp tổng kết</td>
-      <td>7:00</td>
-      <td>9:00</td>
-      <td>20-11-2020</td>
-      <td>20-11-2020</td>
-      <td>1 lần</td>
-      <td>10-11-2020</td>
-      <td>Khả dụng</td>
+    <tr *ngFor="let item of bookedRoomList | paginate:{itemsPerPage: 3, currentPage: p}; let i=index;">
+      <td>{{i + 1}}</td>
+      <td>{{item.meetingRoomName}}</td>
+      <td>{{item.content}}</td>
+      <td>{{item.startTime}}</td>
+      <td>{{item.endTime}}</td>
+      <td>{{item.startDate | date: 'yyyy/LL/dd'}}</td>
+      <td>{{item.endDate | date: 'yyyy/LL/dd'}}</td>
+      <td>{{item.roomType}}</td>
+      <td>{{item.bookedDate | date: 'yyyy/LL/dd'}}</td>
       <td>
-        <button class="btn btn-sm btn-danger">Hủy</button>
+        <span *ngIf="item.bookedStatus == 'Đã kết thúc'"><i
+          class="fas fa-circle mr-2 text-danger"></i>{{item.bookedStatus}}</span>
+        <span *ngIf="item.bookedStatus == 'Đang sử dụng'"><i
+          class="fas fa-circle mr-2 text-success"></i>{{item.bookedStatus}}</span>
       </td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>
+        <button class="btn btn-sm" [ngClass]="item.bookedStatus == 'Đã kết thúc'? 'btn-secondary': 'btn-danger'"
+                [disabled]="item.bookedStatus == 'Đã kết thúc'">Hủy
+        </button>
+      </td>
     </tr>
     </tbody>
   </table>
-
-  <nav  aria-label="Page navigation example" class="d-flex justify-content-end">
-    <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-  </nav>
+  <div class="d-flex justify-content-center">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 </div>
 
 
