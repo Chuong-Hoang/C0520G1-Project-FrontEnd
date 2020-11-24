@@ -49,7 +49,7 @@ export class UserListComponent implements OnInit {
     this.userService.getUserById(idUser).subscribe(data => {
       const dialogRef = this.dialog.open(UserDeleteComponent, {
         width: '570px',
-        height: '225px',
+        height: '200x',
         data: {dataUser: data},
         disableClose: true
       });
@@ -65,7 +65,7 @@ export class UserListComponent implements OnInit {
   openDialogAddNew() {
     const dialogRef = this.dialog.open(UserCreateComponent, {
       width: '740px',
-      height: '540px',
+      height: '500px',
       disableClose: true
     });
 
@@ -80,7 +80,7 @@ export class UserListComponent implements OnInit {
     this.userService.getUserById(idUser).subscribe(dataEdit => {
       const dialogRef = this.dialog.open(UserEditComponent, {
         width: '740px',
-        height: '540px',
+        height: '490px',
         data: {dataE: dataEdit.idUser},
         disableClose: true
       });
@@ -89,6 +89,5 @@ export class UserListComponent implements OnInit {
         this.ngOnInit();
       });
     });
-
   }
 }
