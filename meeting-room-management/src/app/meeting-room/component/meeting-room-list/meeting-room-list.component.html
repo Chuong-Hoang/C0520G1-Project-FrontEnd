@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-12">
+      <h3 style="color: #24292e; text-align: center">Danh sách phòng họp</h3></div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-1 col-sm-1 p-0"><a [routerLink]="['/meeting-room-add']" class="btn btn-success btn-sm" href="#"
+                                       role="button">Thêm</a>
+    </div>
+  </div>
+  <form [formGroup]="formSearch" (ngSubmit)="search()">
+    <div class="row mt-2" style="background: #e9ecef">
+      <div class="col-1"></div>
+      <div class="col-3 col-sm-3 mt-3">
+        <div class="row form-group">
+          <label class="col-5 col-sm-5 col-form-label" for="tenPhong">Tên phòng<sup
+            class="text-danger">*</sup></label>
+          <div class="col-7 col-sm-7">
+            <input type="text" id="tenPhong" formControlName="roomName" class="form-control form-control-sm">
+            <div class="alert- alert-danger small" role="alert"
+                 *ngIf="formSearch.get('roomName').invalid && formSearch.get('roomName').touched">
+              Please input number 0 -> 9
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1 form-group">
+          <label class="col-5 col-sm-5 col-form-label" for="trangThai">Trạng thái<sup
+            class="text-danger">*</sup></label>
+          <div class="col-7 col-sm-7 input-group input-group-sm">
+            <select class="form-control" id="trangThai" formControlName="roomStatusName">
+              <option value="">--Chọn--</option>
+              <option *ngFor="let roomStatus of roomStatusList" [ngValue]="roomStatus">
+                {{roomStatus}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 col-sm-3 mt-3">
+        <div class="row form-group">
+          <label class="col-5 col-form-label col-sm-5" for="tang">Tầng<sup class="text-danger">*</sup></label>
+          <div class="col-7 col-sm-7">
+            <input id="tang" type="text" formControlName="floor" class="form-control form-control-sm">
+            <div class="alert- alert-danger small" role="alert"
+                 *ngIf="formSearch.get('floor').invalid && formSearch.get('floor').touched">
+              Please input 1 -> 9
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1 form-group">
+          <label class="col-5 col-sm-5 col-form-label pr-0" for="loaiPhong">Loại phòng<sup
+            class="text-danger">*</sup></label>
+          <div class="col-7 col-sm-7 input-group input-group-sm">
+            <select class="form-control text-center" id="loaiPhong" formControlName="roomTypeName">
+              <option value="">--Chọn--</option>
+              <option *ngFor="let roomType of roomTypeList" [ngValue]="roomType">
+                {{roomType}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 col-sm-3 mt-3">
+        <div class="row form-group">
+          <label class="col-5 col-form-label" for="khuVuc">Khu vực<sup class="text-danger">*</sup></label>
+          <div class="col-7 col-sm-7 input-group input-group-sm"><select class="form-control" id="khuVuc"
+                                                                         formControlName="zone">
+            <option value="">--Chọn--</option>
+            <option value="khu A">Khu A</option>
+            <option value="khu B">Khu B</option>
+            <option value="khu C">Khu C</option>
+          </select></div>
+        </div>
+        <div class="row mt-1 form-group">
+          <label class="col-5 col-form-label" for="sucChua">Sức chứa<sup class="text-danger">*</sup></label>
+          <div class="col-7"><input type="text" class="form-control form-control-sm" id="sucChua"
+                                    formControlName="capacity"></div>
+        </div>
+      </div>
+      <div class="col-2 col-sm-2 mt-3">
+        <div class="row">
+          <button type="reset" class="btn btn-warning btn-sm" style="width: 78px;">Reset</button>
+        </div>
+        <div class="row mt-4">
+          <button type="submit" class="btn btn-primary btn-sm" [disabled]="formSearch.invalid">Tìm kiếm</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="container">
+  <div class="row mt-4">
+    <table class="table table-hover p-0">
+      <thead class="thead-light">
+      <tr>
+        <th>Stt</th>
+        <th>Tên phòng</th>
+        <th>Tầng</th>
+        <th>Khu vực</th>
+        <th>Trạng thái</th>
+        <th>Loại phòng</th>
+        <th>Sức chứa</th>
+        <th class="text-center"><span>Tác vụ</span></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let meetingRoom of meetingRoomList | paginate : { itemsPerPage: 5, currentPage: p }, let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{meetingRoom.roomName}}</td>
+        <td>{{meetingRoom.floor}}</td>
+        <td>{{meetingRoom.zone}}</td>
+        <td>{{meetingRoom.roomStatusName}}</td>
+        <td>{{meetingRoom.roomTypeName}}</td>
+        <td>{{meetingRoom.capacity}}</td>
+        <td class="text-center">
+          <button type="button" class="btn btn-info btn-sm mt-1"
+                  [routerLink]="['/meeting-room/' + meetingRoom.idRoom]">
+            Chi tiết
+          </button>
+          <button type="button" class="btn btn-warning btn-sm mt-1 ml-1"
+                  [routerLink]="['/meeting-room-edit/' + meetingRoom.idRoom]">Sửa
+          </button>
+          <button type="button" class="btn btn-danger btn-sm mt-1 ml-1" (click)="delete(meetingRoom.idRoom)">
+            Xóa
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center"></div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+
