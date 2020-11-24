@@ -1,8 +1,26 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {Component, Inject, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../service/user.service';
-import {MatDialogRef} from '@angular/material/dialog';
-import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
+// tslint:disable-next-line:typedef
+function comparePassword(c: AbstractControl) {
+  const v = c.value;
+  const isNotEmpty = v.confirmPassword !== '';
+  const isNotEmptyPassOld = v.oldPassword !== '';
+  if (isNotEmptyPassOld) {
+    if (v.getPassword === v.oldPassword) {
+      if (isNotEmpty) {
+        return (v.newPassword === v.confirmPassword) ? null : {
+          passwordNotMatch: true
+        };
+      }
+    } else {
+      return {passwordNotDuplicate: true};
+    }
+  }
+}
+
 
 @Component({
   selector: 'app-user-change-password',
@@ -11,35 +29,34 @@ import {TokenStorageService} from '../../../office-common/service/token-storage/
 })
 export class UserChangePasswordComponent implements OnInit {
   formChangePassword: FormGroup;
+  public id;
+  public password;
 
   constructor(
     public dialogRef: MatDialogRef<UserChangePasswordComponent>,
     public formBuilder: FormBuilder,
     private userService: UserService,
-    private tokenStorageService: TokenStorageService
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }
 
-  public idUser: number;
-
   ngOnInit(): void {
-    this.idUser = this.tokenStorageService.getUser().id;
-    console.log(this.idUser);
+    this.id = this.data.dataIdUser;
+    this.password = this.data.dataPass;
     this.formChangePassword = this.formBuilder.group({
-      oldPassword: [],
-      newPassword: []
-    });
-    // this.userService.getUserById(this.idUser).subscribe(data => {
-    //   this.formChangePassword.patchValue(data);
-    //   console.log(data);
-    // });
+      getPassword: [this.password],
+      oldPassword: ['', Validators.required],
+      newPassword: ['', [Validators.required, Validators.pattern('^[a-z0-9]{6,30}$')]],
+      confirmPassword: ['', [Validators.required]],
+    }, {validator: comparePassword});
   }
 
   // tslint:disable-next-line:typedef
   changePass() {
-    this.userService.changePassword(this.idUser, this.formChangePassword.value).subscribe(data => {
-      this.dialogRef.close();
-    });
+    if (this.formChangePassword.valid) {
+      this.userService.changePassword(this.id, this.formChangePassword.value).subscribe(data => {
+        this.dialogRef.close();
+      });
+    }
   }
-
 }

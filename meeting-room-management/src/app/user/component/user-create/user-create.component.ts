@@ -13,7 +13,13 @@ function comparePassword(c: AbstractControl) {
       passwordNotMatch: true
     };
   }
+}
 
+// tslint:disable-next-line:typedef
+export function checkUserName(userName = []) {
+  return (c: AbstractControl) => {
+    return (userName.includes(c.value) ? {inValidName: true} : null);
+  };
 }
 
 @Component({
@@ -24,6 +30,8 @@ function comparePassword(c: AbstractControl) {
 export class UserCreateComponent implements OnInit {
   formCreat: FormGroup;
   public roleList;
+  public userList;
+  public listUserName = [];
 
   constructor(
     public dialogRef: MatDialogRef<UserCreateComponent>,
@@ -36,18 +44,29 @@ export class UserCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.formCreat = this.formBuilder.group({
-      userName: ['', [Validators.required, Validators.pattern('^[a-z0-9]{3,30}$')]],
-      pwGroup: this.formBuilder.group({
-        password: ['', [Validators.required, Validators.pattern('^[a-z0-9]{6,30}$')]],
-        confirmPassword: ['', [Validators.required]]
-      }, {validator: comparePassword}),
+      userName: ['', [Validators.required, Validators.pattern('^[a-z0-9]{3,30}$'), checkUserName(this.listUserName)]],
+      password: ['', [Validators.required, Validators.pattern('^[a-z0-9]{6,30}$')]],
+      confirmPassword: ['', [Validators.required]],
       fullName: ['', [Validators.required, Validators.maxLength(30)]],
       department: ['', [Validators.required, Validators.maxLength(30)]],
       roleName: ['', Validators.required]
-    });
+    }, {validator: comparePassword});
     this.userService.getAllRole().subscribe(data => {
       this.roleList = data;
     });
+    this.userService.getAllUser().subscribe(data => {
+      this.userList = data;
+      this.getAllUserName();
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  getAllUserName() {
+    if (!this.userList.isEmpty) {
+      for (const element of this.userList) {
+        this.listUserName.push(element.userName);
+      }
+    }
   }
 
   // tslint:disable-next-line:typedef
