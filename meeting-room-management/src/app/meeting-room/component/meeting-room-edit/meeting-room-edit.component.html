@@ -53,7 +53,7 @@
       <div class="form-group row">
         <label for="roomType" class="col-sm-2 col-form-label">Loại phòng<span class="text-danger">(*)</span></label>
         <div class="col-10">
-          <select type="text" id="roomType" class="form-control form-control-sm" formControlName="roomTypeName">
+          <select id="roomType" class="form-control form-control-sm" formControlName="roomTypeName">
             <option *ngFor="let item of roomTypeList" [ngValue]="item">{{item}}</option>
           </select>
           <p *ngIf="formEditRoom.controls.roomTypeName.errors?.required && formEditRoom.controls.roomTypeName.touched"

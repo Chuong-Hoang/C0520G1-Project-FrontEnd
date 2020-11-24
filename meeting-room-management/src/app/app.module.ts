@@ -12,26 +12,28 @@ import {OfficeCommonModule} from './office-common/office-common.module';
 import {UserModule} from './user/user.module';
 import {StatisticRoomModule} from './statistic-room/statistic-room.module';
 import {HttpClientModule} from '@angular/common/http';
+import { AssetsDetailModule } from './assets-detail/assets-detail.module';
 
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    MaterialModule,
-    NgxPaginationModule,
-    BookedRoomModule,
-    CommentModule,
-    MeetingRoomModule,
-    OfficeAssetModule,
-    OfficeCommonModule,
-    UserModule,
-    StatisticRoomModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        MaterialModule,
+        NgxPaginationModule,
+        BookedRoomModule,
+        CommentModule,
+        MeetingRoomModule,
+        OfficeAssetModule,
+        OfficeCommonModule,
+        UserModule,
+        StatisticRoomModule,
+        AppRoutingModule,
+        HttpClientModule,
+        AssetsDetailModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -23,9 +23,9 @@ export class MeetingRoomDeleteComponent implements OnInit {
     this.idMeetingRoomTemp = this.data.dataEl.id;
   }
 
-  // delete() {
-  //   this.meetingRoomService.delete(this.idMeetingRoomTemp).subscribe(data => {
-  //     this.dialogRef.close();
-  //   });
-  // }
+  delete(): void {
+    this.meetingRoomService.deleteMeetingRoomById(this.idMeetingRoomTemp).subscribe(data => {
+      this.dialogRef.close();
+    });
+  }
 }
