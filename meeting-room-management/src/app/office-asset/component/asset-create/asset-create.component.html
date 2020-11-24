@@ -13,8 +13,9 @@
           class="text-danger">Trường này bắt buộc nhập</span>
         <span *ngIf="formCreate.controls.assetName.errors?.pattern && formCreate.controls.assetName.touched"
               class="text-danger">Vui lòng nhập đúng định tên tài sản (vd: Máy chiếu)</span>
+        <span *ngIf="formCreate.controls.assetName.errors?.invalidName && formCreate.controls.assetName.touched"
+              class="text-danger">Tên tài sản đã tồn tại</span>
       </div>
-
     </div>
 
     <div class="form-group row">
@@ -59,7 +60,7 @@
       <label class="col-sm-3 col-form-label">Hình ảnh <sup class="text-danger">*</sup> </label>
       <div class="col-sm-9">
         <input type="file" class="form-control" placeholder="chọn file" formControlName="image" required>
-        <span
+      <span
           *ngIf="formCreate.controls.image.errors?.required && formCreate.controls.image.touched"
           class="text-danger" >Trường này bắt buộc nhập</span>
       </div>
