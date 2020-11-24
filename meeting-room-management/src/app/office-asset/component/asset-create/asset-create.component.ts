@@ -29,7 +29,7 @@ export class AssetCreateComponent implements OnInit {
   ) {
   }
 
-  create(): void {
+  ngOnInit(): void {
     this.formCreate = this.formBuilder.group({
       assetName: ['', [Validators.required, checkNameAsset(this.listAssetName), Validators.pattern(/^[A-Z À-Ỹ][a-z à-ỹ]{1,9}(([ ][a-z à-ỹ]{0,9})?)*$/)]],
       usingQuantity: ['0'],
@@ -47,7 +47,7 @@ export class AssetCreateComponent implements OnInit {
 
   }
 
-  onSubmit(): void {
+  create(): void {
     console.log(this.formCreate.value);
     this.assetServer.create(this.formCreate.value).subscribe(data => {
       this.router.navigate(['asset'], {queryParams: {create_msg: 'Thêm mới thành công!', si: true}});
