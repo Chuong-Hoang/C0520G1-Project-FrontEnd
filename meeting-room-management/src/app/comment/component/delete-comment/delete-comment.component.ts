@@ -12,7 +12,8 @@ export class DeleteCommentComponent implements OnInit {
   public idComment;
   constructor(
     public dialogRef: MatDialogRef<DeleteCommentComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA)
+    public data: any,
     public commentService: CommentService,
   ) {}
 

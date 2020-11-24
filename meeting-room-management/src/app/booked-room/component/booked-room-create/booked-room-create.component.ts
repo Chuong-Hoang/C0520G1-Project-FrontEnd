@@ -1,14 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BookedRoomService} from '../../service/booked-room.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {BookedRoomCancelComponent} from '../booked-room-cancel/booked-room-cancel.component';
 
 @Component({
   selector: 'app-booked-room-create',
   templateUrl: './booked-room-create.component.html',
   styleUrls: ['./booked-room-create.component.css']
 })
-export class BookedRoomCreateComponent implements OnInit {
+export class BookedRoomCreateComponent implements OnInit, OnChanges {
   public formCreate: FormGroup;
   public minDate = new Date();
   public bookedDate = new Date(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate());
@@ -16,10 +18,10 @@ export class BookedRoomCreateComponent implements OnInit {
   public meetingRoomList = [];
   public timeFrameList = [];
   public bookedRoomList = [];
-  bookedStatus = 'Đang sử dụng';
-  bookedUserId = 1;
-  private eleId: any;
-  private meetingRoom: any;
+  public bookedStatus = 'Đang sử dụng';
+  public bookedUserId = 1;
+  public roomName = '';
+  public meetingRoomId: any;
 
   // get data transfer from search input fields when having available results <Chương comment>
   public startDateSearch = '';
@@ -45,6 +47,7 @@ export class BookedRoomCreateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private bookedRoomService: BookedRoomService,
     private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog,
     private router: Router
   ) {
   }
@@ -59,6 +62,7 @@ export class BookedRoomCreateComponent implements OnInit {
     this.endTimeSearch = this.activatedRoute.snapshot.queryParamMap.get('endTimeSearch');
     console.log('init***end time input from search: ' + this.endTimeSearch);
     this.idSentFromSearch = this.activatedRoute.snapshot.queryParamMap.get('idSentFromSearch');
+    console.log('init***id meetingRoom input from search: ' + this.idSentFromSearch);
 
     this.formCreate = this.formBuilder.group({
       id: '',
@@ -72,26 +76,19 @@ export class BookedRoomCreateComponent implements OnInit {
       endTimeId: ['', Validators.required],
       content: ['', Validators.required]
     });
+    if (this.idSentFromSearch !== null){
+       this.bookedRoomService.getMeetingRoomById(this.idSentFromSearch).subscribe(data => {
+          this.roomName = data.roomName;
+       });
+    }
 
-    // this.activatedRoute.params.subscribe(data => {
-    //   this.eleId = data.id;
-    //   console.log('Id found: ' + this.eleId);
-    this.bookedRoomService.getMeetingRoomById(this.idSentFromSearch).subscribe(dataFromServer => {
-        this.meetingRoom = dataFromServer;
-        console.log('MeetingRoom Found: --> ');
-        console.log(this.meetingRoom);
-        this.formCreate.patchValue({
-          meetingRoomId: this.meetingRoom.idRoom,
+    this.formCreate.patchValue({
+          meetingRoomId: this.idSentFromSearch,
           startDate: this.startDateSearch,
           endDate: this.endDateSearch,
           startTimeId: this.startTimeSearch,
           endTimeId: this.endTimeSearch,
-        });
-      });
-      // , error => console.log('There is an error happening...'));
-      // console.log(this.formCreate.value);
-    // });
-
+    });
     this.bookedRoomService.getAllMeetingRooms().subscribe(data => {
       this.meetingRoomList = data;
       // console.log('meeting-rooms: ' + data);
@@ -110,5 +107,25 @@ export class BookedRoomCreateComponent implements OnInit {
       this.router.navigate(['/booked-room-list'], {queryParams: {booking_message: 'Đăng ký phòng họp thành công!'}});
       // this.router.navigateByUrl('booked-room-list');
     }, error => console.log('error happened...'));
+  }
+  ngOnChanges(): void {
+    this.meetingRoomId = this.formCreate.value.meetingRoomId;
+    console.log('Id đăng ký-->onChange: ' + this.meetingRoomId);
+  }
+
+  openCancelDialog(meetingRoomId: any): void {
+    console.log('Id đăng ký: ' + this.meetingRoomId);
+    // this.bookedRoomService.getMeetingRoomById(this.meetingRoomId).subscribe(dataFromServer => {
+    const dialogRef = this.dialog.open(BookedRoomCancelComponent, {
+        width: '500px',
+        disableClose: true,
+        // data: {data1: dataFromServer}
+      });
+
+    dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        // this.ngOnInit();
+      });
+    // });
   }
 }

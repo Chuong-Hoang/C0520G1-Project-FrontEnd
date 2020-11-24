@@ -9,7 +9,7 @@ import {BookedRoomCreateComponent} from './component/booked-room-create/booked-r
 import {BookedRoomSearchComponent} from './component/booked-room-search/booked-room-search.component';
 import {MaterialModule} from './material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgxPaginationModule} from "ngx-pagination";
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
     declarations: [
