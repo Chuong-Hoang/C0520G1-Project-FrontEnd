@@ -2,15 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
-import {StatisticRoomService} from '../service/statistic-room.service';
-import {BookedRoom} from '../model/BookedRoom.class';
-import {RoomType} from '../model/RoomType.class';
+import {StatisticRoomService} from '../../service/statistic-room.service';
+import {BookedRoom} from '../../model/booked-room.class';
+import {RoomType} from '../../model/room-type.class';
 import {NoContentComponent} from '../no-content/no-content.component';
 import {StatisticByTimeComponent} from '../statistic-by-time/statistic-by-time.component';
 import {StatisticByRoomComponent} from '../statistic-by-room/statistic-by-room.component';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Label as ng2Chart} from 'ng2-charts/lib/base-chart.directive';
-import {BookedChart} from '../model/BookedChart.class';
+import {BookedChart} from '../../model/booked-chart.class';
 
 
 @Component({
@@ -201,6 +201,7 @@ export class ViewStatisticComponent implements OnInit {
       this.messageError = 'vui lòng chọn ít nhất 1 trường !!';
     } else {
       this.messageError = '';
+      this.statisticRoom.roomName1 = this.statisticByRoom.value.roomName;
       this.statisticRoom.findSearchByRoom(this.statisticByRoom.value.roomType, this.statisticByRoom.value.roomName
         , this.statisticByRoom.value.month, this.statisticByRoom.value.year).subscribe(data => {
           this.statisticRoom.bookedRoomByRoom = data;

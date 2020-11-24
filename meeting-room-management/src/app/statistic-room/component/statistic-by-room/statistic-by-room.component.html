@@ -19,9 +19,13 @@
                 <h5 class="font-weight-bold mt-2">Kết quả:</h5>
                 <div class="col-md-11 offset-md-1">
                   <div class="row">
-                    <div class="col-md-3 font-weight-bold">Tên phòng:A2</div>
-                    <div class="col-md-3 font-weight-bold">Tổng số lần sử dụng:3</div>
-                    <div class="col-md-3 font-weight-bold">Hiệu suất:60%</div>
+                    <div *ngIf="roomName == '' ; else blockName"></div>
+                    <ng-template #blockName>
+                    <div class="col-md-3 font-weight-bold">Tên phòng:{{roomName}}</div>
+                    </ng-template>
+
+                    <div class="col-md-3 font-weight-bold">Tổng số lần sử dụng:{{totalALl}}</div>
+                    <div class="col-md-3 font-weight-bold">Tổng hiệu suất:{{effectiveAll}} %</div>
                   </div>
                 </div>
                 <div style="overflow-x:auto;" class="mt-2">

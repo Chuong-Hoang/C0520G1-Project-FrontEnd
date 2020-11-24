@@ -1,22 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import {BookedRoom} from '../model/BookedRoom.class';
-import {StatisticRoomService} from '../service/statistic-room.service';
-import {ExcelService} from '../service/excel.service';
+import {Component, OnInit} from '@angular/core';
+import {BookedRoom} from '../../model/booked-room.class';
+import {StatisticRoomService} from '../../service/statistic-room.service';
+import {ExcelService} from '../../service/excel.service';
 import {Label as ng2Chart} from 'ng2-charts';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 
 @Component({
-  selector: 'app-statistic-by-room',
-  templateUrl: './statistic-by-room.component.html',
-  styleUrls: ['./statistic-by-room.component.css']
+  selector: 'app-statistic-by-time',
+  templateUrl: './statistic-by-time.component.html',
+  styleUrls: ['./statistic-by-time.component.css']
 })
-export class StatisticByRoomComponent implements OnInit {
 
-  public bookedRoomByRoom: BookedRoom[] = [];
+
+export class StatisticByTimeComponent implements OnInit {
+  public bookedRoomByTime: BookedRoom[] = [];
   // lấy khoảng thời gian từ service
   public startDate: string;
   public endDate: string;
-  // biến phân trang
+  // phân trang
   public p: number;
   // biểu đồ
   public barChartOptions: ChartOptions = {
@@ -73,33 +74,37 @@ export class StatisticByRoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.bookedRoomByRoom = this.statisticRoom.bookedRoomByRoom;
-    this.exportExcel(this.bookedRoomByRoom);
-    this.dataChart(this.bookedRoomByRoom);
+    this.bookedRoomByTime = this.statisticRoom.bookedRoomByTime;
+    console.log(this.bookedRoomByTime);
+    this.startDate = this.statisticRoom.startDate;
+    this.endDate = this.statisticRoom.endDate;
     this.barChartData = [];
-    this.dataChart(this.bookedRoomByRoom);
-    this.exportExcel(this.bookedRoomByRoom);
+    this.dataChart(this.bookedRoomByTime);
+    this.exportExcel(this.bookedRoomByTime);
   }
+
   // export excel
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.dataOfFootballers, 'statistic_2020');
   }
-  exportExcel(bookedRoom: BookedRoom[]): void {
+
+  exportExcel(bookedRoomByTime: BookedRoom[]): void {
     // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < bookedRoom.length; i++) {
+    for (let i = 0; i < bookedRoomByTime.length; i++) {
       this.dataOfFootballers.push(
         {
           stt: (i + 1),
-          startDate: bookedRoom[i].startDate,
-          endDate: bookedRoom[i].endDate,
-          startTime: bookedRoom[i].startTime,
-          endTime: bookedRoom[i].endTime,
-          status: bookedRoom[i].bookedStatus,
-          bookedDate: bookedRoom[i].bookedDate
+          startDate: bookedRoomByTime[i].startDate,
+          endDate: bookedRoomByTime[i].endDate,
+          startTime: bookedRoomByTime[i].startTime,
+          endTime: bookedRoomByTime[i].endTime,
+          status: bookedRoomByTime[i].bookedStatus,
+          bookedDate: bookedRoomByTime[i].bookedDate
         });
     }
   }
-  // phần biểu đồ
+
+  // biểu đồ
   onChartClick(event): void {
     console.log(event);
   }
@@ -121,5 +126,4 @@ export class StatisticByRoomComponent implements OnInit {
       }
     }
   }
-
 }

@@ -66,29 +66,41 @@
                   <label class="font-weight-bold offset-md-2 mt-3">Từ ngày:</label>
                   <!--            <input class="form-control col-md-7 ml-3" type="date" formControlName="startDate" >-->
                   <mat-form-field class="ml-3">
-                    <input matInput [matDatepicker]="picker" [max]="maxDate" [min]="minDate" placeholder="Choose a date"
+                    <input matInput [matDatepicker]="picker" [max]="maxDate" [min]="minDate"
+                           placeholder="chọn ngày bắt đầu"
                            formControlName="startIn"
                            id="startIn">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
+                  <div class="offset-4">
+                    <span class="text-danger"
+                          *ngIf="statisticByTime.get('dateGroup').get('startIn').errors?.required && statisticByTime.get('dateGroup').get('startIn').touched">Vui lòng nhập ngày bắt đầu</span>
+                  </div>
                 </div>
                 <div class="row mt-3">
                   <label class="font-weight-bold offset-md-2 mt-3">Đến ngày: </label>
                   <!--            <input class="form-control col-md-7 ml-1" type="date" formControlName="endDate">-->
                   <mat-form-field class="ml-2">
                     <input matInput [matDatepicker]="picker1" [max]="maxDate" [min]="minDate"
-                           placeholder="Choose a date" formControlName="startOut"
+                           placeholder="Chọn ngày kết thúc" formControlName="startOut"
                            id="startOut">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                   </mat-form-field>
                 </div>
               </div>
+              <div class="offset-md-4">
+                    <span class="text-danger"
+                          *ngIf="statisticByTime.get('dateGroup').get('startOut').errors?.required && statisticByTime.get('dateGroup').get('startOut').touched">Vui lòng nhập ngày kết thúc</span>
+              </div>
+              <div *ngIf="statisticByTime.get('dateGroup').get('startIn').errors?.required || statisticByTime.get('dateGroup').get('startOut').errors?.required ; else block"></div>
+              <ng-template  #block >
+                   <span class="text-danger offset-md-4"
+                         *ngIf="statisticByTime.get('dateGroup').hasError('invalidDateNotMatch') && statisticByTime.get('dateGroup').touched">Khoảng thời gian không hợp lệ</span>
+              </ng-template>
               <div class="d-flex justify-content-end mt-3 mb-2">
-                <span class="text-danger mr-5 font-weight-bold"
-                      *ngIf="statisticByTime.get('dateGroup').hasError('invalidDateNotMatch') && statisticByTime.get('dateGroup').touched">Dữ liệu không đúng định dang!!</span>
-                <button class="btn btn-success" type="submit" [disabled]="statisticByTime.invalid">
+                <button class="btn btn-success mt-2" type="submit" [disabled]="statisticByTime.invalid">
                   Thống kê
                 </button>
               </div>
@@ -165,7 +177,7 @@
                   </div>
 
                   <div class="row">
-                    <div class="col-md-9 font-weight-bold"><p class="text-danger ml-3">{{messageError}}</p></div>
+                    <div class="col-md-9"><p class="text-danger ml-3 mt-2">{{messageError}}</p></div>
                     <div class="col-md-3 mb-1">
                       <button class="btn  btn-success" type="submit">Thống kê</button>
                     </div>
