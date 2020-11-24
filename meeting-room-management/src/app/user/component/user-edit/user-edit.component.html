@@ -29,8 +29,7 @@
     <div class=" form-group mt-2">
       <label class="col-lg-3 col-md-3 d-flex justify-content-start">Quyền</label>
       <select class="col-lg-9 col-md-9 form-control form-control-sm " formControlName="roleName">
-        <!--        <option [ngValue]="formEdit.value.role">{{formEdit.value.role.roleName}}</option>-->
-        <!--        <option *ngFor="let role of roleList">-->
+        <option value="" selected>-- Chọn --</option>
         <option *ngFor="let role of roleList" [ngValue]="role.roleName">
           <span *ngIf="role.roleName=='ROLE_ADMIN'">Quản trị viên</span>
           <span *ngIf="role.roleName=='ROLE_USER'">Người dùng</span>
