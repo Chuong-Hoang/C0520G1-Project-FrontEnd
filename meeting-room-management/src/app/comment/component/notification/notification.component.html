@@ -14,42 +14,42 @@
       <div class="container-fluid px-0">
         <div class="col-12 px-0">
           <div style="height:70vh ;overflow: auto;">
-          <table class="col-12 px-0" >
-            <tbody>
-            <tr *ngFor="let comment of commentsNotification" class="text-white ml-4"
-                [ngClass]="{'bg-dark font-weight-light':!comment.statusView, 'bg-secondary  font-weight-light':comment.statusView}" >
-              <div *ngIf="!status; else elseBlock"></div>
-              <ng-template #elseBlock>
-<!--                *Thông báo từ hệ thống gửi cho người dùng.-->
-              <div class="row col-12 m-0 hover rounded-bottom" >
+            <table class="col-12 px-0">
+              <tbody>
+              <tr *ngFor="let comment of commentsNotification" class="text-white ml-4"
+                  [ngClass]="{'bg-dark font-weight-light':!comment.statusView, 'bg-secondary  font-weight-light':comment.statusView}">
+                <div *ngIf="!status; else elseBlock"></div>
+                <ng-template #elseBlock>
+                  <!--                *Thông báo từ hệ thống gửi cho người dùng.-->
+                  <div class="row col-12 m-0 hover rounded-bottom">
 
-                <div class="col-10 ml-4 my-2 px-0 " (click)="dialogDetailComment(comment.idComment)">
-                  <label>Phản hồi của bạn về lỗi {{comment.errorTypeName}} ngày "{{comment.commentTime}}" đã được trả lời nhấn vào <span class="text-success">->đây<-</span> xem chi tiết!!</label>
-                </div>
+                    <div class="col-10 ml-4 my-2 px-0 " (click)="dialogDetailComment(comment.idComment)">
+                      <label>Phản hồi của bạn về lỗi {{comment.errorTypeName}} ngày "{{comment.commentTime}}" đã được
+                        trả lời nhấn vào <span class="text-success">->đây<-</span> xem chi tiết!!</label>
+                    </div>
 
-                <div class="col-1 my-2 d-flex justify-content-end">
-                  <td>
-                    <div class="dropdown">
+                    <div class="col-1 my-2 d-flex justify-content-end">
+                      <td>
+                        <div class="dropdown">
                         <span class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                               aria-haspopup="true"
                               aria-expanded="false">
                         </span>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Đã Xem</a>
-                        <a class="dropdown-item" [routerLink]="['/comment-create']">Báo Cáo </a>
-                        <a class="dropdown-item" (click)="dialogDeleteComment(comment.idComment)">Xóa Thông Báo</a>
-                      </div>
-                    </div>
-                  </td>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Đã Xem</a>
+                            <a class="dropdown-item" [routerLink]="['/comment-create']">Báo Cáo </a>
+                            <a class="dropdown-item" (click)="dialogDeleteComment(comment.idComment)">Xóa Thông Báo</a>
+                          </div>
+                        </div>
+                      </td>
 
-                </div>
-              </div>
-<!--              </template>-->
-              </ng-template>
-            </tr>
-            </tbody>
-          </table>
-        </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

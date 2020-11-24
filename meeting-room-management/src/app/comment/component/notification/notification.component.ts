@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Comment} from '../../model/comment.class';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CommentService} from '../../service/comment.service';
@@ -6,6 +6,7 @@ import {DeleteCommentComponent} from '../delete-comment/delete-comment.component
 import {MatDialog} from '@angular/material/dialog';
 import {DetailNotificationComponent} from '../detail-notification/detail-notification.component';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
+
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -31,8 +32,12 @@ export class NotificationComponent implements OnInit {
       this.commentsNotification = data;
       console.log(data);
       // console.log(this.commentsNotification);
-    }, error => { console.log(error); console.log('error'); });
+    }, error => {
+      console.log(error);
+      console.log('error');
+    });
   }
+
   dialogDeleteComment(commentId): void {
     this.commentService.getCommentById(commentId).subscribe(dataName => {
       console.log(dataName);
@@ -47,6 +52,7 @@ export class NotificationComponent implements OnInit {
       });
     }, error => console.log(error));
   }
+
   dialogDetailComment(commentId): void {
     this.commentService.getCommentById(commentId).subscribe(dataFull => {
       console.log(dataFull);
