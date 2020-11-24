@@ -1,15 +1,15 @@
 <div class="container d-flex justify-content-center">
-  <div class="w-50">
-    <h3 class="d-flex justify-content-center bg-light p-3 my-3">Tìm kiếm phòng</h3>
-    <form>
+  <div class="w-50 border rounded-lg p-3 my-5">
+    <h3 class="d-flex justify-content-center bg-light p-3 mb-3">Tìm kiếm phòng họp trống</h3>
+    <form (ngSubmit)="findMeetingRooms();" [formGroup]="formMeetingRoomSearched">
       <div class="form-group row">
         <label class="col-sm-4 col-form-label">Địa điểm họp</label>
         <div class="col-sm-8">
-          <select class="form-control form-control-sm">
-            <option>--Chọn--</option>
-            <option>Khu A</option>
-            <option>Khu B</option>
-            <option>Khu C</option>
+          <select class="form-control form-control-sm" formControlName="zone">
+            <option value="" [selected]="true">--Chọn--</option>
+            <option value="Khu A">Khu A</option>
+            <option value="Khu B">Khu B</option>
+            <option value="Khu C">Khu C</option>
           </select>
         </div>
       </div>
@@ -17,86 +17,96 @@
       <div class="form-group row">
         <label class="col-sm-4 col-form-label">Loại cuộc họp</label>
         <div class="col-sm-8">
-          <select class="form-control form-control-sm">
-            <option>--Chọn--</option>
-            <option>1 lần</option>
-            <option>Hàng tháng</option>
-            <option>Hàng tuần</option>
-            <option>Hàng ngày</option>
+          <select class="form-control form-control-sm" formControlName="roomTypeName">
+            <option value="">--Chọn--</option>
+            <option *ngFor="let item of roomTypeList">{{item.roomTypeName}}</option>
           </select>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label">Ngày bắt đầu</label>
+        <label class="col-sm-4 col-form-label">Số người tham dự <sup class="text-danger">*</sup></label>
         <div class="col-sm-8">
-          <!--<input class="form-control form-control-sm" type="date">-->
+          <input class="form-control form-control-sm" type="number" min="2" max="50"
+                 placeholder="Số người tham dự" formControlName="capacity">
+          <span class="text-danger"
+                *ngIf="formMeetingRoomSearched.get('capacity').invalid && formMeetingRoomSearched.get('capacity').touched">{{ capacity_msg }}
+          </span>
+        </div>
+
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Ngày bắt đầu <sup class="text-danger">*</sup></label>
+        <div class="col-sm-8">
           <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="myDatepicker1">
+            <input class="form-control form-control-sm" matInput [matDatepicker]="myDatepicker1" [min]="minDate" [max]="maxDate"
+                   formControlName="startDate">
             <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>
             <mat-datepicker #myDatepicker1 startView="month"></mat-datepicker>
           </mat-form-field>
+          <span class="text-danger"
+                *ngIf="formMeetingRoomSearched.get('startDate').invalid && formMeetingRoomSearched.get('startDate').touched">{{ startDate_msg }}
+          </span>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label">Ngày kết thúc</label>
+        <label class="col-sm-4 col-form-label">Ngày kết thúc <sup class="text-danger">*</sup></label>
         <div class="col-sm-8">
-          <!--<input class="form-control form-control-sm" type="date">-->
           <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="myDatepicker2">
+            <input class="form-control form-control-sm" matInput [matDatepicker]="myDatepicker2" [min]="minDate" [max]="maxDate"
+                   formControlName="endDate">
             <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
             <mat-datepicker #myDatepicker2 startView="month"></mat-datepicker>
           </mat-form-field>
+          <span class="text-danger"
+                *ngIf="formMeetingRoomSearched.get('endDate').invalid && formMeetingRoomSearched.get('endDate').touched">{{ endDate_msg }}
+          </span>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label">Thời gian bắt đầu</label>
+        <label class="col-sm-4 col-form-label">Giờ bắt đầu <sup class="text-danger">*</sup></label>
         <div class="col-sm-8">
-          <!--<input class="form-control form-control-sm" type="time" min="08:00" max="18:00" required>-->
-          <select class="form-control form-control-sm">
-            <option>--Chọn--</option>
-            <option>7:00</option>
-            <option>7:30</option>
-            <option>8:00</option>
-            <option>8:30</option>
+          <select class="form-control form-control-sm" formControlName="startTime">
+            <option value="">--Chọn--</option>
+            <option *ngFor="let item of timeFrameList" [ngValue]="item.idTime">{{item.timeValue}}</option>
           </select>
+          <span class="text-danger"
+                *ngIf="formMeetingRoomSearched.get('startTime').invalid && formMeetingRoomSearched.get('startTime').touched">{{ startTime_msg }}
+          </span>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label">Thời gian kết thúc</label>
+        <label class="col-sm-4 col-form-label">Giờ kết thúc <sup class="text-danger">*</sup></label>
         <div class="col-sm-8">
-          <!--<input class="form-control form-control-sm" type="time" min="08:00" max="18:00" required>-->
-          <select class="form-control form-control-sm">
-            <option>--Chọn--</option>
-            <option>7:00</option>
-            <option>7:30</option>
-            <option>8:00</option>
-            <option>8:30</option>
+          <select class="form-control form-control-sm" formControlName="endTime">
+            <option value="">--Chọn--</option>
+            <option *ngFor="let item of timeFrameList" [ngValue]="item.idTime">{{item.timeValue}}</option>
           </select>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label class="col-sm-4 col-form-label">Số người tham dự</label>
-        <div class="col-sm-8">
-          <input class="form-control form-control-sm" type="number" min="2" max="50" placeholder="số người tham dự">
+          <span class="text-danger"
+                *ngIf="formMeetingRoomSearched.get('endTime').invalid && formMeetingRoomSearched.get('endTime').touched">{{ endTime_msg }}
+          </span>
         </div>
       </div>
 
       <div class="form-group row">
         <label class="col-sm-4 col-form-label">Thiết bị</label>
         <div class="col-sm-8">
-          <input class="mr-2" type="checkbox" value="printer"><span class="mr-2">Máy in</span><br>
-          <input class="mr-2" type="checkbox" value="projector"><span class="mr-2">Máy chiếu</span><br>
-          <input class="mr-2" type="checkbox" value="laptop"><span class="mr-2">Laptop</span><br>
+          <!--<input class="mr-2" type="checkbox" value="printer" formControlName="roomAsset">-->
+          <!--<span class="mr-2">Máy in</span><br>-->
+          <!--<input class="mr-2" type="checkbox" value="projector" formControlName="roomAsset">-->
+          <!--<span class="mr-2">Máy chiếu</span><br>-->
+          <!--<input class="mr-2" type="checkbox" value="laptop" formControlName="roomAsset">-->
+          <!--<span class="mr-2">Laptop</span><br>-->
         </div>
       </div>
 
-      <div class="d-flex justify-content-center row mb-5">
-        <input class="btn btn-sm btn-primary" type="submit" value="Tìm kiếm">
+      <div class="d-flex justify-content-center row mb-2">
+        <button class="btn btn-sm btn-primary" type="submit" [disabled]="formMeetingRoomSearched.invalid">Tìm kiếm
+        </button>
       </div>
     </form>
   </div>
@@ -104,50 +114,42 @@
 
 <!--  Show list of meeting rooms-->
 <div class="container">
+  <p><b>Kết quả: </b><span class="text-danger font-weight-bolder">{{size_msg}}</span></p>
   <table class="table table-hover" style="overflow-scrolling: auto">
     <thead class="thead-light">
     <tr>
+      <th>#</th>
       <th>Tên phòng</th>
+      <th>Sức chứa</th>
       <th>Khu vực</th>
       <th>Thiết bị</th>
       <th>Đăng ký</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>Green</td>
-      <td>Khu A</td>
-      <td>Máy in, Máy chiếu</td>
+    <tr *ngFor="let item of meetingRoomList | paginate:{itemsPerPage: 1, currentPage: p}; let i = index;">
+      <td>{{i + 1}}</td>
+      <td>{{item.roomName}}</td>
+      <td>{{item.capacity}}</td>
+      <td>{{item.zone}}</td>
+      <td>{{item.roomAsset}}</td>
       <td>
-        <button class="btn btn-sm btn-success">Đăng ký</button>
+        <button class="btn btn-sm btn-success" [routerLink]="['/book-room/']" (click)="sendId(item.idRoom);">Đăng ký</button>
       </td>
     </tr>
     <tr>
-      <td>Blue</td>
-      <td>Khu B</td>
-      <td>Máy in, Máy chiếu</td>
+      <td>[No.]</td>
+      <td>[name]</td>
+      <td>[capacity]</td>
+      <td>[zone]</td>
+      <td>[asset]</td>
       <td>
-        <button class="btn btn-sm btn-success">Đăng ký</button>
-      </td>
-    </tr>
-    <tr>
-      <td>Red</td>
-      <td>Khu C</td>
-      <td>Máy in, Máy chiếu</td>
-      <td>
-        <button class="btn btn-sm btn-success">Đăng ký</button>
+        <button class="btn btn-sm btn-success" [routerLink]="['/book-room']">Đăng ký</button>
       </td>
     </tr>
     </tbody>
   </table>
-
-  <nav  aria-label="Page navigation example" class="d-flex justify-content-end">
-    <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-  </nav>
+  <div class="d-flex justify-content-center">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 </div>

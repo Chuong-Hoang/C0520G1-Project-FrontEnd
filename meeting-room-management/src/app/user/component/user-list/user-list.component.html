@@ -1,0 +1,54 @@
+<div class="container-fluid col-lg-12 col-md-12 p-5">
+  <h3 class="text-center ">Quản lý tài khoản</h3>
+  <div class="row p-1 col-lg-12 col-md-12 mt-3 d-flex">
+    <div class="col-lg-2 col-md-2 justify-content-start">
+      <button class="btn btn-success mr-3 btn-sm " (click)="openDialogAddNew()">Thêm tài khoản</button>
+    </div>
+    <form class="row col-lg-9 col-md-9 justify-content-end" [formGroup]="formSearch">
+      <div class="form-group row col-md-1 col-lg-1 "></div>
+      <div class="form-group row col-md-5 col-lg-5 mr-3">
+        <span class="col-5 justify-content-start">Tên đăng nhập</span>
+        <input class="col-7 form-control form-control-sm rounded" placeholder="Nhập tên người dùng" formControlName="input1">
+      </div>
+      <div class="form-group row col-md-4 col-lg-4 mr-3">
+        <span class="col-5 justify-content-start">Bộ phận</span>
+        <input class="col-7 form-control form-control-sm rounded" placeholder="Nhập tên bộ phận" formControlName="input2">
+      </div>
+      <div class="col-lg-2 col-md-2">
+        <button class="btn btn-primary mr-3 btn-sm" style="width: 80px" (click)="onSearch()">Tìm kiếm</button>
+      </div>
+    </form>
+  </div>
+  <table class="table table-hover mt-2">
+    <thead class="btn-light">
+    <tr>
+      <th>Stt</th>
+      <th>Tên đăng nhập</th>
+      <th>Quyền</th>
+      <th>Họ và tên</th>
+      <th>Bộ phận</th>
+      <th class="text-center">Tác vụ</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of userList | paginate : { itemsPerPage: 5, currentPage: p }; let i = index ">
+      <td>{{i + 1}}</td>
+      <td>{{user.userName}}</td>
+      <td>
+        <span *ngIf="user.roleName=='ROLE_ADMIN'">Quản trị viên</span>
+        <span *ngIf="user.roleName=='ROLE_USER'">Người dùng</span>
+      </td>
+      <td>{{user.fullName}}</td>
+      <td>{{user.department}}</td>
+      <td class="text-center">
+        <button class="btn btn-warning mx-3 btn-sm" (click)="openDialogEdit(user.id) ">Sửa</button>
+        <button class="btn btn-danger btn-sm mx-3" (click)="openDialogDelete(user.id) ">Xóa</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation example" class="mt-5 d-flex justify-content-center">
+    <pagination-controls class="d-block" (pageChange)="p = $event"></pagination-controls>
+  </nav>
+</div>
+

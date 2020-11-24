@@ -1,0 +1,12 @@
+<form [formGroup]="detailCommentForm">
+  <input formControlName="idComment" type="hidden">
+  <span>{{id}}</span>
+  <span>{{contentComment}}</span>
+  <h5 class="d-flex justify-content-center" >Nội dung</h5>
+  <hr>
+  <p class="my-3">Bạn có muốn xóa thông báo <span class="text-danger font-weight-bolder">{{contentComment}}</span>? <br> Lưu ý : không thể hoàn lại!!</p>
+  <div class="row d-flex justify-content-end">
+<!--    <button mat-dialog-close class="btn btn-secondary mr-3">Hủy</button>-->
+    <button class="btn btn-danger mr-3" (click)="detailComment()">Hủy</button>
+  </div>
+</form>

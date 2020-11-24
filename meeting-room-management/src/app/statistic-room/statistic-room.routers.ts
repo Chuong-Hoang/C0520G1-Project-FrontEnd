@@ -1,8 +1,11 @@
 import {Routes} from '@angular/router';
 import {ViewStatisticComponent} from './view-statistic/view-statistic.component';
-import {StatisticalResultsByRoomComponent} from './statistical-results-by-room/statistical-results-by-room.component';
+import {AuthGuard} from '../office-common/helper/auth.guard';
 
 export const statisticRoomRoutes: Routes = [
-  { path: '',
-    component: ViewStatisticComponent}
+  { path: 'statistic',
+    component: ViewStatisticComponent,
+    // canActivate: [AuthGuard],
+    // data: {roles: ['ROLE_ADMIN']}
+  }
 ];
