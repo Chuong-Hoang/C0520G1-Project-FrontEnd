@@ -1,60 +1,60 @@
-
-<div class="container-fluid 100vh"  >
-  <div class=" row col-12 col-12">
-    <h1 class="d-flex justify-content-center col-12">Header</h1>
-  </div>
+<div class="container-fluid 100vh mt-5">
+  <br>
   <hr>
-  <form>
-    <div class="container-fluid">
-      <div class="col-1"></div>
-
-      <div class="col-10 px-0" ><!--Thanh Tiêu Đề Thông Báo-->
-        <div class="col-12 px-0">
-          <h3 class="d-flex justify-content-center ">Xử lý phản hồi</h3>
-        </div>
-        <!--Phần Thân Nội Dung thông Báo-->
-        <div class="col-12 m-3">
-          <div class="row">
-            <div class="col-3 ">
-              <label class="">Nội dung xử lý <span style="color: red">(*)</span></label>
-            </div>
-            <div class="col-9">
-              <textarea required="" rows="5" class=" rounded form-control form-control-sm" placeholder="Nội dung xử lý phản hồi cho người dùng"></textarea>
-              <p class="text-danger">Vui lòng nhập thông tin</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 m-3">
-          <div class="row">
-            <div class="col-3 ">
-              <label class="">Chọn người dùng gửi thông báo</label>
-            </div>
-            <div class="col-9">
-              <select class="form-control form-control-sm">
-                <option>Nguyễn Văn A</option>
-                <option>Nguyễn Văn B</option>
-                <option>Nguyễn VĂn C</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 m-3">
-          <div class="row">
-            <span class="col-3 m-2"></span>
-
-
-            <div class="col-12">
-              <!--                                <div class="col-4"><button class="btn btn-info">Hủy</button></div>-->
-              <!--                                <div class="col-4"></div>-->
-              <div class="d-flex justify-content-center"><button type="submit" class="btn btn-sm btn-success ">Gửi phản hồi</button></div>
-            </div>
-          </div>
-        </div>
-
+    <div class="d-flex justify-content-center">
+      <form class="row w-75" [formGroup]="handleCommentForm" (ngSubmit)="handleComment()">
         <div class="col-1"></div>
+        <input formControlName="idComment" type="hidden">
+        <div class="col-10 px-0"><!--Thanh Tiêu Đề Thông Báo-->
+          <div class="col-12 px-0">
+            <h3 class="d-flex justify-content-center ">Xử lý phản hồi</h3>
+          </div>
+          <!--Phần Thân Nội Dung thông Báo-->
+          <div class="col-12 m-3">
+            <div class="row">
+              <div class="col-3 ">
+                <label class="">Nội dung xử lý <span style="color: red">(*)</span></label>
+              </div>
+              <div class="col-9">
+              <textarea required="" rows="5" class=" rounded form-control form-control-sm"
+                        formControlName="contentReply"
+                        placeholder="Nội dung xử lý phản hồi cho người dùng"></textarea>
+                <p class="text-danger">Vui lòng nhập thông tin</p>
+              </div>
+            </div>
+          </div>
+<!--          <div class="col-12 m-3">-->
+<!--            <div class="row">-->
+<!--              <div class="col-3 ">-->
+<!--                <label class="">Chọn người dùng gửi thông báo</label>-->
+<!--              </div>-->
+<!--              <div class="col-9">-->
+<!--                <select class="form-control form-control-sm">-->
+<!--                  <option>Nguyễn Văn A</option>-->
+<!--                  <option>Nguyễn Văn B</option>-->
+<!--                  <option>Nguyễn VĂn C</option>-->
+<!--                </select>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+          <div class="col-12 m-3">
+            <div class="row">
+              <span class="col-3 m-2"></span>
 
-      </div>
+
+              <div class="col-12">
+                <!--                                <div class="col-4"><button class="btn btn-info">Hủy</button></div>-->
+                <!--                                <div class="col-4"></div>-->
+                <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn btn-sm btn-success ">Gửi phản hồi</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-1"></div>
+        </div>
+      </form>
     </div>
-  </form>
 </div>
 
