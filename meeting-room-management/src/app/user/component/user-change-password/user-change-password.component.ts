@@ -1,7 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
 import {UserService} from '../../service/user.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MatDialogRef} from '@angular/material/dialog';
+import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
 
 // tslint:disable-next-line:typedef
 function comparePassword(c: AbstractControl) {
@@ -21,7 +22,6 @@ function comparePassword(c: AbstractControl) {
   }
 }
 
-
 @Component({
   selector: 'app-user-change-password',
   templateUrl: './user-change-password.component.html',
@@ -29,34 +29,30 @@ function comparePassword(c: AbstractControl) {
 })
 export class UserChangePasswordComponent implements OnInit {
   formChangePassword: FormGroup;
-  public id;
-  public password;
 
   constructor(
     public dialogRef: MatDialogRef<UserChangePasswordComponent>,
     public formBuilder: FormBuilder,
     private userService: UserService,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private tokenStorageService: TokenStorageService
   ) {
   }
 
+  public idUser: number;
+
   ngOnInit(): void {
-    this.id = this.data.dataIdUser;
-    this.password = this.data.dataPass;
+    this.idUser = this.tokenStorageService.getUser().id;
+    console.log(this.idUser);
     this.formChangePassword = this.formBuilder.group({
-      getPassword: [this.password],
-      oldPassword: ['', Validators.required],
-      newPassword: ['', [Validators.required, Validators.pattern('^[a-z0-9]{6,30}$')]],
-      confirmPassword: ['', [Validators.required]],
-    }, {validator: comparePassword});
+      oldPassword: [],
+      newPassword: []
+    });
   }
 
   // tslint:disable-next-line:typedef
   changePass() {
-    if (this.formChangePassword.valid) {
-      this.userService.changePassword(this.id, this.formChangePassword.value).subscribe(data => {
-        this.dialogRef.close();
-      });
-    }
+    this.userService.changePassword(this.idUser, this.formChangePassword.value).subscribe(data => {
+      this.dialogRef.close();
+    });
   }
 }
