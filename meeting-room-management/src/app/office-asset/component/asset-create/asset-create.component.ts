@@ -29,7 +29,7 @@ export class AssetCreateComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
+  create(): void {
     this.formCreate = this.formBuilder.group({
       assetName: ['', [Validators.required, checkNameAsset(this.listAssetName), Validators.pattern(/^[A-Z À-Ỹ][a-z à-ỹ]{1,9}(([ ][a-z à-ỹ]{0,9})?)*$/)]],
       usingQuantity: ['0'],
