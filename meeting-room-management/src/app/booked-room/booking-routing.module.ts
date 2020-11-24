@@ -9,8 +9,6 @@ export const bookingRoomRoute: Routes = [
     canActivate: [AuthGuard], data: {roles: ['ROLE_USER', 'ROLE_ADMIN']}},
   { path: 'book-room', component: BookedRoomCreateComponent,
     canActivate: [AuthGuard], data: {roles: ['ROLE_USER', 'ROLE_ADMIN']}},
-  { path: 'book-room/:id', component: BookedRoomCreateComponent,
-    canActivate: [AuthGuard], data: {roles: ['ROLE_USER', 'ROLE_ADMIN']}},
   { path: 'booked-room-list', component: BookedRoomListComponent,
     canActivate: [AuthGuard], data: {roles: ['ROLE_USER', 'ROLE_ADMIN']}}
 ];
