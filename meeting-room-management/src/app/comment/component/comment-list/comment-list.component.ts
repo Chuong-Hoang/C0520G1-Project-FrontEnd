@@ -13,7 +13,6 @@ export class CommentListComponent implements OnInit {
   public status = true;
   formSearch: FormGroup;
   // public total: number;
-
   p: any;
 
   constructor(
