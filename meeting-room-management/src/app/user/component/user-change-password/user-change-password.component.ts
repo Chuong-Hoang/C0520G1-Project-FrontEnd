@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {UserService} from '../../service/user.service';
 import {MatDialogRef} from '@angular/material/dialog';
+import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
 
 @Component({
   selector: 'app-user-change-password',
@@ -14,13 +15,16 @@ export class UserChangePasswordComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<UserChangePasswordComponent>,
     public formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private tokenStorageService: TokenStorageService
   ) {
   }
 
-  public idUser = 1;
+  public idUser: number;
 
   ngOnInit(): void {
+    this.idUser = this.tokenStorageService.getUser().id;
+    console.log(this.idUser);
     this.formChangePassword = this.formBuilder.group({
       oldPassword: [],
       newPassword: []

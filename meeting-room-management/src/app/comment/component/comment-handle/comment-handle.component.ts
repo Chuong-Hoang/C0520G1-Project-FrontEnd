@@ -15,10 +15,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class CommentHandleComponent implements OnInit {
   handleCommentForm: FormGroup;
   public idComment;
-  public meetingRooms: MeetingRoom[] = [];
   constructor(private formBuilder: FormBuilder,
               public commentService: CommentService,
-              public meetingRoomService: MeetingRoomService,
               public activeRouter: ActivatedRoute,
               public router: Router) { }
 
@@ -33,8 +31,7 @@ export class CommentHandleComponent implements OnInit {
       roomName: [''],
       idReplier: [''],
       sender: [''],
-    })
-    ;
+    });
     this.activeRouter.params.subscribe(data => {
       this.idComment = data.idComment;
       console.log(this.idComment);
@@ -46,7 +43,7 @@ export class CommentHandleComponent implements OnInit {
   }
 
   handleComment(): void {
-    if (this.handleCommentForm.valid){
+      if (this.handleCommentForm.valid){
       console.log(this.handleCommentForm.value);
       this.commentService.handleComment(this.idComment, this.handleCommentForm.value).subscribe(data => {
         this.router.navigate(['comment-list']);

@@ -23,32 +23,46 @@ export class StatisticByTimeComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
     title: {
-      text: 'Biểu đồ thống kê số lần sử dụng',
+      text: 'Biểu đồ thống kê hiệu suất các phòng',
       display: true,
       fontSize: 20,
     }
   };
   public barChartLabels: ng2Chart[] = [
     'Một lần',
+    'Hàng ngày',
     'Hàng tuần',
-    'Hàng tháng',
-    'Hàng ngày'
+    'Hàng tháng'
   ];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartData: ChartDataSets[] = [];
   public chartColors: Array<any> = [
     {
-      backgroundColor: 'rgba(136,59,255,0.84)',
-      borderColor: 'rgb(255,236,18)',
+      // first color
+      backgroundColor: 'rgba(61, 255, 36, 0.84)',
+      borderColor: 'rgb(0,117,45)'
     },
     {
-      backgroundColor: 'rgba(219,186,144,0.84)',
-      borderColor: 'rgb(80,83,117)',
+      // second color
+      backgroundColor: 'rgba(219,194,0,0.84)',
+      borderColor: 'rgba(14, 117, 0, 1)',
     },
     {
-      backgroundColor: 'rgba(0,0,0,0.8)',
-      borderColor: 'rgb(32,255,0)',
+      backgroundColor: 'rgba(255, 162, 87, 0.8)',
+      borderColor: 'rgba(163, 73, 0, 1)',
+    },
+    {
+      backgroundColor: 'rgb(255,4,1)',
+      borderColor: 'rgba(117, 53, 0, 1)',
+    },
+    {
+      backgroundColor: 'rgba(255,232,10,0.78)',
+      borderColor: 'rgba(59,57,219,0.86)',
+    },
+    {
+      backgroundColor: 'rgb(32,255,0)',
+      borderColor: 'rgba(60,60,60,0.86)',
     }
   ];
   // export excel
@@ -98,10 +112,18 @@ export class StatisticByTimeComponent implements OnInit {
   dataChart(arr: BookedRoom[]): void {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < arr.length; i++) {
-      this.barChartData.push({
-        data: [arr[i].effective , arr[i].totalUse],
-        label: 'Sử dụng: ' + arr[i].totalUse + 'Lần'
-      });
+      if (arr[i].roomType === 'Một lần') {
+        this.barChartData.push({data: [arr[i].effective, 0, 0, 0], label: arr[i].roomName + ' sử dụng: ' + arr[i].totalUse + 'lần  '});
+      }
+      if (arr[i].roomType === 'Hàng ngày') {
+        this.barChartData.push({data: [0, arr[i].effective, 0, 0], label: arr[i].roomName + ' sử dụng:' + arr[i].totalUse + 'lần  '});
+      }
+      if (arr[i].roomType === 'Hàng tuần') {
+        this.barChartData.push({data: [0, 0, arr[i].effective, 0], label: arr[i].roomName + ' sử dụng: ' + arr[i].totalUse + 'lần  '});
+      }
+      if (arr[i].roomType === 'Hàng tháng') {
+        this.barChartData.push({data: [0, 0, 0, arr[i].effective], label: arr[i].roomName + ' sử dụng: ' + arr[i].totalUse + 'lần  '});
+      }
     }
   }
 }

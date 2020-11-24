@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class UserService {
   public API_USER = 'http://localhost:8080/user';
-  public API_ROLE = 'http://localhost:8080/user/role-List';
+  public API_ROLE = 'http://localhost:8080/role-List';
 
   constructor(public http: HttpClient) {
   }
@@ -41,4 +41,10 @@ export class UserService {
     return this.http.put(this.API_USER + '/' + idUser + '/change-password', password);
   }
 
+  searchUserByUserNameOrDepartment(input1: string, input2: string): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('input1', input1);
+    params = params.append('input2', input2);
+    return this.http.get(this.API_USER + '/search', {params});
+  }
 }

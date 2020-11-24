@@ -30,9 +30,9 @@ export class AssetCreateQuantityComponent implements OnInit {
       // idAsset: [''],
       assetName: [''],
       usingQuantity: [''],
-      fixingQuantity: ['', [Validators.required]],
+      fixingQuantity: ['', [Validators.required, Validators.pattern('^([0-9][\\d]*)$')]],
       image: [''],
-      total: ['', [Validators.required]],
+      total: ['', [Validators.required, Validators.pattern('^([1-9][\\d]*)$')]],
       description: [''],
       price: ['']
     });

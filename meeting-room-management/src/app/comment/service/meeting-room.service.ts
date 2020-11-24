@@ -7,7 +7,6 @@ import {Observable} from 'rxjs';
 })
 export class MeetingRoomService {
   public API = 'http://localhost:8080/meeting-room';
-
   constructor(public http: HttpClient) {
   }
 
