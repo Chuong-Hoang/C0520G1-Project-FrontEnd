@@ -47,7 +47,7 @@ export class AssetCreateComponent implements OnInit {
 
   }
 
-  onSubmit(): void {
+  create(): void {
     console.log(this.formCreate.value);
     this.assetServer.create(this.formCreate.value).subscribe(data => {
       this.router.navigate(['asset'], {queryParams: {create_msg: 'Thêm mới thành công!', si: true}});
