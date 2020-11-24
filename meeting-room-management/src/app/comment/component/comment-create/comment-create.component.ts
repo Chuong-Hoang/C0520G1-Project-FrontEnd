@@ -44,7 +44,7 @@ export class CommentCreateComponent implements OnInit {
       errorTypeName: [''],
       roomName: [''],
       replier: [''],
-      sender: [''],
+      idSender: [''],
     })
     ;
   }

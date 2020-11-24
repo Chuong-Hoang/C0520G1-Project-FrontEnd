@@ -35,11 +35,11 @@ export class CommentService {
     return this.http.put(this.API + '/detail/' + idComment, comment);
   }
 
-  search(a: string, b: string, c: string): Observable<any> {
+  search(userNameSearch: string, roomNameSearch: string, statusSearch: string): Observable<any> {
     let params = new HttpParams();
-    params = params.append('value1', a);
-    params = params.append('value2', b);
-    params = params.append('value3', c);
+    params = params.append('value1', userNameSearch);
+    params = params.append('value2', roomNameSearch);
+    params = params.append('value3', statusSearch);
     return this.http.get(this.API + '/search', {params});
   }
 
