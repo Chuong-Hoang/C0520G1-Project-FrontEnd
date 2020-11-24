@@ -7,7 +7,6 @@ import {BookedRoom} from '../model/BookedRoom.class';
 import {RoomType} from '../model/RoomType.class';
 import {NoContentComponent} from '../no-content/no-content.component';
 import {StatisticByTimeComponent} from '../statistic-by-time/statistic-by-time.component';
-import {ExcelService} from '../service/excel.service';
 import {StatisticByRoomComponent} from '../statistic-by-room/statistic-by-room.component';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Label as ng2Chart} from 'ng2-charts/lib/base-chart.directive';
@@ -195,14 +194,13 @@ export class ViewStatisticComponent implements OnInit {
   }
 
   onSubmitByRoom(): void {
-    console.log(this.statisticByRoom.value);
-    console.log(this.messageError);
-    console.log('aaaaaa');
+    this.messageError = '';
     this.bookedRoomByRoom = [];
     // tslint:disable-next-line:max-line-length
-    if (this.statisticRoom.roomType === undefined) {
+    if (this.statisticByRoom.value.roomType === '' && this.statisticByRoom.value.roomName === '' && this.statisticByRoom.value.month === '' && this.statisticByRoom.value.year === '') {
       this.messageError = 'vui lòng chọn ít nhất 1 trường !!';
     } else {
+      this.messageError = '';
       this.statisticRoom.findSearchByRoom(this.statisticByRoom.value.roomType, this.statisticByRoom.value.roomName
         , this.statisticByRoom.value.month, this.statisticByRoom.value.year).subscribe(data => {
           this.statisticRoom.bookedRoomByRoom = data;
