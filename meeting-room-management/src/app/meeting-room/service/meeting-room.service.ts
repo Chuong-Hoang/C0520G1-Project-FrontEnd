@@ -8,8 +8,8 @@ import {MeetingRoom} from '../model/MeetingRoom';
 })
 export class MeetingRoomService {
   public API_MEETING_ROOM = 'http://localhost:8080/meeting-room';
-  public API_ROOM_TYPE = 'http://localhost:8080/room-type';
-  public API_ROOM_STATUS = 'http://localhost:8080/room-status';
+  public API_ROOM_TYPE = 'http://localhost:8080/meeting-room/room-type-list';
+  public API_ROOM_STATUS = 'http://localhost:8080/meeting-room/room-status-list';
   public API_SEARCH_ROOM = 'http://localhost:8080/meeting-room/search';
 
   constructor(
