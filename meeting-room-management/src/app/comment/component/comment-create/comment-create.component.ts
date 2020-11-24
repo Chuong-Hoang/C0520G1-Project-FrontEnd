@@ -4,7 +4,6 @@ import {CommentService} from '../../service/comment.service';
 import {ErrorTypeService} from '../../service/error-type.service';
 import {ErrorType} from '../../model/errorType.class';
 import {MeetingRoom} from '../../model/meetingRoom.class';
-import {User} from '../../model/user.class';
 import {Router} from '@angular/router';
 import {MeetingRoomService} from '../../service/meeting-room.service';
 
