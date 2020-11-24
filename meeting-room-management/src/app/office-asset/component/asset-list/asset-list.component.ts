@@ -16,7 +16,6 @@ export class AssetListComponent implements OnInit {
   public create_msg = '';
   // tslint:disable-next-line:variable-name
   public edit_msg = '';
-
   // tslint:disable-next-line:variable-name
   public delete_msg = '';
   public assetList;
