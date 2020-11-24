@@ -55,7 +55,7 @@ export class MeetingRoomListComponent implements OnInit {
       this.roomTypeList = data;
     });
     this.formSearch = this.formBuilder.group({
-      roomName: [''],
+      roomName: ['', [Validators.pattern('^[a-z0-9]{0,100}$')]],
       floor: ['', [Validators.pattern('[0-9]')]],
       roomTypeName: [''],
       roomStatusName: [''],

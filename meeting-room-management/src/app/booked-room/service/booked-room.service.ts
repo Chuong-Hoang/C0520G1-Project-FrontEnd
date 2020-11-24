@@ -32,12 +32,17 @@ export class BookedRoomService {
     return this.http.get(this.API_BookedRoom + '/' + id);
   }
 
+  // get MeetingRoom List
+  getAllMeetingRooms(): Observable<any>{
+    return this.http.get(this.API_MeetingRoom);
+  }
+
   getMeetingRoomById(id): Observable<any>{
-    console.log('You are at finding-a-room-function');
+    console.log(id);
     return this.http.get(this.API_MeetingRoom + '/' + id);
   }
 
-  // search meeting rooms
+  // search available meeting rooms
   searchMeetingRooms(ele): Observable<any>{
     return this.http.post(this.API_MeetingRoom + '-find', ele);
   }
@@ -49,11 +54,6 @@ export class BookedRoomService {
   // get TimeFrame List
   getAllTimeFrames(): Observable<any>{
     return this.http.get(this.API_TimeFrame);
-  }
-
-  // get MeetingRoom List
-  getAllMeetingRooms(): Observable<any>{
-    return this.http.get(this.API_MeetingRoom + '-list');
   }
 
   // get RoomType List

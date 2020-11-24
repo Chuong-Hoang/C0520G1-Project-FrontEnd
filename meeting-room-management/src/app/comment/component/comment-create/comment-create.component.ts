@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CommentService} from '../../service/comment.service';
 import {ErrorTypeService} from '../../service/error-type.service';
 import {ErrorType} from '../../model/errorType.class';
@@ -17,6 +17,7 @@ export class CommentCreateComponent implements OnInit {
   createCommentForm: FormGroup;
   public errorTypes: ErrorType[] = [];
   public meetingRoomServices: MeetingRoom[] = [];
+  public errors = [];
 
 
   constructor(private formBuilder: FormBuilder,
@@ -37,23 +38,23 @@ export class CommentCreateComponent implements OnInit {
     this.createCommentForm = this.formBuilder.group({
       // idComment: [''],
       commentTime: [''],
-      contentComment: [''],
+      contentComment: ['', [Validators.required ]],
       contentReply: [''],
       status: [''],
       errorTypeName: [''],
       roomName: [''],
       replier: [''],
-      sender: [''],
+      idSender: [''],
     })
     ;
   }
 
   createComment(): void{
-    console.log('fđryyh');
     console.log(this.createCommentForm.valid);
     if (this.createCommentForm.valid){
       this.commentService.addNewComment(this.createCommentForm.value).subscribe(data => {
         this.router.navigate(['comment-list'], {queryParams: {create_msg: 'Create successfully!', si: true}});
+      }, err => {this.errors = err.error.message;
       });
     }
   }
