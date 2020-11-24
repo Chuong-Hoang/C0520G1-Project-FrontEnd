@@ -12,12 +12,9 @@ import {AssetDeleteComponent} from '../asset-delete/asset-delete.component';
   styleUrls: ['./asset-list.component.css']
 })
 export class AssetListComponent implements OnInit {
-  // tslint:disable-next-line:variable-name
-  public create_msg = '';
-  // tslint:disable-next-line:variable-name
-  public edit_msg = '';
-  // tslint:disable-next-line:variable-name
-  public delete_msg = '';
+  public createMSG = '';
+  public editMSG = '';
+  public deleteMSG = '';
   public assetList;
   public valueSearch: string;
   p: any;
@@ -43,7 +40,7 @@ export class AssetListComponent implements OnInit {
     this.assetService.getByID(id).subscribe(dataAsset => {
       const dialogRef = this.dialog.open(AssetCreateQuantityComponent, {
         width: '500px',
-        height: '500px',
+        height: '400px',
         data: {dataC: dataAsset.idAsset},
         disableClose: true
       });
@@ -81,9 +78,9 @@ export class AssetListComponent implements OnInit {
   }
 
   sendMessage(): void{
-    this.create_msg = this.route.snapshot.queryParamMap.get('create_msg');
-    this.edit_msg = this.route.snapshot.queryParamMap.get('edit_msg');
-    this.delete_msg = this.route.snapshot.queryParamMap.get('delete_msg');
+    this.createMSG = this.route.snapshot.queryParamMap.get('create_msg');
+    this.editMSG = this.route.snapshot.queryParamMap.get('edit_msg');
+    this.deleteMSG = this.route.snapshot.queryParamMap.get('delete_msg');
 
   }
 
