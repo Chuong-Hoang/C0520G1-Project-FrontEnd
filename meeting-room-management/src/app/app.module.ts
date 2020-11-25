@@ -1,8 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {BookedRoomModule} from './booked-room/booked-room.module';
 import {CommentModule} from './comment/comment.module';
 import {MeetingRoomModule} from './meeting-room/meeting-room.module';
@@ -33,4 +33,5 @@ import {authInterceptorProviders} from './office-common/helper/auth.interceptor'
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}
