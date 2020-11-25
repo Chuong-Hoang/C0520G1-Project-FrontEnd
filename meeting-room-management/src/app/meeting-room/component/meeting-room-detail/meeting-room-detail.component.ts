@@ -22,9 +22,8 @@ export class MeetingRoomDetailComponent implements OnInit {
         console.log(data.id);
         this.idMeetingRoom = data.id;
         this.meetRoomService.getMeetingRoomById(this.idMeetingRoom).subscribe(next => {
-          console.log(next);
           this.meetingRoom = next;
-          next.image = next.image.substring(144);
+          this.meetingRoom.image = this.meetingRoom.image.substring(11);
         }, error => console.log('error'));
       }
     );

@@ -25,7 +25,7 @@ export class MeetingRoomService {
   }
 
   getMeetingRoomById(meetingRoomId): Observable<MeetingRoom> {
-    return this.http.get<MeetingRoom>(this.API_EDIT_MEETING_ROOM + '/' + meetingRoomId);
+    return this.http.get<MeetingRoom>(this.API_MEETING_ROOM + '/' + meetingRoomId);
   }
 
   editMeetingRoom(meetingRoom, meetingRoomId): Observable<any> {

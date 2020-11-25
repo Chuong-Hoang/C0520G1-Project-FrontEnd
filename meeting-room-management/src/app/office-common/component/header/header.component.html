@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="">Quản lí Phòng Họp</a>
+    <a class="navbar-brand" href="">Cho Thuê Phòng Họp</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,13 +8,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto topnav" routerLinkActive="active" *ngIf="showAdminBoard">
         <li class="nav-item">
-          <a class="nav-link" href="/meeting-room">Quản lí phòng họp</a>
+          <a class="nav-link" href="/meeting-room">Quản lý phòng họp</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/asset">Quản lí tài sản</a>
+          <a class="nav-link" href="/asset">Quản lý tài sản</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/user-list">Quản lí người dùng</a>
+          <a class="nav-link" href="/user-list">Quản lý người dùng</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/statistic">Thống kê</a>
@@ -31,12 +31,12 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOffice" role="button"
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Đăng kí phòng họp
+            Đăng ký phòng họp
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownOffice">
             <a class="dropdown-item" href="/search-available-room">Tìm kiếm phòng họp</a>
-            <a class="dropdown-item" href="#">Đăng kí phòng họp</a>
-            <a class="dropdown-item" href="/booked-room-list">Lịch sử đăng kí</a>
+            <a class="dropdown-item" href="#">Đăng ký phòng họp</a>
+            <a class="dropdown-item" href="/booked-room-list">Lịch sử đăng ký</a>
           </div>
         </li>
         <li class="nav-item">
@@ -65,7 +65,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
             <a class="dropdown-item" href="/login">Đăng nhập</a>
-            <a class="dropdown-item" href="#">Đăng ký</a>
+<!--            <a class="dropdown-item" href="#">Đăng ký</a>-->
           </div>
         </li>
         <li class="nav-item dropdown" *ngIf="isLoggedIn">
