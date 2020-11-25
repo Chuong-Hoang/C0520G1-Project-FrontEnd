@@ -7,8 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from '@angular/material-moment-adapter';
-import {BookedRoomCancelComponent} from "./component/booked-room-cancel/booked-room-cancel.component";
-import {DeleteHistoryDialogComponent} from "./component/delete-history-dialog/delete-history-dialog.component";
+import {BookedRoomCancelComponent} from './component/booked-room-cancel/booked-room-cancel.component';
+import {DeleteHistoryDialogComponent} from './component/delete-history-dialog/delete-history-dialog.component';
 
 @NgModule({
   declarations: [],
