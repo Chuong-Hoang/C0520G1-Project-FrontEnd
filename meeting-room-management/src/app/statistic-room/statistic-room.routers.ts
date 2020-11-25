@@ -1,5 +1,5 @@
 import {Routes} from '@angular/router';
-import {ViewStatisticComponent} from './view-statistic/view-statistic.component';
+import {ViewStatisticComponent} from './component/view-statistic/view-statistic.component';
 import {AuthGuard} from '../office-common/helper/auth.guard';
 
 export const statisticRoomRoutes: Routes = [
