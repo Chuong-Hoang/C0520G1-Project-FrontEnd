@@ -80,7 +80,7 @@
                                     formControlName="capacity">
             <div class="alert- alert-danger small" role="alert"
                  *ngIf="formSearch.get('capacity').invalid && formSearch.get('capacity').touched">
-              Nhập 2->99
+              Nhập 2->50
             </div>
           </div>
         </div>
@@ -88,18 +88,20 @@
 
       <div class="col-2 col-sm-2 mt-3">
         <div class="row">
-          <button type="reset" class="btn btn-warning btn-sm" style="width: 63px;">Reset</button>
+          <button type="reset" class="btn btn-warning btn-sm">Khôi phục</button>
         </div>
         <div class="row mt-4">
-          <button type="submit" class="btn btn-primary btn-sm" [disabled]="formSearch.invalid">Tìm kiếm</button>
+          <button type="submit" class="btn btn-primary btn-sm" [disabled]="formSearch.invalid">Tìm kiếm&nbsp;</button>
         </div>
       </div>
     </div>
+
   </form>
 </div>
 
 <div class="container">
   <div class="row mt-4">
+    <div>* Kết quả : <span class="text-danger">{{result}}</span></div>
     <table class="table table-hover p-0">
       <thead class="thead-light">
       <tr>
@@ -146,7 +148,9 @@
   <div class="row">
     <div class="col-3 text-danger">{{messageHome}}</div>
     <div class="col-6 d-flex justify-content-center">
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      <pagination-controls (pageChange)="p = $event" previousLabel="Trước"
+                           nextLabel="Sau"
+                           responsive="true"></pagination-controls>
     </div>
   </div>
 </div>
