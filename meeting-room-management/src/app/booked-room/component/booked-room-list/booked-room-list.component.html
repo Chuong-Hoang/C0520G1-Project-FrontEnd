@@ -131,9 +131,12 @@
           class="fas fa-circle mr-2 text-success"></i>{{item.bookedStatus}}</span>
       </td>
       <td>
-        <button class="btn btn-sm" [ngClass]="item.bookedStatus == 'Đã kết thúc'? 'btn-secondary': 'btn-danger'"
-                [disabled]="item.bookedStatus == 'Đã kết thúc'">Hủy
-        </button>
+<!--        <button class="btn btn-sm" [ngClass]="item.bookedStatus == 'Đã kết thúc'? 'btn-secondary': 'btn-danger'"-->
+<!--                [disabled]="item.bookedStatus == 'Đã kết thúc'">Hủy-->
+<!--        </button>-->
+        <a [routerLink]="['/booked-room-delete/' + item.idBookedRoom]" role="button" class="btn btn-sm"
+           [ngClass]="item.bookedStatus == 'Đã kết thúc'? 'btn-secondary': 'btn-danger'"
+           [hidden]="item.bookedStatus == 'Đã kết thúc'">Hủy</a>
       </td>
     </tr>
     </tbody>

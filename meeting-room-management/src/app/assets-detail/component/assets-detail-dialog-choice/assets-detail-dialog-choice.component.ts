@@ -9,15 +9,19 @@ import {AssetDetail} from '../../model/AssetDetail.class';
   styleUrls: ['./assets-detail-dialog-choice.component.css']
 })
 export class AssetsDetailDialogChoiceComponent implements OnInit {
-  // bo di AssetDetail[]
-  public assetsDetails: AssetDetail[];
+  public assetsDetailsList;
+  public idAsset;
   constructor(
     public dialogRef: MatDialogRef<AssetsDetailDialogChoiceComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) { }
 
   ngOnInit(): void {
-    this.assetsDetails = this.data;
+    this.assetsDetailsList = this.data.data1;
+    this.idAsset = this.data.data1.idAsset;
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }
