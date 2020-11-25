@@ -9,11 +9,12 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Tên phòng <sup class="text-danger">*</sup></label>
         <div class="col-sm-9">
-          <select class="form-control form-control-sm" formControlName="meetingRoomId">
-            <option value="">--Chọn--</option>
-            <option [value]="idSentFromSearch">{{roomName}}</option>
-            <option *ngFor="let item of meetingRoomList" [value]="item.idRoom">{{item.roomName}}</option>
-          </select>
+          <input class="form-control form-control-sm" [value]="roomName" readonly/>
+          <!--<select class="form-control form-control-sm" formControlName="meetingRoomId">-->
+            <!--<option value="">&#45;&#45;Chọn&#45;&#45;</option>-->
+            <!--<option [value]="idSentFromSearch">{{roomName}}</option>-->
+            <!--<option *ngFor="let item of meetingRoomList" [value]="item.idRoom">{{item.roomName}}</option>-->
+          <!--</select>-->
           <span class="text-danger"
                 *ngIf="formCreate.get('meetingRoomId').invalid && formCreate.get('meetingRoomId').touched">{{meetingRoomId_msg}}
           </span>
@@ -33,27 +34,16 @@
       <!--  </div>-->
       <!--</div>-->
 
-      <!--<div class="form-group row" style="display: none">-->
-      <!--  <label class="col-sm-3 col-form-label">Ngày họp</label>-->
-      <!--  <div class="col-sm-9">-->
-      <!--    <input class="form-control form-control-sm" type="date">-->
-      <!--    <mat-form-field class="w-100">-->
-      <!--      <input matInput [matDatepicker]="myDatepicker1" formControlName="meetingDate">-->
-      <!--      <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>-->
-      <!--      <mat-datepicker #myDatepicker1 startView="month"></mat-datepicker>-->
-      <!--    </mat-form-field>-->
-      <!--  </div>-->
-      <!--</div>-->
-
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Ngày bắt đầu <sup class="text-danger">*</sup></label>
         <div class="col-sm-9">
-          <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="myDatepicker2" [min]="minDate" [max]="maxDate"
-                   placeholder="Ngày bắt đầu họp" formControlName="startDate">
-            <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
-            <mat-datepicker #myDatepicker2 startView="month"></mat-datepicker>
-          </mat-form-field>
+          <input class="form-control form-control-sm" type="text" formControlName="startDate" readonly/>
+          <!--<mat-form-field class="w-100">-->
+          <!--  <input matInput [matDatepicker]="myDatepicker2" [min]="minDate" [max]="maxDate"-->
+          <!--         placeholder="Ngày bắt đầu họp" formControlName="startDate">-->
+          <!--  <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>-->
+          <!--  <mat-datepicker #myDatepicker2 startView="month"></mat-datepicker>-->
+          <!--</mat-form-field>-->
           <span class="text-danger"
                 *ngIf="formCreate.get('startDate').invalid && formCreate.get('startDate').touched">{{ startDate_msg }}
           </span>
@@ -63,12 +53,13 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Ngày kết thúc <sup class="text-danger">*</sup></label>
         <div class="col-sm-9">
-          <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="myDatepicker3" [min]="minDate" [max]="maxDate"
-                   placeholder="Ngày kết thúc họp" formControlName="endDate">
-            <mat-datepicker-toggle matSuffix [for]="myDatepicker3"></mat-datepicker-toggle>
-            <mat-datepicker #myDatepicker3 startView="month"></mat-datepicker>
-          </mat-form-field>
+          <input class="form-control form-control-sm" type="text" formControlName="endDate" readonly/>
+          <!--<mat-form-field class="w-100">            -->
+          <!--  <input matInput [matDatepicker]="myDatepicker3" [min]="minDate" [max]="maxDate"-->
+          <!--         placeholder="Ngày kết thúc họp" formControlName="endDate">-->
+          <!--  <mat-datepicker-toggle matSuffix [for]="myDatepicker3"></mat-datepicker-toggle>-->
+          <!--  <mat-datepicker #myDatepicker3 startView="month"></mat-datepicker>-->
+          <!--</mat-form-field>-->
           <span class="text-danger"
                 *ngIf="formCreate.get('endDate').invalid && formCreate.get('endDate').touched">{{ endDate_msg }}
           </span>
