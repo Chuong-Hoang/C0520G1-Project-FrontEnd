@@ -13,7 +13,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 })
 export class UserListComponent implements OnInit {
   public userList;
-  p: any;
+  public p = 1;
   formSearch: FormGroup;
 
   constructor(
@@ -28,6 +28,8 @@ export class UserListComponent implements OnInit {
     this.userService.getAllUser().subscribe(data => {
       this.userList = data;
       console.log(data);
+    }, error => {
+      console.log(error);
     });
     this.formSearch = this.formBuilder.group({
       input1: [''],
@@ -39,8 +41,9 @@ export class UserListComponent implements OnInit {
     this.p = 0;
     this.userService.searchUserByUserNameOrDepartment(this.formSearch.value.input1,
       this.formSearch.value.input2).subscribe(data => {
-      console.log(data);
       this.userList = data;
+    }, error => {
+      console.log(error);
     });
   }
 
