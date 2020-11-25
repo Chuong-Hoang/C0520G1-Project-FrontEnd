@@ -47,7 +47,6 @@ export class NotificationComponent implements OnInit {
 
   dialogDeleteComment(commentId): void {
     this.commentService.getCommentById(commentId).subscribe(dataName => {
-      console.log(dataName);
       const dialogRef = this.dialog.open(DeleteCommentComponent, {
         width: '500px',
         data: {fullName: dataName},

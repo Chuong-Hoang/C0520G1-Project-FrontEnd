@@ -2,9 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BookedRoomService} from '../../service/booked-room.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { DatePipe } from '@angular/common';
-import {BookedRoom} from '../../model/booked-room';
-import {SearchedMeetingRoom} from '../../model/searched-meeting-room';
 
 @Component({
   selector: 'app-booked-room-search',
@@ -15,14 +12,12 @@ export class BookedRoomSearchComponent implements OnInit, OnDestroy {
   public meetingRoomList = [];
   public roomTypeList = [];
   public timeFrameList = [];
-  public pipe: DatePipe;
-  public searchBookedRoom: SearchedMeetingRoom;
   public p: any;
   public minDate = new Date();
   public maxDate = new Date(this.minDate.getFullYear(), this.minDate.getMonth() + 1, this.minDate.getDate());
   // get data input for search if results found <Chương comment>
-  public startDateSearch = null;
-  public endDateSearch = null;
+  public startDateSearch = '';
+  public endDateSearch = '';
   public startTimeSearch = '';
   public endTimeSearch = '';
   // tslint:disable-next-line:variable-name
@@ -51,7 +46,6 @@ export class BookedRoomSearchComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.meetingRoomList = [];
     this.size_msg = 'Rất tiếc, không tìm thấy kết quả nào!';
-    this.pipe = new DatePipe('en-US');
     this.p = 0;
     this.formMeetingRoomSearched = this.formBuilder.group({
       zone: '',
@@ -65,12 +59,12 @@ export class BookedRoomSearchComponent implements OnInit, OnDestroy {
     console.log('Init meeting room:');
     console.log(this.formMeetingRoomSearched.value);
 
-    // this.bookedRoomService.getAllMeetingRooms().subscribe(data => {
-    //   this.meetingRoomList = data;
-    //   this.size_msg = this.meetingRoomList.length + '';
-    //   console.log('meetingRooms ==>: ');
-    //   console.log(data);
-    // });
+    this.bookedRoomService.getAllMeetingRooms().subscribe(data => {
+      this.meetingRoomList = data;
+      this.size_msg = this.meetingRoomList.length + '';
+      console.log('meetingRooms ==>: ');
+      console.log(data);
+    });
     this.bookedRoomService.getAllRoomTypes().subscribe(data => {
       this.roomTypeList = data;
       // console.log('roomTypes: ' + data);
@@ -82,25 +76,24 @@ export class BookedRoomSearchComponent implements OnInit, OnDestroy {
   }
 
   findMeetingRooms(): void {
-    console.log('Input form -->meeting room:');
+    console.log('Input -->meeting room:');
     console.log(this.formMeetingRoomSearched.value);
     this.meetingRoomList = [];
     this.size_msg = 'Rất tiếc, không tìm thấy kết quả nào!';
     this.p = 0;
-    this.searchBookedRoom = Object.assign({}, this.formMeetingRoomSearched.value);
-    this.searchBookedRoom.startDate = this.pipe.transform(this.searchBookedRoom.startDate, 'yyyy-MM-dd');
-    this.searchBookedRoom.endDate = this.pipe.transform(this.searchBookedRoom.endDate, 'yyyy-MM-dd');
-    console.log('Search Input object:');
-    console.log(this.searchBookedRoom);
-    console.log(this.pipe.transform(this.searchBookedRoom.startDate, 'yyyy-MM-dd'));
-    console.log(this.pipe.transform(this.searchBookedRoom.endDate, 'yyyy-MM-dd'));
-    this.bookedRoomService.searchMeetingRooms(this.searchBookedRoom).subscribe(data => {
+    this.bookedRoomService.searchMeetingRooms(this.formMeetingRoomSearched.value).subscribe(data => {
       this.meetingRoomList = data;
       if (data != null){
         console.log(data);
         this.size_msg = this.meetingRoomList.length + '';
-        this.startDateSearch = this.formMeetingRoomSearched.value.startDate;
-        this.endDateSearch = this.formMeetingRoomSearched.value.endDate;
+        this.startDateSearch =
+          this.formMeetingRoomSearched.value.startDate.getFullYear() + '-' +
+          (this.formMeetingRoomSearched.value.startDate.getMonth() + 1) + '-' +
+          this.formMeetingRoomSearched.value.startDate.getDate();
+        this.endDateSearch =
+          this.formMeetingRoomSearched.value.endDate.getFullYear() + '-' +
+          (this.formMeetingRoomSearched.value.endDate.getMonth() + 1) + '-' +
+          this.formMeetingRoomSearched.value.endDate.getDate();
         this.startTimeSearch = this.formMeetingRoomSearched.value.startTime;
         this.endTimeSearch = this.formMeetingRoomSearched.value.endTime;
       }
@@ -109,8 +102,7 @@ export class BookedRoomSearchComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void{
     this.router.navigate(['/book-room'], {queryParams:
-        {startDateSearch: this.pipe.transform(this.startDateSearch.toJSON(), 'yyyy-MM-dd'),
-          endDateSearch: this.pipe.transform(this.endDateSearch.toJSON(), 'yyyy-MM-dd'),
+        {startDateSearch: this.startDateSearch, endDateSearch: this.endDateSearch,
           startTimeSearch: this.startTimeSearch, endTimeSearch: this.endTimeSearch,
           idSentFromSearch: this.idSent
         }
@@ -120,5 +112,4 @@ export class BookedRoomSearchComponent implements OnInit, OnDestroy {
   sendId(idSent: number): void {
     this.idSent = idSent;
   }
-  // .....
 }

@@ -191,8 +191,12 @@ export class ViewStatisticComponent implements OnInit {
           this.statisticRoom.startDate = this.statisticByTime.value.dateGroup.startIn;
           this.statisticRoom.endDate = this.statisticByTime.value.dateGroup.startOut;
           if (data == null) {
+            this.loading = true;
+            this.loading1 = true;
             this.openDialogNoContent();
           } else {
+            this.loading = true;
+            this.loading1 = true;
             this.openDialogByTime();
           }
           console.log(data);
@@ -219,8 +223,12 @@ export class ViewStatisticComponent implements OnInit {
           this.statisticRoom.year = this.statisticByRoom.value.year;
           this.statisticRoom.roomName = this.statisticByRoom.value.roomName;
           if (data == null) {
+            this.loading = true;
+            this.loading1 = true;
             this.openDialogNoContent();
           } else {
+            this.loading = true;
+            this.loading1 = true;
             this.openDialogByRoom();
           }
           console.log(data);

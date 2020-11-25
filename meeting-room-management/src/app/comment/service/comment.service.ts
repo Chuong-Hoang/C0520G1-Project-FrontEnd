@@ -38,11 +38,7 @@ export class CommentService {
     return this.http.put(this.API + '/detail/' + idComment, comment);
   }
 
-<<<<<<< HEAD
-  search(a: string, b: string, c: string): Observable<any> {
-=======
   search(userNameSearch: string, roomNameSearch: string, statusSearch: string): Observable<any> {
->>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
     let params = new HttpParams();
     params = params.append('value1', userNameSearch);
     params = params.append('value2', roomNameSearch);
@@ -51,10 +47,6 @@ export class CommentService {
   }
 
   deleteCommentByID(idComment): Observable<any> {
-<<<<<<< HEAD
-    return this.http.delete(this.API + '/' + idComment);
-=======
     return this.http.delete(this.API + '/delete/' + idComment);
->>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
   }
 }
