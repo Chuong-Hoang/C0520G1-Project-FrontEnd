@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "meeting-room-management"
+    }
+  },
+  "defaultProject": "meeting-room-management",
+  "cli": {
+    "analytics": "aeeee5e3-0674-43e3-b19b-4217fa375d8f"
+  }
 }
