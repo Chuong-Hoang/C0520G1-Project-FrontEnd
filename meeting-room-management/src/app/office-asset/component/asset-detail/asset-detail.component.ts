@@ -10,6 +10,7 @@ import {Asset} from '../../model/model.asset';
 })
 export class AssetDetailComponent implements OnInit {
   public asset = new Asset();
+  d: any;
 
   constructor(
     private assetService: AssetServerService,
@@ -22,7 +23,7 @@ export class AssetDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.assetService.getByID(id).subscribe(data => {
       this.asset = data;
-      data.image = data.image.substring(11);
+      data.image = data.image.substring(10);
       console.log(this.asset);
     } , error => console.log('error'));
   }

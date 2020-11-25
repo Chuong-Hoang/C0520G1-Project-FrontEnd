@@ -1,8 +1,15 @@
-import {ErrorType} from './errorType.class';
-import {MeetingRoom} from './meetingRoom.class';
+import {ErrorType} from './ErrorType.class';
+import {MeetingRoom} from './MeetingRoom.class';
 import {User} from './user.class';
 
 export class Comment {
+  get senderName(): User {
+    return this._senderName;
+  }
+
+  set senderName(value: User) {
+    this._senderName = value;
+  }
   // tslint:disable-next-line:variable-name
   private _idComment: number;
   // tslint:disable-next-line:variable-name
@@ -23,6 +30,28 @@ export class Comment {
   private _replier: User;
   // tslint:disable-next-line:variable-name
   private _sender: User;
+  // tslint:disable-next-line:variable-name
+  private _senderName: User;
+  // tslint:disable-next-line:variable-name
+  private _roomName: MeetingRoom;
+  // tslint:disable-next-line:variable-name
+  private _errorTypeName: ErrorType;
+
+  get errorTypeName(): ErrorType {
+    return this._errorTypeName;
+  }
+
+  set errorTypeName(value: ErrorType) {
+    this._errorTypeName = value;
+  }
+
+  get roomName(): MeetingRoom {
+    return this._roomName;
+  }
+
+  set roomName(value: MeetingRoom) {
+    this._roomName = value;
+  }
 
   constructor(idComment: number, commentTime: string, contentComment: string, contentReply: string, status: boolean,
               errorType: ErrorType, meetingRoom: MeetingRoom, replier: User, sender: User) {

@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {BookedRoom} from '../model/BookedRoom.class';
+import {BookedRoom} from '../model/booked-room.class';
 import {DatePipe} from '@angular/common';
-import {RoomType} from '../model/RoomType.class';
+import {RoomType} from '../model/room-type.class';
+import {BookedChart} from '../model/booked-chart.class';
 
 
 @Injectable({
@@ -13,9 +14,11 @@ import {RoomType} from '../model/RoomType.class';
 export class StatisticRoomService {
   public API = 'http://localhost:8080/statistic';
   // để đưa dữ qua các component
+  public roomName1 = '';
   public bookedRoomByTime: BookedRoom[] = [];
   public bookedRoomByRoom: BookedRoom[] = [];
   public roomTypeList: RoomType[] = [];
+  public roomNameList: string[] = [];
   // params search by time
   public startDate: string;
   public endDate: string;
@@ -29,26 +32,21 @@ export class StatisticRoomService {
               private datePipe: DatePipe) {
   }
 
-  getAllRoomName(): Observable<any> {
-    return this.http.get<any>(`${this.API}/allRoomName`);
+  getAllRoomName(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.API}/allRoomName`);
   }
 
-  getAllBookedChart(start: string, end: string): Observable<any> {
+  getAllBookedChart(start: string, end: string): Observable<BookedChart[]> {
     let params = new HttpParams();
-    params = params.append('start', start);
-    params = params.append('end', end);
-    return this.http.get<any>(`${this.API}/allDataChart`, {params});
+    params = params.append('startYear', start);
+    params = params.append('endYear', end);
+    return this.http.get<BookedChart[]>(`${this.API}/allDataChart`, {params});
+  }
+  getAllRoomType(): Observable<RoomType[]> {
+    return this.http.get<RoomType[]>(`${this.API}/allRoomType`);
   }
 
-  getAllBookedRoom(): Observable<any> {
-    return this.http.get<any>(`${this.API}/all`);
-  }
-
-  getAllRoomType(): Observable<any> {
-    return this.http.get<any>(`${this.API}/allRoomType`);
-  }
-
-  findSearchByRoom(roomType: string, roomName: string, month: string, year: string): Observable<any> {
+  findSearchByRoom(roomType: string, roomName: string, month: string, year: string): Observable<BookedRoom[]> {
     let params = new HttpParams();
     params = params.append('roomType', roomType);
     params = params.append('roomName', roomName);
@@ -56,16 +54,16 @@ export class StatisticRoomService {
     params = params.append('year', year);
     // look for es6 object literal to read more;
     console.log(roomName);
-    return this.http.get<BookedRoom>(`${this.API}/searchByRoom`, {params});
+    return this.http.get<BookedRoom[]>(`${this.API}/searchByRoom`, {params});
   }
 
-  findSearchByTime(startDate: string, endDate: string): Observable<any> {
+  findSearchByTime(startDate: string, endDate: string): Observable<BookedRoom[]> {
     let params = new HttpParams();
-    params = params.append('param1', this.datePipe.transform(startDate, 'yyyy-MM-dd'));
-    params = params.append('param2', this.datePipe.transform(endDate, 'yyyy-MM-dd'));
+    params = params.append('startDate', this.datePipe.transform(startDate, 'yyyy-MM-dd'));
+    params = params.append('endDate', this.datePipe.transform(endDate, 'yyyy-MM-dd'));
     console.log(this.datePipe.transform(startDate, 'yyyy-MM-dd'));
     console.log(endDate);
     // look for es6 object literal to read more;
-    return this.http.get<BookedRoom>(`${this.API}/searchByTime`, {params});
+    return this.http.get<BookedRoom[]>(`${this.API}/searchByTime`, {params});
   }
 }

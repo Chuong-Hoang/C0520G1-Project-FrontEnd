@@ -29,7 +29,7 @@ export class MeetingRoomAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.formAddRoom = this.formBuilder.group({
-      roomName: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]{1,30}$')]],
+      roomName: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]{1,30}$')]],
       floor: ['', [Validators.required, Validators.pattern('^[0-9]{0,20}$')]],
       zone: ['', [Validators.required]],
       capacity: ['', [Validators.required, Validators.pattern('^[0-9]{0,20}$')]],

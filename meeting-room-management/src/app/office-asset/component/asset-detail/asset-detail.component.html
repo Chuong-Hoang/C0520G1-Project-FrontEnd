@@ -42,7 +42,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let element of asset.assetDetailDTOList; let i = index">
+        <tr
+          *ngFor="let element of asset.assetDetailDTOList|paginate: { itemsPerPage: 5, currentPage: d }; let i = index">
           <td>{{i + 1}}</td>
           <td>{{element.nameMeetingRoom}}</td>
           <td>{{element.quantity}}</td>
@@ -50,13 +51,15 @@
         </tr>
         </tbody>
       </table>
+      <pagination-controls class=" d-flex justify-content-center " (pageChange)="d = $event" previousLabel="Trước"
+                           nextLabel="Sau" responsive="true"></pagination-controls>
     </div>
     <div class="col-4 px-5 mt-3">
       <img src="../../../assets/image-asset/{{asset.image}}"
            class="w-100">
     </div>
   </div>
-  <div class="row d-flex justify-content-center mt-3">
+  <div class="row d-flex justify-content-center mt-5">
     <button type="button" class="btn btn-secondary " routerLink="/asset">Quay lại</button>
   </div>
 </div>
