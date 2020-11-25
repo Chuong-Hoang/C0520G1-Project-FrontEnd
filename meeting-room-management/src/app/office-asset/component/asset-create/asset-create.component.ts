@@ -39,12 +39,10 @@ export class AssetCreateComponent implements OnInit {
       description: ['', [Validators.required]],
       price: ['', [Validators.required, Validators.pattern('^([1-9][\\d]*)$')]]
     });
-
     this.assetServer.getAll().subscribe(data => {
       this.assetList = data;
       this.getAllAssetName();
     });
-
   }
 
   create(): void {
@@ -61,5 +59,4 @@ export class AssetCreateComponent implements OnInit {
       }
     }
   }
-
 }

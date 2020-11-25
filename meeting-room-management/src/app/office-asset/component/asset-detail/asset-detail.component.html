@@ -1,9 +1,7 @@
 <div class="container-fluid px-0 w-75 mt-3 ">
   <h3 class="row d-flex justify-content-center">Chi tiết tài sản</h3>
-
   <div class="row px-0 mx-0 mt-5" style="height: 90%">
     <div class="col-8 px-0 ">
-
       <div class="row d-flex justify-content-center ml-1">
         <div class="col-6">
           <div class="row d-flex justify-content-center">
@@ -19,7 +17,6 @@
             </div>
           </div>
         </div>
-
         <div class="col-6">
           <div class="row d-flex justify-content-center">
             <div class="col-3 px-0">
@@ -33,11 +30,8 @@
           </div>
         </div>
       </div>
-
       <br>
-
       <p>Danh sách phòng đang sử dụng tài sản</p>
-
       <table class="table table-hover mt-5">
         <thead class="thead-light">
         <tr>
@@ -48,25 +42,25 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let element of asset.assetDetailDTOList; let i = index">
-          <td>{{i+1}}</td>
+        <tr
+          *ngFor="let element of asset.assetDetailDTOList|paginate: { itemsPerPage: 5, currentPage: d }; let i = index">
+          <td>{{i + 1}}</td>
           <td>{{element.nameMeetingRoom}}</td>
           <td>{{element.quantity}}</td>
           <td>Cái</td>
         </tr>
         </tbody>
       </table>
-
+      <pagination-controls class=" d-flex justify-content-center " (pageChange)="d = $event" previousLabel="Trước"
+                           nextLabel="Sau" responsive="true"></pagination-controls>
     </div>
-
     <div class="col-4 px-5 mt-3">
       <img src="../../../assets/image-asset/{{asset.image}}"
            class="w-100">
     </div>
-
   </div>
-  <div class="row d-flex justify-content-center mt-3">
-    <button type="button" class="btn btn-secondary " routerLink="/asset">Back</button>
+  <div class="row d-flex justify-content-center mt-5">
+    <button type="button" class="btn btn-secondary " routerLink="/asset">Quay lại</button>
   </div>
 </div>
 

@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AppComponent } from './app.component';
 import {BookedRoomModule} from './booked-room/booked-room.module';
@@ -37,4 +37,5 @@ import { BookedRoomDeleteComponent } from './booked-room/component/booked-room-d
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

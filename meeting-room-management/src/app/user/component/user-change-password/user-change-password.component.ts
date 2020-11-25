@@ -3,6 +3,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {UserService} from '../../service/user.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
+
 // tslint:disable-next-line:typedef
 function comparePassword(c: AbstractControl) {
   const v = c.value;
@@ -13,6 +14,7 @@ function comparePassword(c: AbstractControl) {
     };
   }
 }
+
 @Component({
   selector: 'app-user-change-password',
   templateUrl: './user-change-password.component.html',
@@ -20,6 +22,8 @@ function comparePassword(c: AbstractControl) {
 })
 export class UserChangePasswordComponent implements OnInit {
   formChangePassword: FormGroup;
+  public errorMessage: string;
+
   constructor(
     public dialogRef: MatDialogRef<UserChangePasswordComponent>,
     public formBuilder: FormBuilder,
@@ -27,7 +31,9 @@ export class UserChangePasswordComponent implements OnInit {
     private tokenStorageService: TokenStorageService
   ) {
   }
+
   public idUser: number;
+
   ngOnInit(): void {
     this.idUser = this.tokenStorageService.getUser().id;
     console.log(this.idUser);
@@ -37,10 +43,18 @@ export class UserChangePasswordComponent implements OnInit {
       confirmPassword: ['', [Validators.required]],
     }, {validator: comparePassword});
   }
+
   // tslint:disable-next-line:typedef
   changePass() {
     this.userService.changePassword(this.idUser, this.formChangePassword.value).subscribe(data => {
-      this.dialogRef.close();
+      console.log('data');
+      console.log(data);
+      this.errorMessage = data;
+      if (this.errorMessage == null) {
+        this.dialogRef.close();
+      }
+    }, error => {
+      console.log(error);
     });
   }
 }

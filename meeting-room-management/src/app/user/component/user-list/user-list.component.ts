@@ -80,7 +80,7 @@ export class UserListComponent implements OnInit {
     this.userService.getUserById(idUser).subscribe(dataEdit => {
       const dialogRef = this.dialog.open(UserEditComponent, {
         width: '740px',
-        height: '490px',
+        height: '450px',
         data: {dataE: dataEdit.idUser},
         disableClose: true
       });
