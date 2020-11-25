@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {StatisticRoomService} from '../service/statistic-room.service';
@@ -7,7 +7,6 @@ import {BookedRoom} from '../model/BookedRoom.class';
 import {RoomType} from '../model/RoomType.class';
 import {NoContentComponent} from '../no-content/no-content.component';
 import {StatisticByTimeComponent} from '../statistic-by-time/statistic-by-time.component';
-import {ExcelService} from '../service/excel.service';
 import {StatisticByRoomComponent} from '../statistic-by-room/statistic-by-room.component';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Label as ng2Chart} from 'ng2-charts/lib/base-chart.directive';
@@ -28,8 +27,11 @@ export class ViewStatisticComponent implements OnInit {
   public bookedRoomYear: BookedChart[] = [];
   public roomType: RoomType[] = [];
   public roomNames: string[] = [];
+  public messageError;
   public start = '2020';
   public end = '2020';
+  public maxDate = new Date();
+  public minDate = new Date(2000, 0, 1);
   // biểu đồ
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -56,7 +58,7 @@ export class ViewStatisticComponent implements OnInit {
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
   ];
   public chartColors: Array<any> = [
     {
@@ -85,15 +87,17 @@ export class ViewStatisticComponent implements OnInit {
     console.log('thống kê theo thời gian');
     this.bookedRoomByTime = [];
     this.statisticByTime = this.fb.group({
-      startDate: ['', [Validators.required]],
-      endDate: ['', [Validators.required]],
+      dateGroup: this.fb.group({
+        startIn: ['', Validators.required],
+        startOut: ['', Validators.required],
+      }, {validators: diffDate}),
     });
     console.log('thống kê theo phòng');
     this.statisticByRoom = this.fb.group({
-      roomType: ['', [Validators.required]],
-      roomName: ['', [Validators.required]],
-      year: ['', [Validators.required]],
-      month: ['', [Validators.required]]
+      roomType: [''],
+      roomName: [''],
+      year: [''],
+      month: ['']
     });
     console.log('lấy ra danh sách  loại phòng');
     this.statisticRoom.getAllRoomType().subscribe(data => {
@@ -106,7 +110,7 @@ export class ViewStatisticComponent implements OnInit {
       this.roomNames = data;
       console.log(data);
     });
-    this.statisticRoom.getAllBookedChart(this.start , this.end).subscribe(data => {
+    this.statisticRoom.getAllBookedChart(this.start, this.end).subscribe(data => {
       console.log(data);
       this.bookedRoomYear = data;
       console.log('hai1');
@@ -173,10 +177,11 @@ export class ViewStatisticComponent implements OnInit {
     console.log(this.statisticByTime.value);
     this.bookedRoomByTime = [];
     if (this.statisticByTime.valid) {
-      this.statisticRoom.findSearchByTime(this.statisticByTime.value.startDate, this.statisticByTime.value.endDate).subscribe(data => {
+      // tslint:disable-next-line:max-line-length
+      this.statisticRoom.findSearchByTime(this.statisticByTime.value.dateGroup.startIn, this.statisticByTime.value.dateGroup.startOut).subscribe(data => {
           this.statisticRoom.bookedRoomByTime = data;
-          this.statisticRoom.startDate = this.statisticByTime.value.startDate;
-          this.statisticRoom.endDate = this.statisticByTime.value.endDate;
+          this.statisticRoom.startDate = this.statisticByTime.value.dateGroup.startIn;
+          this.statisticRoom.endDate = this.statisticByTime.value.dateGroup.startOut;
           if (data == null) {
             this.openDialogNoContent();
           } else {
@@ -189,29 +194,36 @@ export class ViewStatisticComponent implements OnInit {
   }
 
   onSubmitByRoom(): void {
-    console.log(this.statisticByRoom.value);
+    this.messageError = '';
     this.bookedRoomByRoom = [];
-    this.statisticRoom.findSearchByRoom(this.statisticByRoom.value.roomType, this.statisticByRoom.value.roomName
-      , this.statisticByRoom.value.month, this.statisticByRoom.value.year).subscribe(data => {
-        this.statisticRoom.bookedRoomByRoom = data;
-        this.statisticRoom.roomType = this.statisticByRoom.value.roomType;
-        this.statisticRoom.month = this.statisticByRoom.value.month;
-        this.statisticRoom.year = this.statisticByRoom.value.year;
-        this.statisticRoom.roomName = this.statisticByRoom.value.roomName;
-        if (data == null) {
-          this.openDialogNoContent();
-        } else {
-          this.openDialogByRoom();
+    // tslint:disable-next-line:max-line-length
+    if (this.statisticByRoom.value.roomType === '' && this.statisticByRoom.value.roomName === '' && this.statisticByRoom.value.month === '' && this.statisticByRoom.value.year === '') {
+      this.messageError = 'vui lòng chọn ít nhất 1 trường !!';
+    } else {
+      this.messageError = '';
+      this.statisticRoom.findSearchByRoom(this.statisticByRoom.value.roomType, this.statisticByRoom.value.roomName
+        , this.statisticByRoom.value.month, this.statisticByRoom.value.year).subscribe(data => {
+          this.statisticRoom.bookedRoomByRoom = data;
+          this.statisticRoom.roomType = this.statisticByRoom.value.roomType;
+          this.statisticRoom.month = this.statisticByRoom.value.month;
+          this.statisticRoom.year = this.statisticByRoom.value.year;
+          this.statisticRoom.roomName = this.statisticByRoom.value.roomName;
+          if (data == null) {
+            this.openDialogNoContent();
+          } else {
+            this.openDialogByRoom();
+          }
+          console.log(data);
         }
-        console.log(data);
-      }
-    );
+      );
+    }
   }
 
   // biểu đồ
   onChartClick(event): void {
     console.log(event);
   }
+
   dataChart(arr: BookedChart[]): void {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < arr.length; i++) {
@@ -222,7 +234,17 @@ export class ViewStatisticComponent implements OnInit {
       });
     }
   }
+
   chartYear(): void {
-   this.ngOnInit();
+    this.ngOnInit();
   }
+}
+
+export function diffDate(c: AbstractControl): any {
+  const c1 = c.value;
+  const sDate = Date.parse(c1.startIn);
+  const eDate = Date.parse(c1.startOut);
+  return (eDate >= sDate) ? null : {
+    invalidDateNotMatch: true
+  };
 }

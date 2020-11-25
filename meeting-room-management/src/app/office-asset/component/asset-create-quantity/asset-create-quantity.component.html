@@ -1,37 +1,35 @@
 <div class="container-fluid">
   <h3 class="row d-flex justify-content-center">Cập nhật số lượng </h3>
   <form class="w-75 mx-auto mt-3" [formGroup]="formEdit">
-
-    <!--    <input type="hidden" formControlName="idAsset">-->
     <input type="hidden" formControlName="usingQuantity">
     <input type="hidden" formControlName="image">
     <input type="hidden" formControlName="description">
     <input type="hidden" formControlName="price">
-
-    <div class="form-group">
+    <div class="form-group mt-5">
       <p>Tài Sản: </p>
       <input class="form-control" type="text" value="máy chiếu" formControlName="assetName" readonly>
-
     </div>
-
     <div class="form-group">
       <p>Tổng số lượng: </p>
       <input class="form-control mr-5" type="number" min="1" formControlName="total" required>
-      <p
+      <span
         *ngIf="formEdit.controls.total.errors?.required && formEdit.controls.total.touched"
-        class="text-danger row d-flex justify-content-center">Trường này bắt buộc nhập</p>
+        class="text-danger">Trường này bắt buộc nhập</span>
+      <span *ngIf="formEdit.controls.total.errors?.pattern && formEdit.controls.total.touched"
+            class="text-danger">Vui lòng nhập đúng số lượng</span>
     </div>
-
     <div class="form-group">
       <p>Đang sửa: </p>
-      <input class="form-control" type="number" min="1" formControlName="fixingQuantity" required>
-      <p
+      <input class="form-control" type="number" min="0" formControlName="fixingQuantity" required>
+      <span
         *ngIf="formEdit.controls.fixingQuantity.errors?.required && formEdit.controls.fixingQuantity.touched"
-        class="text-danger row d-flex justify-content-center">Trường này bắt buộc nhập</p>
+        class="text-danger">Trường này bắt buộc nhập</span>
+      <span *ngIf="formEdit.controls.fixingQuantity.errors?.pattern && formEdit.controls.fixingQuantity.touched"
+            class="text-danger">Vui lòng nhập đúng số lượng đang sửa</span>
     </div>
     <div class="row d-flex justify-content-center mt-5">
       <button [mat-dialog-close]="" class="btn btn-secondary">Hủy</button>
-      <button type="submit" class="btn btn-success mx-4" (click)="edit()">Cập nhật</button>
+      <button type="submit" class="btn btn-success mx-4" (click)="edit()" [disabled]="formEdit.invalid">Cập nhật</button>
     </div>
   </form>
 </div>

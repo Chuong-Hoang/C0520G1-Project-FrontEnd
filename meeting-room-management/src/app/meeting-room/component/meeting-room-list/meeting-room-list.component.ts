@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MeetingRoomDeleteComponent} from '../meeting-room-delete/meeting-room-delete.component';
 import {MeetingRoomService} from '../../service/meeting-room.service';
-import {MeetingRoom} from '../../model/MeetingRoom';
+import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
 
 @Component({
   selector: 'app-meeting-room-list',
@@ -12,26 +12,37 @@ import {MeetingRoom} from '../../model/MeetingRoom';
   styleUrls: ['./meeting-room-list.component.css']
 })
 export class MeetingRoomListComponent implements OnInit {
+  private role: string;
   public meetingRoomList = [];
   public roomTypeList;
   public roomStatusList;
   public formSearch: FormGroup;
   public p: number;
+  public showAdminBoard = false;
+  public showUserBoard = true;
+  public messageHome: string;
 
   constructor(
     public meetingRoomService: MeetingRoomService,
     public route: ActivatedRoute,
     public dialog: MatDialog,
     public formBuilder: FormBuilder,
+    private tokenStorageService: TokenStorageService
   ) {
   }
 
   ngOnInit(): void {
+
+    const user = this.tokenStorageService.getUser();
+    this.role = user.role;
+
+    this.showAdminBoard = this.role.includes('ROLE_ADMIN');
+    this.showUserBoard = this.role.includes('ROLE_USER');
+
     this.meetingRoomList = [];
     this.meetingRoomService.getAllMeetingRoom().subscribe(data => {
       this.meetingRoomList = data;
-      console.log('init: ' + data);
-    });
+    }, error => console.log('error'));
     this.meetingRoomService.getAllRoomStatus().subscribe(data => {
       this.roomStatusList = data;
     });
@@ -39,25 +50,32 @@ export class MeetingRoomListComponent implements OnInit {
       this.roomTypeList = data;
     });
     this.formSearch = this.formBuilder.group({
-      roomName: [''],
-      floor: [''],
-      // roomType: [''],
-      // roomStatus: [''],
+      roomName: ['', [Validators.pattern('^[a-zA-Z_0-9]+(([\',. -][a-zA-Z_0-9])?[a-zA-Z_0-9]*)*$')]],
+      floor: ['', [Validators.pattern(/^([1-7]\d|[1-9])$/)]],
+      roomTypeName: [''],
+      roomStatusName: [''],
       zone: [''],
-      capacity: ['']
+      capacity: ['', [Validators.pattern(/^([1-9][0-9]|[2-9])$/)]],
     });
+    this.messageHome = this.sendMessage();
+    // tslint:disable-next-line:typedef
+    setTimeout(function() {
+      this.messageHome = '';
+      console.log(this.edited);
+    }.bind(this), 3000);
   }
 
-  delete(): void {
-    // this.meetingRoomService.getById(id).subscribe(data => {
-    const dialogRef = this.dialog.open(MeetingRoomDeleteComponent, {
-      width: '500px',
-      // data: {dataEl: data},
-      disableClose: true
-    });
+  delete(id: number): void {
+    this.meetingRoomService.getMeetingRoomById(id).subscribe(data => {
+      const dialogRef = this.dialog.open(MeetingRoomDeleteComponent, {
+        width: '500px',
+        data: {dataEl: data},
+        disableClose: true
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.ngOnInit();
+      dialogRef.afterClosed().subscribe(result => {
+        this.ngOnInit();
+      });
     });
   }
 
@@ -65,12 +83,12 @@ export class MeetingRoomListComponent implements OnInit {
     this.meetingRoomList = [];
     console.log(this.formSearch.value);
     this.meetingRoomService.search(this.formSearch.value).subscribe(data => {
-      console.log(this.formSearch.value.roomName);
-      console.log(this.formSearch.value.floor);
-      console.log(this.formSearch.value.zone);
-      console.log(this.formSearch.value.capacity);
       this.meetingRoomList = data;
       console.log('list : ' + data);
     });
+  }
+
+  sendMessage(): string {
+    return this.route.snapshot.queryParamMap.get('message');
   }
 }

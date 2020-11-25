@@ -10,18 +10,20 @@ import {CommentService} from '../../service/comment.service';
 export class DeleteCommentComponent implements OnInit {
   public commentName;
   public idComment;
+
   constructor(
     public dialogRef: MatDialogRef<DeleteCommentComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: any,
     public commentService: CommentService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.commentName = this.data.fullName.name;
-    this.idComment = this.data.fullName.id;
-    console.log(this.commentName);
+    this.commentName = this.data.fullName.contentComment;
+    this.idComment = this.data.fullName.idComment;
   }
+
   deleteComment(): void {
     this.commentService.deleteCommentByID(this.idComment).subscribe(data => {
       this.dialogRef.close();

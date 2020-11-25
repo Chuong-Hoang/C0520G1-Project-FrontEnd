@@ -1,0 +1,12 @@
+<form [formGroup]="detailCommentForm">
+  <input formControlName="idComment" type="hidden">
+  <h5 class="d-flex justify-content-center">Nội dung phản hồi</h5>
+  <hr>
+  Với vấn đề
+  <span>{{contentComment}}</span>
+  thì sẽ
+  <span>{{contentReply}}</span>
+  <div class="row d-flex justify-content-end">
+    <button class="btn btn-secondary mr-3" (click)="detailComment()">Hủy</button>
+  </div>
+</form>

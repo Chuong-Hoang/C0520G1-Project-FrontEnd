@@ -53,7 +53,7 @@ export class BookedRoomListComponent implements OnInit {
       this.p = 0;
       this.bookedRoomList = data;
       this.size_msg = this.bookedRoomList.length + '';
-      // console.log('bookedRooms: ' + data);
+      console.log('bookedRooms: ' + data);
       console.log('init-->size_msg: ' + this.size_msg);
     });
     this.bookedRoomService.getAllMeetingRooms().subscribe(data => {
