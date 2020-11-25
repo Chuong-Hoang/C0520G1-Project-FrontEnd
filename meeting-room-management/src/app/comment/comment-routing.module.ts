@@ -28,6 +28,6 @@ export const CommentRoutes: Routes = [
     path: 'notification',
     component: NotificationComponent,
     canActivate: [AuthGuard],
-    data: {roles: ['ROLE_USER']}
+    data: {roles: ['ROLE_USER', 'ROLE_ADMIN']}
   },
 ];

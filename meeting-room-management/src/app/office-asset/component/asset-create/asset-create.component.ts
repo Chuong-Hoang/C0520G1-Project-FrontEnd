@@ -19,7 +19,7 @@ export function checkNameAsset(name = []) {
 })
 export class AssetCreateComponent implements OnInit {
   public formCreate: FormGroup;
-  private assetList;
+  public assetList;
   public listAssetName = [];
 
   constructor(

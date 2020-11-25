@@ -14,13 +14,14 @@ export class AssetCreateQuantityComponent implements OnInit {
   public dataId;
   public formEdit: FormGroup;
   public asset = new Asset();
+
   constructor(
-    public formBuilder: FormBuilder,
-    public assetService: AssetServerService,
+    private formBuilder: FormBuilder,
+    private assetService: AssetServerService,
     private activatedRouter: ActivatedRoute,
     private route: ActivatedRoute,
     private router: Router,
-    public dialogRef: MatDialogRef<AssetCreateQuantityComponent>,
+    private dialogRef: MatDialogRef<AssetCreateQuantityComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }
