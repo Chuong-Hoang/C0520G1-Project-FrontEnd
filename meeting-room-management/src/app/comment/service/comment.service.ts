@@ -16,6 +16,9 @@ export class CommentService {
   getAllComment(): Observable<any> {
     return this.http.get(this.API);
   }
+  getAllNotification(userName): Observable<any> {
+    return this.http.get(this.API + '/notification/' + userName);
+  }
 
   addNewComment(comment): Observable<any> {
     console.log(comment);
