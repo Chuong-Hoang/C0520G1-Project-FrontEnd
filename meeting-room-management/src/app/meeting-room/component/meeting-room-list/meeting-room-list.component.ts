@@ -4,7 +4,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MeetingRoomDeleteComponent} from '../meeting-room-delete/meeting-room-delete.component';
 import {MeetingRoomService} from '../../service/meeting-room.service';
-import {MeetingRoom} from '../../model/MeetingRoom';
 import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
 
 @Component({
@@ -21,7 +20,7 @@ export class MeetingRoomListComponent implements OnInit {
   public p: number;
   public showAdminBoard = false;
   public showUserBoard = true;
-  isLoggedIn = false;
+  public messageHome: string;
 
   constructor(
     public meetingRoomService: MeetingRoomService,
@@ -33,15 +32,13 @@ export class MeetingRoomListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
 
-    if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.role = user.role;
+    const user = this.tokenStorageService.getUser();
+    this.role = user.role;
 
-      this.showAdminBoard = this.role.includes('ROLE_ADMIN');
-      this.showUserBoard = this.role.includes('ROLE_USER');
-    }
+    this.showAdminBoard = this.role.includes('ROLE_ADMIN');
+    this.showUserBoard = this.role.includes('ROLE_USER');
+
     this.meetingRoomList = [];
     this.meetingRoomService.getAllMeetingRoom().subscribe(data => {
       this.meetingRoomList = data;
@@ -53,13 +50,19 @@ export class MeetingRoomListComponent implements OnInit {
       this.roomTypeList = data;
     });
     this.formSearch = this.formBuilder.group({
-      roomName: ['', [Validators.pattern('^[a-z0-9]{0,100}$')]],
-      floor: ['', [Validators.pattern('[0-9]')]],
+      roomName: ['', [Validators.pattern('^[a-zA-Z_0-9]+(([\',. -][a-zA-Z_0-9])?[a-zA-Z_0-9]*)*$')]],
+      floor: ['', [Validators.pattern(/^([1-7]\d|[1-9])$/)]],
       roomTypeName: [''],
       roomStatusName: [''],
       zone: [''],
-      capacity: ['', [Validators.pattern('[0-9]')]],
+      capacity: ['', [Validators.pattern(/^([1-9][0-9]|[2-9])$/)]],
     });
+    this.messageHome = this.sendMessage();
+    // tslint:disable-next-line:typedef
+    setTimeout(function() {
+      this.messageHome = '';
+      console.log(this.edited);
+    }.bind(this), 3000);
   }
 
   delete(id: number): void {
@@ -76,14 +79,16 @@ export class MeetingRoomListComponent implements OnInit {
     });
   }
 
-  search()
-    :
-    void {
+  search(): void {
     this.meetingRoomList = [];
     console.log(this.formSearch.value);
     this.meetingRoomService.search(this.formSearch.value).subscribe(data => {
       this.meetingRoomList = data;
       console.log('list : ' + data);
     });
+  }
+
+  sendMessage(): string {
+    return this.route.snapshot.queryParamMap.get('message');
   }
 }
