@@ -36,23 +36,24 @@
 
 
       <div class=" row mt-4">
-        <table class="table table-hover">
+        <table class="table table-hover" style="overflow-y:scroll">
           <thead class="btn-light">
           <tr>
-            <th>Stt</th>
+            <th>STT</th>
 
             <th>Tên người dùng</th>
             <th>Tên phòng</th>
+            <th>Vấn đề</th>
             <th>Thời gian phản hồi</th>
-            <th>Lỗi Phòng</th>
+
             <th>Nội dung</th>
             <th>Trạng Thái</th>
             <th>Tác vụ</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let comment of comments| paginate: { itemsPerPage: 6, currentPage: p }">
-            <td>{{comment.idComment}}</td>
+          <tr *ngFor="let comment of comments| paginate: { itemsPerPage: 6, currentPage: p}; let i = index">
+            <td>{{i+1}}</td>
             <td>{{comment.senderName}}</td>
             <td>{{comment.roomName}}</td>
             <td>{{comment.errorTypeName}}</td>
@@ -60,7 +61,7 @@
             <td>{{comment.contentComment}}</td>
             <td *ngIf="!comment.status==true; else abc" >Đã xử lý</td>
             <ng-template #abc><td>Chưa xử lý</td></ng-template>
-            <td><button  style="width: 80px" [disabled]="!comment.status" [ngClass]="{'btn-outline-success':!comment.status, 'btn-success':comment.status}" [routerLink]="['/comment/'+comment.idComment]">Xử Lý</button></td>
+            <td><button  style="width: 80px" [disabled]="!comment.status" [ngClass]="{'btn-sm btn-secondary':!comment.status, 'btn-sm btn-success':comment.status}" [routerLink]="['/comment/'+comment.idComment]">Xử Lý</button></td>
           </tr>
           </tbody>
         </table>

@@ -3,6 +3,7 @@ import {TokenStorageService} from '../../service/token-storage/token-storage.ser
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {UserChangePasswordComponent} from '../../../user/component/user-change-password/user-change-password.component';
+import {UserService} from '../../../user/service/user.service';
 
 @Component({
   selector: 'app-header',
@@ -16,9 +17,10 @@ export class HeaderComponent implements OnInit {
   showAdminBoard = false;
   showUserBoard = true;
   username: string;
+  public id = 1;
 
   constructor(private tokenStorageService: TokenStorageService, private router: Router,
-              public dialog: MatDialog) {
+              public dialog: MatDialog, public userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -26,7 +28,6 @@ export class HeaderComponent implements OnInit {
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      console.log(user);
       this.role = user.role;
 
       this.showAdminBoard = this.role.includes('ROLE_ADMIN');
@@ -37,20 +38,24 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.tokenStorageService.signOut();
-    window.location.reload();
+    this.router.navigate(['/']).then(() => window.location.reload());
   }
 
   // tslint:disable-next-line:typedef
-  openDialogChangePassword() {
-    const dialogRef = this.dialog.open(UserChangePasswordComponent, {
-      width: '740px',
-      height: '380px',
-      disableClose: true
+  openDialogChangePassword(id) {
+    this.userService.getUserById(id).subscribe(data => {
+      const dialogRef = this.dialog.open(UserChangePasswordComponent, {
+        width: '740px',
+        height: '330px',
+        data: {dataIdUser: data.idUser, dataPass: data.password},
+        disableClose: true
+      });
+      console.log(data.password);
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.ngOnInit();
+      });
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.ngOnInit();
-    });
   }
 }

@@ -12,6 +12,7 @@ import {StatisticByTimeComponent} from './component/statistic-by-time/statistic-
 import {StatisticByRoomComponent} from './component/statistic-by-room/statistic-by-room.component';
 import {ExcelService} from './service/excel.service';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
 
 @NgModule({
   declarations: [ViewStatisticComponent,
@@ -32,8 +33,10 @@ import {NgxPaginationModule} from 'ngx-pagination';
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
   ],
-  providers: [DatePipe,
-    ExcelService]
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'vn' },
+    DatePipe,
+    ExcelService
+  ]
 })
 export class StatisticRoomModule {
 }

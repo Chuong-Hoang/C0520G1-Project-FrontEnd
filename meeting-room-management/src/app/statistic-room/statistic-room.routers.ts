@@ -5,7 +5,7 @@ import {AuthGuard} from '../office-common/helper/auth.guard';
 export const statisticRoomRoutes: Routes = [
   { path: 'statistic',
     component: ViewStatisticComponent,
-    // canActivate: [AuthGuard],
-    // data: {roles: ['ROLE_ADMIN']}
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_ADMIN']}
   }
 ];

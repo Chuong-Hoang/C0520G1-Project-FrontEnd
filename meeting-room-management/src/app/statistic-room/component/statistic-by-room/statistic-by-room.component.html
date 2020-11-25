@@ -24,7 +24,7 @@
                     <div class="col-md-3 font-weight-bold">Tên phòng:{{roomName}}</div>
                     </ng-template>
 
-                    <div class="col-md-3 font-weight-bold">Tổng số lần sử dụng:{{totalALl}}</div>
+                    <div class="col-md-3 font-weight-bold">Tổng số lần sử dụng:{{bookedRoomByRoom.length}}</div>
                     <div class="col-md-3 font-weight-bold">Tổng hiệu suất:{{effectiveAll}} %</div>
                   </div>
                 </div>
@@ -44,7 +44,7 @@
                     </thead>
                     <tbody>
                     <tr
-                      *ngFor="let element of bookedRoomByRoom | paginate: { itemsPerPage: 3, currentPage: p } ; let i = index ">
+                      *ngFor="let element of bookedRoomByRoom | paginate: { itemsPerPage: 5, currentPage: p } ; let i = index ">
                       <td>{{i + 1}}</td>
                       <td>{{element.userName}}</td>
                       <td>{{element.startTime}}</td>

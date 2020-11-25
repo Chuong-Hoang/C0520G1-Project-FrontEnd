@@ -18,6 +18,7 @@ export class StatisticRoomService {
   public bookedRoomByTime: BookedRoom[] = [];
   public bookedRoomByRoom: BookedRoom[] = [];
   public roomTypeList: RoomType[] = [];
+  public roomNameList: string[] = [];
   // params search by time
   public startDate: string;
   public endDate: string;

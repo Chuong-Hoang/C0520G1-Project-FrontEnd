@@ -1,10 +1,10 @@
 // @ts-ignore
-import { Component, OnInit } from '@angular/core';
-import { MeetingRoomService} from '../../service/meeting-room.service';
+import {Component, OnInit} from '@angular/core';
+import {MeetingRoomService} from '../../service/meeting-room.service';
 // @ts-ignore
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 // @ts-ignore
-import { Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {AssetsDetailDialogChoiceComponent} from '../../../assets-detail/component/assets-detail-dialog-choice/assets-detail-dialog-choice.component';
 import {AssetDetail} from '../../../assets-detail/model/AssetDetail.class';
@@ -25,6 +25,7 @@ export class MeetingRoomAddComponent implements OnInit {
   public minDate = new Date();
   public maxDate = new Date(2030, 1, 1);
   public assetsDetail: AssetDetail;
+  fileToUpload: File = null;
 
   constructor(
     public dialog: MatDialog,
@@ -51,16 +52,20 @@ export class MeetingRoomAddComponent implements OnInit {
 
   openDialog(): void {
     // this.assetsDetailService.getAllAssetsDetail().subscribe(dataOfAssetsDetail => {
-      const dialogRef = this.dialog.open(AssetsDetailDialogChoiceComponent, {
-        width: '800px',
-        // data: {data1: dataOfAssetsDetail}
-      });
+    const dialogRef = this.dialog.open(AssetsDetailDialogChoiceComponent, {
+      width: '800px',
+      // data: {data1: dataOfAssetsDetail}
+    });
 
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        // this.assetsDetail = result;
-      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.assetsDetail = result;
+    });
     // });
 
+  }
+
+  handleFileInput(files: FileList): void {
+    this.fileToUpload = files.item(0);
   }
 }
