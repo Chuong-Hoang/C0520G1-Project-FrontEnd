@@ -1,61 +1,69 @@
 <div class="container-fluid 100vh mt-5">
   <br>
-<form [formGroup]="createCommentForm" (ngSubmit)="createComment()">
-  <div class="d-flex justify-content-center">
-    <div class="row w-75">
-      <div class="col-lg-12  px-0 rounded">
-        <!--Thanh Tiêu Đề Phản Hồi-->
-        <div class="col-lg-12 px-0">
-          <h3 class="d-flex justify-content-center  rounded">Phản hồi</h3>
-        </div>
-        <!--Phần Thân Nội Dung Phản Hồi-->
-        <div class="col-lg-12 mb-3 mt-3">
-          <div class="row">
-            <span class="col-3 col-md-3 col-xl-3 col-lg-3 col-sm-3">Tên phòng</span>
-
-            <select class="col-8 col-md-8 col-xl-8 col-sm-8 col-lg-8 form-control form-control-sm rounded ml-2"
-                    placeholder="Pòng có vấn đề" formControlName="roomName">
-              <option *ngFor="let room of meetingRoomServices" [value]="room.roomName">{{room.roomName}}</option>
-            </select>
+  <form [formGroup]="createCommentForm" (ngSubmit)="createComment()">
+    <div class="d-flex justify-content-center">
+      <div class="row w-75">
+        <div class="col-lg-12  px-0 rounded">
+          <!--Thanh Tiêu Đề Phản Hồi-->
+          <div class="col-lg-12 px-0">
+            <h3 class="d-flex justify-content-center  rounded">Phản hồi</h3>
+            <input formControlName="idSender" value="1" name="idSender" type="hidden">
           </div>
-        </div>
-        <div class=" col-lg-12 mb-3 mt-3">
-          <div class="row">
-            <span class="col-3 col-md-3 col-xl-3 col-lg-3 col-sm-3">Chuyên mục</span>
-            <select class="col-8 col-md-8 col-xl-8 col-sm-8 col-lg-8 form-control form-control-sm rounded ml-2" formControlName="errorTypeName">
-              <option *ngFor="let type of errorTypes" [value]="type.errorTypeName">{{type.errorTypeName}}</option>
-            </select>
-            <!--                        <input class="col-8 col-md-8 col-xl-8 col-sm-8 col-lg-8 form-control form-control-sm rounded ml-2">-->
-          </div>
-        </div>
-        <div class="col-12">
-          <div class="row">
-            <span class="col-3">Tiêu đề</span>
-
-            <input class="col-8 form-control form-control-sm rounded ml-2 mb-2" placeholder="Tiêu đề lỗi">
-          </div>
-        </div>
-        <div class="col-12 my-2">
-          <div class="row">
-            <label class="col-3">Nội dung <span style="color: red">(*)</span></label>
-            <textarea rows="13" class="col-8 form-control form-control-sm rounded ml-2 mt-2" placeholder="Mô tả lỗi" formControlName="contentComment"></textarea>
-          </div>
-        </div>
-        <div class="col-12">
-          <div class="row mt-3 mb-3 d-flex justify-content-center">
+          <!--        <input formControlName="sender" type="hidden" value="1">  -->
+          <!--Phần Thân Nội Dung Phản Hồi-->
+          <div class="col-lg-12 mb-3 mt-3">
             <div class="row">
-              <div class=" ">
-                <button class="btn btn-sm btn-secondary mr-3" style="width: 80px">Hủy</button>
-              </div>
-              <div>
-                <button class="btn btn-sm btn-success " type="submit" style="width: 80px">Gửi</button>
+              <span class="col-3 col-md-3 col-xl-3 col-lg-3 col-sm-3">Tên phòng</span>
+              <select class="col-8 col-md-8 col-xl-8 col-sm-8 col-lg-8 form-control form-control-sm rounded ml-2"
+                      placeholder="Phòng có vấn đề" formControlName="roomName">
+                <option *ngFor="let room of meetingRoomServices" [value]="room.roomName">{{room.roomName}}</option>
+              </select>
+            </div>
+          </div>
+          <div class=" col-lg-12 mb-3 mt-3">
+            <div class="row">
+              <span class="col-3 col-md-3 col-xl-3 col-lg-3 col-sm-3">Vấn đề</span>
+              <select class="col-8 col-md-8 col-xl-8 col-sm-8 col-lg-8 form-control form-control-sm rounded ml-2"
+                      formControlName="errorTypeName">
+                <option *ngFor="let type of errorTypes" [value]="type.errorTypeName">{{type.errorTypeName}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="row">
+              <span class="col-3">Tiêu đề</span>
+              <input class="col-8 form-control form-control-sm rounded ml-2 mb-2" placeholder="Tiêu đề lỗi">
+            </div>
+          </div>
+          <div class="col-12 my-2">
+            <div class="row">
+              <label class="col-3">Nội dung <span style="color: red">(*)</span></label>
+              <textarea rows="13" class="col-8 form-control form-control-sm rounded ml-2 mt-2"
+                        placeholder="Mô tả lỗi" formControlName="contentComment"></textarea>
+              <label class="col-3"></label>
+              <label class="text-danger d-flex align-self-center ml-2 mt-2" role="alert"
+                     *ngIf="createCommentForm.get('contentComment').invalid && createCommentForm.get('contentComment').touched">
+                Vui lòng nhập không được để trống
+              </label>
+              <!--            <span *ngIf="errors.contentComment"> {{errors.contentComment}} </span>-->
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row mt-3 mb-3 d-flex justify-content-center">
+              <div class="row">
+                <div class=" ">
+                  <button class="btn btn-sm btn-secondary mr-3" style="width: 80px">Hủy</button>
+                </div>
+                <div>
+                  <button class="btn btn-sm btn-success " type="submit" style="width: 80px">Gửi</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</form>
+  </form>
 </div>
 

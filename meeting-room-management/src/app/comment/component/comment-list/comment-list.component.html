@@ -12,18 +12,18 @@
 
           <div class="form-group row col-md-12 col-12 col-lg-4 my-2">
             <label class="col-4 justify-content-start">Tên người dùng<span style="color: red">(*)</span></label>
-            <input class="col-8 form-control form-control-sm rounded" required="" formControlName="a"
+            <input class="col-8 form-control form-control-sm rounded" required="" formControlName="userNameSearch"
                    placeholder="Nhập tên người dùng">
           </div>
           <div class="form-group row col-12 col-md-12 col-lg-4 my-2">
             <span class="col-4 col-md-4 col-lg-4 justify-content-start">Tên phòng</span>
-            <input class="col-8 col-md-8 col-lg-8 form-control form-control-sm" formControlName="b"
+            <input class="col-8 col-md-8 col-lg-8 form-control form-control-sm" formControlName="roomNameSearch"
                    placeholder="Nhập tên phòng">
           </div>
 
           <div class="form-group row col-12 col-md-12 col-lg-3 my-2">
             <label class="col-4 justify-content-start">Trạng thái</label>
-            <select class="col-8 form-control form-control-sm" formControlName="c" [(ngModel)]="status">
+            <select class="col-8 form-control form-control-sm" formControlName="statusSearch" [(ngModel)]="status">
               <option [value]="false" >Đã xử lý</option>
               <option [value]="true">Chưa xử lý</option>
             </select>
@@ -43,8 +43,9 @@
 
             <th>Tên người dùng</th>
             <th>Tên phòng</th>
+            <th>Vấn đề</th>
             <th>Thời gian phản hồi</th>
-            <th>Lỗi Phòng</th>
+
             <th>Nội dung</th>
             <th>Trạng Thái</th>
             <th>Tác vụ</th>

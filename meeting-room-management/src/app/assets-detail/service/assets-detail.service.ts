@@ -7,7 +7,7 @@ import { Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class AssetsDetailService {
-  public API_ASSETS_DETAIL = 'http://localhost:8080/assetDetail';
+  public API_ASSETS_DETAIL = 'http://localhost:8080/assets';
 
   constructor(
   public http: HttpClient

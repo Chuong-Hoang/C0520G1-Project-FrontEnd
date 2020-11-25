@@ -21,7 +21,6 @@ export class MeetingRoomListComponent implements OnInit {
   public showAdminBoard = false;
   public showUserBoard = true;
   public messageHome: string;
-  isLoggedIn = false;
 
   constructor(
     public meetingRoomService: MeetingRoomService,
@@ -33,7 +32,6 @@ export class MeetingRoomListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     const user = this.tokenStorageService.getUser();
     this.role = user.role;
@@ -44,8 +42,7 @@ export class MeetingRoomListComponent implements OnInit {
     this.meetingRoomList = [];
     this.meetingRoomService.getAllMeetingRoom().subscribe(data => {
       this.meetingRoomList = data;
-      console.log('init: ' + data);
-    });
+    }, error => console.log('error'));
     this.meetingRoomService.getAllRoomStatus().subscribe(data => {
       this.roomStatusList = data;
     });

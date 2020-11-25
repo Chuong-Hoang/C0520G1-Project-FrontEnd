@@ -1,76 +1,81 @@
 <div class="container-fluid  w-50 ">
   <div class=" border rounded-lg p-3 my-5 ">
-  <form  [formGroup]="formCreate">
-    <h3 class="row d-flex justify-content-center">Thêm tài sản </h3>
-    <input type="hidden" formControlName="usingQuantity">
-    <input type="hidden" formControlName="fixingQuantity">
-    <div class="form-group row ">
-      <label class="col-sm-3 col-form-label">Tên tài sản <sup class="text-danger">*</sup> </label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" formControlName="assetName" required>
-        <span
-          *ngIf="formCreate.controls.assetName.errors?.required && formCreate.controls.assetName.touched"
-          class="text-danger">Trường này bắt buộc nhập</span>
-        <span *ngIf="formCreate.controls.assetName.errors?.pattern && formCreate.controls.assetName.touched"
-              class="text-danger">Vui lòng nhập đúng định tên tài sản (vd: Máy chiếu)</span>
+    <form [formGroup]="formCreate">
+      <h3 class="row d-flex justify-content-center">Thêm tài sản </h3>
+      <input type="hidden" formControlName="usingQuantity">
+      <input type="hidden" formControlName="fixingQuantity">
+      <div class="form-group row ">
+        <label class="col-sm-3 col-form-label">Tên tài sản <sup class="text-danger">*</sup> </label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="assetName" required>
+          <span
+            *ngIf="formCreate.controls.assetName.errors?.required && formCreate.controls.assetName.touched"
+            class="text-danger">Trường này bắt buộc nhập</span>
+          <span *ngIf="formCreate.controls.assetName.errors?.pattern && formCreate.controls.assetName.touched"
+                class="text-danger">Vui lòng nhập đúng định tên tài sản (vd: Máy chiếu)</span>
+          <span *ngIf="formCreate.controls.assetName.errors?.invalidName && formCreate.controls.assetName.touched"
+                class="text-danger">Tên tài sản đã tồn tại</span>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <label class="col-sm-3 col-form-label">Mô tả <sup class="text-danger">*</sup> </label>
-      <div class="col-sm-9">
-        <textarea style="resize: none" type="text" class="form-control" placeholder="mô tả" rows="4" formControlName="description"
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Mô tả <sup class="text-danger">*</sup> </label>
+        <div class="col-sm-9">
+        <textarea style="resize: none" type="text" class="form-control" placeholder="mô tả" rows="4"
+                  formControlName="description"
                   required></textarea>
-        <span
-          *ngIf="formCreate.controls.description.errors?.required && formCreate.controls.description.touched"
-          class="text-danger" >Trường này bắt buộc nhập</span>
+          <span
+            *ngIf="formCreate.controls.description.errors?.required && formCreate.controls.description.touched"
+            class="text-danger">Trường này bắt buộc nhập</span>
+        </div>
+
       </div>
 
-    </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Giá <sup class="text-danger">*</sup> </label>
+        <div class="col-sm-9">
+          <input type="number" min="1" class="form-control" formControlName="price">
+          <span
+            *ngIf="formCreate.controls.price.errors?.required && formCreate.controls.price.touched"
+            class="text-danger">Trường này bắt buộc nhập</span>
+          <span *ngIf="formCreate.controls.price.errors?.pattern && formCreate.controls.price.touched"
+                class="text-danger">Vui lòng nhập đúng giá tài sản</span>
+        </div>
 
-    <div class="form-group row">
-      <label class="col-sm-3 col-form-label">Giá <sup class="text-danger">*</sup> </label>
-      <div class="col-sm-9">
-        <input type="number" min="1" class="form-control" formControlName="price">
-        <span
-          *ngIf="formCreate.controls.price.errors?.required && formCreate.controls.price.touched"
-          class="text-danger" >Trường này bắt buộc nhập</span>
-        <span *ngIf="formCreate.controls.price.errors?.pattern && formCreate.controls.price.touched"
-              class="text-danger">Vui lòng nhập đúng giá tài sản</span>
       </div>
 
-    </div>
+      <div class="form-group row ">
+        <label class="col-sm-3 col-form-label">Số lượng tài sản <sup class="text-danger">*</sup> </label>
+        <div class="col-sm-9">
+          <input type="number" min="1" class="form-control" formControlName="total" required>
+          <span
+            *ngIf="formCreate.controls.total.errors?.required && formCreate.controls.total.touched"
+            class="text-danger">Trường này bắt buộc nhập</span>
+          <span *ngIf="formCreate.controls.total.errors?.pattern && formCreate.controls.total.touched"
+                class="text-danger">Vui lòng nhập đúng số lượng tài sản</span>
+        </div>
 
-    <div class="form-group row ">
-      <label class="col-sm-3 col-form-label">Số lượng tài sản <sup class="text-danger">*</sup> </label>
-      <div class="col-sm-9">
-        <input type="number" min="1" class="form-control" formControlName="total" required>
-        <span
-          *ngIf="formCreate.controls.total.errors?.required && formCreate.controls.total.touched"
-          class="text-danger" >Trường này bắt buộc nhập</span>
-        <span *ngIf="formCreate.controls.total.errors?.pattern && formCreate.controls.total.touched"
-              class="text-danger">Vui lòng nhập đúng giá tài sản</span>
       </div>
 
-    </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Hình ảnh <sup class="text-danger">*</sup> </label>
+        <div class="col-sm-9">
+          <input type="file" class="form-control" placeholder="chọn file" formControlName="image" required>
+          <span
+            *ngIf="formCreate.controls.image.errors?.required && formCreate.controls.image.touched"
+            class="text-danger">Trường này bắt buộc nhập</span>
+        </div>
 
-    <div class="form-group row">
-      <label class="col-sm-3 col-form-label">Hình ảnh <sup class="text-danger">*</sup> </label>
-      <div class="col-sm-9">
-        <input type="file" class="form-control" placeholder="chọn file" formControlName="image" required>
-        <span
-          *ngIf="formCreate.controls.image.errors?.required && formCreate.controls.image.touched"
-          class="text-danger" >Trường này bắt buộc nhập</span>
       </div>
 
-    </div>
-
-    <div class="row d-flex justify-content-center ml-4">
-      <div>
-        <button class="btn btn-secondary" routerLink="/asset">Hủy</button>
-        <button type="submit" class="btn btn-success mx-4" (click)="create()" [disabled]="formCreate.invalid"  >Thêm mới</button>
+      <div class="row d-flex justify-content-center ml-4">
+        <div>
+          <button class="btn btn-secondary" routerLink="/asset">Hủy</button>
+          <button type="submit" class="btn btn-success mx-4" (click)="create()" [disabled]="formCreate.invalid">Thêm
+            mới
+          </button>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
   </div>
 </div>

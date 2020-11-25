@@ -14,6 +14,8 @@ export class BookedRoomService {
   public API_MeetingRoom = 'http://localhost:8080/meeting-room';
   // tslint:disable-next-line:variable-name
   public API_RoomType = 'http://localhost:8080/room-type';
+  public API_BOOKED_ROOM_BY_ID = 'http://localhost:8080/findBookedRoom';
+  public API_BOOKED_ROOM_DELETE = 'http://localhost:8080/delete';
 
   constructor(private http: HttpClient) { }
 
@@ -32,18 +34,23 @@ export class BookedRoomService {
     return this.http.get(this.API_BookedRoom + '/' + id);
   }
 
+  // get MeetingRoom List
+  getAllMeetingRooms(): Observable<any>{
+    return this.http.get(this.API_MeetingRoom);
+  }
+
   getMeetingRoomById(id): Observable<any>{
-    console.log('You are at finding-a-room-function');
+    console.log(id);
     return this.http.get(this.API_MeetingRoom + '/' + id);
   }
 
-  // search meeting rooms
+  // search available meeting rooms
   searchMeetingRooms(ele): Observable<any>{
     return this.http.post(this.API_MeetingRoom + '-find', ele);
   }
 
   deleteBookedRoomById(id): Observable<any>{
-    return this.http.delete(this.API_BookedRoom + '/' + id);
+    return this.http.delete(this.API_BOOKED_ROOM_DELETE + '/' + id);
   }
 
   // get TimeFrame List
@@ -51,13 +58,12 @@ export class BookedRoomService {
     return this.http.get(this.API_TimeFrame);
   }
 
-  // get MeetingRoom List
-  getAllMeetingRooms(): Observable<any>{
-    return this.http.get(this.API_MeetingRoom + '-list');
-  }
-
   // get RoomType List
   getAllRoomTypes(): Observable<any>{
     return this.http.get(this.API_RoomType);
+  }
+
+  getFullBookedRoomById(id): Observable<any>{
+    return this.http.get(this.API_BOOKED_ROOM_BY_ID + '/' + id);
   }
 }

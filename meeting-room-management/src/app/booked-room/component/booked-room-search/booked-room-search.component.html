@@ -1,6 +1,6 @@
 <div class="container d-flex justify-content-center">
   <div class="w-50 border rounded-lg p-3 my-5">
-    <h3 class="d-flex justify-content-center bg-light p-3 mb-3">Tìm kiếm phòng</h3>
+    <h3 class="d-flex justify-content-center bg-light p-3 mb-3">Tìm kiếm phòng họp trống</h3>
     <form (ngSubmit)="findMeetingRooms();" [formGroup]="formMeetingRoomSearched">
       <div class="form-group row">
         <label class="col-sm-4 col-form-label">Địa điểm họp</label>
@@ -40,8 +40,8 @@
         <label class="col-sm-4 col-form-label">Ngày bắt đầu <sup class="text-danger">*</sup></label>
         <div class="col-sm-8">
           <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="myDatepicker1" [min]="minDate" [max]="maxDate"
-                   placeholder="Ngày bắt đầu" formControlName="startDate">
+            <input class="form-control form-control-sm" matInput [matDatepicker]="myDatepicker1" [min]="minDate" [max]="maxDate"
+                   formControlName="startDate">
             <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>
             <mat-datepicker #myDatepicker1 startView="month"></mat-datepicker>
           </mat-form-field>
@@ -55,8 +55,8 @@
         <label class="col-sm-4 col-form-label">Ngày kết thúc <sup class="text-danger">*</sup></label>
         <div class="col-sm-8">
           <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="myDatepicker2" [min]="minDate" [max]="maxDate"
-                   placeholder="Ngày bắt đầu" formControlName="endDate">
+            <input class="form-control form-control-sm" matInput [matDatepicker]="myDatepicker2" [min]="minDate" [max]="maxDate"
+                   formControlName="endDate">
             <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
             <mat-datepicker #myDatepicker2 startView="month"></mat-datepicker>
           </mat-form-field>
@@ -134,7 +134,7 @@
       <td>{{item.zone}}</td>
       <td>{{item.roomAsset}}</td>
       <td>
-        <button class="btn btn-sm btn-success" [routerLink]="['/book-room/'+ item.idRoom]" (click)="sendId(item.idRoom);">Đăng ký</button>
+        <button class="btn btn-sm btn-success" [routerLink]="['/book-room/']" (click)="sendId(item.idRoom);">Đăng ký</button>
       </td>
     </tr>
     <tr>
