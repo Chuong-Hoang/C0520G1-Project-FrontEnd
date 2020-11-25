@@ -10,8 +10,11 @@ export class MeetingRoomService {
   public API_MEETING_ROOM = 'http://localhost:8080/meeting-room';
   public API_ROOM_TYPE = 'http://localhost:8080/meeting-room/room-type-list';
   public API_ROOM_STATUS = 'http://localhost:8080/meeting-room/room-status-list';
+<<<<<<< HEAD
+=======
   public API_ADD_MEETING_ROOM = 'http://localhost:8080/meeting-room/createMeetingRoom';
   public API_EDIT_MEETING_ROOM = 'http://localhost:8080/meeting-room/find';
+>>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
   public API_SEARCH_ROOM = 'http://localhost:8080/meeting-room/search';
   public API_EDIT_ROOM = 'http://localhost:8080/meeting-room/edit';
 

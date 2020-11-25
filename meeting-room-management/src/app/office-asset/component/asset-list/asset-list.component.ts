@@ -11,9 +11,18 @@ import {AssetDeleteComponent} from '../asset-delete/asset-delete.component';
   styleUrls: ['./asset-list.component.css']
 })
 export class AssetListComponent implements OnInit {
+<<<<<<< HEAD
+  // tslint:disable-next-line:variable-name
+  public create_msg = '';
+  // tslint:disable-next-line:variable-name
+  public edit_msg = '';
+  // tslint:disable-next-line:variable-name
+  public delete_msg = '';
+=======
   public createMSG = '';
   public editMSG = '';
   public deleteMSG = '';
+>>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
   public assetList;
   public valueSearch: string;
   p: any;

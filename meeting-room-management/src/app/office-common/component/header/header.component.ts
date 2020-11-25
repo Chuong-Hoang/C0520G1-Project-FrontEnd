@@ -3,6 +3,7 @@ import {TokenStorageService} from '../../service/token-storage/token-storage.ser
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {UserChangePasswordComponent} from '../../../user/component/user-change-password/user-change-password.component';
+import {UserService} from '../../../user/service/user.service';
 
 @Component({
   selector: 'app-header',
@@ -15,9 +16,10 @@ export class HeaderComponent implements OnInit {
   showAdminBoard = false;
   showUserBoard = true;
   username: string;
+  public id = 1;
 
   constructor(private tokenStorageService: TokenStorageService, private router: Router,
-              public dialog: MatDialog) {
+              public dialog: MatDialog, public userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -38,6 +40,23 @@ export class HeaderComponent implements OnInit {
 
 
   // tslint:disable-next-line:typedef
+<<<<<<< HEAD
+  openDialogChangePassword(id) {
+    this.userService.getUserById(id).subscribe(data => {
+      const dialogRef = this.dialog.open(UserChangePasswordComponent, {
+        width: '740px',
+        height: '330px',
+        data: {dataIdUser: data.idUser, dataPass: data.password},
+        disableClose: true
+      });
+      console.log(data.password);
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.ngOnInit();
+      });
+    });
+
+=======
   openDialogChangePassword() {
     const dialogRef = this.dialog.open(UserChangePasswordComponent, {
       width: '740px',
@@ -48,5 +67,6 @@ export class HeaderComponent implements OnInit {
       console.log('The dialog was closed');
       this.ngOnInit();
     });
+>>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
   }
 }

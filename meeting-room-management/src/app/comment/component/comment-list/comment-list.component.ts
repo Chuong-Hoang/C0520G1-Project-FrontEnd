@@ -36,8 +36,12 @@ export class CommentListComponent implements OnInit {
 
   onSearch(): void {
     this.p = 0;
+<<<<<<< HEAD
+    this.commentService.search(this.formSearch.value.a, this.formSearch.value.b, this.formSearch.value.c).subscribe(data => {
+=======
     // tslint:disable-next-line:max-line-length
     this.commentService.search(this.formSearch.value.userNameSearch, this.formSearch.value.roomNameSearch, this.formSearch.value.statusSearch).subscribe(data => {
+>>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
       console.log(data);
       this.comments = data;
     }, error =>  console.log(error));
