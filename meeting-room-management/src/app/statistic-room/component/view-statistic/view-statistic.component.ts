@@ -28,6 +28,7 @@ export class ViewStatisticComponent implements OnInit {
   public roomType: RoomType[] = [];
   public roomNames: string[] = [];
   public messageError;
+  public messageErrorYear = '';
   public loading = true;
   public loading1 = true;
   public start = '2020';
@@ -254,6 +255,9 @@ export class ViewStatisticComponent implements OnInit {
   }
 
   chartYear(): void {
+    if ( this.start > this.end){
+      this.messageErrorYear = 'Năm không hợp lệ !';
+    }
     this.ngOnInit();
   }
 }
