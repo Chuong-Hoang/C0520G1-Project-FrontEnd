@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import {BookedRoom} from '../../model/booked-room';
-import {SearchedMeetingRoom} from "../../model/searched-meeting-room";
+import {SearchedMeetingRoom} from '../../model/searched-meeting-room';
 
 @Component({
   selector: 'app-booked-room-search',
@@ -120,4 +120,5 @@ export class BookedRoomSearchComponent implements OnInit, OnDestroy {
   sendId(idSent: number): void {
     this.idSent = idSent;
   }
+  // .....
 }
