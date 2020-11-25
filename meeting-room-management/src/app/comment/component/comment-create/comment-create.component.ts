@@ -8,6 +8,7 @@ import {User} from '../../model/user.class';
 import {Router} from '@angular/router';
 import {MeetingRoomService} from '../../service/meeting-room.service';
 
+
 @Component({
   selector: 'app-comment-create',
   templateUrl: './comment-create.component.html',
@@ -25,8 +26,7 @@ export class CommentCreateComponent implements OnInit {
               public errorTypeService: ErrorTypeService,
               public meetingRoomService: MeetingRoomService,
               public router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.errorTypeService.getAllErrorType().subscribe(data => {
@@ -34,6 +34,7 @@ export class CommentCreateComponent implements OnInit {
     });
     this.meetingRoomService.getAllMeetingRoom().subscribe(data => {
       this.meetingRoomServices = data;
+      console.log(data);
     });
     this.createCommentForm = this.formBuilder.group({
       // idComment: [''],

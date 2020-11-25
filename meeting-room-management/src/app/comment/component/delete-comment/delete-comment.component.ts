@@ -22,7 +22,6 @@ export class DeleteCommentComponent implements OnInit {
   ngOnInit(): void {
     this.commentName = this.data.fullName.contentComment;
     this.idComment = this.data.fullName.idComment;
-    console.log(this.commentName);
   }
 
   deleteComment(): void {
