@@ -14,9 +14,9 @@ export class AssetDeleteComponent implements OnInit {
   public assetOfId;
 
   constructor(
-    public dialogRef: MatDialogRef<AssetDeleteComponent>,
+    private dialogRef: MatDialogRef<AssetDeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public assetServerService: AssetServerService,
+    private assetServerService: AssetServerService,
     private router: Router
   ) {
   }

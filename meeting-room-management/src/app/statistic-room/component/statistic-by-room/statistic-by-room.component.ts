@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {BookedRoom} from '../model/BookedRoom.class';
-import {StatisticRoomService} from '../service/statistic-room.service';
-import {ExcelService} from '../service/excel.service';
+import {Component, OnInit} from '@angular/core';
+import {BookedRoom} from '../../model/booked-room.class';
+import {StatisticRoomService} from '../../service/statistic-room.service';
+import {ExcelService} from '../../service/excel.service';
 import {Label as ng2Chart} from 'ng2-charts';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 
@@ -11,8 +11,10 @@ import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
   styleUrls: ['./statistic-by-room.component.css']
 })
 export class StatisticByRoomComponent implements OnInit {
-
+  public effectiveAll = 0;
+  public roomName = '';
   public bookedRoomByRoom: BookedRoom[] = [];
+  public roomNameList: string[] = [];
   // lấy khoảng thời gian từ service
   public startDate: string;
   public endDate: string;
@@ -74,16 +76,19 @@ export class StatisticByRoomComponent implements OnInit {
 
   ngOnInit(): void {
     this.bookedRoomByRoom = this.statisticRoom.bookedRoomByRoom;
-    this.exportExcel(this.bookedRoomByRoom);
-    this.dataChart(this.bookedRoomByRoom);
     this.barChartData = [];
-    this.dataChart(this.bookedRoomByRoom);
     this.exportExcel(this.bookedRoomByRoom);
+    this.totalPerformance(this.bookedRoomByRoom);
+    this.roomName = this.statisticRoom.roomName1;
+    this.roomNameList = this.statisticRoom.roomNameList;
+    this.dataChart();
   }
+
   // export excel
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.dataOfFootballers, 'statistic_2020');
   }
+
   exportExcel(bookedRoom: BookedRoom[]): void {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < bookedRoom.length; i++) {
@@ -99,27 +104,64 @@ export class StatisticByRoomComponent implements OnInit {
         });
     }
   }
+
   // phần biểu đồ
   onChartClick(event): void {
     console.log(event);
   }
 
-  dataChart(arr: BookedRoom[]): void {
+  dataChart(): void {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.roomNameList.length; i++) {
+      this.effectiveByRoom(this.roomNameList[i], this.bookedRoomByRoom);
+    }
+  }
+
+  effectiveByRoom(roomName: string, arr: BookedRoom[]): void {
+    let count1 = 0;
+    let count2 = 0;
+    let count3 = 0;
+    let count4 = 0;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < arr.length; i++) {
-      if (arr[i].roomType === 'Một lần') {
-        this.barChartData.push({data: [arr[i].effective, 0, 0, 0], label: arr[i].roomName + ' sử dụng: ' + arr[i].totalUse + 'lần  '});
+      if (arr[i].roomType === 'Một lần' && roomName === arr[i].roomName && count1 < 1) {
+        count1++;
+        this.barChartData.push({data: [this.totalEffectiveByRoom(arr[i].roomName) , 0, 0, 0], label: arr[i].roomName});
       }
-      if (arr[i].roomType === 'Hàng ngày') {
-        this.barChartData.push({data: [0, arr[i].effective, 0, 0], label: arr[i].roomName + ' sử dụng:' + arr[i].totalUse + 'lần  '});
+      if (arr[i].roomType === 'Hàng ngày' && roomName === arr[i].roomName && count2 < 1) {
+        count2++;
+        this.barChartData.push({data: [0, this.totalEffectiveByRoom(arr[i].roomName) , 0, 0], label: arr[i].roomName});
       }
-      if (arr[i].roomType === 'Hàng tuần') {
-        this.barChartData.push({data: [0, 0, arr[i].effective, 0], label: arr[i].roomName + ' sử dụng: ' + arr[i].totalUse + 'lần  '});
+      if (arr[i].roomType === 'Hàng tuần' && roomName === arr[i].roomName && count3 < 1) {
+        count3++;
+        this.barChartData.push({data: [0, 0, this.totalEffectiveByRoom(arr[i].roomName) , 0], label: arr[i].roomName});
       }
-      if (arr[i].roomType === 'Hàng tháng') {
-        this.barChartData.push({data: [0, 0, 0, arr[i].effective], label: arr[i].roomName + ' sử dụng: ' + arr[i].totalUse + 'lần  '});
+      if (arr[i].roomType === 'Hàng tháng' && roomName === arr[i].roomName && count4 < 1) {
+        count4++;
+        this.barChartData.push({data: [0, 0, 0, this.totalEffectiveByRoom(arr[i].roomName) ], label: arr[i].roomName});
       }
     }
   }
 
+  totalEffectiveByRoom(roomName: string): number {
+    let effective = 0;
+    let count = 0;
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.bookedRoomByRoom.length; i++) {
+      if ( roomName === this.bookedRoomByRoom[i].roomName){
+        count++;
+        effective += this.bookedRoomByRoom[i].effective;
+      }
+    }
+    return (effective / count );
+  }
+
+  totalPerformance(arr: BookedRoom[]): void {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < arr.length; i++) {
+      this.effectiveAll += arr[i].effective;
+    }
+    this.effectiveAll = Math.round((this.effectiveAll) / arr.length);
+  }
 }
+
