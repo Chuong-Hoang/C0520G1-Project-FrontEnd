@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AppComponent } from './app.component';
 import {BookedRoomModule} from './booked-room/booked-room.module';
@@ -13,10 +13,12 @@ import {HttpClientModule} from '@angular/common/http';
 import {AssetsDetailModule} from './assets-detail/assets-detail.module';
 import { AppRoutingModule } from './app-routing.module';
 import {authInterceptorProviders} from './office-common/helper/auth.interceptor';
+import { BookedRoomDeleteComponent } from './booked-room/component/booked-room-delete/booked-room-delete.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BookedRoomDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -35,4 +37,5 @@ import {authInterceptorProviders} from './office-common/helper/auth.interceptor'
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

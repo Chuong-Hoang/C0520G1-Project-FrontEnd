@@ -1,0 +1,52 @@
+<div class="container-fluid d-flex justify-content-center">
+  <div class="row">
+    <table class="table table-borderless">
+      <thead>
+      <tr>
+        <td style="text-align: center" colspan="2"><h4>Hủy đăng ký đặt phòng</h4></td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Tên phòng:</td>
+        <td>{{bookedRoom.meetingRoomName}}</td>
+      </tr>
+      <tr>
+        <td>Loại phòng:</td>
+        <td>{{bookedRoom.roomType}}</td>
+      </tr>
+      <tr>
+        <td>Ngày bắt đầu:</td>
+        <td>{{bookedRoom.startDate | date:  'dd/MM/yyyy'}}</td>
+      </tr>
+      <tr>
+        <td>Ngày kết thúc:</td>
+        <td>{{bookedRoom.endDate | date:  'dd/MM/yyyy'}}</td>
+      </tr>
+      <tr>
+        <td>Thời gian bắt đầu:</td>
+        <td>{{bookedRoom.startTime}}</td>
+      </tr>
+      <tr>
+        <td>Thời gian kết thúc:</td>
+        <td>{{bookedRoom.endTime}}</td>
+      </tr>
+      <tr>
+        <td>Nội dung cuộc họp:</td>
+        <td>{{bookedRoom.content}}</td>
+      </tr>
+      <tr>
+        <td style="margin-top: 9px;">Lý do hủy phòng họp:</td>
+        <td><textarea cols="30" rows="3" class="mt-2"></textarea></td>
+      </tr>
+      <tr>
+        <td colspan="2"><a role="button" class="btn btn-secondary btn-sm justify-content-center"
+                           style="width: 100px; margin-left: 88px" [routerLink]="['/booked-room-list']">Trở về</a>
+          <a role="button" class="btn btn-danger btn-sm justify-content-center ml-2" (click)="openDialogDelete()">Hủy
+            đăng ký</a></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
