@@ -17,7 +17,6 @@
                 class="text-danger">Tên tài sản đã tồn tại</span>
         </div>
       </div>
-
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Mô tả <sup class="text-danger">*</sup> </label>
         <div class="col-sm-9">
@@ -28,9 +27,7 @@
             *ngIf="formCreate.controls.description.errors?.required && formCreate.controls.description.touched"
             class="text-danger">Trường này bắt buộc nhập</span>
         </div>
-
       </div>
-
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Giá <sup class="text-danger">*</sup> </label>
         <div class="col-sm-9">
@@ -41,9 +38,7 @@
           <span *ngIf="formCreate.controls.price.errors?.pattern && formCreate.controls.price.touched"
                 class="text-danger">Vui lòng nhập đúng giá tài sản</span>
         </div>
-
       </div>
-
       <div class="form-group row ">
         <label class="col-sm-3 col-form-label">Số lượng tài sản <sup class="text-danger">*</sup> </label>
         <div class="col-sm-9">
@@ -54,9 +49,7 @@
           <span *ngIf="formCreate.controls.total.errors?.pattern && formCreate.controls.total.touched"
                 class="text-danger">Vui lòng nhập đúng số lượng tài sản</span>
         </div>
-
       </div>
-
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Hình ảnh <sup class="text-danger">*</sup> </label>
         <div class="col-sm-9">
@@ -65,9 +58,7 @@
             *ngIf="formCreate.controls.image.errors?.required && formCreate.controls.image.touched"
             class="text-danger">Trường này bắt buộc nhập</span>
         </div>
-
       </div>
-
       <div class="row d-flex justify-content-center ml-4">
         <div>
           <button class="btn btn-secondary" routerLink="/asset">Hủy</button>

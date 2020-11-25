@@ -2,9 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {AssetCreateQuantityComponent} from '../asset-create-quantity/asset-create-quantity.component';
 import {AssetServerService} from '../../service/asset-server.service';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {AssetDeleteComponent} from '../asset-delete/asset-delete.component';
-
 
 @Component({
   selector: 'app-asset-list',
@@ -18,7 +17,6 @@ export class AssetListComponent implements OnInit {
   public assetList;
   public valueSearch: string;
   p: any;
-
 
   constructor(
     private dialog: MatDialog,
@@ -77,12 +75,11 @@ export class AssetListComponent implements OnInit {
     });
   }
 
-  sendMessage(): void{
+  sendMessage(): void {
     this.createMSG = this.route.snapshot.queryParamMap.get('create_msg');
     this.editMSG = this.route.snapshot.queryParamMap.get('edit_msg');
     this.deleteMSG = this.route.snapshot.queryParamMap.get('delete_msg');
 
   }
-
 }
 
