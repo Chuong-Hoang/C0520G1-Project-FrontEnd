@@ -6,6 +6,7 @@ import {MeetingRoomAppRoutingModule} from './meeting-room-app-routing.module';
 import {MeetingRoomAddComponent} from './component/meeting-room-add/meeting-room-add.component';
 import {MeetingRoomEditComponent} from './component/meeting-room-edit/meeting-room-edit.component';
 import {MaterialModule} from './material.meeting-room.module';
+import {RouterModule} from '@angular/router';
 
 
 @NgModule({
@@ -13,13 +14,14 @@ import {MaterialModule} from './material.meeting-room.module';
     MeetingRoomEditComponent],
   exports: [MeetingRoomAddComponent,
     MeetingRoomEditComponent],
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MeetingRoomAppRoutingModule,
-    MaterialModule,
-  ]
+    imports: [
+        CommonModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MeetingRoomAppRoutingModule,
+        MaterialModule,
+        RouterModule,
+    ]
 })
 export class MeetingRoomModule {
 }

@@ -13,10 +13,12 @@ import {HttpClientModule} from '@angular/common/http';
 import {AssetsDetailModule} from './assets-detail/assets-detail.module';
 import { AppRoutingModule } from './app-routing.module';
 import {authInterceptorProviders} from './office-common/helper/auth.interceptor';
+import { BookedRoomDeleteComponent } from './booked-room/component/booked-room-delete/booked-room-delete.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BookedRoomDeleteComponent
   ],
   imports: [
     BrowserModule,

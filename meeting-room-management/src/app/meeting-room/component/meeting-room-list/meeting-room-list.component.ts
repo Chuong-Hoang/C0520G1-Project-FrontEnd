@@ -37,7 +37,6 @@ export class MeetingRoomListComponent implements OnInit {
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      console.log(user);
       this.role = user.role;
 
       this.showAdminBoard = this.role.includes('ROLE_ADMIN');
@@ -46,8 +45,7 @@ export class MeetingRoomListComponent implements OnInit {
     this.meetingRoomList = [];
     this.meetingRoomService.getAllMeetingRoom().subscribe(data => {
       this.meetingRoomList = data;
-      console.log('init: ' + data);
-    });
+    }, error => console.log('error'));
     this.meetingRoomService.getAllRoomStatus().subscribe(data => {
       this.roomStatusList = data;
     });
