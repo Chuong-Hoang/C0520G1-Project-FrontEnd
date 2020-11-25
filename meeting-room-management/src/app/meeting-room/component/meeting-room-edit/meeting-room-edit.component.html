@@ -29,12 +29,9 @@
         <label for="zone" class="col-sm-2 col-form-label">Khu vực<span class="text-danger">(*)</span></label>
         <div class="col-10">
           <select id="zone" class="form-control form-control-sm" formControlName="zone">
-            <option>Đà nẵng</option>
-            <option>Hội an</option>
-            <option>Hà nội</option>
-            <option>A</option>
-            <option>B</option>
-            <option>C</option>
+            <option>Khu A</option>
+            <option>Khu B</option>
+            <option>Khu C</option>
           </select>
           <p *ngIf="formEditRoom.controls.zone.errors?.required && formEditRoom.controls.zone.touched"
              class="text-danger">Vui lòng chọn khu vực</p>
@@ -50,6 +47,7 @@
              class="text-danger">Sức chứa phải là số nguyên</p>
         </div>
       </div>
+
       <div class="form-group row">
         <label for="roomType" class="col-sm-2 col-form-label">Loại phòng<span class="text-danger">(*)</span></label>
         <div class="col-10">
@@ -64,9 +62,10 @@
       <div class="form-group row">
         <label for="images" class="col-sm-2 col-form-label">Hình ảnh</label>
         <div class="col-10">
-          <input type="file" accept="image/*" class="form-control form-control-sm" id="images">
+          <input type="file" accept="image/*" class="form-control form-control-sm" id="images" formControlName="image">
         </div>
       </div>
+
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Tài sản</label>
         <div class="col-10">

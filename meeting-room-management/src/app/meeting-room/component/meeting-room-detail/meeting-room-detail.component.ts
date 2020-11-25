@@ -23,7 +23,7 @@ export class MeetingRoomDetailComponent implements OnInit {
         this.idMeetingRoom = data.id;
         this.meetRoomService.getMeetingRoomById(this.idMeetingRoom).subscribe(next => {
           this.meetingRoom = next;
-          this.meetingRoom.image = this.meetingRoom.image.substring(11);
+          next.image = next.image.substring(11);
         }, error => console.log('error'));
       }
     );

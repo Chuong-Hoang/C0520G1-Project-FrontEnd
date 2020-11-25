@@ -29,9 +29,9 @@
         <label for="zone" class="col-sm-2 col-form-label">Khu vực<span class="text-danger">(*)</span></label>
         <div class="col-10">
           <select id="zone" class="form-control form-control-sm" formControlName="zone">
-            <option>A</option>
-            <option>B</option>
-            <option>C</option>
+            <option>Khu A</option>
+            <option>Khu B</option>
+            <option>Khu C</option>
           </select>
           <p *ngIf="formAddRoom.controls.zone.errors?.required && formAddRoom.controls.zone.touched"
              class="text-danger">Vui lòng chọn khu vực</p>
