@@ -23,7 +23,6 @@ export class MeetingRoomDetailComponent implements OnInit {
         console.log(data.id);
         this.idMeetingRoom = data.id;
         this.meetRoomService.getMeetingRoomById(this.idMeetingRoom).subscribe(next => {
-          console.log(next);
           this.meetingRoom = next;
         }, error => console.log('error'));
       }
