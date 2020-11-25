@@ -9,11 +9,7 @@ function comparePassword(c: AbstractControl) {
   const v = c.value;
   const isNotEmpty = v.confirmPassword !== '';
   if (isNotEmpty) {
-<<<<<<< HEAD
-    return (v.password === v.confirmPassword) ? null : {
-=======
     return (v.newPassword === v.confirmPassword) ? null : {
->>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
       passwordNotMatch: true
     };
   }
@@ -41,11 +37,7 @@ export class UserEditComponent implements OnInit {
   ngOnInit(): void {
     this.formEdit = this.formBuilder.group({
       userName: [''],
-<<<<<<< HEAD
-      password: ['', [Validators.required, Validators.pattern('^[a-z0-9]{6,30}$')]],
-=======
       newPassword: ['', [Validators.required, Validators.pattern('^[a-z0-9]{6,30}$')]],
->>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
       confirmPassword: ['', [Validators.required]],
       fullName: ['', [Validators.required, Validators.maxLength(30)]],
       department: ['', [Validators.required, Validators.maxLength(30)]],

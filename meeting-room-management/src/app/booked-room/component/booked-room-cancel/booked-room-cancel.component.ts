@@ -9,22 +9,16 @@ import {BookedRoomService} from '../../service/booked-room.service';
   styleUrls: ['./booked-room-cancel.component.css']
 })
 export class BookedRoomCancelComponent implements OnInit {
-  public eleId: any;
-  public eleName: any;
 
   constructor(
     public dialogRef: MatDialogRef<BookedRoomCancelComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: any,
     public bookedRoomService: BookedRoomService,
-    public router: Router
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.eleId = this.data.data1.idRoom;
-    this.eleName = this.data.data1.roomName;
-    console.log('id truyền vào: ' + this.eleId);
-    console.log('tên truyền vào: ' + this.eleName);
   }
 
   agreeToCancel(): void {

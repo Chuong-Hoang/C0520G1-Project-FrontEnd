@@ -36,12 +36,8 @@
           <td>{{asset.total - asset.usingQuantity - asset.fixingQuantity }}</td>
           <td>
             <div class="d-flex">
-<<<<<<< HEAD
-              <button class="btn btn-sm btn-info mr-3" [routerLink]="['/asset-detail/'+ asset.idAsset]">Chi tiết</button>
-=======
               <button class="btn btn-sm btn-info mr-3" [routerLink]="['/asset-detail/'+ asset.idAsset]">Chi tiết
               </button>
->>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
               <button class="btn btn-sm btn-warning mr-3" (click)="openDialogCreate(asset.idAsset)">Cập nhật</button>
               <button class="btn btn-sm btn-danger mr-3" (click)="openDialogDelete(asset.idAsset)">Xóa</button>
             </div>
