@@ -11,7 +11,6 @@ import {UserService} from '../../../user/service/user.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
   private role: string;
   isLoggedIn = false;
   showAdminBoard = false;
@@ -25,11 +24,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.role = user.role;
-
       this.showAdminBoard = this.role.includes('ROLE_ADMIN');
       this.showUserBoard = this.role.includes('ROLE_USER');
       this.username = user.userName;
@@ -41,7 +38,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/']).then(() => window.location.reload());
   }
 
+
   // tslint:disable-next-line:typedef
+<<<<<<< HEAD
   openDialogChangePassword(id) {
     this.userService.getUserById(id).subscribe(data => {
       const dialogRef = this.dialog.open(UserChangePasswordComponent, {
@@ -57,5 +56,17 @@ export class HeaderComponent implements OnInit {
       });
     });
 
+=======
+  openDialogChangePassword() {
+    const dialogRef = this.dialog.open(UserChangePasswordComponent, {
+      width: '740px',
+      height: '320px',
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.ngOnInit();
+    });
+>>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
   }
 }

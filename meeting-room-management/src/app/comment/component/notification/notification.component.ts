@@ -14,27 +14,40 @@ import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 })
 export class NotificationComponent implements OnInit {
   public commentsNotification: Comment[];
+<<<<<<< HEAD
   public status = true;
+=======
+>>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
   public count = 0;
   formSearch: FormGroup;
-  // public total: number;
   p: any;
 
   constructor(
     public commentService: CommentService,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
-  ) {
+    public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
+    this.count = 0;
     this.commentService.getAllComment().subscribe(data => {
       this.commentsNotification = data;
+<<<<<<< HEAD
       console.log(data);
       // console.log(this.commentsNotification);
     }, error => {
       console.log(error);
       console.log('error');
+=======
+      for (const i of this.commentsNotification){
+        // tslint:disable-next-line:triple-equals
+        if (i.status == false && i.statusView == false){
+          this.count ++;
+        }
+      }
+    }, error => {
+      console.log(error)
+>>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
     });
   }
 
@@ -55,7 +68,10 @@ export class NotificationComponent implements OnInit {
 
   dialogDetailComment(commentId): void {
     this.commentService.getCommentById(commentId).subscribe(dataFull => {
+<<<<<<< HEAD
       console.log(dataFull);
+=======
+>>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
       const dialogRef = this.dialog.open(DetailNotificationComponent, {
         width: '500px',
         data: {full: dataFull},

@@ -19,7 +19,11 @@ export function checkNameAsset(name = []) {
 })
 export class AssetCreateComponent implements OnInit {
   public formCreate: FormGroup;
+<<<<<<< HEAD
   private assetList;
+=======
+  public assetList;
+>>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
   public listAssetName = [];
 
   constructor(
@@ -39,12 +43,18 @@ export class AssetCreateComponent implements OnInit {
       description: ['', [Validators.required]],
       price: ['', [Validators.required, Validators.pattern('^([1-9][\\d]*)$')]]
     });
+<<<<<<< HEAD
 
+=======
+>>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
     this.assetServer.getAll().subscribe(data => {
       this.assetList = data;
       this.getAllAssetName();
     });
+<<<<<<< HEAD
 
+=======
+>>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
   }
 
   create(): void {
@@ -61,5 +71,8 @@ export class AssetCreateComponent implements OnInit {
       }
     }
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
 }

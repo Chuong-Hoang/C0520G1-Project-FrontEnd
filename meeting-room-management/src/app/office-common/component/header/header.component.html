@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="">Cho Thuê Phòng Họp</a>
+    <a class="navbar-brand" href="">Quản lí Phòng Họp</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,7 +14,11 @@
           <a class="nav-link" href="/asset">Quản lí tài sản</a>
         </li>
         <li class="nav-item">
+<<<<<<< HEAD
           <a class="nav-link" href="/user-list" >Quản lí người dùng</a>
+=======
+          <a class="nav-link" href="/user-list">Quản lí người dùng</a>
+>>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/statistic">Thống kê</a>
@@ -26,16 +30,16 @@
 
       <ul class="navbar-nav mr-auto topnav" routerLinkActive="active" *ngIf="showUserBoard">
         <li class="nav-item">
-          <a class="nav-link text-white" href="/meeting-room">Danh sách phòng họp</a>
+          <a class="nav-link" href="/meeting-room">Danh sách phòng họp</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownOffice" role="button"
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOffice" role="button"
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Đăng kí phòng họp
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownOffice">
             <a class="dropdown-item" href="/search-available-room">Tìm kiếm phòng họp</a>
-            <a class="dropdown-item" href="/book-room">Đăng kí phòng họp</a>
+            <a class="dropdown-item" href="#">Đăng kí phòng họp</a>
             <a class="dropdown-item" href="/booked-room-list">Lịch sử đăng kí</a>
           </div>
         </li>
@@ -49,21 +53,23 @@
 
       <ul class="navbar-nav ml-auto topnav">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLanguage" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLanguage" role="button" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
             Ngôn Ngữ
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownLanguage">
-            <a class="dropdown-item" href="#" >Tiếng Anh</a>
+            <a class="dropdown-item" href="#">Tiếng Anh</a>
             <a class="dropdown-item" href="#">Tiếng Việt</a>
           </div>
         </li>
         <li class="nav-item dropdown" *ngIf="!isLoggedIn">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
             Tài Khoản
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
             <a class="dropdown-item" href="/login">Đăng nhập</a>
-            <a class="dropdown-item" href="#">Đăng kí</a>
+            <a class="dropdown-item" href="#">Đăng ký</a>
           </div>
         </li>
         <li class="nav-item dropdown" *ngIf="isLoggedIn">

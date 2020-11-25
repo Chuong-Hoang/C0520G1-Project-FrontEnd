@@ -72,8 +72,11 @@ export class UserCreateComponent implements OnInit {
   // tslint:disable-next-line:typedef
   addNewUser() {
     if (this.formCreat.valid) {
+<<<<<<< HEAD
       console.log(this.formCreat.value);
       console.log(this.formCreat.value.message);
+=======
+>>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
       this.userService.addNewUser(this.formCreat.value).subscribe(data => {
         this.dialogRef.close();
       }, error => console.log(error.message));
