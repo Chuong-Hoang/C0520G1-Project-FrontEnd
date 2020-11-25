@@ -21,6 +21,8 @@ export class CommentListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // tslint:disable-next-line:no-unused-expression
+    this.comments;
     this.p = 0;
     this.commentService.getAllComment().subscribe(data => {
       this.comments = data;
