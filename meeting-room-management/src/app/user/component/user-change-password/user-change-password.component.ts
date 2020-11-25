@@ -22,6 +22,7 @@ function comparePassword(c: AbstractControl) {
 })
 export class UserChangePasswordComponent implements OnInit {
   formChangePassword: FormGroup;
+  public errorMessage: string;
 
   constructor(
     public dialogRef: MatDialogRef<UserChangePasswordComponent>,
@@ -46,7 +47,14 @@ export class UserChangePasswordComponent implements OnInit {
   // tslint:disable-next-line:typedef
   changePass() {
     this.userService.changePassword(this.idUser, this.formChangePassword.value).subscribe(data => {
-      this.dialogRef.close();
+      console.log('data');
+      console.log(data);
+      this.errorMessage = data;
+      if (this.errorMessage == null) {
+        this.dialogRef.close();
+      }
+    }, error => {
+      console.log(error);
     });
   }
 }
