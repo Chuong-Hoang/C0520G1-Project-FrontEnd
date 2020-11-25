@@ -42,9 +42,7 @@ export class DetailNotificationComponent implements OnInit {
       this.id = this.data.full.idComment;
       this.contentComment = this.data.full.contentComment;
       this.contentReply = this.data.full.contentReply;
-      console.log(this.id);
       this.commentService.getCommentById(this.id).subscribe(next => {
-        console.log(next);
         this.detailCommentForm.patchValue(next);
       });
     });

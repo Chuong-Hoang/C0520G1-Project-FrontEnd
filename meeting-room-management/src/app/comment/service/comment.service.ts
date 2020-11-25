@@ -19,7 +19,7 @@ export class CommentService {
 
   addNewComment(comment): Observable<any> {
     console.log(comment);
-    return this.http.post(this.API, comment);
+    return this.http.post(this.API + '/create', comment);
   }
 
   getCommentById(idComment): Observable<any> {
@@ -44,6 +44,6 @@ export class CommentService {
   }
 
   deleteCommentByID(idComment): Observable<any> {
-    return this.http.delete(this.API + '/' + idComment);
+    return this.http.delete(this.API + '/delete/' + idComment);
   }
 }
