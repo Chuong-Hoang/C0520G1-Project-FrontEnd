@@ -6,71 +6,61 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class BookedRoomService {
-  public API_BOOKED_ROOM = 'http://localhost:8080/booked-room';
-  public API_TIME_FRAME = 'http://localhost:8080/time-frame';
-  public API_MEETING_ROOM = 'http://localhost:8080/meeting-room';
-  public API_ROOM_TYPE = 'http://localhost:8080/room-type';
+  // tslint:disable-next-line:variable-name
+  public API_BookedRoom = 'http://localhost:8080/booked-room';
+  // tslint:disable-next-line:variable-name
+  public API_TimeFrame = 'http://localhost:8080/time-frame';
+  // tslint:disable-next-line:variable-name
+  public API_MeetingRoom = 'http://localhost:8080/meeting-room';
+  // tslint:disable-next-line:variable-name
+  public API_RoomType = 'http://localhost:8080/room-type';
   public API_BOOKED_ROOM_BY_ID = 'http://localhost:8080/findBookedRoom';
   public API_BOOKED_ROOM_DELETE = 'http://localhost:8080/delete';
 
   constructor(private http: HttpClient) { }
 
-  // get all booked-rooms
-  getAllBookedRooms(idUser): Observable<any>{
-    return this.http.get(this.API_BOOKED_ROOM + '-list/' + idUser);
+  getAllBookedRooms(): Observable<any>{
+    return this.http.get(this.API_BookedRoom);
   }
-
-  // book new meeting-room
   createNewBookedRoom(ele): Observable<any>{
-    console.log('new booked room:');
-    console.log(ele);
-    console.log(ele.startDate);
-    console.log(ele.endDate);
-    return this.http.post(this.API_BOOKED_ROOM, ele);
+    return this.http.post(this.API_BookedRoom, ele);
   }
 
-  // find bookedRooms with input fields
   searchBookedRooms(ele): Observable<any>{
-    return this.http.post(this.API_BOOKED_ROOM + '/search', ele);
+    return this.http.post(this.API_BookedRoom + '/search', ele);
   }
 
-  // find bookedRoom each by Id
   getBookedRoomById(id): Observable<any>{
-    return this.http.get(this.API_BOOKED_ROOM + '/' + id);
+    return this.http.get(this.API_BookedRoom + '/' + id);
   }
 
-  // get MeetingRoom List <--database
+  // get MeetingRoom List
   getAllMeetingRooms(): Observable<any>{
-    return this.http.get(this.API_MEETING_ROOM);
+    return this.http.get(this.API_MeetingRoom);
   }
 
-  // find meetingRoom each by id
   getMeetingRoomById(id): Observable<any>{
-    console.log('Id tìm kiếm một meeting-room: ' + id);
-    return this.http.get(this.API_MEETING_ROOM + '/' + id);
+    console.log(id);
+    return this.http.get(this.API_MeetingRoom + '/' + id);
   }
 
   // search available meeting rooms
   searchMeetingRooms(ele): Observable<any>{
-    console.log('Search Object sent to BE:');
-    console.log(ele);
-    return this.http.post(this.API_MEETING_ROOM + '-find', ele);
+    return this.http.post(this.API_MeetingRoom + '-find', ele);
   }
 
-  // delete booked-room (delete booking)
   deleteBookedRoomById(id): Observable<any>{
     return this.http.delete(this.API_BOOKED_ROOM_DELETE + '/' + id);
   }
 
   // get TimeFrame List
   getAllTimeFrames(): Observable<any>{
-    // console.log('--Looking for time-frames function --')
-    return this.http.get(this.API_TIME_FRAME);
+    return this.http.get(this.API_TimeFrame);
   }
 
   // get RoomType List
   getAllRoomTypes(): Observable<any>{
-    return this.http.get(this.API_ROOM_TYPE);
+    return this.http.get(this.API_RoomType);
   }
 
   getFullBookedRoomById(id): Observable<any>{

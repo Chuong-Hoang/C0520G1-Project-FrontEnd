@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {BookedRoomService} from '../../service/booked-room.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MeetingRoomService} from '../../../meeting-room/service/meeting-room.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {TokenStorageService} from "../../../office-common/service/token-storage/token-storage.service";
 
 @Component({
   selector: 'app-booked-room-list',
@@ -22,13 +22,11 @@ export class BookedRoomListComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   public size_msg = '';
   public btnHidden = false;
-  private bookedUserId = 1;
 
   constructor(
     private bookedRoomService: BookedRoomService,
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private tokenStorageService: TokenStorageService,
     private router: Router
   ) { }
 
@@ -37,11 +35,9 @@ export class BookedRoomListComponent implements OnInit {
     this.size_msg = 'Rất tiếc, không tìm thấy kết quả nào!';
     this.p = 0;
     this.booking_message = this.activatedRoute.snapshot.queryParamMap.get('booking_message');
-    this.bookedUserId = this.tokenStorageService.getUser().id;
     this.formBookedRoomSearched = this.formBuilder.group({
       id: '',
-      meetingRoomName: '',
-      bookedUserId: this.bookedUserId,
+      roomName: '',
       roomType: '',
       startDate: '',
       endDate: '',
@@ -49,7 +45,7 @@ export class BookedRoomListComponent implements OnInit {
       bookedStatus: ''
     });
 
-    this.bookedRoomService.getAllBookedRooms(this.bookedUserId).subscribe(data => {
+    this.bookedRoomService.getAllBookedRooms().subscribe(data => {
       this.p = 0;
       this.bookedRoomList = data;
       this.size_msg = this.bookedRoomList.length + '';
@@ -61,20 +57,18 @@ export class BookedRoomListComponent implements OnInit {
     });
     this.bookedRoomService.getAllRoomTypes().subscribe(data => {
       this.roomTypeList = data;
+      // console.log('roomTypes: ' + data);
     });
   }
 
-  // find booked meeting-rooms (booked-rooms)
   findBookedRooms(): void {
     this.p = 0;
     this.bookedRoomList = [];
     this.size_msg = 'Rất tiếc, không tìm thấy kết quả nào!';
     this.bookedRoomService.searchBookedRooms(this.formBookedRoomSearched.value).subscribe(data => {
-      if (data !== null) {
-        this.bookedRoomList = data;
-        this.size_msg = this.bookedRoomList.length + '';
-        console.log('search-->size_msg: ' + this.size_msg);
-      }
+      this.bookedRoomList = data;
+      this.size_msg = this.bookedRoomList.length + '';
+      console.log('search-->size_msg: ' + this.size_msg);
       this.router.navigate(['/booked-room-list']);
     });
   }

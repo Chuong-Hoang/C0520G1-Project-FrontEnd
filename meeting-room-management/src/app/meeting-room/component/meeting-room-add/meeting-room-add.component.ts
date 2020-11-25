@@ -1,17 +1,7 @@
-<<<<<<< HEAD
-// @ts-ignore
-import {Component, OnInit} from '@angular/core';
-import {MeetingRoomService} from '../../service/meeting-room.service';
-// @ts-ignore
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-// @ts-ignore
-import {Router} from '@angular/router';
-=======
 import { Component, OnInit } from '@angular/core';
 import { MeetingRoomService} from '../../service/meeting-room.service';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { Router} from '@angular/router';
->>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
 import {MatDialog} from '@angular/material/dialog';
 import {AssetsDetailDialogChoiceComponent} from '../../../assets-detail/component/assets-detail-dialog-choice/assets-detail-dialog-choice.component';
 import {AssetDetail} from '../../../assets-detail/model/AssetDetail.class';
@@ -27,7 +17,6 @@ export class MeetingRoomAddComponent implements OnInit {
   public roomTypeList;
   public formAddRoom: FormGroup;
   public assetsDetail: AssetDetail;
-  fileToUpload: File = null;
 
   constructor(
     public dialog: MatDialog,
@@ -53,19 +42,6 @@ export class MeetingRoomAddComponent implements OnInit {
   }
 
   openDialog(): void {
-<<<<<<< HEAD
-    // this.assetsDetailService.getAllAssetsDetail().subscribe(dataOfAssetsDetail => {
-    const dialogRef = this.dialog.open(AssetsDetailDialogChoiceComponent, {
-      width: '800px',
-      // data: {data1: dataOfAssetsDetail}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.assetsDetail = result;
-    });
-    // });
-=======
     this.assetsDetailService.getAllAssetsDetail().subscribe(dataOfAssetsDetail => {
       const dialogRef = this.dialog.open(AssetsDetailDialogChoiceComponent, {
         width: '800px',
@@ -78,15 +54,10 @@ export class MeetingRoomAddComponent implements OnInit {
       });
     });
   }
->>>>>>> fe797ed9eedc2383894b7ba4ac1118cdf32337fa
 
   addNewMeetingRoom(): void {
     this.meetingRoomService.addNewMeetingRoom(this.formAddRoom.value).subscribe(data => {
       this.router.navigateByUrl('meeting-room');
     });
-  }
-
-  handleFileInput(files: FileList): void {
-    this.fileToUpload = files.item(0);
   }
 }

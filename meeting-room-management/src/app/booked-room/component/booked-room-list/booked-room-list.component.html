@@ -5,7 +5,7 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Tên phòng họp</label>
         <div class="col-sm-9">
-          <select class="form-control form-control-sm" formControlName="meetingRoomName">
+          <select class="form-control form-control-sm" formControlName="roomName">
             <option [selected]="true" value="">--Chọn--</option>
             <option *ngFor="let item of meetingRoomList" [value]="item.roomName">{{item.roomName}}</option>
           </select>
@@ -86,7 +86,7 @@
 </div>
 
 <!--  Show list of booked rooms-->
-<div class="container mx-auto">
+<div class="container-fluid">
   <div class="d-flex justify-content-between">
     <div class="col-sm-6">
       <p><b>Kết quả: </b><span class="text-danger font-weight-bolder">{{size_msg}}</span></p>
@@ -109,7 +109,6 @@
       <th>Ngày kết thúc</th>
       <th>Loại phòng họp</th>
       <th>Ngày đăng ký</th>
-      <th>User [Test]</th>
       <th>Trạng thái phòng</th>
       <th>Hủy</th>
     </tr>
@@ -121,11 +120,10 @@
       <td>{{item.content}}</td>
       <td>{{item.startTime}}</td>
       <td>{{item.endTime}}</td>
-      <td>{{item.startDate | date: 'yyyy-LL-dd'}}</td>
-      <td>{{item.endDate | date: 'yyyy-LL-dd'}}</td>
+      <td>{{item.startDate | date: 'yyyy/LL/dd'}}</td>
+      <td>{{item.endDate | date: 'yyyy/LL/dd'}}</td>
       <td>{{item.roomType}}</td>
-      <td>{{item.bookedDate | date: 'yyyy-LL-dd'}}</td>
-      <td>{{item.bookedUserId}}</td>
+      <td>{{item.bookedDate | date: 'yyyy/LL/dd'}}</td>
       <td>
         <span *ngIf="item.bookedStatus == 'Đã kết thúc'"><i
           class="fas fa-circle mr-2 text-danger"></i>{{item.bookedStatus}}</span>
