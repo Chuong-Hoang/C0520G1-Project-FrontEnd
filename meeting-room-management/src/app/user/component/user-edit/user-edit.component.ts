@@ -50,7 +50,7 @@ export class UserEditComponent implements OnInit {
     console.log(this.dataIdUser);
     this.userService.getUserById(this.dataIdUser).subscribe(getData => {
       this.formEdit.patchValue(getData);
-      console.log(getData);
+      console.log(getData.idUser);
     });
   }
 
