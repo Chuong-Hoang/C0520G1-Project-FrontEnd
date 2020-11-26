@@ -43,7 +43,7 @@
                     <tbody>
                     <tr>
                     <tr
-                      *ngFor="let element of bookedRoomByTime | paginate: { itemsPerPage: 3, currentPage: p } ; let i = index ">
+                      *ngFor="let element of bookedRoomByTime | paginate: { itemsPerPage: 5, currentPage: p } ; let i = index ">
                       <td>{{i + 1}}</td>
                       <td>{{element.userName}}</td>
                       <td>{{element.roomName}}</td>
@@ -58,7 +58,9 @@
                   </table>
                 </div>
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                  <pagination-controls (pageChange)="p = $event"  previousLabel="Trước"
+                                       nextLabel="Sau"
+                                       responsive="true"></pagination-controls>
                 </nav>
               </div>
             </div>
@@ -87,3 +89,4 @@
     </div>
   </div>
 </div>
+

@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CommentService} from '../../service/comment.service';
-import {MeetingRoomService} from '../../service/meeting-room.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-
+import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
+import { TitleCasePipe } from '@angular/common';
 @Component({
   selector: 'app-detail-notification',
   templateUrl: './detail-notification.component.html',
@@ -13,13 +13,17 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 export class DetailNotificationComponent implements OnInit {
   detailCommentForm: FormGroup;
   public id;
+  public fullName;
   public contentComment;
   public contentReply;
+  public commentTime;
   public comment: CommentService[];
+  private isLoggedIn;
 
   constructor(private formBuilder: FormBuilder,
               public commentService: CommentService,
               public activeRouter: ActivatedRoute,
+              private tokenStorageService: TokenStorageService,
               public router: Router,
               public dialogRef: MatDialogRef<DetailNotificationComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -27,6 +31,10 @@ export class DetailNotificationComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      this.fullName = this.tokenStorageService.getUser().fullName;
+    }
     this.detailCommentForm = this.formBuilder.group({
       idComment: [''],
       commentTime: [''],
@@ -42,6 +50,7 @@ export class DetailNotificationComponent implements OnInit {
       this.id = this.data.full.idComment;
       this.contentComment = this.data.full.contentComment;
       this.contentReply = this.data.full.contentReply;
+      this.commentTime = this.data.full.commentTime;
       this.commentService.getCommentById(this.id).subscribe(next => {
         this.detailCommentForm.patchValue(next);
       });

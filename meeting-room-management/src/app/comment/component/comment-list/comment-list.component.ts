@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CommentService} from '../../service/comment.service';
-import {Comment} from '../../model/comment.class';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {Comment} from '../../model/Comment.class';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-comment-list',
@@ -12,7 +12,6 @@ export class CommentListComponent implements OnInit {
   public comments: Comment[];
   public status = true;
   formSearch: FormGroup;
-  // public total: number;
   p: any;
 
   constructor(
@@ -22,12 +21,14 @@ export class CommentListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // tslint:disable-next-line:no-unused-expression
+    this.comments;
     this.p = 0;
     this.commentService.getAllComment().subscribe(data => {
       this.comments = data;
-      console.log(this.comments);
     }, error => console.log(error));
     this.formSearch = this.formBuilder.group({
+      // userNameSearch: ['', Validators.pattern(/^[a-zA-Z\d]+(([\',. -][a-zA-Z\d ])?[a-zA-Z\d]*)*$/)],
       userNameSearch: [''],
       roomNameSearch: [''],
       statusSearch: ['']
@@ -38,7 +39,6 @@ export class CommentListComponent implements OnInit {
     this.p = 0;
     // tslint:disable-next-line:max-line-length
     this.commentService.search(this.formSearch.value.userNameSearch, this.formSearch.value.roomNameSearch, this.formSearch.value.statusSearch).subscribe(data => {
-      console.log(data);
       this.comments = data;
     }, error =>  console.log(error));
   }

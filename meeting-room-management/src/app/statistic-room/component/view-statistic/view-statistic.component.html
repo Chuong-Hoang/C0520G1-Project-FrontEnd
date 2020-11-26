@@ -1,14 +1,13 @@
 <br>
-<br>
-<br>
 <div class="container-fluid">
-  <div class="row d-flex justify-content-center ">
-    <h1 class="font-weight-bold" style="color: #3c3c3c">Báo cáo thống kê </h1>
+  <div class="row d-flex justify-content-center ml-5">
+    <h1 class="font-weight-bold pl-5" style="color: #3c3c3c">Báo cáo thống kê </h1>
   </div>
 </div>
 <div class="container-fluid justify-content-center">
-  <div class="row">
+  <div class=" container-fluid row">
     <div class="col-md-2 mt-5 ml-2"><h4 class="font-weight-bold">I. Biểu đồ thống kê</h4>
+      <label class="text-danger mt-1 offset-md-2">{{messageErrorYear}}</label>
       <div class="row ml-3">
         <label class="mt-1 font-weight-bold">Từ năm &nbsp;</label>
         <select [(ngModel)]="start" class="form-control col-md-6 ml-4 pl-4">
@@ -59,38 +58,62 @@
       <div class="container-fluid ">
         <div class="row mt-5">
           <div class="col-md-5 border border border-dark">
-            <form [formGroup]="statisticByTime" (ngSubmit)="onSubmitByTime()">
+            <form [formGroup]="statisticByTime">
               <h5 class="font-weight-bold mt-1">Theo thời gian</h5>
               <div formGroupName="dateGroup">
                 <div class="row">
                   <label class="font-weight-bold offset-md-2 mt-3">Từ ngày:</label>
                   <!--            <input class="form-control col-md-7 ml-3" type="date" formControlName="startDate" >-->
                   <mat-form-field class="ml-3">
-                    <input matInput [matDatepicker]="picker" [max]="maxDate" [min]="minDate" placeholder="Choose a date"
+                    <input matInput [matDatepicker]="picker" [max]="maxDate" [min]="minDate"
+                           placeholder="chọn ngày bắt đầu"
                            formControlName="startIn"
                            id="startIn">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
+                  <div class="offset-md-3 pl-4">
+                    <span class="text-danger"
+                          *ngIf="statisticByTime.get('dateGroup').get('startIn').errors?.required && statisticByTime.get('dateGroup').get('startIn').touched">Vui lòng nhập ngày bắt đầu</span>
+                  </div>
                 </div>
                 <div class="row mt-3">
                   <label class="font-weight-bold offset-md-2 mt-3">Đến ngày: </label>
-                  <!--            <input class="form-control col-md-7 ml-1" type="date" formControlName="endDate">-->
                   <mat-form-field class="ml-2">
                     <input matInput [matDatepicker]="picker1" [max]="maxDate" [min]="minDate"
-                           placeholder="Choose a date" formControlName="startOut"
+                           placeholder="Chọn ngày kết thúc" formControlName="startOut"
                            id="startOut">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                   </mat-form-field>
                 </div>
               </div>
-              <div class="d-flex justify-content-end mt-3 mb-2">
-                <span class="text-danger mr-5 font-weight-bold"
-                      *ngIf="statisticByTime.get('dateGroup').hasError('invalidDateNotMatch') && statisticByTime.get('dateGroup').touched">Dữ liệu không đúng định dang!!</span>
-                <button class="btn btn-success" type="submit" [disabled]="statisticByTime.invalid">
-                  Thống kê
-                </button>
+              <div class="row">
+                <div class="offset-md-3 pl-4">
+                    <span class="text-danger"
+                          *ngIf="statisticByTime.get('dateGroup').get('startOut').errors?.required && statisticByTime.get('dateGroup').get('startOut').touched">Vui lòng nhập ngày kết thúc</span>
+                </div>
+                <div
+                  *ngIf="statisticByTime.get('dateGroup').get('startIn').errors?.required || statisticByTime.get('dateGroup').get('startOut').errors?.required ; else block"></div>
+                <ng-template #block class=" offset-md-3 pl-2">
+                   <span class="text-danger"
+                         *ngIf="statisticByTime.get('dateGroup').hasError('invalidDateNotMatch') && statisticByTime.get('dateGroup').touched">Khoảng thời gian không hợp lệ</span>
+                </ng-template>
+
+                <div class="offset-md-9  mt-3 mb-2">
+                  <div *ngIf="loading == true; else blockLoading">
+                    <button class="btn btn-success mt-2 " (click)="onSubmitByTime()" type="submit"
+                            [disabled]="statisticByTime.invalid">
+                      Thống kê
+                    </button>
+                  </div>
+                  <ng-template #blockLoading class="offset-md-9  mt-3 mb-2">
+                    <button class="btn btn-primary mt-2" type="button" disabled>
+                      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                      Đang tải...
+                    </button>
+                  </ng-template>
+                </div>
               </div>
             </form>
           </div>
@@ -165,10 +188,17 @@
                   </div>
 
                   <div class="row">
-                    <div class="col-md-9 font-weight-bold"><p class="text-danger ml-3">{{messageError}}</p></div>
+                    <div class="col-md-9"><p class="text-danger ml-3 mt-2">{{messageError}}</p></div>
                     <div class="col-md-3 mb-1">
-                      <button class="btn  btn-success" type="submit">Thống kê</button>
+                      <div *ngIf="loading1 == true; else blockLoading1">
+                        <button class="btn  btn-success" type="submit">Thống kê</button>
+                      </div>
                     </div>
+                    <ng-template #blockLoading1 class="offset-md-7  mt-3 mb-2">
+                      <button class=" btn btn-primary mt-2" type="button" disabled>
+                        Đang tải...
+                      </button>
+                    </ng-template>
                   </div>
                 </div>
               </div>
