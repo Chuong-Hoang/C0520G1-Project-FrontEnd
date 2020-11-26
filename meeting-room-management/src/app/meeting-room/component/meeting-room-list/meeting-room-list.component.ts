@@ -87,6 +87,7 @@ export class MeetingRoomListComponent implements OnInit {
   }
 
   search(): void {
+    this.p = 0;
     this.meetingRoomList = [];
     this.result = '';
     console.log(this.formSearch.value);
@@ -103,5 +104,16 @@ export class MeetingRoomListComponent implements OnInit {
 
   sendMessage(): string {
     return this.route.snapshot.queryParamMap.get('message');
+  }
+
+  reset(): void {
+    this.formSearch = this.formBuilder.group({
+      roomName: [''],
+      floor: [''],
+      roomTypeName: [''],
+      roomStatusName: [''],
+      zone: [''],
+      capacity: ['']
+    });
   }
 }

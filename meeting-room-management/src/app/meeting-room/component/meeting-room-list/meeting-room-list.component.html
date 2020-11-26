@@ -88,14 +88,13 @@
 
       <div class="col-2 col-sm-2 mt-3">
         <div class="row">
-          <button type="reset" class="btn btn-warning btn-sm">Khôi phục</button>
+          <button type="submit" class="btn btn-warning btn-sm" (click)="reset()">Khôi phục</button>
         </div>
         <div class="row mt-4">
           <button type="submit" class="btn btn-primary btn-sm" [disabled]="formSearch.invalid">Tìm kiếm&nbsp;</button>
         </div>
       </div>
     </div>
-
   </form>
 </div>
 
