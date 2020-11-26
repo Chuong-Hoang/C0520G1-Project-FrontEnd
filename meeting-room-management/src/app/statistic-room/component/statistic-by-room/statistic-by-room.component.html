@@ -1,3 +1,32 @@
+
+<h2 class="d-flex justify-content-center font-weight-bold">Số liệu thống kê theo thời gian.</h2>
+<label class="font-weight-bold"> Số liệu thống kê gồm:</label>
+<label class="ml-5 d-flex">
+  <label *ngIf="inputRoomType; else blockType" class="d-flex ml-2" >
+    <p class="font-weight-bold">Loại phòng: &nbsp;</p>
+    {{inputRoomType+ ';'}}
+  </label>
+  <ng-template #blockType>
+  </ng-template>
+  <label *ngIf="inputRoomName; else blockName1" class="d-flex ml-2">
+    <p class="font-weight-bold">Tên phòng: &nbsp;</p>
+    {{inputRoomName+ ';'}}
+  </label>
+  <ng-template #blockName1>
+  </ng-template>
+  <label *ngIf="inputMonth; else blockMonth" class="d-flex ml-2">
+    <p class="font-weight-bold">Tháng: &nbsp;</p>
+    {{inputMonth+ ';'}}
+  </label>
+  <ng-template #blockMonth>
+  </ng-template>
+  <label *ngIf="inputYear; else blockYear" class="d-flex ml-2">
+    <p class="font-weight-bold">Năm: &nbsp;</p>
+    {{inputYear+ ';'}}
+  </label>
+  <ng-template #blockYear>
+  </ng-template>
+</label>
 <div class="container register">
   <div class="row">
     <div class="col-md-12 register-right">

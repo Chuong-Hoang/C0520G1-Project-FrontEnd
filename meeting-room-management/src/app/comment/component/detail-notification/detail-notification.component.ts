@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
 import { TitleCasePipe } from '@angular/common';
+import {Title} from '@angular/platform-browser';
 @Component({
   selector: 'app-detail-notification',
   templateUrl: './detail-notification.component.html',
@@ -26,11 +27,13 @@ export class DetailNotificationComponent implements OnInit {
               private tokenStorageService: TokenStorageService,
               public router: Router,
               public dialogRef: MatDialogRef<DetailNotificationComponent>,
+              private title: Title,
               @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
 
   ngOnInit(): void {
+    this.title.setTitle('Feedback');
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       this.fullName = this.tokenStorageService.getUser().fullName;

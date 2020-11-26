@@ -1,3 +1,7 @@
+<h2 class="d-flex justify-content-center font-weight-bold">Số liệu thống kê theo thời gian.</h2>
+<label class="ml-5 d-flex"><p class="font-weight-bold">
+  Số liệu thống kê từ ngày:&nbsp;</p> {{startDate | date: 'dd/MM/yyyy'}}
+  <p class="font-weight-bold">;&nbsp;&nbsp;Đến:&nbsp;</p> {{endDate | date: 'dd/MM/yyyy'}};</label>
 <div class="container register">
   <div class="row">
     <div class="col-md-12 register-right">
@@ -19,8 +23,8 @@
                 <h5 class="font-weight-bold mt-2">Kết quả</h5>
                 <div class="col-md-11 offset-md-1">
                   <div class="row">
-                    <div class="col-md-3 font-weight-bold">Từ ngày: {{startDate | date: 'dd/MM/yy'}}</div>
-                    <div class="col-md-3 font-weight-bold">Đến ngày: {{endDate | date: 'dd/MM/yy'}}</div>
+<!--                    <div class="col-md-3 font-weight-bold">Từ ngày: {{startDate | date: 'dd/MM/yy'}}</div>-->
+<!--                    <div class="col-md-3 font-weight-bold">Đến ngày: {{endDate | date: 'dd/MM/yy'}}</div>-->
                     <div class="col-md-5 font-weight-bold">Tổng số lần sử dụng: {{bookedRoomByTime.length}}</div>
 
                   </div>

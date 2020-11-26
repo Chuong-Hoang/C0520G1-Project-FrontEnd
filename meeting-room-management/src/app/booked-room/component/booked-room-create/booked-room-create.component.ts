@@ -4,6 +4,7 @@ import {BookedRoomService} from '../../service/booked-room.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {BookedRoomCancelComponent} from '../booked-room-cancel/booked-room-cancel.component';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-booked-room-create',
@@ -48,11 +49,13 @@ export class BookedRoomCreateComponent implements OnInit, OnChanges {
     private bookedRoomService: BookedRoomService,
     private activatedRoute: ActivatedRoute,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private title: Title,
   ) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Booked Room');
     this.startDateSearch = this.activatedRoute.snapshot.queryParamMap.get('startDateSearch');
     console.log('init***start date input from search: ' + this.startDateSearch);
     this.endDateSearch = this.activatedRoute.snapshot.queryParamMap.get('endDateSearch');

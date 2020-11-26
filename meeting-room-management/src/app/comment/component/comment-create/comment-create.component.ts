@@ -7,6 +7,7 @@ import {MeetingRoom} from '../../model/MeetingRoom.class';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
 import {MeetingRoomService} from '../../../meeting-room/service/meeting-room.service';
+import {Title} from '@angular/platform-browser';
 
 
 @Component({
@@ -26,10 +27,12 @@ export class CommentCreateComponent implements OnInit {
               public meetingRoomService: MeetingRoomService,
               public commentService: CommentService,
               public router: Router,
-              private tokenStorageService: TokenStorageService
+              private tokenStorageService: TokenStorageService,
+              private title: Title,
   ) {}
 
   ngOnInit(): void {
+    this.title.setTitle('Feedback');
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       this.user = this.tokenStorageService.getUser().userName;

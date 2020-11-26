@@ -18,6 +18,10 @@ export class StatisticByRoomComponent implements OnInit {
   // lấy khoảng thời gian từ service
   public startDate: string;
   public endDate: string;
+  public inputRoomType: string;
+  public inputRoomName: string;
+  public inputMonth: string;
+  public inputYear: string;
   // biến phân trang
   public p: number;
   // biểu đồ
@@ -75,6 +79,10 @@ export class StatisticByRoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.inputRoomType = this.statisticRoom.roomType;
+    this.inputRoomName = this.statisticRoom.roomName;
+    this.inputMonth = this.statisticRoom.month;
+    this.inputYear = this.statisticRoom.year;
     this.bookedRoomByRoom = this.statisticRoom.bookedRoomByRoom;
     this.barChartData = [];
     this.exportExcel(this.bookedRoomByRoom);
@@ -95,6 +103,9 @@ export class StatisticByRoomComponent implements OnInit {
       this.dataOfFootballers.push(
         {
           stt: (i + 1),
+          userName: bookedRoom[i].userName,
+          roomName: bookedRoom[i].roomName,
+          content: bookedRoom[i].content,
           startDate: bookedRoom[i].startDate,
           endDate: bookedRoom[i].endDate,
           startTime: bookedRoom[i].startTime,
