@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {AssetServerService} from '../../service/asset-server.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-asset-delete',
@@ -17,11 +18,13 @@ export class AssetDeleteComponent implements OnInit {
     private dialogRef: MatDialogRef<AssetDeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private assetServerService: AssetServerService,
-    private router: Router
+    private router: Router,
+    private title: Title,
   ) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Asset');
     this.assetName = this.data.data1.assetName;
     this.assetOfId = this.data.data1.idAsset;
   }

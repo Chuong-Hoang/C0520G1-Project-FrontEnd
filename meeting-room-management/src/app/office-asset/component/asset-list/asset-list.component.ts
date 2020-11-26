@@ -4,6 +4,7 @@ import {AssetCreateQuantityComponent} from '../asset-create-quantity/asset-creat
 import {AssetServerService} from '../../service/asset-server.service';
 import {ActivatedRoute} from '@angular/router';
 import {AssetDeleteComponent} from '../asset-delete/asset-delete.component';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-asset-list',
@@ -21,12 +22,14 @@ export class AssetListComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private assetService: AssetServerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private title: Title,
   ) {
   }
 
   ngOnInit(): void {
     // this.p = 0;
+    this.title.setTitle('Asset');
     this.assetService.getAll().subscribe(data => {
       this.assetList = data;
       console.log(this.assetList);

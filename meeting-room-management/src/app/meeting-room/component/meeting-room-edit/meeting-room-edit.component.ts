@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {AssetsDetailService} from '../../../assets-detail/service/assets-detail.service';
 import {AssetDetail} from '../../../assets-detail/model/AssetDetail.class';
 import {AssetsDetailDialogChoiceComponent} from '../../../assets-detail/component/assets-detail-dialog-choice/assets-detail-dialog-choice.component';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-meeting-room-edit',
@@ -24,9 +25,11 @@ export class MeetingRoomEditComponent implements OnInit {
     public router: Router,
     public assetsDetailService: AssetsDetailService,
     public activatedRoute: ActivatedRoute,
+    private title: Title,
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Meeting Room');
     this.formEditRoom = this.formBuilder.group({
       roomName: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]{1,30}$')]],
       floor: ['', [Validators.required, Validators.pattern('^[0-9]{0,20}$')]],

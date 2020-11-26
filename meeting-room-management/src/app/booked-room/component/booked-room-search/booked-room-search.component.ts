@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BookedRoomService} from '../../service/booked-room.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-booked-room-search',
@@ -40,10 +41,12 @@ export class BookedRoomSearchComponent implements OnInit, OnDestroy {
   constructor(
     private bookedRoomService: BookedRoomService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Booked Room');
     this.meetingRoomList = [];
     this.size_msg = 'Rất tiếc, không tìm thấy kết quả nào!';
     this.p = 0;

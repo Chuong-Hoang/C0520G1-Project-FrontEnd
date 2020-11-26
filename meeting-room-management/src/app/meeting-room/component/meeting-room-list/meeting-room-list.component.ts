@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MeetingRoomDeleteComponent} from '../meeting-room-delete/meeting-room-delete.component';
 import {MeetingRoomService} from '../../service/meeting-room.service';
 import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-meeting-room-list',
@@ -29,11 +30,13 @@ export class MeetingRoomListComponent implements OnInit {
     public route: ActivatedRoute,
     public dialog: MatDialog,
     public formBuilder: FormBuilder,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    private title: Title,
   ) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Meeting Room');
     const user = this.tokenStorageService.getUser();
     this.role = user.role;
 

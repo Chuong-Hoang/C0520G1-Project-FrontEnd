@@ -5,6 +5,7 @@ import {UserCreateComponent} from '../user-create/user-create.component';
 import {UserEditComponent} from '../user-edit/user-edit.component';
 import {UserService} from '../../service/user.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-list',
@@ -19,11 +20,13 @@ export class UserListComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public userService: UserService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private title: Title
   ) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('User');
     this.p = 0;
     this.userService.getAllUser().subscribe(data => {
       this.userList = data;

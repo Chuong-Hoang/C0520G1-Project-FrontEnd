@@ -11,6 +11,7 @@ import {StatisticByRoomComponent} from '../statistic-by-room/statistic-by-room.c
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Label as ng2Chart} from 'ng2-charts/lib/base-chart.directive';
 import {BookedChart} from '../../model/booked-chart.class';
+import {Title} from '@angular/platform-browser';
 
 
 @Component({
@@ -82,11 +83,13 @@ export class ViewStatisticComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private dialog: MatDialog,
-              private statisticRoom: StatisticRoomService) {
+              private statisticRoom: StatisticRoomService,
+              private title: Title) {
   }
 
 
   ngOnInit(): void {
+    this.title.setTitle('Statistic');
     this.loading = true;
     this.loading1 = true;
     console.log('thống kê theo thời gian');
