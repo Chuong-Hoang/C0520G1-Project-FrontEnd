@@ -4,5 +4,5 @@ import {LoginComponent} from './component/login/login.component';
 
 export const OfficeCommonRoute: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent}
 ];

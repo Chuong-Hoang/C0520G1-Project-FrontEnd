@@ -5,8 +5,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {BookedRoomCancelComponent} from '../booked-room-cancel/booked-room-cancel.component';
 import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
-import {DatePipe} from '@angular/common';
+import {DatePipe, Time} from '@angular/common';
 import {BookedRoom} from '../../model/booked-room';
+import {TimeFrame} from '../../model/time-frame';
 
 @Component({
   selector: 'app-booked-room-create',
@@ -27,6 +28,8 @@ export class BookedRoomCreateComponent implements OnInit {
   public meetingRoomId: any;
   public pipe: DatePipe;
   public inputBookedRoom: BookedRoom;
+  public startTimeBooked: TimeFrame;
+  endTimeBooked: TimeFrame;
 
   // get data transfer from search input fields when having available results <Chương comment>
   public startDateSearch = '';
@@ -47,6 +50,7 @@ export class BookedRoomCreateComponent implements OnInit {
   startTimeId_msg = 'Vui lòng nhập giờ hợp lệ';
   // tslint:disable-next-line:variable-name
   endTimeId_msg = 'Vui lòng nhập giờ hợp lệ';
+  public disableSelect = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -72,8 +76,22 @@ export class BookedRoomCreateComponent implements OnInit {
     console.log('init***id meetingRoom input from search: ' + this.idSentFromSearch);
     console.log('init***booked-date-input from search: ' + this.pipe.transform(this.bookedDate, 'yyyy-MM-dd'));
 
-    // get userId from loggin form
+    // get userId from login form
     this.bookedUserId = this.tokenStorageService.getUser().id;
+
+    // get startTimeValue by Id
+    this.bookedRoomService.getTimeFrameById(this.startTimeSearch).subscribe(data => {
+      if (data != null) {
+        this.startTimeBooked = data;
+      }
+    });
+
+    // get endTimeValue by Id
+    this.bookedRoomService.getTimeFrameById(this.endTimeSearch).subscribe(data => {
+      if (data != null) {
+        this.endTimeBooked = data;
+      }
+    });
 
     this.formCreate = this.formBuilder.group({
       id: '',

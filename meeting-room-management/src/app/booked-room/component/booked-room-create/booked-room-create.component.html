@@ -7,7 +7,7 @@
       <input type="text" class="form-control form-control-sm mb-2" formControlName="bookedUserId" readonly [hidden]="true">
       <input type="text" class="form-control form-control-sm mb-2" formControlName="bookedDate" readonly [hidden]="true">
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Tên phòng <sup class="text-danger">*</sup></label>
+        <label class="col-sm-3 col-form-label">Tên phòng <sup class="text-danger"></sup></label>
         <div class="col-sm-9">
           <input class="form-control form-control-sm" [value]="roomName" readonly/>
           <!--<select class="form-control form-control-sm" formControlName="meetingRoomId">-->
@@ -35,7 +35,7 @@
       <!--</div>-->
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Ngày bắt đầu <sup class="text-danger">*</sup></label>
+        <label class="col-sm-3 col-form-label">Ngày bắt đầu <sup class="text-danger"></sup></label>
         <div class="col-sm-9">
           <input class="form-control form-control-sm" type="text" formControlName="startDate" readonly/>
           <!--<mat-form-field class="w-100">-->
@@ -51,7 +51,7 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Ngày kết thúc <sup class="text-danger">*</sup></label>
+        <label class="col-sm-3 col-form-label">Ngày kết thúc <sup class="text-danger"></sup></label>
         <div class="col-sm-9">
           <input class="form-control form-control-sm" type="text" formControlName="endDate" readonly/>
           <!--<mat-form-field class="w-100">            -->
@@ -67,12 +67,13 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Giờ bắt đầu <sup class="text-danger">*</sup></label>
+        <label class="col-sm-3 col-form-label">Giờ bắt đầu <sup class="text-danger"></sup></label>
         <div class="col-sm-9">
-          <select class="form-control form-control-sm" formControlName="startTimeId">
-            <option value="">--Chọn--</option>
-            <option *ngFor="let item of timeFrameList" [value]="item.idTime">{{ item.timeValue}}</option>
-          </select>
+          <!--<select class="form-control form-control-sm" formControlName="startTimeId">-->
+          <!--  <option value="">&#45;&#45;Chọn&#45;&#45;</option>-->
+          <!--  <option *ngFor="let item of timeFrameList" [value]="item.idTime">{{ item.timeValue}}</option>-->
+          <!--</select>-->
+          <input type="text" class="form-control form-control-sm" [value]="startTimeBooked.timeValue" readonly>
           <span class="text-danger"
                 *ngIf="formCreate.get('startTimeId').invalid && formCreate.get('startTimeId').touched">{{ startTimeId_msg }}
           </span>
@@ -80,12 +81,13 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Giờ kết thúc <sup class="text-danger">*</sup></label>
+        <label class="col-sm-3 col-form-label">Giờ kết thúc <sup class="text-danger"></sup></label>
         <div class="col-sm-9">
-          <select class="form-control form-control-sm" formControlName="endTimeId">
-            <option value="">--Chọn--</option>
-            <option *ngFor="let item of timeFrameList" [value]="item.idTime">{{ item.timeValue}}</option>
-          </select>
+          <!--<select class="form-control form-control-sm" formControlName="endTimeId">-->
+          <!--  <option value="">&#45;&#45;Chọn&#45;&#45;</option>-->
+          <!--  <option *ngFor="let item of timeFrameList" [value]="item.idTime">{{ item.timeValue}}</option>-->
+          <!--</select>-->
+          <input type="text" class="form-control form-control-sm" [value]="endTimeBooked.timeValue" readonly>
           <span class="text-danger"
                 *ngIf="formCreate.get('endTimeId').invalid && formCreate.get('endTimeId').touched">{{ endTimeId_msg }}
           </span>

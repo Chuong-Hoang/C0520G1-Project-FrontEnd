@@ -14,8 +14,6 @@ export class Comment {
   // tslint:disable-next-line:variable-name
   private _status: boolean;
   // tslint:disable-next-line:variable-name
-  private _statusView: boolean;
-  // tslint:disable-next-line:variable-name
   private _errorType: ErrorType;
   // tslint:disable-next-line:variable-name
   private _meetingRoom: MeetingRoom;
@@ -91,14 +89,6 @@ export class Comment {
 
   set meetingRoom(value: MeetingRoom) {
     this._meetingRoom = value;
-  }
-
-  get statusView(): boolean {
-    return this._statusView;
-  }
-
-  set statusView(value: boolean) {
-    this._statusView = value;
   }
 
   get replier(): User {

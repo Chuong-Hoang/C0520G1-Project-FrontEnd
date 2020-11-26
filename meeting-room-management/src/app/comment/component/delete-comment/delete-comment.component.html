@@ -1,8 +1,7 @@
-<h5 class="d-flex justify-content-center">Xác nhận xóa thông báo</h5>
+<p style="color: red">Confirm Comment Delete</p>
 <hr>
-<p class="my-3">Bạn có muốn xóa thông báo <span class="text-danger font-weight-bolder">{{commentName}}</span>? <br> Lưu
-  ý : không thể hoàn lại!!</p>
+<p class="my-3">Do you want Delete <span class="text-danger font-weight-bolder">{{commentName}}</span>? <br> Waring: action not undo</p>
 <div class="row d-flex justify-content-end">
-  <button mat-dialog-close class="btn btn-secondary mr-3">Hủy</button>
-  <button class="btn btn-danger mr-3" (click)="deleteComment()">Xóa</button>
+  <button mat-dialog-close class="btn btn-warning mr-3">Close</button>
+  <button class="btn btn-danger mr-3" (click)="deleteComment()">Delete</button>
 </div>

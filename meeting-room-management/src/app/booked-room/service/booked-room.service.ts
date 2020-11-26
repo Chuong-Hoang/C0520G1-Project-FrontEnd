@@ -10,10 +10,14 @@ export class BookedRoomService {
   public API_TIME_FRAME = 'http://localhost:8080/time-frame';
   public API_MEETING_ROOM = 'http://localhost:8080/meeting-room';
   public API_ROOM_TYPE = 'http://localhost:8080/room-type';
-  public API_BOOKED_ROOM_BY_ID = 'http://localhost:8080/findBookedRoom';
-  public API_BOOKED_ROOM_DELETE = 'http://localhost:8080/delete';
+  public API_ASSET = 'http://localhost:8080/asset-list';
 
   constructor(private http: HttpClient) { }
+
+  // get asset List
+  getAllAssets(): Observable<any>{
+    return this.http.get(this.API_ASSET);
+  }
 
   // get all booked-rooms
   getAllBookedRooms(idUser): Observable<any>{
@@ -31,6 +35,8 @@ export class BookedRoomService {
 
   // find bookedRooms with input fields
   searchBookedRooms(ele): Observable<any>{
+    console.log('Service calls search bookedRoom function -->bookedRoomSearch:');
+    console.log(ele);
     return this.http.post(this.API_BOOKED_ROOM + '/search', ele);
   }
 
@@ -59,7 +65,7 @@ export class BookedRoomService {
 
   // delete booked-room (delete booking)
   deleteBookedRoomById(id): Observable<any>{
-    return this.http.delete(this.API_BOOKED_ROOM_DELETE + '/' + id);
+    return this.http.delete(this.API_BOOKED_ROOM + '/' + id);
   }
 
   // get TimeFrame List
@@ -68,12 +74,13 @@ export class BookedRoomService {
     return this.http.get(this.API_TIME_FRAME);
   }
 
+  // find TimeFrame each by Id
+  getTimeFrameById(id): Observable<any>{
+    return this.http.get(this.API_TIME_FRAME + '/' + id);
+  }
+
   // get RoomType List
   getAllRoomTypes(): Observable<any>{
     return this.http.get(this.API_ROOM_TYPE);
-  }
-
-  getFullBookedRoomById(id): Observable<any>{
-    return this.http.get(this.API_BOOKED_ROOM_BY_ID + '/' + id);
   }
 }

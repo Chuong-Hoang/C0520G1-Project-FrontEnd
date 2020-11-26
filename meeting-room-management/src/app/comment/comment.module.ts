@@ -11,15 +11,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { BrowserModule } from '@angular/platform-browser';
 import { DeleteCommentComponent } from './component/delete-comment/delete-comment.component';
 import {MaterialModule} from './material.module';
-import { DetailNotificationComponent } from './component/detail-notification/detail-notification.component';
 @NgModule({
-  declarations: [CommentListComponent,
-    CommentHandleComponent,
-    CommentCreateComponent,
-    NotificationComponent,
-    DeleteCommentComponent,
-    DetailNotificationComponent
-  ],
+  declarations: [CommentListComponent, CommentHandleComponent, CommentCreateComponent, NotificationComponent, DeleteCommentComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(CommentRoutes),

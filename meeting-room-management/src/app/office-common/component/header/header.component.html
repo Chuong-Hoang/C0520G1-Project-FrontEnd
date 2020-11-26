@@ -14,7 +14,7 @@
           <a class="nav-link" href="/asset">Quản lí tài sản</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/user-list">Quản lí người dùng</a>
+          <a class="nav-link" [routerLink]="['user-list']" >Quản lí người dùng</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/statistic">Thống kê</a>
@@ -26,10 +26,10 @@
 
       <ul class="navbar-nav mr-auto topnav" routerLinkActive="active" *ngIf="showUserBoard">
         <li class="nav-item">
-          <a class="nav-link" href="/meeting-room">Danh sách phòng họp</a>
+          <a class="nav-link text-white" href="/meeting-room">Danh sách phòng họp</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOffice" role="button"
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownOffice" role="button"
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Đăng kí phòng họp
           </a>
@@ -49,23 +49,21 @@
 
       <ul class="navbar-nav ml-auto topnav">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLanguage" role="button" data-toggle="dropdown"
-             aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLanguage" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Ngôn Ngữ
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownLanguage">
-            <a class="dropdown-item" href="#">Tiếng Anh</a>
+            <a class="dropdown-item" href="#" >Tiếng Anh</a>
             <a class="dropdown-item" href="#">Tiếng Việt</a>
           </div>
         </li>
         <li class="nav-item dropdown" *ngIf="!isLoggedIn">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
-             aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Tài Khoản
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
             <a class="dropdown-item" href="/login">Đăng nhập</a>
-            <a class="dropdown-item" href="#">Đăng ký</a>
+            <a class="dropdown-item" href="#">Đăng kí</a>
           </div>
         </li>
         <li class="nav-item dropdown" *ngIf="isLoggedIn">

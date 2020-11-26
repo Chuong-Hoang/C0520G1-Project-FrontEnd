@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MeetingRoomService} from '../../service/meeting-room.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-meeting-room-delete',
@@ -10,29 +9,24 @@ import {Router} from '@angular/router';
 })
 export class MeetingRoomDeleteComponent implements OnInit {
 
-  public roomName: string;
-  public idMeetingRoom: number;
+  public meetingRoomTemp;
+  public idMeetingRoomTemp;
 
   constructor(
     public dialogRef: MatDialogRef<MeetingRoomDeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public meetingRoomService: MeetingRoomService,
-    public router: Router) {
+    public meetingRoomService: MeetingRoomService) {
   }
 
   ngOnInit(): void {
-    this.roomName = this.data.dataEl.roomName;
-    this.idMeetingRoom = this.data.dataEl.idRoom;
-    console.log(this.idMeetingRoom);
+    this.meetingRoomTemp = this.data.dataEl;
+    this.idMeetingRoomTemp = this.data.dataEl.id;
   }
 
 
   delete(): void {
-    this.meetingRoomService.deleteMeetingRoomById(this.idMeetingRoom).subscribe(data => {
+    this.meetingRoomService.deleteMeetingRoomById(this.idMeetingRoomTemp).subscribe(data => {
       this.dialogRef.close();
-      this.router.navigate(['/meeting-room'], {
-        queryParams: {message: 'Xóa thành công'}
-      });
     });
   }
 }

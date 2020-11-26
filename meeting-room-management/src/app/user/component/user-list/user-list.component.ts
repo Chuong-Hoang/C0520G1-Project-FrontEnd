@@ -4,7 +4,6 @@ import {UserDeleteComponent} from '../user-delete/user-delete.component';
 import {UserCreateComponent} from '../user-create/user-create.component';
 import {UserEditComponent} from '../user-edit/user-edit.component';
 import {UserService} from '../../service/user.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-user-list',
@@ -14,33 +13,17 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class UserListComponent implements OnInit {
   public userList;
   p: any;
-  formSearch: FormGroup;
 
   constructor(
     public dialog: MatDialog,
-    public userService: UserService,
-    public formBuilder: FormBuilder
+    public userService: UserService
   ) {
   }
 
   ngOnInit(): void {
-    this.p = 0;
     this.userService.getAllUser().subscribe(data => {
       this.userList = data;
       console.log(data);
-    });
-    this.formSearch = this.formBuilder.group({
-      input1: [''],
-      input2: [''],
-    });
-  }
-
-  onSearch(): void {
-    this.p = 0;
-    this.userService.searchUserByUserNameOrDepartment(this.formSearch.value.input1,
-      this.formSearch.value.input2).subscribe(data => {
-      console.log(data);
-      this.userList = data;
     });
   }
 
@@ -49,7 +32,7 @@ export class UserListComponent implements OnInit {
     this.userService.getUserById(idUser).subscribe(data => {
       const dialogRef = this.dialog.open(UserDeleteComponent, {
         width: '570px',
-        height: '200x',
+        height: '225px',
         data: {dataUser: data},
         disableClose: true
       });
@@ -65,7 +48,7 @@ export class UserListComponent implements OnInit {
   openDialogAddNew() {
     const dialogRef = this.dialog.open(UserCreateComponent, {
       width: '740px',
-      height: '500px',
+      height: '580px',
       disableClose: true
     });
 
@@ -80,7 +63,7 @@ export class UserListComponent implements OnInit {
     this.userService.getUserById(idUser).subscribe(dataEdit => {
       const dialogRef = this.dialog.open(UserEditComponent, {
         width: '740px',
-        height: '450px',
+        height: '580px',
         data: {dataE: dataEdit.idUser},
         disableClose: true
       });
@@ -89,5 +72,6 @@ export class UserListComponent implements OnInit {
         this.ngOnInit();
       });
     });
+
   }
 }

@@ -1,57 +1,95 @@
-<style>.hover:hover {
-  background-color: #545454;
-}</style>
 <div class="container-fluid 100vh">
-  <br>
+  <div class="">
+    <h1 class="d-flex justify-content-center">Header</h1>
+  </div>
+  <hr>
 
   <div class="row d-fex justify-content-center">
-    <div class="col-8 border border-dark px-0 rounded bg-secondary "><!--Thanh Tiêu Đề Thông Báo-->
-      <div class="col-12 px-0 border-bottom border-light" style="height: 40px">
-        <h3 class="d-flex justify-content-center  my-0 text-white mt-3">Thông báo <span *ngIf="count>0">{{count}}</span></h3>
+    <div class="col-8 border border-success px-0 rounded bg-light "><!--Thanh Tiêu Đề Thông Báo-->
+      <div class="col-12 px-0 ">
+        <h3 class="d-flex justify-content-center border-bottom border-success my-0">Thông Báo</h3>
       </div>
       <!--Phần Thân Nội Dung thông Báo-->
+
       <div class="container-fluid px-0">
         <div class="col-12 px-0">
-          <div style="height:70vh ;overflow: auto;">
-            <table class="col-12 px-0">
-              <tbody>
-              <tr *ngFor="let comment of commentsNotification" class="text-white ml-4"
-                  [ngClass]="{'bg-dark font-weight-light':!comment.statusView, 'bg-secondary  font-weight-light':comment.statusView}">
-                <div *ngIf="comment.status==true; else elseBlock"></div>
-                <ng-template #elseBlock>
-                  <!--                *Thông báo từ hệ thống gửi cho người dùng.-->
-                  <div *ngIf="comment.statusView==false"></div>
-                  <div class="row col-12 m-0 hover rounded-bottom">
-
-                    <div class="col-10 ml-4 my-2 px-0 " (click)="dialogDetailComment(comment.idComment)">
-                      <label>Phản hồi của bạn về lỗi {{comment.errorTypeName}} ngày "{{comment.commentTime}}" đã được
-                        trả lời nhấn vào <span class="text-success">->đây<-</span> xem chi tiết!!</label>
-                    </div>
-
-                    <div class="col-1 my-2 d-flex justify-content-end">
-                      <td>
-                        <div class="dropdown">
+          <table>
+            <tr style="height: 50px" *ngFor="let comment of commentsNotification" class="bg-secondary text-white mx-5">
+                <td class="col-10 m-3">
+                  <span class="">{{comment.contentReply}}</span>
+                </td>
+                <td class="col-2 m-3">
+                  <div class="dropdown">
                         <span class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                               aria-haspopup="true"
                               aria-expanded="false">
                         </span>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Đã Xem</a>
-                            <a class="dropdown-item" [routerLink]="['/comment-create']">Báo Cáo </a>
-                            <a class="dropdown-item" (click)="dialogDeleteComment(comment.idComment)">Xóa Thông Báo</a>
-                          </div>
-                        </div>
-                      </td>
-
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="#">Đã Xem</a>
+                      <a class="dropdown-item" [routerLink]="['/comment-create']">Báo Cáo </a>
+                      <a class="dropdown-item" (click)="dialogDeleteComment(comment.idComment)">Xóa Thông Báo</a>
                     </div>
                   </div>
-                </ng-template>
-              </tr>
-              </tbody>
-            </table>
+                </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="col-12">
+      </div>
+      <div class="col-12">
+        <div class="row bg-secondary text-white">
+          <span class="col-10 m-2">Khuyến mãi Sốc!!Thuê Phòng Hôm nay giảm ngay !!!</span>
+
+          <div class="dropdown col-1 m-2">
+                        <span class=" dropdown-toggle" type="button" id="dropdownMenuButton3" data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false">
+                        </span>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+              <!--                                <a class="dropdown-item" href="#">Đã Xem</a>-->
+              <a class="dropdown-item" href="#">Báo Cáo </a>
+              <a class="dropdown-item" href="#">Xóa Thông Báo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row bg-light text-dark">
+          <span class="col-10 m-2 bg-light">Phòng bạn thường xuyên đặt đang trống bạn có muốn đặt thuê ngay bây giờ không !?</span>
+
+          <div class="dropdown col-1 m-2">
+                        <span class=" dropdown-toggle" type="button" id="dropdownMenuButton4" data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false">
+                        </span>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
+              <a class="dropdown-item" href="#">Đã Xem</a>
+              <a class="dropdown-item" href="#">Báo Cáo </a>
+              <a class="dropdown-item" href="#">Xóa Thông Báo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <span class="col-10 m-2 ">Cảm ơn bạn đã phản hồi!Phản hồi của bạn đã được gửi thành công !! Chúng tôi sẽ giải quyết và thông báo cho bạn trong thời gian sớm nhất.</span>
+
+          <div class="dropdown col-1 m-2">
+                        <span class=" dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false">
+                        </span>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+              <a class="dropdown-item" href="#">Đã Xem</a>
+              <a class="dropdown-item" href="#">Báo Cáo </a>
+              <a class="dropdown-item" href="#">Xóa Thông Báo</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
   </div>
+
 </div>

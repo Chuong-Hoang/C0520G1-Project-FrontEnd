@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MeetingRoomService} from '../../service/meeting-room.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MeetingRoom} from '../../model/MeetingRoom';
 
 @Component({
   selector: 'app-meeting-room-detail',
@@ -10,9 +9,11 @@ import {MeetingRoom} from '../../model/MeetingRoom';
 })
 export class MeetingRoomDetailComponent implements OnInit {
 
+
   private router: Router;
+
   private idMeetingRoom: number;
-  public meetingRoom: MeetingRoom;
+  public meetingRoom;
 
   constructor(public activeRouter: ActivatedRoute, private meetRoomService: MeetingRoomService) {
   }
@@ -24,9 +25,15 @@ export class MeetingRoomDetailComponent implements OnInit {
         this.meetRoomService.getMeetingRoomById(this.idMeetingRoom).subscribe(next => {
           console.log(next);
           this.meetingRoom = next;
-          next.image = next.image.substring(144);
         }, error => console.log('error'));
       }
     );
+  //   const id = this.activeRouter.snapshot.paramMap.get('id');
+  //   console.log(id);
+  //   this._meetRoomService.getMeetingRoomById(id).subscribe( data => {
+  //     console.log(data);
+  //     this.meetingRoom = data;
+  //   },
+  //     error => console.log('error'));
   }
 }

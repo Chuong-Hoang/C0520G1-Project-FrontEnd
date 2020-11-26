@@ -1,3 +1,5 @@
+import {BookedUser} from './BookedUser.class';
+
 export class BookedRoom {
   public idBookedRoom: number;
   public startDate: string;

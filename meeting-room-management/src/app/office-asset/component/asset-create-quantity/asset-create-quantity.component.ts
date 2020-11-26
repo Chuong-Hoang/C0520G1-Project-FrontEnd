@@ -14,14 +14,13 @@ export class AssetCreateQuantityComponent implements OnInit {
   public dataId;
   public formEdit: FormGroup;
   public asset = new Asset();
-
   constructor(
-    private formBuilder: FormBuilder,
-    private assetService: AssetServerService,
+    public formBuilder: FormBuilder,
+    public assetService: AssetServerService,
     private activatedRouter: ActivatedRoute,
     private route: ActivatedRoute,
     private router: Router,
-    private dialogRef: MatDialogRef<AssetCreateQuantityComponent>,
+    public dialogRef: MatDialogRef<AssetCreateQuantityComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }
@@ -31,9 +30,9 @@ export class AssetCreateQuantityComponent implements OnInit {
       // idAsset: [''],
       assetName: [''],
       usingQuantity: [''],
-      fixingQuantity: ['', [Validators.required, Validators.pattern('^([0-9][\\d]*)$')]],
+      fixingQuantity: ['', [Validators.required]],
       image: [''],
-      total: ['', [Validators.required, Validators.pattern('^([1-9][\\d]*)$')]],
+      total: ['', [Validators.required]],
       description: [''],
       price: ['']
     });
@@ -45,13 +44,13 @@ export class AssetCreateQuantityComponent implements OnInit {
   }
 
   edit(): void {
-    if (this.formEdit.valid) {
-      this.assetService.edit(this.formEdit.value, this.dataId).subscribe(data => {
-        this.router.navigate(['asset'], {queryParams: {edit_msg: 'Cập nhật thành công !!!', si: true}});
-        this.dialogRef.close();
-      }, error => {
-        console.log(error);
-      });
-    }
+  if (this.formEdit.valid) {
+    this.assetService.edit(this.formEdit.value, this.dataId).subscribe(data => {
+      this.router.navigate(['asset'], {queryParams: {edit_msg: 'Cập nhật thành công !!!', si: true}});
+      this.dialogRef.close();
+    }, error => {
+      console.log(error);
+    });
   }
+}
 }

@@ -1,12 +1,17 @@
+// @ts-ignore
 import { Component, OnInit } from '@angular/core';
 import { MeetingRoomService} from '../../service/meeting-room.service';
+// @ts-ignore
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+// @ts-ignore
 import { Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {AssetsDetailDialogChoiceComponent} from '../../../assets-detail/component/assets-detail-dialog-choice/assets-detail-dialog-choice.component';
 import {AssetDetail} from '../../../assets-detail/model/AssetDetail.class';
 import {AssetsDetailService} from '../../../assets-detail/service/assets-detail.service';
 
+
+// @ts-ignore
 @Component({
   selector: 'app-meeting-room-add',
   templateUrl: './meeting-room-add.component.html',
@@ -14,8 +19,11 @@ import {AssetsDetailService} from '../../../assets-detail/service/assets-detail.
 })
 export class MeetingRoomAddComponent implements OnInit {
 
-  public roomTypeList;
+  public roomType;
+  public roomStatus;
   public formAddRoom: FormGroup;
+  public minDate = new Date();
+  public maxDate = new Date(2030, 1, 1);
   public assetsDetail: AssetDetail;
 
   constructor(
@@ -29,35 +37,30 @@ export class MeetingRoomAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.formAddRoom = this.formBuilder.group({
-      roomName: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]{1,30}$')]],
-      floor: ['', [Validators.required, Validators.pattern('^[0-9]{0,20}$')]],
-      zone: ['', [Validators.required]],
-      capacity: ['', [Validators.required, Validators.pattern('^[0-9]{0,20}$')]],
-      roomTypeName: ['', [Validators.required]],
-      image: [''],
+      _roomName: ['', [Validators.required]],
+      _floor: ['', [Validators.required]],
+      _zone: ['', [Validators.required]],
+      _capacity: ['', [Validators.required]],
+      _roomType: ['', [Validators.required]],
+      _image: ['', [Validators.required]],
     });
     this.meetingRoomService.getAllRoomType().subscribe(data => {
-      this.roomTypeList = data;
+      this.roomType = data;
     });
   }
 
   openDialog(): void {
-    this.assetsDetailService.getAllAssetsDetail().subscribe(dataOfAssetsDetail => {
+    // this.assetsDetailService.getAllAssetsDetail().subscribe(dataOfAssetsDetail => {
       const dialogRef = this.dialog.open(AssetsDetailDialogChoiceComponent, {
         width: '800px',
-        data: {data1: dataOfAssetsDetail},
-        disableClose: true
+        // data: {data1: dataOfAssetsDetail}
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        this.assetsDetail = result;
+        console.log('The dialog was closed');
+        // this.assetsDetail = result;
       });
-    });
-  }
+    // });
 
-  addNewMeetingRoom(): void {
-    this.meetingRoomService.addNewMeetingRoom(this.formAddRoom.value).subscribe(data => {
-      this.router.navigateByUrl('meeting-room');
-    });
   }
 }
