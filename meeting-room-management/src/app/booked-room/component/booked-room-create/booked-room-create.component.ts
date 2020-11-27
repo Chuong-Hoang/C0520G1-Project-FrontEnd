@@ -8,6 +8,8 @@ import {TokenStorageService} from '../../../office-common/service/token-storage/
 import {DatePipe, Time} from '@angular/common';
 import {BookedRoom} from '../../model/booked-room';
 import {TimeFrame} from '../../model/time-frame';
+import {Title} from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-booked-room-create',
@@ -58,12 +60,14 @@ export class BookedRoomCreateComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private tokenStorageService: TokenStorageService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private title: Title,
   ) {
   }
 
   ngOnInit(): void {
     this.pipe = new DatePipe('en-US');
+    this.title.setTitle('Booked Room');
     this.startDateSearch = this.activatedRoute.snapshot.queryParamMap.get('startDateSearch');
     console.log('init***start-date-input from search: ' + this.startDateSearch);
     this.endDateSearch = this.activatedRoute.snapshot.queryParamMap.get('endDateSearch');

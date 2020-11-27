@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {DetailNotificationComponent} from '../detail-notification/detail-notification.component';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-notification',
@@ -23,10 +24,12 @@ export class NotificationComponent implements OnInit {
   constructor(
     public commentService: CommentService,
     public tokenStorageService: TokenStorageService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private title: Title) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Feedback');
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       this.userName = this.tokenStorageService.getUser().userName;

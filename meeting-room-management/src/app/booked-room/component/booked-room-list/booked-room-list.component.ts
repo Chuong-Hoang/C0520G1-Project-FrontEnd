@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
 import {BookedRoom} from '../../model/booked-room';
 import {DatePipe} from '@angular/common';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-booked-room-list',
@@ -32,10 +33,12 @@ export class BookedRoomListComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private tokenStorageService: TokenStorageService,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Booked Room');
     this.bookedRoomList = [];
     this.size_msg = 'Rất tiếc, không tìm thấy kết quả nào!';
     this.pipe = new DatePipe('en-US');

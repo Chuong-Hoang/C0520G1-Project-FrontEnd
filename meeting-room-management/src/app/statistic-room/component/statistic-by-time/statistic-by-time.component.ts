@@ -96,6 +96,9 @@ export class StatisticByTimeComponent implements OnInit {
       this.dataOfFootballers.push(
         {
           stt: (i + 1),
+          userName: bookedRoomByTime[i].userName,
+          roomName: bookedRoomByTime[i].roomName,
+          content: bookedRoomByTime[i].content,
           startDate: bookedRoomByTime[i].startDate,
           endDate: bookedRoomByTime[i].endDate,
           startTime: bookedRoomByTime[i].startTime,
