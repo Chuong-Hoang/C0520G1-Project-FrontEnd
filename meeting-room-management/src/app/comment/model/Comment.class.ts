@@ -1,6 +1,6 @@
 import {ErrorType} from './ErrorType.class';
-import {MeetingRoom} from './MeetingRoom.class';
 import {User} from './user.class';
+import {MeetingRoom} from '../../meeting-room/model/MeetingRoom';
 
 export class Comment {
   get senderName(): User {

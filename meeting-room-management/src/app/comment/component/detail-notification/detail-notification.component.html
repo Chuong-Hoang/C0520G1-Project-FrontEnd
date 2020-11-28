@@ -1,18 +1,21 @@
 <form [formGroup]="detailCommentForm">
   <input formControlName="idComment" type="hidden">
-  <h5 class="d-flex justify-content-center">Xin Chào <h5 class="mx-1 text-danger font-weight-bolder">{{ fullName | titlecase }}</h5>!!</h5>
-  <hr>Với vấn đề
-  <span>{{contentComment}}</span>
+  <h5 class="d-flex justify-content-center">Xin Chào <h5
+    class="mx-1 text-danger font-weight-bolder">{{ fullName | titlecase }}</h5>!!
+  </h5>
+  <hr>
+  Với vấn đề
+  <span>{{errorType}}</span>
 
-  <p >Vào ngày {{commentTime}}</p>
+  <p>Vào ngày {{commentTime}}</p>
   <p>{{contentReply}}</p>
 
   <div class="row">
     <div class="col-10 d-flex justify-content-start">
-    <p class="mt-4 ">Cảm ơn Bạn đã phản hồi!!</p>
-  </div>
+      <p class="mt-4 ">Cảm ơn Bạn đã phản hồi!!</p>
+    </div>
     <div class="col-2 d-flex justify-content-end">
-    <button class="btn-sm btn-secondary mt-2 h-75" (click)="detailComment()">Hủy</button>
+      <button class="btn-sm btn-secondary mt-2 h-75" (click)="detailComment()">Hủy</button>
     </div>
   </div>
 </form>

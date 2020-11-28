@@ -10,8 +10,6 @@ import {Title} from '@angular/platform-browser';
   styleUrls: ['./meeting-room-detail.component.css']
 })
 export class MeetingRoomDetailComponent implements OnInit {
-
-  private router: Router;
   private idMeetingRoom: number;
   public meetingRoom: MeetingRoom;
 
