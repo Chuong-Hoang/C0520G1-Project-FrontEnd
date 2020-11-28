@@ -12,13 +12,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { DeleteCommentComponent } from './component/delete-comment/delete-comment.component';
 import {MaterialModule} from './material.module';
 import { DetailNotificationComponent } from './component/detail-notification/detail-notification.component';
+import { FormDirective} from './formDirective';
+import { CreateNotificationComponent } from './component/create-notification/create-notification.component';
+
 @NgModule({
   declarations: [CommentListComponent,
     CommentHandleComponent,
     CommentCreateComponent,
     NotificationComponent,
     DeleteCommentComponent,
-    DetailNotificationComponent
+    DetailNotificationComponent,
+    FormDirective,
+    CreateNotificationComponent
   ],
   imports: [
     CommonModule,

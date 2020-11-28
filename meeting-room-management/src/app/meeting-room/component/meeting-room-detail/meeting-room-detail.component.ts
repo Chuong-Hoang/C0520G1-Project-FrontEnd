@@ -9,12 +9,11 @@ import {MeetingRoom} from '../../model/MeetingRoom';
   styleUrls: ['./meeting-room-detail.component.css']
 })
 export class MeetingRoomDetailComponent implements OnInit {
-
-  private router: Router;
   private idMeetingRoom: number;
   public meetingRoom: MeetingRoom;
 
-  constructor(public activeRouter: ActivatedRoute, private meetRoomService: MeetingRoomService) {
+  constructor(public activeRouter: ActivatedRoute,
+              private meetRoomService: MeetingRoomService) {
   }
 
   ngOnInit(): void {
