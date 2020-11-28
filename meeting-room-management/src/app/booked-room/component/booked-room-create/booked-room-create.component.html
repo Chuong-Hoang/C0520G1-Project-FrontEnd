@@ -1,5 +1,5 @@
 <div class="container d-flex justify-content-center">
-  <div class="w-75 border rounded-lg p-3 my-5">
+  <div class="w-50 border rounded-lg p-3 my-5">
     <h3 class="d-flex justify-content-center bg-light p-3 mb-3">Đăng ký phòng họp</h3>
     <form (ngSubmit)="onSubmit();" [formGroup]="formCreate">
       <input type="hidden" class="form-control form-control-sm" formControlName="id">
@@ -7,13 +7,14 @@
       <input type="text" class="form-control form-control-sm mb-2" formControlName="bookedUserId" readonly [hidden]="true">
       <input type="text" class="form-control form-control-sm mb-2" formControlName="bookedDate" readonly [hidden]="true">
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Tên phòng <sup class="text-danger">*</sup></label>
+        <label class="col-sm-3 col-form-label">Tên phòng <sup class="text-danger"></sup></label>
         <div class="col-sm-9">
-          <select class="form-control form-control-sm" formControlName="meetingRoomId">
-            <option value="">--Chọn--</option>
-            <option [value]="idSentFromSearch">{{roomName}}</option>
-            <option *ngFor="let item of meetingRoomList" [value]="item.idRoom">{{item.roomName}}</option>
-          </select>
+          <input class="form-control form-control-sm" [value]="roomName" readonly/>
+          <!--<select class="form-control form-control-sm" formControlName="meetingRoomId">-->
+            <!--<option value="">&#45;&#45;Chọn&#45;&#45;</option>-->
+            <!--<option [value]="idSentFromSearch">{{roomName}}</option>-->
+            <!--<option *ngFor="let item of meetingRoomList" [value]="item.idRoom">{{item.roomName}}</option>-->
+          <!--</select>-->
           <span class="text-danger"
                 *ngIf="formCreate.get('meetingRoomId').invalid && formCreate.get('meetingRoomId').touched">{{meetingRoomId_msg}}
           </span>
@@ -33,27 +34,16 @@
       <!--  </div>-->
       <!--</div>-->
 
-      <!--<div class="form-group row" style="display: none">-->
-      <!--  <label class="col-sm-3 col-form-label">Ngày họp</label>-->
-      <!--  <div class="col-sm-9">-->
-      <!--    <input class="form-control form-control-sm" type="date">-->
-      <!--    <mat-form-field class="w-100">-->
-      <!--      <input matInput [matDatepicker]="myDatepicker1" formControlName="meetingDate">-->
-      <!--      <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>-->
-      <!--      <mat-datepicker #myDatepicker1 startView="month"></mat-datepicker>-->
-      <!--    </mat-form-field>-->
-      <!--  </div>-->
-      <!--</div>-->
-
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Ngày bắt đầu <sup class="text-danger">*</sup></label>
+        <label class="col-sm-3 col-form-label">Ngày bắt đầu <sup class="text-danger"></sup></label>
         <div class="col-sm-9">
-          <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="myDatepicker2" [min]="minDate" [max]="maxDate"
-                   placeholder="Ngày bắt đầu họp" formControlName="startDate">
-            <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
-            <mat-datepicker #myDatepicker2 startView="month"></mat-datepicker>
-          </mat-form-field>
+          <input class="form-control form-control-sm" type="text" formControlName="startDate" readonly/>
+          <!--<mat-form-field class="w-100">-->
+          <!--  <input matInput [matDatepicker]="myDatepicker2" [min]="minDate" [max]="maxDate"-->
+          <!--         placeholder="Ngày bắt đầu họp" formControlName="startDate">-->
+          <!--  <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>-->
+          <!--  <mat-datepicker #myDatepicker2 startView="month"></mat-datepicker>-->
+          <!--</mat-form-field>-->
           <span class="text-danger"
                 *ngIf="formCreate.get('startDate').invalid && formCreate.get('startDate').touched">{{ startDate_msg }}
           </span>
@@ -61,14 +51,15 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Ngày kết thúc <sup class="text-danger">*</sup></label>
+        <label class="col-sm-3 col-form-label">Ngày kết thúc <sup class="text-danger"></sup></label>
         <div class="col-sm-9">
-          <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="myDatepicker3" [min]="minDate" [max]="maxDate"
-                   placeholder="Ngày kết thúc họp" formControlName="endDate">
-            <mat-datepicker-toggle matSuffix [for]="myDatepicker3"></mat-datepicker-toggle>
-            <mat-datepicker #myDatepicker3 startView="month"></mat-datepicker>
-          </mat-form-field>
+          <input class="form-control form-control-sm" type="text" formControlName="endDate" readonly/>
+          <!--<mat-form-field class="w-100">            -->
+          <!--  <input matInput [matDatepicker]="myDatepicker3" [min]="minDate" [max]="maxDate"-->
+          <!--         placeholder="Ngày kết thúc họp" formControlName="endDate">-->
+          <!--  <mat-datepicker-toggle matSuffix [for]="myDatepicker3"></mat-datepicker-toggle>-->
+          <!--  <mat-datepicker #myDatepicker3 startView="month"></mat-datepicker>-->
+          <!--</mat-form-field>-->
           <span class="text-danger"
                 *ngIf="formCreate.get('endDate').invalid && formCreate.get('endDate').touched">{{ endDate_msg }}
           </span>
@@ -76,12 +67,13 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Giờ bắt đầu <sup class="text-danger">*</sup></label>
+        <label class="col-sm-3 col-form-label">Giờ bắt đầu <sup class="text-danger"></sup></label>
         <div class="col-sm-9">
-          <select class="form-control form-control-sm" formControlName="startTimeId">
-            <option value="">--Chọn--</option>
-            <option *ngFor="let item of timeFrameList" [value]="item.idTime">{{ item.timeValue}}</option>
-          </select>
+          <!--<select class="form-control form-control-sm" formControlName="startTimeId">-->
+          <!--  <option value="">&#45;&#45;Chọn&#45;&#45;</option>-->
+          <!--  <option *ngFor="let item of timeFrameList" [value]="item.idTime">{{ item.timeValue}}</option>-->
+          <!--</select>-->
+          <input type="text" class="form-control form-control-sm" [value]="startTimeBooked.timeValue" readonly>
           <span class="text-danger"
                 *ngIf="formCreate.get('startTimeId').invalid && formCreate.get('startTimeId').touched">{{ startTimeId_msg }}
           </span>
@@ -89,12 +81,13 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Giờ kết thúc <sup class="text-danger">*</sup></label>
+        <label class="col-sm-3 col-form-label">Giờ kết thúc <sup class="text-danger"></sup></label>
         <div class="col-sm-9">
-          <select class="form-control form-control-sm" formControlName="endTimeId">
-            <option value="">--Chọn--</option>
-            <option *ngFor="let item of timeFrameList" [value]="item.idTime">{{ item.timeValue}}</option>
-          </select>
+          <!--<select class="form-control form-control-sm" formControlName="endTimeId">-->
+          <!--  <option value="">&#45;&#45;Chọn&#45;&#45;</option>-->
+          <!--  <option *ngFor="let item of timeFrameList" [value]="item.idTime">{{ item.timeValue}}</option>-->
+          <!--</select>-->
+          <input type="text" class="form-control form-control-sm" [value]="endTimeBooked.timeValue" readonly>
           <span class="text-danger"
                 *ngIf="formCreate.get('endTimeId').invalid && formCreate.get('endTimeId').touched">{{ endTimeId_msg }}
           </span>

@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MeetingRoomDeleteComponent} from '../meeting-room-delete/meeting-room-delete.component';
 import {MeetingRoomService} from '../../service/meeting-room.service';
 import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-meeting-room-list',
@@ -21,18 +22,21 @@ export class MeetingRoomListComponent implements OnInit {
   public showAdminBoard = false;
   public showUserBoard = true;
   public messageHome: string;
+  public result = '';
+
 
   constructor(
     public meetingRoomService: MeetingRoomService,
     public route: ActivatedRoute,
     public dialog: MatDialog,
     public formBuilder: FormBuilder,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    private title: Title,
   ) {
   }
 
   ngOnInit(): void {
-
+    this.title.setTitle('Meeting Room');
     const user = this.tokenStorageService.getUser();
     this.role = user.role;
 
@@ -42,6 +46,13 @@ export class MeetingRoomListComponent implements OnInit {
     this.meetingRoomList = [];
     this.meetingRoomService.getAllMeetingRoom().subscribe(data => {
       this.meetingRoomList = data;
+      console.log('meeting room list');
+      console.log(data);
+      if (data == null) {
+        this.result = 'Rất tiếc!! không có kết quả nào';
+      } else {
+        this.result = this.meetingRoomList.length + '';
+      }
     }, error => console.log('error'));
     this.meetingRoomService.getAllRoomStatus().subscribe(data => {
       this.roomStatusList = data;
@@ -50,18 +61,17 @@ export class MeetingRoomListComponent implements OnInit {
       this.roomTypeList = data;
     });
     this.formSearch = this.formBuilder.group({
-      roomName: ['', [Validators.pattern('^[a-zA-Z_0-9]+(([\',. -][a-zA-Z_0-9])?[a-zA-Z_0-9]*)*$')]],
+      roomName: ['', [Validators.pattern(/^[a-zA-Zà-ỹÀ-Ỹ_0-9]{1,9}(([ ][a-zA-Zà-ỹÀ-Ỹ_0-9]{0,9})?)*$/)]],
       floor: ['', [Validators.pattern(/^([1-7]\d|[1-9])$/)]],
       roomTypeName: [''],
       roomStatusName: [''],
       zone: [''],
-      capacity: ['', [Validators.pattern(/^([1-9][0-9]|[2-9])$/)]],
+      capacity: ['', [Validators.pattern(/^([1-4][0-9]|50|[2-9])$/)]],
     });
     this.messageHome = this.sendMessage();
     // tslint:disable-next-line:typedef
     setTimeout(function() {
       this.messageHome = '';
-      console.log(this.edited);
     }.bind(this), 3000);
   }
 
@@ -81,9 +91,15 @@ export class MeetingRoomListComponent implements OnInit {
 
   search(): void {
     this.meetingRoomList = [];
+    this.result = '';
     console.log(this.formSearch.value);
     this.meetingRoomService.search(this.formSearch.value).subscribe(data => {
       this.meetingRoomList = data;
+      if (data == null) {
+        this.result = 'Rất tiếc!! không có kết quả nào';
+      } else {
+        this.result = this.meetingRoomList.length + '';
+      }
       console.log('list : ' + data);
     });
   }

@@ -1,4 +1,4 @@
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, Title} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AppComponent } from './app.component';
@@ -14,11 +14,13 @@ import {AssetsDetailModule} from './assets-detail/assets-detail.module';
 import { AppRoutingModule } from './app-routing.module';
 import {authInterceptorProviders} from './office-common/helper/auth.interceptor';
 import { BookedRoomDeleteComponent } from './booked-room/component/booked-room-delete/booked-room-delete.component';
+import { FooterComponent } from './office-common/component/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BookedRoomDeleteComponent
+    BookedRoomDeleteComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,7 @@ import { BookedRoomDeleteComponent } from './booked-room/component/booked-room-d
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, Title],
   bootstrap: [AppComponent],
 })
 export class AppModule {

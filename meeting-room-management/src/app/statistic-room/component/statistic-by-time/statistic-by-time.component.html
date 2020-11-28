@@ -1,3 +1,7 @@
+<h2 class="d-flex justify-content-center font-weight-bold">Số liệu thống kê theo thời gian.</h2>
+<label class="ml-5 d-flex"><p class="font-weight-bold">
+  Số liệu thống kê từ ngày:&nbsp;</p> {{startDate | date: 'dd/MM/yyyy'}}
+  <p class="font-weight-bold">;&nbsp;&nbsp;Đến:&nbsp;</p> {{endDate | date: 'dd/MM/yyyy'}};</label>
 <div class="container register">
   <div class="row">
     <div class="col-md-12 register-right">
@@ -14,14 +18,15 @@
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
           <div class="container">
-            <div class="row mt-2">
+            <div class="row">
               <div class="col-md-12 border border-success mt-4 ">
-                <h5 class="font-weight-bold mt-2">Kết quả:</h5>
+                <h5 class="font-weight-bold mt-2">Kết quả</h5>
                 <div class="col-md-11 offset-md-1">
                   <div class="row">
-                    <div class="col-md-3 font-weight-bold">Tên phòng:A2</div>
-                    <div class="col-md-3 font-weight-bold">Tổng số lần sử dụng:3</div>
-                    <div class="col-md-3 font-weight-bold">Hiệu suất:60%</div>
+<!--                    <div class="col-md-3 font-weight-bold">Từ ngày: {{startDate | date: 'dd/MM/yy'}}</div>-->
+<!--                    <div class="col-md-3 font-weight-bold">Đến ngày: {{endDate | date: 'dd/MM/yy'}}</div>-->
+                    <div class="col-md-5 font-weight-bold">Tổng số lần sử dụng: {{bookedRoomByTime.length}}</div>
+
                   </div>
                 </div>
                 <div style="overflow-x:auto;" class="mt-2">
@@ -30,37 +35,41 @@
                     <tr>
                       <th class="small font-weight-bold">STT</th>
                       <th class="small font-weight-bold">Tên người đăng ký</th>
+                      <th class="small font-weight-bold">Tên phòng</th>
+                      <th class="small font-weight-bold">Loại phòng</th>
                       <th class="small font-weight-bold">Thời gian bắt đầu</th>
                       <th class="small font-weight-bold">Thời gian kết thúc</th>
                       <th class="small font-weight-bold">Ngày bắt đầu</th>
                       <th class="small font-weight-bold">Ngày kết thúc</th>
                       <th class="small font-weight-bold">Trạng thái</th>
-                      <th class="small font-weight-bold">Ngày đăng ký</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <tr>
                     <tr
-                      *ngFor="let element of bookedRoomByRoom | paginate: { itemsPerPage: 3, currentPage: p } ; let i = index ">
+                      *ngFor="let element of bookedRoomByTime | paginate: { itemsPerPage: 5, currentPage: p } ; let i = index ">
                       <td>{{i + 1}}</td>
                       <td>{{element.userName}}</td>
+                      <td>{{element.roomName}}</td>
+                      <td>{{element.roomType}}</td>
                       <td>{{element.startTime}}</td>
                       <td>{{element.endTime}}</td>
                       <td>{{element.startDate}}</td>
                       <td>{{element.endDate}}</td>
                       <td>{{element.bookedStatus}}</td>
-                      <td>{{element.bookedDate}}</td>
                     </tr>
                     </tbody>
                   </table>
                 </div>
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                  <pagination-controls (pageChange)="p = $event"  previousLabel="Trước"
+                                       nextLabel="Sau"
+                                       responsive="true"></pagination-controls>
                 </nav>
               </div>
             </div>
           </div>
         </div>
-
         <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
           <div style="width: 100%;">
             <canvas

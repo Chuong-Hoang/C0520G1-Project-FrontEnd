@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {BookedRoom} from '../model/BookedRoom.class';
-import {StatisticRoomService} from '../service/statistic-room.service';
-import {ExcelService} from '../service/excel.service';
+import {BookedRoom} from '../../model/booked-room.class';
+import {StatisticRoomService} from '../../service/statistic-room.service';
+import {ExcelService} from '../../service/excel.service';
 import {Label as ng2Chart} from 'ng2-charts';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 
@@ -17,6 +17,7 @@ export class StatisticByTimeComponent implements OnInit {
   // lấy khoảng thời gian từ service
   public startDate: string;
   public endDate: string;
+  public roomNameList: string[] = [];
   // phân trang
   public p: number;
   // biểu đồ
@@ -79,7 +80,8 @@ export class StatisticByTimeComponent implements OnInit {
     this.startDate = this.statisticRoom.startDate;
     this.endDate = this.statisticRoom.endDate;
     this.barChartData = [];
-    this.dataChart(this.bookedRoomByTime);
+    this.roomNameList = this.statisticRoom.roomNameList;
+    this.dataChart();
     this.exportExcel(this.bookedRoomByTime);
   }
 
@@ -94,6 +96,9 @@ export class StatisticByTimeComponent implements OnInit {
       this.dataOfFootballers.push(
         {
           stt: (i + 1),
+          userName: bookedRoomByTime[i].userName,
+          roomName: bookedRoomByTime[i].roomName,
+          content: bookedRoomByTime[i].content,
           startDate: bookedRoomByTime[i].startDate,
           endDate: bookedRoomByTime[i].endDate,
           startTime: bookedRoomByTime[i].startTime,
@@ -108,22 +113,49 @@ export class StatisticByTimeComponent implements OnInit {
   onChartClick(event): void {
     console.log(event);
   }
-
-  dataChart(arr: BookedRoom[]): void {
+  dataChart(): void {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.roomNameList.length; i++) {
+      this.effectiveByRoom(this.roomNameList[i], this.bookedRoomByTime);
+    }
+  }
+  effectiveByRoom(roomName: string, arr: BookedRoom[]): void {
+    let count1 = 0;
+    let count2 = 0;
+    let count3 = 0;
+    let count4 = 0;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < arr.length; i++) {
-      if (arr[i].roomType === 'Một lần') {
-        this.barChartData.push({data: [arr[i].effective, 0, 0, 0], label: arr[i].roomName + ' sử dụng: ' + arr[i].totalUse + 'lần  '});
+      if (arr[i].roomType === 'Một lần' && roomName === arr[i].roomName && count1 < 1) {
+        count1++;
+        this.barChartData.push({data: [this.totalEffectiveByRoom(arr[i].roomName) , 0, 0, 0], label: arr[i].roomName});
       }
-      if (arr[i].roomType === 'Hàng ngày') {
-        this.barChartData.push({data: [0, arr[i].effective, 0, 0], label: arr[i].roomName + ' sử dụng:' + arr[i].totalUse + 'lần  '});
+      if (arr[i].roomType === 'Hàng ngày' && roomName === arr[i].roomName && count2 < 1) {
+        count2++;
+        this.barChartData.push({data: [0, this.totalEffectiveByRoom(arr[i].roomName) , 0, 0], label: arr[i].roomName});
       }
-      if (arr[i].roomType === 'Hàng tuần') {
-        this.barChartData.push({data: [0, 0, arr[i].effective, 0], label: arr[i].roomName + ' sử dụng: ' + arr[i].totalUse + 'lần  '});
+      if (arr[i].roomType === 'Hàng tuần' && roomName === arr[i].roomName && count3 < 1) {
+        count3++;
+        this.barChartData.push({data: [0, 0, this.totalEffectiveByRoom(arr[i].roomName) , 0], label: arr[i].roomName});
       }
-      if (arr[i].roomType === 'Hàng tháng') {
-        this.barChartData.push({data: [0, 0, 0, arr[i].effective], label: arr[i].roomName + ' sử dụng: ' + arr[i].totalUse + 'lần  '});
+      if (arr[i].roomType === 'Hàng tháng' && roomName === arr[i].roomName && count4 < 1) {
+        count4++;
+        this.barChartData.push({data: [0, 0, 0, this.totalEffectiveByRoom(arr[i].roomName) ], label: arr[i].roomName});
       }
     }
   }
+
+  totalEffectiveByRoom(roomName: string): number {
+    let effective = 0;
+    let count = 0;
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.bookedRoomByTime.length; i++) {
+      if ( roomName === this.bookedRoomByTime[i].roomName){
+        count++;
+        effective += this.bookedRoomByTime[i].effective;
+      }
+    }
+    return (effective / count );
+  }
 }
+

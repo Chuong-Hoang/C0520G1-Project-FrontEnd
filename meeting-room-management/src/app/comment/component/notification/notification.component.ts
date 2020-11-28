@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {Comment} from '../../model/comment.class';
+import {Comment} from '../../model/Comment.class';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CommentService} from '../../service/comment.service';
 import {DeleteCommentComponent} from '../delete-comment/delete-comment.component';
 import {MatDialog} from '@angular/material/dialog';
 import {DetailNotificationComponent} from '../detail-notification/detail-notification.component';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
+import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-notification',
@@ -15,18 +17,25 @@ import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 export class NotificationComponent implements OnInit {
   public commentsNotification: Comment[];
   public count = 0;
-  formSearch: FormGroup;
+  public isLoggedIn ;
+  public userName ;
   p: any;
 
   constructor(
     public commentService: CommentService,
-    private formBuilder: FormBuilder,
-    public dialog: MatDialog) {
+    public tokenStorageService: TokenStorageService,
+    public dialog: MatDialog,
+    private title: Title) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Feedback');
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      this.userName = this.tokenStorageService.getUser().userName;
+    }
     this.count = 0;
-    this.commentService.getAllComment().subscribe(data => {
+    this.commentService.getAllNotification(this.userName).subscribe(data => {
       this.commentsNotification = data;
       for (const i of this.commentsNotification){
         // tslint:disable-next-line:triple-equals
@@ -35,7 +44,7 @@ export class NotificationComponent implements OnInit {
         }
       }
     }, error => {
-      console.log(error)
+      console.log(error);
     });
   }
 

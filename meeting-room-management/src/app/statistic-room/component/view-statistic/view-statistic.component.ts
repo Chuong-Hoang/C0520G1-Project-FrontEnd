@@ -2,15 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
-import {StatisticRoomService} from '../service/statistic-room.service';
-import {BookedRoom} from '../model/BookedRoom.class';
-import {RoomType} from '../model/RoomType.class';
+import {StatisticRoomService} from '../../service/statistic-room.service';
+import {BookedRoom} from '../../model/booked-room.class';
+import {RoomType} from '../../model/room-type.class';
 import {NoContentComponent} from '../no-content/no-content.component';
 import {StatisticByTimeComponent} from '../statistic-by-time/statistic-by-time.component';
 import {StatisticByRoomComponent} from '../statistic-by-room/statistic-by-room.component';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Label as ng2Chart} from 'ng2-charts/lib/base-chart.directive';
-import {BookedChart} from '../model/BookedChart.class';
+import {BookedChart} from '../../model/booked-chart.class';
+import {Title} from '@angular/platform-browser';
 
 
 @Component({
@@ -28,6 +29,9 @@ export class ViewStatisticComponent implements OnInit {
   public roomType: RoomType[] = [];
   public roomNames: string[] = [];
   public messageError;
+  public messageErrorYear = '';
+  public loading = true;
+  public loading1 = true;
   public start = '2020';
   public end = '2020';
   public maxDate = new Date();
@@ -38,7 +42,7 @@ export class ViewStatisticComponent implements OnInit {
     title: {
       text: 'Biểu đồ thống kê hiệu suất sử dụng',
       display: true,
-      fontSize: 20,
+      fontSize: 20
     }
   };
   public barChartLabels: ng2Chart[] = [
@@ -79,11 +83,15 @@ export class ViewStatisticComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private dialog: MatDialog,
-              private statisticRoom: StatisticRoomService) {
+              private statisticRoom: StatisticRoomService,
+              private title: Title) {
   }
 
 
   ngOnInit(): void {
+    this.title.setTitle('Statistic');
+    this.loading = true;
+    this.loading1 = true;
     console.log('thống kê theo thời gian');
     this.bookedRoomByTime = [];
     this.statisticByTime = this.fb.group({
@@ -108,6 +116,7 @@ export class ViewStatisticComponent implements OnInit {
     console.log('lấy ra tất cả các tên phòng');
     this.statisticRoom.getAllRoomName().subscribe(data => {
       this.roomNames = data;
+      this.statisticRoom.roomNameList = this.roomNames;
       console.log(data);
     });
     this.statisticRoom.getAllBookedChart(this.start, this.end).subscribe(data => {
@@ -144,6 +153,7 @@ export class ViewStatisticComponent implements OnInit {
   }
 
   openDialogByTime(): void {
+    this.loading = true;
     this.statisticRoom.getAllRoomType().subscribe(data => {
       const dialogRef = this.dialog.open(StatisticByTimeComponent, {
         width: '1000px',
@@ -159,6 +169,7 @@ export class ViewStatisticComponent implements OnInit {
   }
 
   openDialogByRoom(): void {
+    this.loading1 = true;
     this.statisticRoom.getAllRoomType().subscribe(data => {
       const dialogRef = this.dialog.open(StatisticByRoomComponent, {
         width: '1000px',
@@ -176,6 +187,7 @@ export class ViewStatisticComponent implements OnInit {
   onSubmitByTime(): void {
     console.log(this.statisticByTime.value);
     this.bookedRoomByTime = [];
+    this.loading = false;
     if (this.statisticByTime.valid) {
       // tslint:disable-next-line:max-line-length
       this.statisticRoom.findSearchByTime(this.statisticByTime.value.dateGroup.startIn, this.statisticByTime.value.dateGroup.startOut).subscribe(data => {
@@ -183,8 +195,12 @@ export class ViewStatisticComponent implements OnInit {
           this.statisticRoom.startDate = this.statisticByTime.value.dateGroup.startIn;
           this.statisticRoom.endDate = this.statisticByTime.value.dateGroup.startOut;
           if (data == null) {
+            this.loading = true;
+            this.loading1 = true;
             this.openDialogNoContent();
           } else {
+            this.loading = true;
+            this.loading1 = true;
             this.openDialogByTime();
           }
           console.log(data);
@@ -200,7 +216,9 @@ export class ViewStatisticComponent implements OnInit {
     if (this.statisticByRoom.value.roomType === '' && this.statisticByRoom.value.roomName === '' && this.statisticByRoom.value.month === '' && this.statisticByRoom.value.year === '') {
       this.messageError = 'vui lòng chọn ít nhất 1 trường !!';
     } else {
+      this.loading1 = false;
       this.messageError = '';
+      this.statisticRoom.roomName1 = this.statisticByRoom.value.roomName;
       this.statisticRoom.findSearchByRoom(this.statisticByRoom.value.roomType, this.statisticByRoom.value.roomName
         , this.statisticByRoom.value.month, this.statisticByRoom.value.year).subscribe(data => {
           this.statisticRoom.bookedRoomByRoom = data;
@@ -209,8 +227,12 @@ export class ViewStatisticComponent implements OnInit {
           this.statisticRoom.year = this.statisticByRoom.value.year;
           this.statisticRoom.roomName = this.statisticByRoom.value.roomName;
           if (data == null) {
+            this.loading = true;
+            this.loading1 = true;
             this.openDialogNoContent();
           } else {
+            this.loading = true;
+            this.loading1 = true;
             this.openDialogByRoom();
           }
           console.log(data);
@@ -236,6 +258,9 @@ export class ViewStatisticComponent implements OnInit {
   }
 
   chartYear(): void {
+    if ( this.start > this.end){
+      this.messageErrorYear = 'Năm không hợp lệ !';
+    }
     this.ngOnInit();
   }
 }

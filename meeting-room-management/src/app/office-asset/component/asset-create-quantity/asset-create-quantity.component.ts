@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AssetServerService} from '../../service/asset-server.service';
 import {Asset} from '../../model/model.asset';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-asset-create-quantity',
@@ -22,11 +23,13 @@ export class AssetCreateQuantityComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dialogRef: MatDialogRef<AssetCreateQuantityComponent>,
+    private title: Title,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Asset');
     this.formEdit = this.formBuilder.group({
       // idAsset: [''],
       assetName: [''],

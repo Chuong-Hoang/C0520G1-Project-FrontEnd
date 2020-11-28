@@ -16,7 +16,7 @@
             <table class="col-12 px-0">
               <tbody>
               <tr *ngFor="let comment of commentsNotification" class="text-white ml-4"
-                  [ngClass]="{'bg-dark font-weight-light':!comment.statusView, 'bg-secondary  font-weight-light':comment.statusView}">
+                  [ngClass]="{'bg-dark font-weight-bold':!comment.statusView, 'bg-secondary f':comment.statusView}">
                 <div *ngIf="comment.status==true; else elseBlock"></div>
                 <ng-template #elseBlock>
                   <!--                *Thông báo từ hệ thống gửi cho người dùng.-->

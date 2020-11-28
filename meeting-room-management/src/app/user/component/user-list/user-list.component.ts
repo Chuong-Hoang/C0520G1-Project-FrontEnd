@@ -6,6 +6,8 @@ import {UserEditComponent} from '../user-edit/user-edit.component';
 import {UserService} from '../../service/user.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
+import {Title} from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-user-list',
@@ -24,10 +26,12 @@ export class UserListComponent implements OnInit {
     public userService: UserService,
     public formBuilder: FormBuilder,
     private tokenStorageService: TokenStorageService,
+    private title: Title
   ) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('User');
     this.p = 0;
     this.idUser = this.tokenStorageService.getUser().id;
     this.userService.getAllUser().subscribe(data => {
