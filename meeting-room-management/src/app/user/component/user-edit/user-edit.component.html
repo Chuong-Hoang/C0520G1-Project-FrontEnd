@@ -1,16 +1,18 @@
 <h3 class="text-center text-dark">Sửa người dùng</h3>
 <hr class="border-dark">
-<form class=" p-1 m-0 form-inline " style="width: 95%" [formGroup]="formEdit">
+<form focusInvalidInput class=" p-1 m-0 form-inline " style="width: 95%" [formGroup]="formEdit">
   <div class="container-fluid col-lg-12 col-md-12 p-1 m-1 ">
     <div class=" form-group mt-2">
       <label class="col-lg-3 col-md-3  justify-content-start">Tên đăng nhập </label>
-      <input type="text" class="col-lg-9 col-md-9  form-control form-control-sm " formControlName="userName" readonly>
+      <input type="text" class="col-lg-8 col-md-8  form-control form-control-sm " formControlName="userName" readonly>
     </div>
     <div class=" form-group mt-2">
-      <label class="col-lg-3 col-md-3 d-flex justify-content-start">Mật khẩu mới
-        <pre class="mx-2" style="color: red">*</pre></label>
-      <input type="password" class="col-lg-9 col-md-9 form-control form-control-sm" formControlName="newPassword"
+      <label for="password" class="col-lg-3 col-md-3 d-flex justify-content-start">Mật khẩu mới
+        <pre class="mx-1" style="color: red">*</pre></label>
+      <input id="password" type="password" class="col-lg-8 col-md-8 form-control form-control-sm" formControlName="newPassword"
              placeholder="Nhập mật khẩu mới">
+      <label class="col-lg-1 col-md-1 text-success" *ngIf="formEdit.get('newPassword').valid">
+        <i style="font-size: 15px"  class="fas fa-check"></i></label>
       <div class="text-danger font-italic" role="alert" style="margin-left: 25%;font-size: 12px" *ngIf="formEdit.get('newPassword').invalid &&
       formEdit.get('newPassword').touched">
         <span *ngIf="formEdit.get('newPassword').hasError('required')"
@@ -19,19 +21,25 @@
       </div>
     </div>
     <div class=" form-group mt-2">
-      <label class="col-lg-3 col-md-3 d-flex justify-content-start">Nhập lại mật khẩu
-        <pre class="mx-2" style="color: red">*</pre></label>
-      <input type="password" class="col-lg-9 col-md-9 form-control form-control-sm " formControlName="confirmPassword"
+      <label  for="confirm" class="col-lg-3 col-md-3 d-flex justify-content-start">Nhập lại mật khẩu
+        <pre class="mx-1" style="color: red">*</pre></label>
+      <input id="confirm" type="password" class="col-lg-8 col-md-8 form-control form-control-sm " formControlName="confirmPassword"
              placeholder="Nhập lại mật khẩu mới ">
-      <div class="text-danger font-italic" role="alert" style="margin-left: 25%;font-size: 12px" *ngIf="formEdit.hasError('passwordNotMatch') &&
-      formEdit.get('confirmPassword').touched">
-        Mật khẩu không chính xác!
+      <label class="col-lg-1 col-md-1 text-success" *ngIf="formEdit.get('confirmPassword').valid && !formEdit.hasError('passwordNotMatch')">
+        <i style="font-size: 15px"  class="fas fa-check"></i></label>
+      <div class="text-danger font-italic" role="alert" style="margin-left: 25%;font-size: 12px"
+           *ngIf="formEdit.get('confirmPassword').touched && formEdit.get('confirmPassword').invalid">
+        <span *ngIf="formEdit.get('confirmPassword').hasError('required')"
+              style="font-size: 12px">Vui lòng xác nhận lại mật khẩu.</span>
+      </div>
+      <div class="text-danger font-italic" role="alert" *ngIf="formEdit.hasError('passwordNotMatch')" style="font-size: 12px;margin-left: 25%">
+        Mật khẩu không chính xác.
       </div>
     </div>
     <div class=" form-group mt-2">
-      <label class="col-lg-3 col-md-3 d-flex justify-content-start">Quyền
-        <pre class="mx-2" style="color: red">*</pre></label>
-      <select class="col-lg-9 col-md-9 form-control form-control-sm " formControlName="roleName">
+      <label for="role" class="col-lg-3 col-md-3 d-flex justify-content-start">Quyền
+        <pre class="mx-1" style="color: red">*</pre></label>
+      <select id="role" class="col-lg-8 col-md-8 form-control form-control-sm " formControlName="roleName">
         <option value="" selected>-- Chọn --</option>
         <option *ngFor="let role of roleList" [ngValue]="role.roleName">
           <span *ngIf="role.roleName=='ROLE_ADMIN'">Quản trị viên</span>
@@ -45,8 +53,9 @@
       </div>
     </div>
     <div class=" form-group mt-2">
-      <label class="col-lg-3 col-md-3 justify-content-start">Họ và tên </label>
-      <input type="text" class="col-lg-9 col-md-9 form-control form-control-sm " formControlName="fullName">
+      <label for="fullName" class="col-lg-3 col-md-3 justify-content-start">Họ và tên
+        <pre class="mx-1" style="color: red">*</pre></label>
+      <input id="fullName" type="text" class="col-lg-8 col-md-8 form-control form-control-sm " formControlName="fullName">
       <div class="text-danger font-italic" role="alert" style="margin-left: 25%"
            *ngIf="formEdit.get('fullName').invalid && formEdit.get('fullName').touched">
         <span *ngIf="formEdit.get('fullName').hasError('required')" style="font-size: 12px">Vui lòng nhập họ tên</span>
@@ -54,8 +63,9 @@
       </div>
     </div>
     <div class=" form-group mt-2">
-      <label class="col-lg-3 col-md-3  justify-content-start">Bộ phận </label>
-      <input type="text" class="col-lg-9 col-md-9 form-control form-control-sm " formControlName="department">
+      <label for="department" class="col-lg-3 col-md-3  justify-content-start">Bộ phận
+        <pre class="mx-1" style="color: red">*</pre></label>
+      <input id="department" type="text" class="col-lg-8 col-md-8 form-control form-control-sm " formControlName="department">
       <div class="text-danger font-italic" role="alert" style="margin-left: 25%"
            *ngIf="formEdit.get('department').invalid && formEdit.get('department').touched">
         <span *ngIf="formEdit.get('department').hasError('required')"

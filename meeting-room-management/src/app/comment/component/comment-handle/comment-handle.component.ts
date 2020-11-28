@@ -8,6 +8,7 @@ import {MeetingRoomService} from '../../service/meeting-room.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
 import {Local} from 'protractor/built/driverProviders';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-comment-handle',
@@ -23,10 +24,12 @@ export class CommentHandleComponent implements OnInit {
               public commentService: CommentService,
               private tokenStorageService: TokenStorageService,
               public activeRouter: ActivatedRoute,
-              public router: Router) {
+              public router: Router,
+              private title: Title) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Feedback');
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       this.user = this.tokenStorageService.getUser().userName;

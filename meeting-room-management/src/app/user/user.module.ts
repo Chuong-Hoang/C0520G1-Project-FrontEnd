@@ -9,7 +9,9 @@ import {UserAppRoutingModule} from './user-app-routing.module';
 import {MatDialogModule} from '@angular/material/dialog';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-
+import { UserDialogComponent } from './component/user-dialog/user-dialog.component';
+import {FormDirective} from './formdirective';
+import { MessageNotificationComponent } from './component/message-notification/message-notification.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,10 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
     UserCreateComponent,
     UserEditComponent,
     UserDeleteComponent,
-    UserChangePasswordComponent
+    UserChangePasswordComponent,
+    UserDialogComponent,
+    FormDirective,
+    MessageNotificationComponent
   ],
   imports: [
     CommonModule,

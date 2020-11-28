@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../service/auth/authentication.service';
 import {TokenStorageService} from '../../service/token-storage/token-storage.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -17,10 +18,11 @@ export class LoginComponent implements OnInit {
   role: string;
 
   constructor(private authenticationService: AuthenticationService, private tokenStorage: TokenStorageService,
-              private router: Router) {
+              private router: Router, private title: Title) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Login');
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.role = this.tokenStorage.getUser().role;
@@ -48,4 +50,10 @@ export class LoginComponent implements OnInit {
     window.location.reload();
   }
 
+  getFocus(): void {
+    if (this.form.invalid) {
+      const invalidFields = [].slice.call(document.getElementsByClassName('alert-warning'));
+      invalidFields[1].focus();
+    }
+  }
 }

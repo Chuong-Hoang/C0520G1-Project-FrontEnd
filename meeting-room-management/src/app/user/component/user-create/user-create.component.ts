@@ -1,8 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {UserService} from '../../service/user.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MessageNotificationComponent} from '../message-notification/message-notification.component';
 
 // tslint:disable-next-line:typedef
 function comparePassword(c: AbstractControl) {
@@ -32,12 +33,14 @@ export class UserCreateComponent implements OnInit {
   public roleList;
   public userList;
   public listUserName = [];
+  public idMessage = 1;
 
   constructor(
     public dialogRef: MatDialogRef<UserCreateComponent>,
     public userService: UserService,
     public router: Router,
     public formBuilder: FormBuilder,
+    public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }
@@ -71,11 +74,31 @@ export class UserCreateComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   addNewUser() {
+    this.formCreat.markAllAsTouched();
     if (this.formCreat.valid) {
       this.userService.addNewUser(this.formCreat.value).subscribe(data => {
-        this.dialogRef.close();
+        console.log(data);
+        if (data == null) {
+          this.dialogRef.close();
+          this.openDialogMessage();
+        }
       }, error => console.log(error.message));
     }
+  }
 
+  // tslint:disable-next-line:typedef
+  openDialogMessage() {
+    const timeout = 1800;
+    const dialogRef = this.dialog.open(MessageNotificationComponent, {
+      width: '300px',
+      height: '160px',
+      data: {dataMessage: this.idMessage},
+      disableClose: true
+    });
+    dialogRef.afterOpened().subscribe(_ => {
+      setTimeout(() => {
+        dialogRef.close();
+      }, timeout);
+    });
   }
 }
