@@ -20,7 +20,7 @@ export class AssetDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = + this.route.snapshot.paramMap.get('id');
     this.assetService.getByID(id).subscribe(data => {
       this.asset = data;
       data.image = data.image.substring(11);

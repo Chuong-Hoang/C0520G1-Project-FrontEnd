@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {AssetCreateQuantityComponent} from '../asset-create-quantity/asset-create-quantity.component';
 import {AssetServerService} from '../../service/asset-server.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AssetDeleteComponent} from '../asset-delete/asset-delete.component';
 
 @Component({
@@ -21,7 +21,8 @@ export class AssetListComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private assetService: AssetServerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
@@ -31,7 +32,13 @@ export class AssetListComponent implements OnInit {
       this.assetList = data;
       console.log(this.assetList);
       this.sendMessage();
+      // set time out msg
     });
+    // setTimeout(function(): void {
+    //   this.deleteMSG = '';
+    //   this.editMSG = '';
+    //   this.createMSG = '';
+    // }.bind(this), 3000);
   }
 
   openDialogCreate(id): void {
@@ -64,12 +71,11 @@ export class AssetListComponent implements OnInit {
         this.ngOnInit();
       });
     });
-
   }
 
   search(): void {
     this.p = 0;
-    this.assetService.searchByNameAsset(this.valueSearch).subscribe(dataSearch => {
+    this.assetService.searchByNameAsset(this.valueSearch.trim()).subscribe(dataSearch => {
       this.assetList = dataSearch;
       console.log(this.valueSearch);
     });
