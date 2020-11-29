@@ -8,8 +8,6 @@ import {Observable} from 'rxjs';
 })
 export class CommentService {
   public API = 'http://localhost:8080/comment';
-  public idErrorType: number;
-
   constructor(public http: HttpClient) {
   }
 
@@ -21,8 +19,10 @@ export class CommentService {
   }
 
   addNewComment(comment): Observable<any> {
-    console.log(comment);
     return this.http.post(this.API + '/create', comment);
+  }
+  addNewNotification(comment): Observable<any> {
+    return this.http.post(this.API + '/create/notification', comment);
   }
 
   getCommentById(idComment): Observable<any> {

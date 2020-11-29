@@ -1,6 +1,6 @@
 export class BookedRoom {
   // tslint:disable-next-line:variable-name
-  private _id: number;
+  // private _id: number;
   // tslint:disable-next-line:variable-name
   private _bookedDate: string;
   // tslint:disable-next-line:variable-name
@@ -22,9 +22,8 @@ export class BookedRoom {
 
   // tslint:disable-next-line:max-line-length
   constructor(
-    id: number, bookedDate: string, startDate: string, endDate: string, bookingStatus: string,
+    bookedDate: string, startDate: string, endDate: string, bookingStatus: string,
     startTime: string, endTime: string, content: string, bookingUser: string, meetingRoom: string) {
-    this._id = id;
     this._bookedDate = bookedDate;
     this._bookingStatus = bookingStatus;
     this._startDate = startDate;
@@ -36,13 +35,13 @@ export class BookedRoom {
     this._meetingRoom = meetingRoom;
   }
 
-  get id(): number {
-    return this._id;
-  }
-
-  set id(value: number) {
-    this._id = value;
-  }
+  // get id(): number {
+  //   return this._id;
+  // }
+  //
+  // set id(value: number) {
+  //   this._id = value;
+  // }
 
   get bookedDate(): string {
     return this._bookedDate;

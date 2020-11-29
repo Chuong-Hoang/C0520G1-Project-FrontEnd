@@ -5,7 +5,7 @@
     <input type="text" class="form-control" name="username" placeholder="Tên Đăng Nhập" autofocus=""
            autocomplete="off" [(ngModel)]="form.username" required #username="ngModel"/>
     <div class="alert-danger" *ngIf="f.submitted && username.invalid">
-      <div *ngIf="username.errors.required">
+      <div *ngIf="username.errors.required" >
         Tên Đăng Nhập là bắt buộc.
       </div>
     </div>

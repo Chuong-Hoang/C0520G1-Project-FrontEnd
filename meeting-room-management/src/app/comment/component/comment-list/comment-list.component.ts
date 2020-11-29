@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CommentService} from '../../service/comment.service';
 import {Comment} from '../../model/Comment.class';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-comment-list',
@@ -16,11 +17,13 @@ export class CommentListComponent implements OnInit {
 
   constructor(
     public commentService: CommentService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private title: Title
   ) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Feedback');
     // tslint:disable-next-line:no-unused-expression
     this.comments;
     this.p = 0;

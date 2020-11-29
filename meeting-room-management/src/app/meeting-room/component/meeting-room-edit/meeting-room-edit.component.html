@@ -62,7 +62,7 @@
       <div class="form-group row">
         <label for="images" class="col-sm-2 col-form-label">Hình ảnh</label>
         <div class="col-10">
-          <input type="file" accept="image/*" class="form-control form-control-sm" id="images" formControlName="image">
+          <input type="file" accept="image/*" class="form-control form-control-sm" id="images">
         </div>
       </div>
 
@@ -70,6 +70,11 @@
         <label class="col-sm-2 col-form-label">Tài sản</label>
         <div class="col-10">
           <a role="button" class="btn btn-sm btn-success" style="width: 80px" (click) = openDialog()>Chọn</a>
+        </div>
+        <div>
+          <ul *ngFor="let element of assetList">
+            <li>{{element.assetName + ': ' + element.quantity}}</li>
+          </ul>
         </div>
       </div>
       <div>

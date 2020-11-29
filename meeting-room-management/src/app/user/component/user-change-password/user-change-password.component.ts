@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../service/user.service';
-import {MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
+import {Router} from '@angular/router';
+import {UserDialogComponent} from '../user-dialog/user-dialog.component';
 
 // tslint:disable-next-line:typedef
 function comparePassword(c: AbstractControl) {
@@ -28,7 +30,9 @@ export class UserChangePasswordComponent implements OnInit {
     public dialogRef: MatDialogRef<UserChangePasswordComponent>,
     public formBuilder: FormBuilder,
     private userService: UserService,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    private route: Router,
+    public dialog: MatDialog
   ) {
   }
 
@@ -46,15 +50,31 @@ export class UserChangePasswordComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   changePass() {
-    this.userService.changePassword(this.idUser, this.formChangePassword.value).subscribe(data => {
-      console.log('data');
-      console.log(data);
-      this.errorMessage = data;
-      if (this.errorMessage == null) {
-        this.dialogRef.close();
-      }
-    }, error => {
-      console.log(error);
+    this.formChangePassword.markAllAsTouched();
+    if (this.formChangePassword.valid) {
+      this.userService.changePassword(this.idUser, this.formChangePassword.value).subscribe(data => {
+        this.errorMessage = data;
+        console.log(data);
+        if (this.errorMessage == null) {
+          this.dialogRef.close();
+          this.openDialogConfirm(this.idUser);
+        }
+      }, error => {
+        console.log(error);
+      });
+    }
+  }
+
+  // tslint:disable-next-line:typedef
+  openDialogConfirm(id) {
+    const dialogRef = this.dialog.open(UserDialogComponent, {
+      width: '500px',
+      height: '200x',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
     });
   }
 }

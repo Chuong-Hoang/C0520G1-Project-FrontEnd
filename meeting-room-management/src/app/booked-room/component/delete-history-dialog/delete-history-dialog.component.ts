@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {BookedRoomService} from '../../service/booked-room.service';
-import {Router} from '@angular/router';
+// can import them service
 
 @Component({
   selector: 'app-delete-history-dialog',
@@ -10,23 +9,23 @@ import {Router} from '@angular/router';
 })
 export class DeleteHistoryDialogComponent implements OnInit {
   public roomName;
-  public bookedRoomId;
+  public roomId;
   constructor(
     public dialogRef: MatDialogRef<DeleteHistoryDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public bookedRoomService: BookedRoomService,
-    public router: Router
+    @Inject(MAT_DIALOG_DATA) public data: any
+    // tiem them service
   ) { }
 
   ngOnInit(): void {
-    this.roomName = this.data.meetingRoomName;
-    this.bookedRoomId = this.data.idBookedRoom;
-    console.log(this.data);
+    // this.roomName = this.data.data1.name;
+    // this.roomId = this.data.data1.id;
   }
-  deleteBookedRoom(): void {
-    this.bookedRoomService.deleteBookedRoomById(this.bookedRoomId).subscribe(data => {
-      this.router.navigate(['/booked-room-list']);
-      this.dialogRef.close();
-    });
+
+  // tslint:disable-next-line:typedef            xoa dong nay
+  deleteBookedRoom() {
+    // this.bookedRoomService.deleteBookedRoomById(this.bookedRoomId).subscribe(data =>{
+    //   this.dialogRef.close();
+    // });
   }
+    // qua trang list.ts tiem them  Matdialog va goi ham openDialog().
 }

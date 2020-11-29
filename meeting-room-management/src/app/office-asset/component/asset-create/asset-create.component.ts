@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AssetServerService} from '../../service/asset-server.service';
+import {Title} from '@angular/platform-browser';
 
 
 // tslint:disable-next-line:typedef
@@ -25,11 +26,13 @@ export class AssetCreateComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private assetServer: AssetServerService,
-    private router: Router
+    private router: Router,
+    private title: Title,
   ) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Asset');
     this.formCreate = this.formBuilder.group({
       assetName: ['', [Validators.required, checkNameAsset(this.listAssetName), Validators.pattern(/^[A-Z À-Ỹ][a-z à-ỹ]{1,9}(([ ][a-z à-ỹ]{0,9})?)*$/)]],
       usingQuantity: ['0'],

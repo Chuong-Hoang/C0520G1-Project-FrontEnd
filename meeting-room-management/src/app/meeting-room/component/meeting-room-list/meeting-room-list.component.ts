@@ -5,6 +5,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {MeetingRoomDeleteComponent} from '../meeting-room-delete/meeting-room-delete.component';
 import {MeetingRoomService} from '../../service/meeting-room.service';
 import {TokenStorageService} from '../../../office-common/service/token-storage/token-storage.service';
+import {Title} from '@angular/platform-browser';
 import validate = WebAssembly.validate;
 
 export function checkValidMinMaxCapacity(c: AbstractControl): any {
@@ -39,11 +40,13 @@ export class MeetingRoomListComponent implements OnInit {
     public dialogMessage: MatDialog,
     public router: Router,
     public formBuilder: FormBuilder,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    private title: Title,
   ) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Meeting Room');
     const user = this.tokenStorageService.getUser();
     this.role = user.role;
     this.showAdminBoard = this.role.includes('ROLE_ADMIN');
