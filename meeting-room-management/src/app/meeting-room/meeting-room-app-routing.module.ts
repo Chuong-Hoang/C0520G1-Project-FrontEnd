@@ -10,6 +10,7 @@ import {MeetingRoomAddComponent} from './component/meeting-room-add/meeting-room
 import {ReactiveFormsModule} from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {AuthGuard} from '../office-common/helper/auth.guard';
+import { MeetingRoomMessageComponent } from './component/meeting-room-message/meeting-room-message.component';
 
 const routesConfig: Routes = [
   {
@@ -41,7 +42,8 @@ const routesConfig: Routes = [
 @NgModule({
   declarations: [MeetingRoomListComponent,
     MeetingRoomDetailComponent,
-    MeetingRoomDeleteComponent],
+    MeetingRoomDeleteComponent,
+    MeetingRoomMessageComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routesConfig),

@@ -1,44 +1,43 @@
-<div class="container-fluid mt-3">
-  <div class="row mt-4">
-    <div class="col-6 col-sm-6">
-      <div class="col-sm-12 ml-2">
-        <p style="font-size: 25px">Chi tiết phòng họp</p></div>
-      <div class="col-10 ml-5">
-        <table class="table">
-          <tr>
-            <td>Stt :</td>
-            <td>{{meetingRoom.idRoom}}</td>
+<div class="container-fluid mt-4">
+  <div class="row mt-4 d-flex justify-content-center">
+    <div class="col-4 mr-5" style="border : 1px solid #d5d5d5; border-radius: 3%;  box-shadow: 1px 3px 2px 3px #f1f1f1;">
+      <h3 style=" text-align: center" class="my-3">Chi tiết phòng họp</h3>
+      <div class="col-9 ml-5">
+        <table class="table table-borderless ">
+          <tr class="row">
+            <td class="font-weight-bold col-sm-5">STT</td>
+            <td class="col-sm-7">{{meetingRoom.idRoom}}</td>
           </tr>
-          <tr>
-            <td>Tên phòng :</td>
-            <td>{{meetingRoom.roomName}}</td>
+          <tr class="row">
+            <td class="font-weight-bold col-sm-5">Tên phòng</td>
+            <td class="col-sm-7">{{meetingRoom.roomName}}</td>
           </tr>
-          <tr>
-            <td>Tầng :</td>
-            <td>{{meetingRoom.floor}}</td>
+          <tr class="row">
+            <td class="font-weight-bold col-sm-5">Tầng</td>
+            <td class="col-sm-7">{{meetingRoom.floor}}</td>
           </tr>
-          <tr>
-            <td>Khu vực :</td>
-            <td>{{meetingRoom.zone}}</td>
+          <tr class="row">
+            <td class="font-weight-bold col-sm-5">Khu vực</td>
+            <td class="col-sm-7">{{meetingRoom.zone}}</td>
           </tr>
-          <tr>
-            <td>Trạng thái :</td>
-            <td>{{meetingRoom.roomStatusName}}</td>
-          </tr>
-
-          <tr>
-            <td>Loại phòng :</td>
-            <td>{{meetingRoom.roomTypeName}}</td>
+          <tr class="row">
+            <td class="font-weight-bold col-sm-5">Trạng thái</td>
+            <td class="col-sm-7">{{meetingRoom.roomStatusName}}</td>
           </tr>
 
-          <tr>
-            <td>Sức chứa :</td>
-            <td>{{meetingRoom.capacity + ' người'}}</td>
+          <tr class="row">
+            <td class="font-weight-bold col-sm-5">Loại phòng</td>
+            <td class="col-sm-7">{{meetingRoom.roomTypeName}}</td>
           </tr>
 
-          <tr>
-            <td>Tài sản :</td>
-            <td>
+          <tr class="row">
+            <td class="font-weight-bold col-sm-5">Sức chứa</td>
+            <td class="col-sm-7">{{meetingRoom.capacity + ' người'}}</td>
+          </tr>
+
+          <tr class="row">
+            <td class="font-weight-bold col-sm-5">Tài sản</td>
+            <td class="col-sm-7" style="height: auto">
               <ul style="list-style-type: none; padding: 0">
                 <li *ngFor="let asset of meetingRoom.asset">
                   {{asset.nameAssetDetail}}: {{asset.quantity + ' cái'}}
@@ -46,17 +45,36 @@
               </ul>
             </td>
           </tr>
-          <tr>
-            <td colspan="2">
-              <a class="btn btn-success btn-sm" style="width: 120px;" [routerLink]="['/meeting-room']"
-                 role="button">Quay lại</a></td>
-          </tr>
         </table>
       </div>
+    <div class="col-12 d-flex justify-content-center mb-3">
+      <a class="btn btn-success btn-sm " style="width: 100px;"
+         [routerLink]="['/meeting-room']"
+         role="button">Quay lại</a>
+<!--      <a class="btn btn-success btn-sm " style="width: 100px;"-->
+<!--         [routerLink]="['/booked-room-list']" (click)="getBookedRoomListById(meetingRoom.idRoom)"-->
+<!--         role="button">Lịch sử đăng ký</a>-->
     </div>
+    </div>
+
     <div class="col-6">
-      <img src="../../assets/image-meeting-room/{{meetingRoom.image}}" class="d-block"
-           alt="...">
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" >
+            <img src="../../assets/image-meeting-room/{{meetingRoom.image}}" class="d-block img-fluid" style=" border-radius: 10px;  box-shadow: 5px 10px 8px 10px #888888;"
+                 alt="Lỗi ảnh">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
     </div>
   </div>
+
 </div>

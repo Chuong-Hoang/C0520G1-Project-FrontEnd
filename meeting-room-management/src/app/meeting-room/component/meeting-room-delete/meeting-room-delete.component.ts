@@ -1,7 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MeetingRoomService} from '../../service/meeting-room.service';
 import {Router} from '@angular/router';
+import {MeetingRoomMessageComponent} from "../meeting-room-message/meeting-room-message.component";
 
 @Component({
   selector: 'app-meeting-room-delete',
@@ -17,6 +18,7 @@ export class MeetingRoomDeleteComponent implements OnInit {
     public dialogRef: MatDialogRef<MeetingRoomDeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public meetingRoomService: MeetingRoomService,
+    public dialog: MatDialog,
     public router: Router) {
   }
 
@@ -29,10 +31,26 @@ export class MeetingRoomDeleteComponent implements OnInit {
 
   delete(): void {
     this.meetingRoomService.deleteMeetingRoomById(this.idMeetingRoom).subscribe(data => {
+      if (data == null) {
+        this.openMessage();
+      }
       this.dialogRef.close();
-      this.router.navigate(['/meeting-room'], {
-        queryParams: {message: 'Xóa thành công'}
-      });
+
+    }, error => {
+      console.log(error)
     });
   }
+
+
+  openMessage() {
+    const dialogRef = this.dialog.open(MeetingRoomMessageComponent, {
+      disableClose: true
+    });
+    dialogRef.afterOpened().subscribe(_ => {
+      setTimeout(() => {
+        dialogRef.close();
+      }, 1800);
+    })
+  };
 }
+

@@ -2,106 +2,126 @@
   <div class="row">
     <div class="col-12 col-sm-12 mt-3">
       <h3 style="color: #24292e; text-align: center">Danh sách phòng họp</h3></div>
-
   </div>
-  <div class="row mt-3">
-    <div class="col-1 col-sm-1 p-0"><a [routerLink]="['/meeting-room-add']" class="btn btn-success btn-sm"
-                                       *ngIf="showAdminBoard; else elseBlock" role="button">Thêm</a>
-      <ng-template #elseBlock><a [routerLink]="['/book-room']" class="btn btn-success btn-sm"
-                                 *ngIf="showUserBoard" role="button">Đặt phòng</a></ng-template>
-    </div>
+  <div class="mb-2"  style="border: 1px solid #d5d5d5; border-radius: 5px">
+    <form [formGroup]="formSearch" (ngSubmit)="search()">
+      <div class="row mt-2">
+        <div class="col-1"></div>
+        <div class="col-3 col-sm-3 mt-3">
+          <div class="row form-group">
+            <label class="col-5 col-sm-5 col-form-label" for="tenPhong">Tên phòng<sup
+              class="text-danger">*</sup></label>
+            <div class="col-7 col-sm-7">
+              <input type="text" id="tenPhong" formControlName="roomName" class="form-control form-control-sm">
+              <div class="alert- alert-danger small" role="alert"
+                   *ngIf="formSearch.get('roomName').hasError('pattern') && formSearch.get('roomName').touched">
+                Tên phòng không nhập ký tự đặc biệt ($&+,:;=?@#)
+              </div>
+              <div class="alert- alert-danger small" role="alert"
+                   *ngIf="formSearch.get('roomName').hasError('maxlength') && formSearch.get('roomName').touched">
+                Tên phòng không quá 30 ký tự
+              </div>
+            </div>
+          </div>
+          <div class="row mt-1 form-group">
+            <label class="col-5 col-sm-5 col-form-label" for="trangThai">Trạng thái<sup
+              class="text-danger">*</sup></label>
+            <div class="col-7 col-sm-7 input-group input-group-sm">
+              <select class="form-control " id="trangThai" formControlName="roomStatusName">
+                <option value="">--Chọn--</option>
+                <option *ngFor="let roomStatus of roomStatusList" [ngValue]="roomStatus">
+                  {{roomStatus}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3 col-sm-3 mt-3">
+          <div class="row form-group">
+            <label class="col-5 col-form-label col-sm-5" for="tang">Tầng<sup class="text-danger">*</sup></label>
+            <div class="col-7 col-sm-7">
+              <input id="tang" type="text" formControlName="floor" class="form-control form-control-sm">
+              <div class="alert- alert-danger small" role="alert"
+                   *ngIf="formSearch.get('floor').invalid && formSearch.get('floor').touched">
+                Nhập số nguyên,lớn hơn 0, nhỏ hơn 80
+              </div>
+            </div>
+          </div>
+          <div class="row mt-1 form-group">
+            <label class="col-5 col-sm-5 col-form-label pr-0" for="loaiPhong">Loại phòng<sup
+              class="text-danger">*</sup></label>
+            <div class="col-7 col-sm-7 input-group input-group-sm">
+              <select class="form-control text-center" id="loaiPhong" formControlName="roomTypeName">
+                <option value="">--Chọn--</option>
+                <option *ngFor="let roomType of roomTypeList" [ngValue]="roomType">
+                  {{roomType}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3 col-sm-3 mt-3">
+          <div class="row form-group">
+            <label class="col-5 col-form-label" for="khuVuc">Khu vực<sup class="text-danger">*</sup></label>
+            <div class="col-7 col-sm-7 input-group input-group-sm"><select class="form-control" id="khuVuc"
+                                                                           formControlName="zone">
+              <option value="">--Chọn--</option>
+              <option value="khu A">Khu A</option>
+              <option value="khu B">Khu B</option>
+              <option value="khu C">Khu C</option>
+            </select></div>
+          </div>
+          <div class="row mt-1 form-group">
+            <label class="col-5 col-form-label" for="sucChua">Sức chứa<sup class="text-danger">*</sup></label>
+            <div class="col-7 form-row ml-0">
+              <input type="text" style="width: 49%" id="sucChua" class="form-control form-control-sm"
+                     placeholder="Tối thiểu"
+                     formControlName="capacity">
+              <input type="text" style="width: 48%" class="form-control" class="form-control form-control-sm ml-1"
+                     formControlName="capacityMax" placeholder="Tối đa">
+              <div class="d-flex">
+                <div class="alert- alert-danger small" role="alert" style="width: 49%"
+                     *ngIf="formSearch.get('capacity').invalid && formSearch.get('capacity').touched">
+                  Nhập số nguyên, tối thiểu 10
+                </div>
+                <div class="alert- alert-danger small ml-1" role="alert" style="width: 49%"
+                     *ngIf="formSearch.get('capacityMax').invalid && formSearch.get('capacityMax').touched">
+                  Nhập số nguyên, tối đa 50
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-2 col-sm-2 mt-3">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center mb-3">
+          <button type="button" class="btn btn-warning btn-sm mr-2" (click)="reset()" style="width: 63px">Đặt lại</button>
+          <button type="submit" class="btn btn-primary btn-sm ml-2" [disabled]="formSearch.invalid">Tìm kiếm
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
-  <form [formGroup]="formSearch" (ngSubmit)="search()">
-    <div class="row mt-2 border rounded">
-      <div class="col-1"></div>
-      <div class="col-3 col-sm-3 mt-3">
-        <div class="row form-group">
-          <label class="col-5 col-sm-5 col-form-label" for="tenPhong">Tên phòng<sup
-            class="text-danger">*</sup></label>
-          <div class="col-7 col-sm-7">
-            <input type="text" id="tenPhong" formControlName="roomName" class="form-control form-control-sm">
-            <div class="alert- alert-danger small" role="alert"
-                 *ngIf="formSearch.get('roomName').invalid && formSearch.get('roomName').touched">
-              Không nhập ký tự đặc biệt ($&+,:;=?@#)
-            </div>
-          </div>
-        </div>
-        <div class="row mt-1 form-group">
-          <label class="col-5 col-sm-5 col-form-label" for="trangThai">Trạng thái<sup
-            class="text-danger">*</sup></label>
-          <div class="col-7 col-sm-7 input-group input-group-sm">
-            <select class="form-control " id="trangThai" formControlName="roomStatusName">
-              <option value="">--Chọn--</option>
-              <option *ngFor="let roomStatus of roomStatusList" [ngValue]="roomStatus">
-                {{roomStatus}}</option>
-            </select>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-3 col-sm-3 mt-3">
-        <div class="row form-group">
-          <label class="col-5 col-form-label col-sm-5" for="tang">Tầng<sup class="text-danger">*</sup></label>
-          <div class="col-7 col-sm-7">
-            <input id="tang" type="text" formControlName="floor" class="form-control form-control-sm">
-            <div class="alert- alert-danger small" role="alert"
-                 *ngIf="formSearch.get('floor').invalid && formSearch.get('floor').touched">
-              Nhập nhỏ hơn 80
-            </div>
-          </div>
-        </div>
-        <div class="row mt-1 form-group">
-          <label class="col-5 col-sm-5 col-form-label pr-0" for="loaiPhong">Loại phòng<sup
-            class="text-danger">*</sup></label>
-          <div class="col-7 col-sm-7 input-group input-group-sm">
-            <select class="form-control text-center" id="loaiPhong" formControlName="roomTypeName">
-              <option value="">--Chọn--</option>
-              <option *ngFor="let roomType of roomTypeList" [ngValue]="roomType">
-                {{roomType}}</option>
-            </select>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-3 col-sm-3 mt-3">
-        <div class="row form-group">
-          <label class="col-5 col-form-label" for="khuVuc">Khu vực<sup class="text-danger">*</sup></label>
-          <div class="col-7 col-sm-7 input-group input-group-sm"><select class="form-control" id="khuVuc"
-                                                                         formControlName="zone">
-            <option value="">--Chọn--</option>
-            <option value="khu A">Khu A</option>
-            <option value="khu B">Khu B</option>
-            <option value="khu C">Khu C</option>
-          </select></div>
-        </div>
-        <div class="row mt-1 form-group">
-          <label class="col-5 col-form-label" for="sucChua">Sức chứa<sup class="text-danger">*</sup></label>
-          <div class="col-7"><input type="text" class="form-control form-control-sm" id="sucChua"
-                                    formControlName="capacity">
-            <div class="alert- alert-danger small" role="alert"
-                 *ngIf="formSearch.get('capacity').invalid && formSearch.get('capacity').touched">
-              Nhập 2->50
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-2 col-sm-2 mt-3">
-        <div class="row">
-          <button type="submit" class="btn btn-warning btn-sm" (click)="reset()">Khôi phục</button>
-        </div>
-        <div class="row mt-4">
-          <button type="submit" class="btn btn-primary btn-sm" [disabled]="formSearch.invalid">Tìm kiếm&nbsp;</button>
-        </div>
-      </div>
-    </div>
-  </form>
 </div>
 
 <div class="container">
-  <div class="row mt-4">
-    <div>* Kết quả : <span class="text-danger">{{result}}</span></div>
-    <table class="table table-hover p-0">
+  <div class="row mt-5 mb-2">
+    <div class="col-6 font-weight-bold">
+      * Kết quả : <span class="text-danger">{{result}}</span>
+    </div>
+    <div class="col-6 d-flex justify-content-end"><a [routerLink]="['/meeting-room-add']" class="btn btn-success btn-sm"
+                                                     *ngIf="showAdminBoard; else elseBlock" role="button">Thêm phòng</a>
+      <ng-template #elseBlock><a [routerLink]="['/search-available-room']" class="btn btn-success btn-sm"
+                                 *ngIf="showUserBoard" role="button">Đặt phòng</a></ng-template>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <table class="table table-hover p-0" *ngIf="result.length < 3">
       <thead class="thead-light">
       <tr>
         <th>STT</th>
@@ -119,7 +139,7 @@
       <tr *ngFor="let meetingRoom of meetingRoomList | paginate : { itemsPerPage: 5, currentPage: p }, let i = index">
         <td>{{i + 1}}</td>
         <td>{{meetingRoom.roomName}}</td>
-        <td>{{meetingRoom.floor}}</td>
+        <td style="text-align : right; margin-right: 2px">{{meetingRoom.floor}}</td>
         <td>{{meetingRoom.zone}}</td>
         <td>{{meetingRoom.roomStatusName}}</td>
         <td>{{meetingRoom.roomTypeName}}</td>
@@ -130,11 +150,11 @@
             Chi tiết
           </button>
 
-          <button type="button" class="btn btn-warning btn-sm mt-1 ml-2"
+          <button type="button" class="btn btn-warning btn-sm mt-1 ml-3"
                   *ngIf="showAdminBoard" [routerLink]="['/meeting-room-edit/' + meetingRoom.idRoom]">Sửa
           </button>
 
-          <button type="button" class="btn btn-danger btn-sm mt-1 ml-2" *ngIf="showAdminBoard"
+          <button type="button" class="btn btn-danger btn-sm mt-1 ml-3" *ngIf="showAdminBoard"
                   (click)="delete(meetingRoom.idRoom)">
             Xóa
           </button>
