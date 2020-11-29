@@ -127,10 +127,12 @@
           class="fas fa-circle mr-2 text-danger"></i>{{item.bookedStatus}}</span>
         <span *ngIf="item.bookedStatus == 'Đang sử dụng'"><i
           class="fas fa-circle mr-2 text-success"></i>{{item.bookedStatus}}</span>
+        <span *ngIf="item.bookedStatus == 'Vô hiệu hóa'"><i
+          class="fas fa-circle mr-2 text-success"></i>{{item.bookedStatus}}</span>
       </td>
       <td>
         <button class="btn btn-sm" [ngClass]="item.bookedStatus == 'Đã kết thúc'? 'btn-secondary': 'btn-danger'"
-                [disabled]="item.bookedStatus == 'Đã kết thúc'">Hủy
+                [disabled]="item.bookedStatus == 'Đã kết thúc' || item.bookedStatus == 'Vô hiệu hóa'" [routerLink]="['/booked-room-delete/' + item.idBookedRoom]">Hủy
         </button>
       </td>
     </tr>
