@@ -29,4 +29,8 @@ export class MeetingRoomDetailComponent implements OnInit {
       }
     );
   }
+
+  // getBookedRoomListById(idRoom: number) {
+
+  // }
 }

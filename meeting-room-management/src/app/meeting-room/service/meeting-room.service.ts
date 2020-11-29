@@ -50,6 +50,8 @@ export class MeetingRoomService {
   }
 
   search(meetingRoomSearch): Observable<any> {
+    console.log('đối tượng gửi qua service : ' );
+    console.log(meetingRoomSearch);
     return this.http.post(this.API_SEARCH_ROOM, meetingRoomSearch);
   }
 }

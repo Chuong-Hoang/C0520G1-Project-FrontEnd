@@ -3,6 +3,6 @@
 <p>Bạn có chắc chắn muốn xóa phòng <span class="text-danger">{{roomName}} </span>không ?</p>
 <hr>
 <div class="row d-flex justify-content-center">
-  <a class="btn btn-danger btn-sm mr-1" role="button" (click)="delete()">Xóa</a>
-  <a class="btn btn-success btn-sm" [mat-dialog-close]="" role="button">Hủy</a>
+  <a class="btn btn-danger btn-sm mr-3" role="button" style="width: 60px" (click)="delete()">Xóa</a>
+  <a class="btn btn-success btn-sm" mat-button [mat-dialog-close]="true" role="button" style="width: 60px">Hủy</a>
 </div>
