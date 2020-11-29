@@ -9,8 +9,8 @@
       </div>
       <div class="col-lg-7 col-md-12">
         <div class="d-flex float-right">
-          <input class="form-control" type="text" placeholder="Search...">
-          <button style="height: 34px" class="btn btn-primary ml-2">Tìm</button>
+          <input class="form-control" type="text" placeholder="Tìm kiếm..."  [(ngModel)]="nameOfSearch">
+          <button style="height: 30px" class="btn btn-primary ml-2" (click)="searchByName()">Tìm</button>
         </div>
       </div>
     </div>
@@ -26,7 +26,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor = "let item of assetsDetailsList">
+          <tr *ngFor = "let item of assetsDetailsList | paginate: { itemsPerPage: 4, currentPage: p}; let i = index">
             <td>{{item.assetName}}</td>
             <td>{{item.total}}</td>
             <td>
@@ -41,5 +41,8 @@
         </div>
       </form>
     </div>
+    <pagination-controls (pageChange)="p = $event" previousLabel="Trước"
+                         nextLabel="Sau"
+                         responsive="true"></pagination-controls>
   </div>
 </div>
