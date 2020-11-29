@@ -48,12 +48,12 @@
         </table>
       </div>
     <div class="col-12 d-flex justify-content-center mb-3">
-      <a class="btn btn-success btn-sm " style="width: 100px;"
+      <a class="btn btn-secondary btn-sm mr-3" style="width: 100px;"
          [routerLink]="['/meeting-room']"
          role="button">Quay lại</a>
-<!--      <a class="btn btn-success btn-sm " style="width: 100px;"-->
-<!--         [routerLink]="['/booked-room-list']" (click)="getBookedRoomListById(meetingRoom.idRoom)"-->
-<!--         role="button">Lịch sử đăng ký</a>-->
+      <a class="btn btn-success btn-sm " style="width: 100px;"
+         [routerLink]="['/booked-room-list']" (click)="getBookedRoomListByName(meetingRoom.roomName)"
+         role="button">Lịch sử đăng ký</a>
     </div>
     </div>
 

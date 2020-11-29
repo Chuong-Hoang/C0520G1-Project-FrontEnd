@@ -55,7 +55,7 @@ export class BookedRoomListComponent implements OnInit, OnDestroy {
     this.bookedUserId = this.tokenStorageService.getUser().id;
     this.formBookedRoomSearched = this.formBuilder.group({
       id: '',
-      meetingRoomName: '',
+      meetingRoomName: this.bookedRoomService.roomNameSearched,
       bookedUserId: this.bookedUserId,
       roomType: '',
       startDate: '',
@@ -64,13 +64,19 @@ export class BookedRoomListComponent implements OnInit, OnDestroy {
       bookedStatus: ''
     });
 
-    this.bookedRoomService.getAllBookedRooms(this.bookedUserId).subscribe(data => {
-      this.p = 0;
-      this.bookedRoomList = data;
-      this.size_msg = this.bookedRoomList.length + '';
-      // console.log('bookedRooms: ' + data);
-      console.log('init-->size_msg: ' + this.size_msg);
-    });
+    // find bookedListByMeetingName (Quang : chi tiet phong hop)
+    if(this.bookedRoomService.roomNameSearched != '') {
+     this.findBookedRooms();
+    }
+    else {
+      this.bookedRoomService.getAllBookedRooms(this.bookedUserId).subscribe(data => {
+        this.p = 0;
+        this.bookedRoomList = data;
+        this.size_msg = this.bookedRoomList.length + '';
+        // console.log('bookedRooms: ' + data);
+        console.log('init-->size_msg: ' + this.size_msg);
+      });
+    }
     this.bookedRoomService.getAllMeetingRooms().subscribe(data => {
       this.meetingRoomList = data;
     });
