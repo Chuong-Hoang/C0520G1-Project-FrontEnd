@@ -3,7 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AssetServerService} from '../../service/asset-server.service';
 import {Asset} from '../../model/model.asset';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MessgerAssetComponent} from '../messger-asset/messger-asset.component';
 import {Title} from '@angular/platform-browser';
 
 @Component({
@@ -15,16 +16,18 @@ export class AssetCreateQuantityComponent implements OnInit {
   public dataId;
   public formEdit: FormGroup;
   public asset = new Asset();
+  public idMessage = 2;
 
   constructor(
+    private  dialog: MatDialog,
     private formBuilder: FormBuilder,
     private assetService: AssetServerService,
     private activatedRouter: ActivatedRoute,
     private route: ActivatedRoute,
     private router: Router,
     private dialogRef: MatDialogRef<AssetCreateQuantityComponent>,
-    private title: Title,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private title: Title
   ) {
   }
 
@@ -50,11 +53,27 @@ export class AssetCreateQuantityComponent implements OnInit {
   edit(): void {
     if (this.formEdit.valid) {
       this.assetService.edit(this.formEdit.value, this.dataId).subscribe(data => {
-        this.router.navigate(['asset'], {queryParams: {edit_msg: 'Cập nhật thành công !!!', si: true}});
-        this.dialogRef.close();
+          this.dialogRef.close();
+          this.openDialogMessage();
       }, error => {
         console.log(error);
       });
     }
   }
+
+  openDialogMessage(): void {
+    const timeout = 1800;
+    const dialogRef = this.dialog.open(MessgerAssetComponent, {
+      width: '300px',
+      height: '160px',
+      data: {dataMessage: this.idMessage},
+      disableClose: true
+    });
+    dialogRef.afterOpened().subscribe(_ => {
+      setTimeout(() => {
+        dialogRef.close();
+      }, timeout);
+    });
+  }
+
 }
