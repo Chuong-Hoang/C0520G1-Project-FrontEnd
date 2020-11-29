@@ -17,6 +17,7 @@ export class DetailNotificationComponent implements OnInit {
   public fullName;
   public contentComment;
   public contentReply;
+  public errorType;
   public commentTime;
   public comment: CommentService[];
   private isLoggedIn;
@@ -54,6 +55,8 @@ export class DetailNotificationComponent implements OnInit {
       this.contentComment = this.data.full.contentComment;
       this.contentReply = this.data.full.contentReply;
       this.commentTime = this.data.full.commentTime;
+      this.errorType = this.data.full.errorTypeName;
+      console.log(this.errorType);
       this.commentService.getCommentById(this.id).subscribe(next => {
         this.detailCommentForm.patchValue(next);
       });

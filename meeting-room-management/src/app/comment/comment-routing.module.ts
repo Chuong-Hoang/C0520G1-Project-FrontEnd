@@ -4,6 +4,7 @@ import {CommentCreateComponent} from './component/comment-create/comment-create.
 import {CommentHandleComponent} from './component/comment-handle/comment-handle.component';
 import {NotificationComponent} from './component/notification/notification.component';
 import {AuthGuard} from '../office-common/helper/auth.guard';
+import {CreateNotificationComponent} from './component/create-notification/create-notification.component';
 
 export const CommentRoutes: Routes = [
   {
@@ -17,6 +18,12 @@ export const CommentRoutes: Routes = [
     component: CommentCreateComponent,
     canActivate: [AuthGuard],
     data: {roles: ['ROLE_ADMIN', 'ROLE_USER']}
+  },
+  {
+    path: 'create-notification',
+    component: CreateNotificationComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_ADMIN']}
   },
   {
     path: 'comment/:idComment',

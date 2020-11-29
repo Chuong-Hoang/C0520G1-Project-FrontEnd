@@ -7,7 +7,8 @@
   <div class="row d-fex justify-content-center">
     <div class="col-8 border border-dark px-0 rounded bg-secondary "><!--Thanh Tiêu Đề Thông Báo-->
       <div class="col-12 px-0 border-bottom border-light" style="height: 40px">
-        <h3 class="d-flex justify-content-center  my-0 text-white mt-3">Thông báo <span *ngIf="count>0">{{count}}</span></h3>
+        <h3 class="d-flex justify-content-center  my-0 text-white mt-3">Thông báo <span *ngIf="count>0">{{count}}</span>
+        </h3>
       </div>
       <!--Phần Thân Nội Dung thông Báo-->
       <div class="container-fluid px-0">
@@ -16,7 +17,7 @@
             <table class="col-12 px-0">
               <tbody>
               <tr *ngFor="let comment of commentsNotification" class="text-white ml-4"
-                  [ngClass]="{'bg-dark font-weight-bold':!comment.statusView, 'bg-secondary f':comment.statusView}">
+                  [ngClass]="{'bg-dark font-weight-bold':!comment.statusView, 'bg-secondary':comment.statusView}">
                 <div *ngIf="comment.status==true; else elseBlock"></div>
                 <ng-template #elseBlock>
                   <!--                *Thông báo từ hệ thống gửi cho người dùng.-->
@@ -36,7 +37,6 @@
                               aria-expanded="false">
                         </span>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Đã Xem</a>
                             <a class="dropdown-item" [routerLink]="['/comment-create']">Báo Cáo </a>
                             <a class="dropdown-item" (click)="dialogDeleteComment(comment.idComment)">Xóa Thông Báo</a>
                           </div>
