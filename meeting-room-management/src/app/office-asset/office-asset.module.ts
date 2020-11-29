@@ -12,9 +12,10 @@ import {AssetCreateQuantityComponent} from './component/asset-create-quantity/as
 import {AssetDetailComponent} from './component/asset-detail/asset-detail.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AssetDeleteComponent } from './component/asset-delete/asset-delete.component';
+import { MessgerAssetComponent } from './component/messger-asset/messger-asset.component';
 
 @NgModule({
-  declarations: [AssetListComponent, AssetCreateComponent, AssetDetailComponent, AssetCreateQuantityComponent, AssetDeleteComponent],
+  declarations: [AssetListComponent, AssetCreateComponent, AssetDetailComponent, AssetCreateQuantityComponent, AssetDeleteComponent, MessgerAssetComponent],
   exports: [
     AssetListComponent
   ],

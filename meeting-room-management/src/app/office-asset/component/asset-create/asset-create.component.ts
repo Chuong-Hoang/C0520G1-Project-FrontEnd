@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AssetServerService} from '../../service/asset-server.service';
+import {MessgerAssetComponent} from '../messger-asset/messger-asset.component';
+import {MatDialog} from '@angular/material/dialog';
 import {Title} from '@angular/platform-browser';
 
 
@@ -21,13 +23,15 @@ export function checkNameAsset(name = []) {
 export class AssetCreateComponent implements OnInit {
   public formCreate: FormGroup;
   public assetList;
+  public idMessage = 1;
   public listAssetName = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private assetServer: AssetServerService,
     private router: Router,
-    private title: Title,
+    private  dialog: MatDialog,
+    private title: Title
   ) {
   }
 
@@ -51,7 +55,12 @@ export class AssetCreateComponent implements OnInit {
   create(): void {
     console.log(this.formCreate.value);
     this.assetServer.create(this.formCreate.value).subscribe(data => {
-      this.router.navigate(['asset'], {queryParams: {create_msg: 'Thêm mới thành công!', si: true}});
+      if (data == null){
+        this.router.navigateByUrl('asset');
+        this.openDialogMessage();
+      }
+    }, error => {
+      console.log(error);
     });
   }
 
@@ -61,5 +70,20 @@ export class AssetCreateComponent implements OnInit {
         this.listAssetName.push(asset.assetName);
       }
     }
+  }
+
+  openDialogMessage(): void {
+    const timeout = 1800;
+    const dialogRef = this.dialog.open(MessgerAssetComponent, {
+      width: '300px',
+      height: '160px',
+      data: {dataMessage: this.idMessage},
+      disableClose: true
+    });
+    dialogRef.afterOpened().subscribe(_ => {
+      setTimeout(() => {
+        dialogRef.close();
+      }, timeout);
+    });
   }
 }

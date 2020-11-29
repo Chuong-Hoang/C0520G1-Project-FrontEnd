@@ -2,9 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {AssetCreateQuantityComponent} from '../asset-create-quantity/asset-create-quantity.component';
 import {AssetServerService} from '../../service/asset-server.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AssetDeleteComponent} from '../asset-delete/asset-delete.component';
 import {Title} from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-asset-list',
@@ -17,21 +18,26 @@ export class AssetListComponent implements OnInit {
   public deleteMSG = '';
   public assetList;
   public valueSearch: string;
+  public sizeMSG: string;
   p: any;
 
   constructor(
     private dialog: MatDialog,
     private assetService: AssetServerService,
     private route: ActivatedRoute,
-    private title: Title,
+    private router: Router,
+    private title: Title
   ) {
   }
 
   ngOnInit(): void {
     // this.p = 0;
     this.title.setTitle('Asset');
+    this.assetList = [];
+    this.sizeMSG = 'Không có kết quả nào!';
     this.assetService.getAll().subscribe(data => {
       this.assetList = data;
+      this.sizeMSG = this.assetList.length + '';
       console.log(this.assetList);
       this.sendMessage();
     });
@@ -67,12 +73,11 @@ export class AssetListComponent implements OnInit {
         this.ngOnInit();
       });
     });
-
   }
 
   search(): void {
     this.p = 0;
-    this.assetService.searchByNameAsset(this.valueSearch).subscribe(dataSearch => {
+    this.assetService.searchByNameAsset(this.valueSearch.trim()).subscribe(dataSearch => {
       this.assetList = dataSearch;
       console.log(this.valueSearch);
     });
