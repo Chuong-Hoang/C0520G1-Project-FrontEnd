@@ -49,11 +49,4 @@ export class LoginComponent implements OnInit {
   reloadPage(): void {
     window.location.reload();
   }
-
-  getFocus(): void {
-    if (this.form.invalid) {
-      const invalidFields = [].slice.call(document.getElementsByClassName('alert-warning'));
-      invalidFields[1].focus();
-    }
-  }
 }

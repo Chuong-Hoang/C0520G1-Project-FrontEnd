@@ -8,6 +8,7 @@ import { Observable} from 'rxjs';
 })
 export class AssetsDetailService {
   public API_ASSETS_DETAIL = 'http://localhost:8080/assets';
+  public ASSETS_DETAIL = 'http://localhost:8080/assetDetail';
 
   constructor(
   public http: HttpClient
@@ -20,4 +21,12 @@ export class AssetsDetailService {
     return this.http.get(this.API_ASSETS_DETAIL);
   }
 
+  createAssetDetail(assetDetail): Observable<any> {
+    return this.http.post(this.ASSETS_DETAIL + '/create',
+      {
+        nameAssetDetail: assetDetail.assetName,
+        quantity: assetDetail.quantity,
+        nameMeetingRoom: assetDetail.meetingRoomName
+      });
+  }
 }

@@ -3,7 +3,7 @@
         novalidate>
     <h2 class="form-signIn-heading text-center">Đăng Nhập</h2>
     <input type="text" class="form-control" name="username" placeholder="Tên Đăng Nhập" autofocus=""
-           autocomplete="off" [(ngModel)]="form.username" required #username="ngModel" (focusin)="getFocus()"/>
+           autocomplete="off" [(ngModel)]="form.username" required #username="ngModel"/>
     <div class="alert-danger" *ngIf="f.submitted && username.invalid">
       <div *ngIf="username.errors.required" >
         Tên Đăng Nhập là bắt buộc.

@@ -71,6 +71,11 @@
         <div class="col-10">
           <a role="button" class="btn btn-sm btn-success" style="width: 80px" (click) = openDialog()>Chọn</a>
         </div>
+        <div>
+          <ul *ngFor="let element of assetList">
+            <li>{{element.assetName + ': ' + element.quantity}}</li>
+          </ul>
+        </div>
       </div>
       <div>
         <br>

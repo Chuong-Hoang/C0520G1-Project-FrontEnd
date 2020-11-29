@@ -29,8 +29,10 @@
           <tr *ngFor = "let item of assetsDetailsList">
             <td>{{item.assetName}}</td>
             <td>{{item.total}}</td>
-            <td><input type="text" class="form-control" style="width: 200px" #quantity></td>
-            <td><button class="btn btn-sm btn-success" style="width: 80px">Thêm</button></td>
+            <td>
+              <input type="text" class="form-control" style="width: 200px" [(ngModel)]="quantity" name="quantity">
+            </td>
+            <td><button class="btn btn-sm btn-success" style="width: 80px" (click)="saveAsset(item.idAsset, item.assetName)">Thêm</button></td>
           </tr>
           </tbody>
         </table>

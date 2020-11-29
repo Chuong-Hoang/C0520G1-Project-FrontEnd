@@ -16,8 +16,12 @@ import {Title} from '@angular/platform-browser';
 export class MeetingRoomEditComponent implements OnInit {
   public formEditRoom: FormGroup;
   public roomTypeList;
-  public assetsDetail: AssetDetail;
   public idToFind;
+  public meetingRoomName: string;
+  public idTemp: number;
+  public quantity: number;
+  public assetName: string;
+  public assetList = [];
   constructor(
     public dialog: MatDialog,
     public formBuilder: FormBuilder,
@@ -37,33 +41,41 @@ export class MeetingRoomEditComponent implements OnInit {
       capacity: ['', [Validators.required, Validators.pattern('^[0-9]{0,20}$')]],
       roomTypeName: ['', [Validators.required]],
       image: [''],
+      assetList: []
     });
     this.meetingRoomService.getAllRoomType().subscribe(data => {
       this.roomTypeList = data;
     });
     this.activatedRoute.params.subscribe(data => {
       this.idToFind = data.id;
-      this.meetingRoomService.getMeetingRoomById(this.idToFind).subscribe(data1 => {
-        this.formEditRoom.patchValue(data1);
-      });
+      console.log(this.idToFind);
     });
+    this.meetingRoomService.getMeetingRoomById(this.idToFind).subscribe(data => {
+      this.meetingRoomName = data.roomName;
+      this.formEditRoom.patchValue(data);
+    }, error => console.log('error'));
+    console.log('qua day');
   }
   openDialog(): void {
     this.assetsDetailService.getAllAssetsDetail().subscribe(dataOfAssetsDetail => {
       const dialogRef = this.dialog.open(AssetsDetailDialogChoiceComponent, {
         width: '800px',
-        data: {data1: dataOfAssetsDetail},
+        data: {data1: dataOfAssetsDetail, idTemp: this.idTemp, quantity: this.quantity, assetName: this.assetName},
         disableClose: true
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        this.assetsDetail = result;
+        const asset = new AssetDetail(result.idTemp, result.assetName, result.quantity, this.meetingRoomName);
+        this.assetList.push(asset);
       });
     });
   }
 
   // tslint:disable-next-line:typedef
   edit() {
+    for (let i = 0; i < this.assetList.length; i++) {
+      this.assetsDetailService.createAssetDetail(this.assetList[i]).subscribe(data => console.log('OK'));
+    }
     this.meetingRoomService.editMeetingRoom(this.formEditRoom.value, this.idToFind).subscribe(data => {
       this.router.navigateByUrl('meeting-room');
     });
