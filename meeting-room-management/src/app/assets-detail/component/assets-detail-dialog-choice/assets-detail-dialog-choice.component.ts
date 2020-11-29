@@ -11,6 +11,7 @@ import {AssetDetail} from '../../model/AssetDetail.class';
 export class AssetsDetailDialogChoiceComponent implements OnInit {
   public assetsDetailsList;
   public idAsset;
+  public quantity: number;
   constructor(
     public dialogRef: MatDialogRef<AssetsDetailDialogChoiceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -23,5 +24,12 @@ export class AssetsDetailDialogChoiceComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  saveAsset(idAsset: any, assetName: any): any {
+    this.data.idTemp = idAsset;
+    this.data.assetName = assetName;
+    this.data.quantity = this.quantity;
+    this.dialogRef.close(this.data);
   }
 }

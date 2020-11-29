@@ -4,51 +4,53 @@ import {MeetingRoom} from '../../meeting-room/model/MeetingRoom';
 
 export class AssetDetail {
   // tslint:disable-next-line:variable-name
-  private _idAssetsDetail: number;
+  private _idAsset: number;
   // tslint:disable-next-line:variable-name
-  private _assetQuantity: string;
+  private _assetName: string;
   // tslint:disable-next-line:variable-name
-  private _meetingRoom: MeetingRoom;
+  private _quantity: number;
   // tslint:disable-next-line:variable-name
-  private _asset: Asset;
+  private _meetingRoomName: string;
 
-  constructor(idAssetsDetail: number, assetQuantity: string, meetingRoom: MeetingRoom, asset: Asset) {
-    this._idAssetsDetail = idAssetsDetail;
-    this._assetQuantity = assetQuantity;
-    this._meetingRoom = meetingRoom;
-    this._asset = asset;
+
+  constructor(idAsset: number, assetName: string, quantity: number, idMeetingRoom: string) {
+    this._idAsset = idAsset;
+    this._assetName = assetName;
+    this._quantity = quantity;
+    this._meetingRoomName = idMeetingRoom;
   }
 
-  get idAssetsDetail(): number {
-    return this._idAssetsDetail;
+  get idAsset(): number {
+    return this._idAsset;
   }
 
-  set idAssetsDetail(value: number) {
-    this._idAssetsDetail = value;
+  set idAsset(value: number) {
+    this._idAsset = value;
   }
 
-  get assetQuantity(): string {
-    return this._assetQuantity;
+  get quantity(): number {
+    return this._quantity;
   }
 
-  set assetQuantity(value: string) {
-    this._assetQuantity = value;
+  set quantity(value: number) {
+    this._quantity = value;
   }
 
-  get meetingRoom(): MeetingRoom {
-    return this._meetingRoom;
+  get meetingRoomName(): string {
+    return this._meetingRoomName;
   }
 
-  set meetingRoom(value: MeetingRoom) {
-    this._meetingRoom = value;
+  set meetingRoomName(value: string) {
+    this._meetingRoomName = value;
   }
 
-  get asset(): Asset {
-    return this._asset;
+
+  get assetName(): string {
+    return this._assetName;
   }
 
-  set asset(value: Asset) {
-    this._asset = value;
+  set assetName(value: string) {
+    this._assetName = value;
   }
 }
 
