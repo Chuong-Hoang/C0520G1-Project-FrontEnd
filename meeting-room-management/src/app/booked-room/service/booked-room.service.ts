@@ -14,6 +14,7 @@ export class BookedRoomService {
   public API_BOOKED_ROOM_BY_ID = 'http://localhost:8080/findBookedRoom';
   public BOOKED_MSG = '';
   public roomNameSearched = '';
+  public API_BOOKED_ROOM_DELETE = 'http://localhost:8080/edit-booked-room';
 
   constructor(private http: HttpClient) {
   }
@@ -91,5 +92,9 @@ export class BookedRoomService {
   // find booked room by id (Tra <-- functionality)
   getFullBookedRoomById(id): Observable<any> {
     return this.http.get(this.API_BOOKED_ROOM_BY_ID + '/' + id);
+  }
+
+  setStatusBookedRoomById(id): Observable<any>{
+    return this.http.put(this.API_BOOKED_ROOM_DELETE + '/' + id, null);
   }
 }

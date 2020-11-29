@@ -32,10 +32,10 @@ export class MeetingRoomAddComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('Meeting Room');
     this.formAddRoom = this.formBuilder.group({
-      roomName: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]{1,30}$')]],
-      floor: ['', [Validators.required, Validators.pattern('^[0-9]{0,20}$')]],
+      roomName: ['', [Validators.required, Validators.pattern(/^[a-zA-Zà-ỹÀ-Ỹ_0-9\s]{1,30}$/)]],
+      floor: ['', [Validators.required, Validators.pattern(/^([1-9]|[1-5]\d|60)$/)]],
       zone: ['', [Validators.required]],
-      capacity: ['', [Validators.required, Validators.pattern('^[0-9]{0,20}$')]],
+      capacity: ['10', [Validators.required, Validators.pattern(/^([5-9]|[1-9]\d|100)$/)]],
       roomTypeName: ['', [Validators.required]],
       image: [''],
     });
@@ -49,9 +49,9 @@ export class MeetingRoomAddComponent implements OnInit {
       const dialogRef = this.dialog.open(AssetsDetailDialogChoiceComponent, {
         width: '800px',
         data: {data1: dataOfAssetsDetail},
-        disableClose: true
+        disableClose: true,
       });
-
+      console.log('here');
       dialogRef.afterClosed().subscribe(result => {
         this.assetsDetail = result;
       });
